@@ -1,0 +1,839 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "primereact/resources/primereact.min.css";
+@import "primeicons/primeicons.css";
+
+@import "pipedrive-button.scss";
+@import "pipedrive-info.scss";
+@import "pipedrive-checkbox.scss";
+@import "pipedrive-input.scss";
+@import "pipedrive-dropdown.scss";
+@import "pipedrive-table.scss";
+@import "pipedrive-calendar.scss";
+@import "pipedrive-text.scss";
+@import "detailview.scss";
+
+/* -------------------------------------------------------------------
+   ROOT VARIABLES
+------------------------------------------------------------------- */
+:root {
+  --primary-dark: #0b7acc;
+  --primary-light: #e5f5ff;
+
+  --primary: #0058ff;
+  --primary-hover: #004ae0;
+
+  --text-primary: #21232c;
+  --text-secondary: #6c727f;
+
+  --surface-base: #ffffff;
+  --surface-subtle: #f4f5f7;
+  --surface-hover: #182635;
+  --surface-drop-down-hover: #dae3f4;
+  --surface-drop-down-active: #c3d3f0;
+
+  --border: #d1d5db;
+  --border-light: #e5e7eb;
+
+  --success: #2ca87f;
+  --warning: #f7b500;
+  --danger: #d64545;
+  --info: #69767f;
+
+  --yellow: #fae021;
+  --red: #d63033;
+  --blue: #4164d4;
+  --cyon: #7fd6b6;
+  --purple: #a0419d;
+  --brown: #9a592a;
+  --orange: #ffad57;
+  --pink: #f88fbf;
+
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+
+  --green-100: #b9e1b9;
+  --green-200: #22cc22;
+  --green-300: #009900;
+  --green-400: #008800;
+  --green-500: #007700;
+  --green-600: #006600;
+  --green-700: #005500;
+  --green-800: #004400;
+  --green-900: #003300;
+  --pd-font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+
+  --pd-global-color-alpha-black-1000a: rgba(33, 35, 44, 0.72);
+  --pd-global-color-alpha-black-900a: rgba(33, 35, 44, 0.56);
+  --pd-global-color-alpha-black-800a: rgba(33, 35, 44, 0.52);
+  --pd-global-color-alpha-black-700a: rgba(33, 35, 44, 0.48);
+  --pd-global-color-alpha-black-600a: rgba(33, 35, 44, 0.32);
+  --pd-global-color-alpha-black-500a: rgba(33, 35, 44, 0.24);
+  --pd-global-color-alpha-black-400a: rgba(33, 35, 44, 0.16);
+  --pd-global-color-alpha-black-300a: rgba(33, 35, 44, 0.12);
+  --pd-global-color-alpha-black-200a: rgb(33 35 44 / 8%);
+  --pd-global-color-alpha-black-100a: rgb(33 35 44 / 5%);
+  --pd-global-color-alpha-white-1000a: hsla(0, 0%, 100%, 0.72);
+  --pd-global-color-alpha-white-900a: hsla(0, 0%, 100%, 0.48);
+  --pd-global-color-alpha-white-800a: hsla(0, 0%, 100%, 0.32);
+  --pd-global-color-alpha-white-700a: hsla(0, 0%, 100%, 0.24);
+  --pd-global-color-alpha-white-600a: hsla(0, 0%, 100%, 0.16);
+  --pd-global-color-alpha-white-500a: hsla(0, 0%, 100%, 0.15);
+  --pd-global-color-alpha-white-400a: hsla(0, 0%, 100%, 0.12);
+  --pd-global-color-alpha-white-300a: hsla(0, 0%, 100%, 0.09);
+  --pd-global-color-alpha-white-200a: hsla(0, 0%, 100%, 0.08);
+  --pd-global-color-alpha-white-100a: hsla(0, 0%, 100%, 0.06);
+  --pd-global-color-light-green-1000: #012a12;
+  --pd-global-color-light-green-900: #004d25;
+  --pd-global-color-light-green-800: #00672a;
+  --pd-global-color-light-green-700: #077838;
+  --pd-global-color-light-green-600: #2d8647;
+  --pd-global-color-light-green-500: #61a36b;
+  --pd-global-color-light-green-400: #82b886;
+  --pd-global-color-light-green-300: #bedfbd;
+  --pd-global-color-light-green-200: #ddf4db;
+  --pd-global-color-light-green-100: #e9fbe7;
+  --pd-global-color-light-neutral-1000: #21232c;
+  --pd-global-color-light-neutral-900: #3f424a;
+  --pd-global-color-light-neutral-800: #565961;
+  --pd-global-color-light-neutral-700: #65686f;
+  --pd-global-color-light-neutral-600: #73767c;
+  --pd-global-color-light-neutral-500: #93949a;
+  --pd-global-color-light-neutral-400: #a9abaf;
+  --pd-global-color-light-neutral-300: #d7d7d9;
+  --pd-global-color-light-neutral-200: #ececed;
+  --pd-global-color-light-neutral-100: #f5f5f6;
+  --pd-global-color-light-neutral-0: #fff;
+  --pd-global-color-light-blue-1000: #002252;
+  --pd-global-color-light-blue-900: #013f88;
+  --pd-global-color-light-blue-800: #0157ae;
+  --pd-global-color-light-blue-700: #0d68c5;
+  --pd-global-color-light-blue-600: #2b74da;
+  --pd-global-color-light-blue-500: #5195f6;
+  --pd-global-color-light-blue-400: #72adff;
+  --pd-global-color-light-blue-300: #bcdaff;
+  --pd-global-color-light-blue-200: #e1eeff;
+  --pd-global-color-light-blue-100: #eff6ff;
+  --pd-global-color-light-red-1000: #510000;
+  --pd-global-color-light-red-900: #8a0007;
+  --pd-global-color-light-red-800: #b21019;
+  --pd-global-color-light-red-700: #c82627;
+  --pd-global-color-light-red-600: #d83c38;
+  --pd-global-color-light-red-500: #f16a60;
+  --pd-global-color-light-red-400: #fb8b80;
+  --pd-global-color-light-red-300: #fdc9c2;
+  --pd-global-color-light-red-200: #fde7e4;
+  --pd-global-color-light-red-100: #fef2f0;
+  --pd-global-color-light-yellow-1000: #371e00;
+  --pd-global-color-light-yellow-900: #603900;
+  --pd-global-color-light-yellow-800: #804d00;
+  --pd-global-color-light-yellow-700: #945b00;
+  --pd-global-color-light-yellow-600: #a76800;
+  --pd-global-color-light-yellow-500: #cf8501;
+  --pd-global-color-light-yellow-400: #e69b00;
+  --pd-global-color-light-yellow-300: #ffd24a;
+  --pd-global-color-light-yellow-200: #ffedac;
+  --pd-global-color-light-yellow-100: #fff6d6;
+  --pd-global-color-light-purple-1000: #211c52;
+  --pd-global-color-light-purple-900: #3d348e;
+  --pd-global-color-light-purple-800: #5345bf;
+  --pd-global-color-light-purple-700: #6150e1;
+  --pd-global-color-light-purple-600: #6962f2;
+  --pd-global-color-light-purple-500: #9086fc;
+  --pd-global-color-light-purple-400: #ab9ffb;
+  --pd-global-color-light-purple-300: #d9d1f8;
+  --pd-global-color-light-purple-200: #eeeafb;
+  --pd-global-color-light-purple-100: #f6f4fe;
+  --pd-global-color-dark-purple-1000: #e5dff7;
+  --pd-global-color-dark-purple-900: #c0b5f0;
+  --pd-global-color-dark-purple-800: #9c92ed;
+  --pd-global-color-dark-purple-700: #857ee9;
+  --pd-global-color-dark-purple-600: #6a64de;
+  --pd-global-color-dark-purple-500: #5e59d2;
+  --pd-global-color-dark-purple-400: #45449b;
+  --pd-global-color-dark-purple-300: #2c2b75;
+  --pd-global-color-dark-purple-200: #242464;
+  --pd-global-color-dark-purple-100: #1a1a4e;
+  --pd-global-color-dark-red-1000: #fedad7;
+  --pd-global-color-dark-red-900: #f9a7a0;
+  --pd-global-color-dark-red-800: #ec7c75;
+  --pd-global-color-dark-red-700: #e0645e;
+  --pd-global-color-dark-red-600: #cc4543;
+  --pd-global-color-dark-red-500: #c03737;
+  --pd-global-color-dark-red-400: #9a1b21;
+  --pd-global-color-dark-red-300: #720002;
+  --pd-global-color-dark-red-200: #620000;
+  --pd-global-color-dark-red-100: #4c0000;
+  --pd-global-color-dark-neutral-1000: #e2e2e4;
+  --pd-global-color-dark-neutral-900: #bcbcbf;
+  --pd-global-color-dark-neutral-800: #9c9da1;
+  --pd-global-color-dark-neutral-700: #898b90;
+  --pd-global-color-dark-neutral-600: #72747a;
+  --pd-global-color-dark-neutral-500: #686970;
+  --pd-global-color-dark-neutral-400: #4c4f55;
+  --pd-global-color-dark-neutral-300: #33353e;
+  --pd-global-color-dark-neutral-200: #2a2c35;
+  --pd-global-color-dark-neutral-100: #1e2029;
+  --pd-global-color-dark-neutral-0: #0e1017;
+  --pd-global-color-dark-yellow-1000: #ffdf8c;
+  --pd-global-color-dark-yellow-900: #eeb245;
+  --pd-global-color-dark-yellow-800: #d18f3b;
+  --pd-global-color-dark-yellow-700: #bc7e33;
+  --pd-global-color-dark-yellow-600: #9f6829;
+  --pd-global-color-dark-yellow-500: #915e24;
+  --pd-global-color-dark-yellow-400: #6e4618;
+  --pd-global-color-dark-yellow-300: #4f2e00;
+  --pd-global-color-dark-yellow-200: #432600;
+  --pd-global-color-dark-yellow-100: #331c00;
+  --pd-global-color-dark-green-1000: #d1e8cf;
+  --pd-global-color-dark-green-900: #a0c6a1;
+  --pd-global-color-dark-green-800: #76a97c;
+  --pd-global-color-dark-green-700: #5d9867;
+  --pd-global-color-dark-green-600: #3c824e;
+  --pd-global-color-dark-green-500: #2a7742;
+  --pd-global-color-dark-green-400: #0b5b2e;
+  --pd-global-color-dark-green-300: #013e1d;
+  --pd-global-color-dark-green-200: #013417;
+  --pd-global-color-dark-green-100: #012710;
+  --pd-global-color-dark-blue-1000: #d3e3fe;
+  --pd-global-color-dark-blue-900: #9abefa;
+  --pd-global-color-dark-blue-800: #6e9dec;
+  --pd-global-color-dark-blue-700: #588adf;
+  --pd-global-color-dark-blue-600: #4073c8;
+  --pd-global-color-dark-blue-500: #3768ba;
+  --pd-global-color-dark-blue-400: #244d92;
+  --pd-global-color-dark-blue-300: #023372;
+  --pd-global-color-dark-blue-200: #012a60;
+  --pd-global-color-dark-blue-100: #001f4b;
+  --pd-global-color-brand-green-500: #012710;
+  --pd-global-color-brand-green-400: #014722;
+  --pd-global-color-brand-green-300: #aee9b4;
+  --pd-global-color-brand-green-200: #d7f9d3;
+  --pd-global-color-brand-green-100: #ebfce9;
+  --pd-global-color-brand-purple-400: #252745;
+  --pd-global-color-brand-purple-300: #3b3a97;
+  --pd-global-color-brand-purple-200: #e7e7fc;
+  --pd-global-color-brand-purple-100: #f8f8fe;
+  --pd-motion-ease-transition: cubic-bezier(0.5, 0, 0.2, 1);
+  --pd-motion-ease-exit: cubic-bezier(0.7, 0, 1, 1);
+  --pd-motion-ease-enter: cubic-bezier(0, 0, 0.2, 1);
+  --pd-motion-duration-400: 0.4s;
+  --pd-motion-duration-350: 0.35s;
+  --pd-motion-duration-300: 0.3s;
+  --pd-motion-duration-250: 0.25s;
+  --pd-motion-duration-200: 0.2s;
+  --pd-motion-duration-150: 0.15s;
+  --pd-motion-duration-100: 0.1s;
+  --pd-non-semantic-color-neutral-gray-148: #2d2f2f;
+  --pd-non-semantic-color-neutral-gray-140: #343637;
+  --pd-non-semantic-color-neutral-gray-132: #3b3d3e;
+  --pd-non-semantic-color-neutral-gray-124: #424445;
+  --pd-non-semantic-color-neutral-gray-116: #494c4c;
+  --pd-non-semantic-color-neutral-gray-108: #505354;
+  --pd-non-semantic-color-neutral-gray-100: #575a5b;
+  --pd-non-semantic-color-neutral-gray-92: #646768;
+  --pd-non-semantic-color-neutral-gray-88: #6b6e6f;
+  --pd-non-semantic-color-neutral-gray-80: #797b7c;
+  --pd-non-semantic-color-neutral-gray-72: #868889;
+  --pd-non-semantic-color-neutral-gray-64: #939596;
+  --pd-non-semantic-color-neutral-gray-56: #a1a3a3;
+  --pd-non-semantic-color-neutral-gray-48: #aeb0b0;
+  --pd-non-semantic-color-neutral-gray-40: #bcbdbd;
+  --pd-non-semantic-color-neutral-gray-32: #c9cacb;
+  --pd-non-semantic-color-neutral-gray-24: #d7d7d8;
+  --pd-non-semantic-color-neutral-gray-20: #dddede;
+  --pd-non-semantic-color-neutral-gray-16: #e4e5e5;
+  --pd-non-semantic-color-neutral-gray-12: #ebebeb;
+  --pd-non-semantic-color-neutral-gray-8: #f2f2f2;
+  --pd-non-semantic-color-neutral-gray-4: #f8f8f8;
+  --pd-non-semantic-color-earth-brown-148: #502e16;
+  --pd-non-semantic-color-earth-brown-140: #5c351a;
+  --pd-non-semantic-color-earth-brown-132: #693d1d;
+  --pd-non-semantic-color-earth-brown-124: #754421;
+  --pd-non-semantic-color-earth-brown-116: #814b24;
+  --pd-non-semantic-color-earth-brown-108: #8e5228;
+  --pd-non-semantic-color-earth-brown-100: #9a592b;
+  --pd-non-semantic-color-earth-brown-92: #a2663c;
+  --pd-non-semantic-color-earth-brown-88: #a66d44;
+  --pd-non-semantic-color-earth-brown-80: #ae7a55;
+  --pd-non-semantic-color-earth-brown-72: #b68766;
+  --pd-non-semantic-color-earth-brown-64: #be9577;
+  --pd-non-semantic-color-earth-brown-56: #c6a288;
+  --pd-non-semantic-color-earth-brown-48: #cfaf99;
+  --pd-non-semantic-color-earth-brown-40: #d7bdaa;
+  --pd-non-semantic-color-earth-brown-32: #dfcabb;
+  --pd-non-semantic-color-earth-brown-24: #e7d7cc;
+  --pd-non-semantic-color-earth-brown-20: #ebded5;
+  --pd-non-semantic-color-earth-brown-16: #efe4dd;
+  --pd-non-semantic-color-earth-brown-12: #f3ebe5;
+  --pd-non-semantic-color-earth-brown-8: #f7f2ee;
+  --pd-non-semantic-color-earth-brown-4: #fbf8f7;
+  --pd-non-semantic-color-lavender-purple-148: #331b5f;
+  --pd-non-semantic-color-lavender-purple-140: #3b1f6e;
+  --pd-non-semantic-color-lavender-purple-132: #43237c;
+  --pd-non-semantic-color-lavender-purple-124: #4a288b;
+  --pd-non-semantic-color-lavender-purple-116: #522c9a;
+  --pd-non-semantic-color-lavender-purple-108: #5a30a8;
+  --pd-non-semantic-color-lavender-purple-100: #6234b7;
+  --pd-non-semantic-color-lavender-purple-92: #6f44bd;
+  --pd-non-semantic-color-lavender-purple-88: #754cc0;
+  --pd-non-semantic-color-lavender-purple-80: #815dc5;
+  --pd-non-semantic-color-lavender-purple-72: #8e6dcb;
+  --pd-non-semantic-color-lavender-purple-64: #9b7dd1;
+  --pd-non-semantic-color-lavender-purple-56: #a78dd7;
+  --pd-non-semantic-color-lavender-purple-48: #b49edd;
+  --pd-non-semantic-color-lavender-purple-40: #c0aee2;
+  --pd-non-semantic-color-lavender-purple-32: #cdbee8;
+  --pd-non-semantic-color-lavender-purple-24: #d9ceee;
+  --pd-non-semantic-color-lavender-purple-20: #e0d6f1;
+  --pd-non-semantic-color-lavender-purple-16: #e6dff3;
+  --pd-non-semantic-color-lavender-purple-12: #ece7f6;
+  --pd-non-semantic-color-lavender-purple-8: #f2eff9;
+  --pd-non-semantic-color-lavender-purple-4: #f9f7fc;
+  --pd-non-semantic-color-lilac-purple-148: #521150;
+  --pd-non-semantic-color-lilac-purple-140: #5d155a;
+  --pd-non-semantic-color-lilac-purple-132: #671864;
+  --pd-non-semantic-color-lilac-purple-124: #721c6f;
+  --pd-non-semantic-color-lilac-purple-116: #7d2179;
+  --pd-non-semantic-color-lilac-purple-108: #872484;
+  --pd-non-semantic-color-lilac-purple-100: #92288e;
+  --pd-non-semantic-color-lilac-purple-92: #9c3898;
+  --pd-non-semantic-color-lilac-purple-88: #a0419d;
+  --pd-non-semantic-color-lilac-purple-80: #aa51a6;
+  --pd-non-semantic-color-lilac-purple-72: #b462b1;
+  --pd-non-semantic-color-lilac-purple-64: #c26fbf;
+  --pd-non-semantic-color-lilac-purple-56: #cd7fca;
+  --pd-non-semantic-color-lilac-purple-48: #d88fd5;
+  --pd-non-semantic-color-lilac-purple-40: #e29fe0;
+  --pd-non-semantic-color-lilac-purple-32: #eab0e8;
+  --pd-non-semantic-color-lilac-purple-24: #edc6eb;
+  --pd-non-semantic-color-lilac-purple-20: #f0cfee;
+  --pd-non-semantic-color-lilac-purple-16: #f5d8f4;
+  --pd-non-semantic-color-lilac-purple-12: #f7e1f6;
+  --pd-non-semantic-color-lilac-purple-8: #fbeafb;
+  --pd-non-semantic-color-lilac-purple-4: #fdf4fd;
+  --pd-non-semantic-color-bubblegum-pink-148: #890540;
+  --pd-non-semantic-color-bubblegum-pink-140: #910d48;
+  --pd-non-semantic-color-bubblegum-pink-132: #98144f;
+  --pd-non-semantic-color-bubblegum-pink-124: #a11d58;
+  --pd-non-semantic-color-bubblegum-pink-116: #a92560;
+  --pd-non-semantic-color-bubblegum-pink-108: #b02c67;
+  --pd-non-semantic-color-bubblegum-pink-100: #b8346f;
+  --pd-non-semantic-color-bubblegum-pink-92: #c5417c;
+  --pd-non-semantic-color-bubblegum-pink-88: #ca4681;
+  --pd-non-semantic-color-bubblegum-pink-80: #d8548f;
+  --pd-non-semantic-color-bubblegum-pink-72: #e4609b;
+  --pd-non-semantic-color-bubblegum-pink-64: #f16da8;
+  --pd-non-semantic-color-bubblegum-pink-56: #f97bb3;
+  --pd-non-semantic-color-bubblegum-pink-48: #f88fbe;
+  --pd-non-semantic-color-bubblegum-pink-40: #f7a3c8;
+  --pd-non-semantic-color-bubblegum-pink-32: #f6b7d3;
+  --pd-non-semantic-color-bubblegum-pink-24: #f7c9dd;
+  --pd-non-semantic-color-bubblegum-pink-20: #f7d3e3;
+  --pd-non-semantic-color-bubblegum-pink-16: #f7dde9;
+  --pd-non-semantic-color-bubblegum-pink-12: #f9e6ee;
+  --pd-non-semantic-color-bubblegum-pink-8: #faeef3;
+  --pd-non-semantic-color-bubblegum-pink-4: #fff7f8;
+  --pd-non-semantic-color-watermelon-red-148: #8f191b;
+  --pd-non-semantic-color-watermelon-red-140: #a31e21;
+  --pd-non-semantic-color-watermelon-red-132: #b12628;
+  --pd-non-semantic-color-watermelon-red-124: #cd272a;
+  --pd-non-semantic-color-watermelon-red-116: #d63033;
+  --pd-non-semantic-color-watermelon-red-108: #e03a3d;
+  --pd-non-semantic-color-watermelon-red-100: #e94346;
+  --pd-non-semantic-color-watermelon-red-92: #f44e51;
+  --pd-non-semantic-color-watermelon-red-88: #ff6164;
+  --pd-non-semantic-color-watermelon-red-72: #ff7174;
+  --pd-non-semantic-color-watermelon-red-64: #ff8183;
+  --pd-non-semantic-color-watermelon-red-56: #ff9193;
+  --pd-non-semantic-color-watermelon-red-48: #ffa0a2;
+  --pd-non-semantic-color-watermelon-red-40: #ffb0b2;
+  --pd-non-semantic-color-watermelon-red-32: #ffc0c1;
+  --pd-non-semantic-color-watermelon-red-24: #ffd0d1;
+  --pd-non-semantic-color-watermelon-red-20: #ffd7d8;
+  --pd-non-semantic-color-watermelon-red-16: #ffe0e0;
+  --pd-non-semantic-color-watermelon-red-12: #ffe7e7;
+  --pd-non-semantic-color-watermelon-red-8: #ffefef;
+  --pd-non-semantic-color-watermelon-red-4: #fff8f8;
+  --pd-non-semantic-color-tangerine-orange-148: #8c4700;
+  --pd-non-semantic-color-tangerine-orange-140: #a25200;
+  --pd-non-semantic-color-tangerine-orange-132: #b85d00;
+  --pd-non-semantic-color-tangerine-orange-124: #cd6800;
+  --pd-non-semantic-color-tangerine-orange-116: #e27301;
+  --pd-non-semantic-color-tangerine-orange-108: #ef800e;
+  --pd-non-semantic-color-tangerine-orange-100: #fc8d1b;
+  --pd-non-semantic-color-tangerine-orange-92: #ff9529;
+  --pd-non-semantic-color-tangerine-orange-88: #ff9a33;
+  --pd-non-semantic-color-tangerine-orange-80: #ffa446;
+  --pd-non-semantic-color-tangerine-orange-72: #ffad58;
+  --pd-non-semantic-color-tangerine-orange-64: #ffb66a;
+  --pd-non-semantic-color-tangerine-orange-56: #ffbf7c;
+  --pd-non-semantic-color-tangerine-orange-48: #ffc88f;
+  --pd-non-semantic-color-tangerine-orange-40: #ffd1a2;
+  --pd-non-semantic-color-tangerine-orange-32: #ffdbb5;
+  --pd-non-semantic-color-tangerine-orange-24: #ffe4c7;
+  --pd-non-semantic-color-tangerine-orange-20: #ffe8d0;
+  --pd-non-semantic-color-tangerine-orange-16: #ffeddb;
+  --pd-non-semantic-color-tangerine-orange-12: #fff1e3;
+  --pd-non-semantic-color-tangerine-orange-8: #fff6ed;
+  --pd-non-semantic-color-tangerine-orange-4: #fffaf5;
+  --pd-non-semantic-color-honey-yellow-148: #846204;
+  --pd-non-semantic-color-honey-yellow-140: #987104;
+  --pd-non-semantic-color-honey-yellow-132: #ad8005;
+  --pd-non-semantic-color-honey-yellow-124: #c18f05;
+  --pd-non-semantic-color-honey-yellow-116: #d59e06;
+  --pd-non-semantic-color-honey-yellow-108: #eaad06;
+  --pd-non-semantic-color-honey-yellow-100: #febc07;
+  --pd-non-semantic-color-honey-yellow-92: #fec11b;
+  --pd-non-semantic-color-honey-yellow-88: #fec425;
+  --pd-non-semantic-color-honey-yellow-80: #fec939;
+  --pd-non-semantic-color-honey-yellow-72: #fecf4c;
+  --pd-non-semantic-color-honey-yellow-64: #fed460;
+  --pd-non-semantic-color-honey-yellow-56: #ffda74;
+  --pd-non-semantic-color-honey-yellow-48: #ffdf88;
+  --pd-non-semantic-color-honey-yellow-40: #ffe49c;
+  --pd-non-semantic-color-honey-yellow-32: #ffeab0;
+  --pd-non-semantic-color-honey-yellow-24: #ffefc3;
+  --pd-non-semantic-color-honey-yellow-20: #fff2cd;
+  --pd-non-semantic-color-honey-yellow-16: #fff4d7;
+  --pd-non-semantic-color-honey-yellow-12: #fff7e1;
+  --pd-non-semantic-color-honey-yellow-8: #fffaeb;
+  --pd-non-semantic-color-honey-yellow-4: #fffcf5;
+  --pd-non-semantic-color-lemon-yellow-148: #766700;
+  --pd-non-semantic-color-lemon-yellow-140: #887800;
+  --pd-non-semantic-color-lemon-yellow-132: #9a8700;
+  --pd-non-semantic-color-lemon-yellow-124: #ac9800;
+  --pd-non-semantic-color-lemon-yellow-116: #bea800;
+  --pd-non-semantic-color-lemon-yellow-108: #d1b800;
+  --pd-non-semantic-color-lemon-yellow-100: #e1c708;
+  --pd-non-semantic-color-lemon-yellow-92: #e6cc0d;
+  --pd-non-semantic-color-lemon-yellow-88: #ead011;
+  --pd-non-semantic-color-lemon-yellow-80: #efd516;
+  --pd-non-semantic-color-lemon-yellow-72: #f4da1b;
+  --pd-non-semantic-color-lemon-yellow-64: #fae021;
+  --pd-non-semantic-color-lemon-yellow-56: #fce439;
+  --pd-non-semantic-color-lemon-yellow-48: #fce854;
+  --pd-non-semantic-color-lemon-yellow-40: #fbec77;
+  --pd-non-semantic-color-lemon-yellow-32: #fbef95;
+  --pd-non-semantic-color-lemon-yellow-24: #fbf3b8;
+  --pd-non-semantic-color-lemon-yellow-20: #fdf5be;
+  --pd-non-semantic-color-lemon-yellow-16: #fef7c5;
+  --pd-non-semantic-color-lemon-yellow-12: #fff9cf;
+  --pd-non-semantic-color-lemon-yellow-8: #fffce2;
+  --pd-non-semantic-color-lemon-yellow-4: #fffdf1;
+  --pd-non-semantic-color-avocado-green-148: #5c6600;
+  --pd-non-semantic-color-avocado-green-140: #6a7500;
+  --pd-non-semantic-color-avocado-green-132: #788400;
+  --pd-non-semantic-color-avocado-green-124: #879500;
+  --pd-non-semantic-color-avocado-green-115: #95a400;
+  --pd-non-semantic-color-avocado-green-108: #a3b308;
+  --pd-non-semantic-color-avocado-green-100: #b0c015;
+  --pd-non-semantic-color-avocado-green-92: #b6c623;
+  --pd-non-semantic-color-avocado-green-88: #bac92a;
+  --pd-non-semantic-color-avocado-green-80: #c1cf38;
+  --pd-non-semantic-color-avocado-green-72: #c6d34f;
+  --pd-non-semantic-color-avocado-green-64: #cdd95e;
+  --pd-non-semantic-color-avocado-green-56: #d4de6f;
+  --pd-non-semantic-color-avocado-green-48: #dae380;
+  --pd-non-semantic-color-avocado-green-40: #dfe798;
+  --pd-non-semantic-color-avocado-green-32: #e6edaa;
+  --pd-non-semantic-color-avocado-green-24: #edf3b4;
+  --pd-non-semantic-color-avocado-green-20: #f0f5c0;
+  --pd-non-semantic-color-avocado-green-16: #f3f8ca;
+  --pd-non-semantic-color-avocado-green-12: #f7f9d5;
+  --pd-non-semantic-color-avocado-green-8: #fafce0;
+  --pd-non-semantic-color-avocado-green-4: #fdfeef;
+  --pd-non-semantic-color-emerald-green-148: #005635;
+  --pd-non-semantic-color-emerald-green-140: #00643e;
+  --pd-non-semantic-color-emerald-green-132: #007046;
+  --pd-non-semantic-color-emerald-green-124: #007e4f;
+  --pd-non-semantic-color-emerald-green-116: #008a56;
+  --pd-non-semantic-color-emerald-green-108: #0a9460;
+  --pd-non-semantic-color-emerald-green-100: #129c68;
+  --pd-non-semantic-color-emerald-green-92: #1ea874;
+  --pd-non-semantic-color-emerald-green-88: #23ad79;
+  --pd-non-semantic-color-emerald-green-80: #2fb985;
+  --pd-non-semantic-color-emerald-green-72: #45c091;
+  --pd-non-semantic-color-emerald-green-64: #57c89d;
+  --pd-non-semantic-color-emerald-green-56: #6ad0a9;
+  --pd-non-semantic-color-emerald-green-48: #7fd6b6;
+  --pd-non-semantic-color-emerald-green-40: #95ddc2;
+  --pd-non-semantic-color-emerald-green-32: #aae4ce;
+  --pd-non-semantic-color-emerald-green-24: #c1e9db;
+  --pd-non-semantic-color-emerald-green-20: #ccede1;
+  --pd-non-semantic-color-emerald-green-16: #d3f2e7;
+  --pd-non-semantic-color-emerald-green-12: #ddf5ed;
+  --pd-non-semantic-color-emerald-green-8: #e7f9f3;
+  --pd-non-semantic-color-emerald-green-4: #f4fbfc;
+  --pd-non-semantic-color-teal-green-148: #084e4d;
+  --pd-non-semantic-color-teal-green-140: #085b59;
+  --pd-non-semantic-color-teal-green-132: #0a6765;
+  --pd-non-semantic-color-teal-green-124: #0b7271;
+  --pd-non-semantic-color-teal-green-116: #117d7b;
+  --pd-non-semantic-color-teal-green-108: #178684;
+  --pd-non-semantic-color-teal-green-100: #1c918f;
+  --pd-non-semantic-color-teal-green-92: #2b9b99;
+  --pd-non-semantic-color-teal-green-88: #32a09e;
+  --pd-non-semantic-color-teal-green-80: #41aaa8;
+  --pd-non-semantic-color-teal-green-72: #50b5b3;
+  --pd-non-semantic-color-teal-green-64: #62bebc;
+  --pd-non-semantic-color-teal-green-56: #71c7c6;
+  --pd-non-semantic-color-teal-green-48: #81d1d0;
+  --pd-non-semantic-color-teal-green-40: #95d9d8;
+  --pd-non-semantic-color-teal-green-32: #abe1e0;
+  --pd-non-semantic-color-teal-green-24: #bfe9e8;
+  --pd-non-semantic-color-teal-green-20: #caecec;
+  --pd-non-semantic-color-teal-green-16: #d7efef;
+  --pd-non-semantic-color-teal-green-12: #dff4f4;
+  --pd-non-semantic-color-teal-green-8: #e9f8f8;
+  --pd-non-semantic-color-teal-green-4: #f5fafd;
+  --pd-non-semantic-color-sky-blue-148: #004b77;
+  --pd-non-semantic-color-sky-blue-140: #00578a;
+  --pd-non-semantic-color-sky-blue-132: #036198;
+  --pd-non-semantic-color-sky-blue-124: #0c6aa1;
+  --pd-non-semantic-color-sky-blue-116: #1673aa;
+  --pd-non-semantic-color-sky-blue-108: #1e7cb3;
+  --pd-non-semantic-color-sky-blue-100: #2785bc;
+  --pd-non-semantic-color-sky-blue-92: #3391c8;
+  --pd-non-semantic-color-sky-blue-88: #3997ce;
+  --pd-non-semantic-color-sky-blue-80: #43a1d9;
+  --pd-non-semantic-color-sky-blue-72: #4fade4;
+  --pd-non-semantic-color-sky-blue-64: #60b7ea;
+  --pd-non-semantic-color-sky-blue-56: #6dc3f5;
+  --pd-non-semantic-color-sky-blue-48: #82cbf5;
+  --pd-non-semantic-color-sky-blue-40: #97d4f7;
+  --pd-non-semantic-color-sky-blue-32: #aedcf7;
+  --pd-non-semantic-color-sky-blue-24: #c2e5f9;
+  --pd-non-semantic-color-sky-blue-20: #cde9fa;
+  --pd-non-semantic-color-sky-blue-16: #d4eefd;
+  --pd-non-semantic-color-sky-blue-12: #dff2fd;
+  --pd-non-semantic-color-sky-blue-8: #e9f7ff;
+  --pd-non-semantic-color-sky-blue-4: #f3fbff;
+  --pd-non-semantic-color-electric-blue-148: #1033a3;
+  --pd-non-semantic-color-electric-blue-140: #183bab;
+  --pd-non-semantic-color-electric-blue-132: #2043b3;
+  --pd-non-semantic-color-electric-blue-124: #284bbb;
+  --pd-non-semantic-color-electric-blue-116: #3154c4;
+  --pd-non-semantic-color-electric-blue-108: #395ccc;
+  --pd-non-semantic-color-electric-blue-100: #4164d4;
+  --pd-non-semantic-color-electric-blue-92: #4d70e0;
+  --pd-non-semantic-color-electric-blue-88: #5477e7;
+  --pd-non-semantic-color-electric-blue-80: #6083f3;
+  --pd-non-semantic-color-electric-blue-72: #6c8fff;
+  --pd-non-semantic-color-electric-blue-64: #7c9bff;
+  --pd-non-semantic-color-electric-blue-56: #8da8ff;
+  --pd-non-semantic-color-electric-blue-48: #9db5ff;
+  --pd-non-semantic-color-electric-blue-40: #adc1ff;
+  --pd-non-semantic-color-electric-blue-32: #bdcdff;
+  --pd-non-semantic-color-electric-blue-24: #cedaff;
+  --pd-non-semantic-color-electric-blue-20: #d6e0ff;
+  --pd-non-semantic-color-electric-blue-16: #dee6ff;
+  --pd-non-semantic-color-electric-blue-12: #e6ecff;
+  --pd-non-semantic-color-electric-blue-8: #eff3ff;
+  --pd-non-semantic-color-electric-blue-4: #f7f9ff;
+}
+
+:root,
+[data-theme="light"] {
+  --pd-color-other-backdrop: rgba(33, 35, 44, 0.48);
+  --pd-color-fill-ai-subtle-rgba: linear-gradient(
+      180deg,
+      #fff,
+      hsla(0, 0%, 100%, 0) 69%
+    ),
+    linear-gradient(218.99deg, hsla(0, 0%, 100%, 0) 35.81%, #fcf5ff 77.63%),
+    linear-gradient(142.98deg, rgba(255, 244, 237, 0) 78.17%, #fff4ed 97.41%);
+  --pd-color-fill-ai-subtle: linear-gradient(
+      180deg,
+      #fff,
+      hsla(0, 0%, 100%, 0) 69%
+    ),
+    linear-gradient(218.99deg, hsla(0, 0%, 100%, 0) 35.81%, #fcf5ff 77.63%),
+    linear-gradient(142.98deg, rgba(255, 244, 237, 0) 78.17%, #fff4ed 97.41%);
+  --pd-color-fill-ai-moderate: linear-gradient(
+    141.6deg,
+    #f0e6ff 27.79%,
+    #fff4ed 86.53%
+  );
+  --pd-color-fill-ai-intense: linear-gradient(
+    141.6deg,
+    #7118f7 27.79%,
+    #ebbca0 86.53%
+  );
+  --pd-color-fill-white-muted-static: hsla(0, 0%, 100%, 0.48);
+  --pd-color-fill-white-static: #fff;
+  --pd-color-fill-light-static: #ececed;
+  --pd-color-fill-dark-static: #565961;
+  --pd-color-fill-extra-black-static: #21232c;
+  --pd-color-fill-on-inverted-strong: hsla(0, 0%, 100%, 0.24);
+  --pd-color-fill-on-inverted-medium: hsla(0, 0%, 100%, 0.16);
+  --pd-color-fill-on-inverted-light: hsla(0, 0%, 100%, 0.08);
+  --pd-color-fill-extra-strong-rgba: rgba(33, 35, 44, 0.72);
+  --pd-color-fill-strong-rgba: rgba(33, 35, 44, 0.48);
+  --pd-color-fill-medium-strong-rgba: rgba(33, 35, 44, 0.24);
+  --pd-color-fill-medium-rgba: rgba(33, 35, 44, 0.16);
+  --pd-color-fill-medium-light-rgba: rgba(33, 35, 44, 0.12);
+  --pd-color-fill-light-rgba: rgb(33 35 44 / 8%);
+  --pd-color-fill-extra-light-rgba: rgb(33 35 44 / 5%);
+  --pd-color-divider-ai-line: linear-gradient(90deg, #802ced, #df769f);
+  --pd-color-divider-ai-outline: linear-gradient(
+    141.6deg,
+    #7118f7 27.79%,
+    #d59fb0 86.53%
+  );
+  --pd-color-divider-strong: rgba(33, 35, 44, 0.24);
+  --pd-color-divider-medium-rgba: rgba(33, 35, 44, 0.12);
+  --pd-color-divider-medium: rgba(33, 35, 44, 0.12);
+  --pd-color-divider-light-rgba: rgb(33 35 44 / 8%);
+  --pd-color-icon-muted-rgba: rgba(33, 35, 44, 0.48);
+  --pd-color-icon-secondary-rgba: rgba(33, 35, 44, 0.72);
+  --pd-color-icon-black-static: #21232c;
+  --pd-color-icon-white-secondary-static: #a9abaf;
+  --pd-color-icon-white-static: #fff;
+  --pd-color-icon-secondary-inverted: hsla(0, 0%, 100%, 0.72);
+  --pd-color-icon-ai: #7619f0;
+  --pd-color-text-muted-rgba: rgba(33, 35, 44, 0.48);
+  --pd-color-text-secondary-rgba: rgba(33, 35, 44, 0.72);
+  --pd-color-text-black-static: #21232c;
+  --pd-color-text-white-secondary-static: #a9abaf;
+  --pd-color-text-white-static: #fff;
+  --pd-color-text-secondary-inverted: hsla(0, 0%, 100%, 0.72);
+  --pd-color-text-ai: linear-gradient(135.14deg, #7118f7 31.88%, #e72b21 90.4%);
+  --pd-color-surface-black-static: #3f424a;
+  --pd-color-surface-dark-static: #565961;
+  --pd-color-secondary-background-light: var(
+    --pd-global-color-light-purple-100
+  );
+  --pd-color-secondary-background: var(--pd-global-color-light-purple-200);
+  --pd-color-secondary-background-strong: var(
+    --pd-global-color-light-purple-300
+  );
+  --pd-color-secondary-border: var(--pd-global-color-light-purple-400);
+  --pd-color-secondary-muted: var(--pd-global-color-light-purple-400);
+  --pd-color-secondary-default: var(--pd-global-color-light-purple-600);
+  --pd-color-secondary-hover: var(--pd-global-color-light-purple-700);
+  --pd-color-secondary-strong: var(--pd-global-color-light-purple-700);
+}
+
+/* -------------------------------------------------------------------
+   Global Body
+------------------------------------------------------------------- */
+body {
+  @apply m-0 p-0 text-[14px] leading-[20px] text-text;
+  font-family: var(--pd-font);
+}
+
+/* -------------------------------------------------------------------
+   Theme Switcher
+------------------------------------------------------------------- */
+.themeswitcher-select {
+  @apply min-w-[280px];
+}
+
+.theme-color-placeholder {
+  @apply flex gap-2 items-center;
+
+  .theme-color {
+    @apply w-[12px] h-[12px] rounded-full;
+  }
+
+  .bootstrap4-light-blue {
+    @apply bg-[#007bff];
+  }
+
+  .md-light-deeppurple {
+    @apply bg-[#673AB7];
+  }
+
+  .mira {
+    @apply bg-[#5e81ac];
+  }
+
+  .nano {
+    @apply bg-[#1174c0];
+  }
+
+  .tailwind-light {
+    @apply bg-[#4f46e5];
+  }
+
+  .lara-light-cyan {
+    @apply bg-[#06b6d4];
+  }
+
+  .saga-blue {
+    @apply bg-[#2196f3];
+  }
+
+  .lara-light-amber {
+    @apply bg-[#f59e0b];
+  }
+}
+
+/* -------------------------------------------------------------------
+   Overlay Panel
+------------------------------------------------------------------- */
+.overlay-container {
+  @apply w-[320px] pt-3;
+
+  .p-overlaypanel-content {
+    @apply p-5;
+
+    .overlay-fields {
+      @apply flex flex-col gap-6;
+    }
+
+    .overlay-profile {
+      @apply flex gap-[14px] border-b border-gray-100 pb-4;
+
+      .user-profile {
+        @apply w-[80%];
+
+        .name {
+          @apply font-medium text-[14px] leading-[20px] capitalize;
+          color: var(--text-primary);
+        }
+
+        .email {
+          @apply text-[12px] leading-[18px] italic;
+          color: var(--text-secondary);
+        }
+      }
+    }
+
+    .set-container {
+      @apply mt-[10px] flex gap-[8px] items-center pt-[10px] pb-[20px] border-b border-gray-100 cursor-pointer;
+
+      .setting-name {
+        @apply font-medium text-[14px];
+      }
+    }
+  }
+
+  .logout-btn {
+    @apply h-[36px] w-full bg-primary flex items-center justify-center gap-[8px] mt-[10px];
+
+    .label {
+      @apply font-medium text-[14px] text-white capitalize;
+    }
+  }
+}
+
+/* -------------------------------------------------------------------
+   Field Labels
+------------------------------------------------------------------- */
+.hub-field-label {
+  @apply text-[13px] font-semibold mb-1;
+  color: var(--text-primary);
+}
+
+.hub-field-info {
+  @apply text-[12px] mb-2;
+  color: var(--text-secondary);
+}
+
+/* -------------------------------------------------------------------
+   RADIO
+------------------------------------------------------------------- */
+.pd-radio-title {
+  @apply text-[14px] font-semibold;
+  color: var(--text-primary);
+}
+
+.pd-radio {
+  @apply flex items-center gap-2;
+}
+
+.pd-radio-label {
+  @apply text-[14px];
+  color: var(--text-primary);
+}
+
+.pd-radio .p-radiobutton {
+  @apply w-[18px] h-[18px];
+}
+
+.pd-radio .p-radiobutton-box {
+  @apply w-[18px] h-[18px] rounded-full transition ease-in-out duration-200;
+  border: 2px solid var(--gray-300);
+  background: var(--surface-base);
+}
+
+.pd-radio .p-radiobutton-box:hover {
+  border-color: var(--gray-400);
+}
+
+.pd-radio .p-radiobutton.p-highlight .p-radiobutton-box {
+  border-color: var(--primary);
+  background: var(--primary);
+}
+
+.pd-radio .p-radiobutton.p-highlight .p-radiobutton-icon {
+  @apply w-[8px] h-[8px] rounded-full;
+  background: white !important;
+}
+
+.pd-radio .p-radiobutton:not(.p-highlight) .p-radiobutton-icon {
+  background: transparent !important;
+  transform: scale(0);
+}
+
+/* -------------------------------------------------------------------
+   Headings + Paragraph
+------------------------------------------------------------------- */
+h1 {
+  @apply text-[24px] font-semibold leading-[32px] mb-2;
+  font-family: var(--pd-font);
+}
+
+h2 {
+  @apply text-[20px] font-semibold leading-[28px] mb-2;
+  font-family: var(--pd-font);
+}
+
+h3 {
+  @apply text-[18px] font-semibold leading-[24px] mb-1;
+  font-family: var(--pd-font);
+}
+
+h4 {
+  @apply text-[16px] font-semibold leading-[22px] mb-1;
+  font-family: var(--pd-font);
+}
+
+h5 {
+  @apply text-[14px] font-semibold leading-[20px] mb-1;
+  font-family: var(--pd-font);
+}
+
+h6 {
+  @apply text-[13px] font-semibold leading-[18px] mb-1;
+  font-family: var(--pd-font);
+}
+
+span{
+  font-family: var(--pd-font);
+}
+
+p {
+  @apply text-[14px] font-normal leading-[20px] mb-3;
+  font-family: var(--pd-font);
+  color: #333;
+}
+
+label {
+  @apply text-[13px] font-medium mb-1 block;
+  font-family: var(--pd-font);
+  color: #6c737f;
+}

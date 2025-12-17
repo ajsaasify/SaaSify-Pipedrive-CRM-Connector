@@ -1,0 +1,22 @@
+export const privateOfferConstant = {
+    productNotFount: "Product Not Fount",
+    replacementOffer: "ReplacementPrivateOffer",
+    upperMonths: "Months",
+    lowerMonths: "months",
+    upperYears: "Years",
+    lowerYears: "years",
+    lowerDays: "days",
+    externalRenewal: "External",
+    awsRenewal: "AwsMarketplace",
+    contractQuantity: "contract quantity",
+    standard: "Standard",
+    name: "Name",
+    description: "Description",
+    sellerCode: "SellerCode",
+    sellerAccountName: "SellerAccountName",
+    Id: "Id",
+    offerId: "OfferID",
+    offerDescription: "OfferDescription",
+    planId: "PlanID",
+    planName: "PlanName"
+}

@@ -1,0 +1,16 @@
+export enum AccordianTitle {
+  AUDIT = "Audit Log",
+  OVERVIEW = "Overview",
+  SAAS = "SaaS Documentation",
+  PROJECT = "Project Details",
+  NEXT = "Next Steps",
+  MARKETPLACE = "Marketplace",
+  CUSTOMER = "Customer Details",
+  CONTACT = "Contacts Details",
+  ADDITIONAL = "Additional Details",
+  DEALS = "Deal Details",
+  DEALS_Qualify = "Qualification Information",
+  SYSTEM_INFO = "System Information",
+  PARTNER_CONNECTION = "Partner Shared Details",
+  INVITATION = "Invitation Details",
+}

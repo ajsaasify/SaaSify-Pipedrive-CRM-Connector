@@ -1,0 +1,50 @@
+/* -------------------------------------------------------------------
+   INPUT TEXT
+------------------------------------------------------------------- */
+.p-column-filter-constraint .p-inputnumber.p-component.p-inputwrapper,
+.hub-input {
+  @apply h-8 !bg-surface-base rounded-md w-full py-3 px-[8px] flex items-center border border-border text-sm text-text transition-[0.2s] duration-[ease] border-solid;
+}
+.p-column-filter-constraint .p-inputnumber.p-component.p-inputwrapper:focus,
+.hub-input:focus {
+  @apply border-[color:var(--primary)] shadow-none;
+}
+.p-column-filter-constraint
+  .p-inputnumber.p-component.p-inputwrapper::placeholder,
+.hub-input::placeholder {
+  @apply text-[color:var(--gray-400)];
+}
+.p-placeholder {
+  @apply text-gray-400;
+}
+
+/* -------------------------------------------------------------------
+   TEXTAREA
+------------------------------------------------------------------- */
+.hub-textarea {
+  @apply w-full min-h-[100px] border border-border text-sm resize-y text-text transition-[0.2s] duration-[ease] px-3 py-2.5 rounded-lg border-solid focus:border-[color:var(--primary)] focus:shadow-none;
+  background: var(--surface-base) !important;
+}
+.hub-textarea::placeholder {
+  @apply text-[color:var(--gray-400)];
+}
+
+/* -------------------------------------------------------------------
+   SLIDER (Inside Filter Constraints)
+------------------------------------------------------------------- */
+.p-column-filter-constraints .p-slider.p-component.p-slider-horizontal {
+  @apply w-full;
+}
+.p-column-filter-constraints .p-slider-handle.p-slider-handle-end,
+.p-column-filter-constraints .p-slider-handle.p-slider-handle-start,
+.p-column-filter-constraints .p-slider-range {
+  background: var(--primary) !important;
+}
+
+/* -------------------------------------------------------------------
+   INVALID STATE
+------------------------------------------------------------------- */
+.hub-textarea.p-inputtextarea.p-inputtext.p-component.p-invalid,
+.hub-input.p-inputtext.p-component.p-invalid {
+  @apply border-[color:var(--red-500)];
+}

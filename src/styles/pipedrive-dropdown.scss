@@ -1,0 +1,120 @@
+/* -------------------------------------------------------------------
+   DROPDOWN
+------------------------------------------------------------------- */
+.hub-dropdown.p-dropdown {
+  @apply h-8 w-full flex !bg-surface-base items-center border border-border text-sm transition-[0.2s] duration-[ease] px-0 py-3 rounded-md border-solid;
+}
+.hub-dropdown.p-dropdown.p-focus,
+.hub-dropdown.p-dropdown.p-component.p-inputwrapper.p-inputwrapper-focus {
+  @apply border-border shadow-none;
+}
+.hub-dropdown .p-dropdown-label {
+  @apply text-sm text-text;
+}
+.p-dropdown-label.p-inputtext.p-placeholder{
+  @apply text-gray-400;
+}
+.hub-dropdown .p-dropdown-trigger {
+  @apply w-7;
+}
+.p-dropdown-trigger-icon {
+  @apply w-3;
+}
+.p-multiselect-trigger {
+  @apply w-3 flex items-center justify-center;
+}
+.p-dropdown-item.p-focus,
+.p-dropdown-item.p-highlight {
+  @apply  bg-primary !text-gray-50;
+}
+
+/* -------------------------------------------------------------------
+   MULTISELECT (HubSpot Style)
+------------------------------------------------------------------- */
+.hub-multiselect.p-multiselect {
+  @apply h-8 w-full !bg-surface-base border border-border text-sm transition-[0.2s] duration-[ease] shadow-none px-2 py-1 rounded-md border-solid;
+}
+.hub-multiselect.p-multiselect.p-component.p-inputwrapper.p-inputwrapper-focus {
+  @apply border-[color:var(--primary)];
+}
+.p-multiselect-item.p-focus,
+.p-multiselect-item.p-highlight {
+  @apply text-gray-50 !bg-primary;
+}
+.p-multiselect-label {
+  @apply p-0 text-sm pl-0;
+}
+.hub-multiselect .p-multiselect-token {
+  @apply text-primary-dark rounded-md !bg-primary-light;
+}
+.p-multiselect-checkbox {
+  @apply hidden;
+}
+.pi-check {
+  @apply ml-2;
+}
+.p-multiselect-header {
+  @apply h-8;
+}
+.p-dropdown-item-label,
+.p-multiselect-item.p-highlight span {
+  @apply w-full;
+}
+
+/* -------------------------------------------------------------------
+   FILTER MATCHMODE / OPERATOR DROPDOWNS (Pipedrive UI Style)
+------------------------------------------------------------------- */
+.p-column-filter-matchmode-dropdown.p-dropdown,
+.p-column-filter-operator-dropdown.p-dropdown {
+  @apply  h-8 w-full !bg-surface-base flex items-center border border-border text-sm transition-[0.2s] duration-[ease] px-2 py-0 rounded-md border-solid;
+}
+.p-column-filter-matchmode-dropdown.p-dropdown .p-dropdown-label,
+.p-column-filter-operator-dropdown.p-dropdown .p-dropdown-label {
+  @apply text-sm text-text pl-0;
+}
+.p-column-filter-matchmode-dropdown.p-dropdown .p-dropdown-trigger,
+.p-column-filter-operator-dropdown.p-dropdown .p-dropdown-trigger {
+  @apply w-7;
+}
+.p-column-filter-matchmode-dropdown.p-dropdown .p-dropdown-trigger-icon,
+.p-column-filter-operator-dropdown.p-dropdown .p-dropdown-trigger-icon {
+  @apply w-3;
+}
+.p-column-filter-matchmode-dropdown.p-dropdown .p-hidden-accessible select,
+.p-column-filter-operator-dropdown.p-dropdown .p-hidden-accessible select {
+  @apply p-0;
+}
+.p-column-filter-matchmode-dropdown.p-focus,
+.p-column-filter-matchmode-dropdown.p-inputwrapper-focus,
+.p-column-filter-operator-dropdown.p-focus,
+.p-column-filter-operator-dropdown.p-inputwrapper-focus {
+  @apply border-primary shadow-none;
+}
+
+/* -------------------------------------------------------------------
+   MULTISELECT (PrimeReact Base Override)
+------------------------------------------------------------------- */
+.p-multiselect.p-component {
+  @apply h-8 !bg-surface-base w-full flex items-center border border-border text-sm transition-[0.2s] duration-[ease] px-2 py-0 rounded-md border-solid;
+}
+.p-multiselect-label-container {
+  @apply flex items-center;
+}
+.p-multiselect-label-empty {
+  @apply text-gray-600 opacity-70;
+}
+.p-multiselect-trigger-icon {
+  @apply w-3;
+}
+.p-multiselect.p-focus,
+.p-multiselect.p-inputwrapper-focus {
+  @apply border-primary shadow-none;
+}
+
+/* -------------------------------------------------------------------
+   INVALID STATES
+------------------------------------------------------------------- */
+.hub-multiselect.p-multiselect.p-component.p-inputwrapper.p-invalid,
+.hub-dropdown.p-dropdown.p-component.p-inputwrapper.p-invalid {
+  @apply border-red-500;
+}
