@@ -1,0 +1,48 @@
+/* Pipedrive Style - Calendar Input */
+.pd-datepicker-wrapper {
+  @apply bg-white active:border-border;
+}
+.pd-datepicker-input {
+  @apply text-sm shadow-none text-[#2c3e50] p-0 border-[none] !bg-transparent !outline-0;
+}
+
+/* Calendar Icon Highlight When Focused */
+.pd-datepicker-wrapper .p-datepicker-trigger {
+  @apply text-[#6a7a89] transition-[color] duration-[0.2s] ease-[ease];
+}
+.pd-datepicker-wrapper.border-blue-500 .p-datepicker-trigger {
+  @apply text-primary-text;
+}
+
+/* Remove borders from the default PrimeReact calendar */
+.p-calendar .p-inputtext {
+  @apply shadow-none border-[none];
+}
+.p-inputtext:enabled:focus {
+  @apply shadow-none;
+}
+.p-datepicker.p-component {
+  @apply opacity-0;
+}
+.p-datepicker.p-component.p-connected-overlay-enter-done {
+  @apply opacity-100 origin-top-left scale-[0.7];
+  transition: transform 0.1s ease, opacity 0.1s ease;
+}
+.p-datepicker .p-highlight {
+  @apply text-white bg-[var(--primary)] rounded-md;
+}
+.p-datepicker-calendar thead[data-pc-section="tableheader"] {
+  @apply border-t-[length:var(--border)] border-b-[length:var(--border)] border-y-[1px] border-solid;
+}
+.p-datepicker-title {
+  @apply text-[color:var(--primary)];
+  @apply font-extrabold;
+}
+.p-datepicker-next,
+.p-datepicker-prev {
+  @apply p-2 border-solid border rounded-md border-gray-800;
+}
+
+.p-datepicker.p-component.p-connected-overlay-enter-done{
+  @apply h-auto !min-w-20;
+}

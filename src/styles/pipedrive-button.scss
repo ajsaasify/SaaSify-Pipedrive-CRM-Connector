@@ -1,0 +1,141 @@
+@layer components {
+
+  /* -----------------------------------------------------------
+     BASE BUTTON
+  ----------------------------------------------------------- */
+  .pd-btn {
+    @apply inline-flex items-center justify-center rounded-md transition-all duration-150 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed gap-2 focus:shadow-none font-bold;
+  }
+
+  /* -----------------------------------------------------------
+     BUTTON SIZES
+  ----------------------------------------------------------- */
+  .pd-btn-xs {
+    @apply text-xs px-2 py-1;
+  }
+
+  .pd-btn-sm {
+    @apply text-sm px-3 py-1.5;
+  }
+
+  .pd-btn-md {
+    @apply text-sm px-4 py-2;
+  }
+
+  .pd-btn-lg {
+    @apply text-base px-5 py-2.5;
+  }
+
+  /* -----------------------------------------------------------
+     PRIMARY BUTTON (Pipedrive Green)
+  ----------------------------------------------------------- */
+  .pd-btn-primary {
+    @apply bg-green-600 hover:bg-green-700 focus:bg-green-700 active:bg-green-800 text-white;
+  }
+
+  /* -----------------------------------------------------------
+     SECONDARY BUTTON (Gray Outline)
+  ----------------------------------------------------------- */
+  .pd-btn-secondary {
+    @apply border border-border text-gray-900 bg-white hover:bg-gray-50 active:bg-gray-100;
+  }
+
+  /* Accordion style */
+  .pd-accordion-btn {
+    @apply text-gray-900 bg-transparent hover:bg-gray-50 active:bg-gray-100;
+  }
+
+  /* -----------------------------------------------------------
+     GHOST BUTTON
+  ----------------------------------------------------------- */
+  .pd-btn-ghost {
+    @apply text-gray-700 bg-transparent hover:bg-gray-100 active:bg-gray-200;
+  }
+
+  /* -----------------------------------------------------------
+     DANGER BUTTON
+  ----------------------------------------------------------- */
+  .pd-btn-danger {
+    @apply bg-red-600 text-white hover:bg-red-700 active:bg-red-800;
+  }
+
+  /* -----------------------------------------------------------
+     FULL WIDTH BUTTON
+  ----------------------------------------------------------- */
+  .pd-btn-block {
+    @apply w-full;
+  }
+
+  /* -----------------------------------------------------------
+     ICON BUTTONS
+  ----------------------------------------------------------- */
+  .pd-btn-icon {
+    @apply inline-flex items-center justify-center p-2 rounded-md bg-gray-100 text-gray-700 hover:bg-gray-200 active:bg-gray-300;
+  }
+
+  .pd-btn-icon-sm {
+    @apply w-8 h-8;
+  }
+
+  .pd-btn-icon-md {
+    @apply w-9 h-9;
+  }
+
+  .pd-btn-icon-lg {
+    @apply w-11 h-11;
+  }
+}
+
+/* -------------------------------------------------------------
+   PRIME REACT COLUMN FILTER BUTTONS (Add / Remove)
+------------------------------------------------------------- */
+.p-column-filter-remove-button,
+.p-column-filter-add-button {
+  @apply h-8 text-sm gap-1.5 inline-flex items-center justify-center px-3 py-0 pd-btn pd-btn-md pd-btn-primary mt-3 rounded-md;
+}
+
+.p-column-filter-remove-button .p-button-text,
+.p-column-filter-add-button .p-button-text {
+  @apply bg-surface-base border border-border text-text border-solid;
+}
+
+.p-column-filter-remove-button .p-icon,
+.p-column-filter-add-button .p-icon {
+  @apply w-3.5 h-3.5;
+}
+
+/* Override for remove button color */
+.p-column-filter-remove-button {
+  @apply bg-state-danger;
+}
+
+/* -------------------------------------------------------------
+   BUTTONBAR INSIDE FILTER MENU
+------------------------------------------------------------- */
+.p-column-filter-buttonbar .p-button.p-component.p-button-sm {
+  @apply h-8 text-sm gap-1.5 inline-flex items-center justify-center px-3 py-0 rounded-md pd-btn pd-btn-sm pd-btn-secondary;
+}
+
+.p-column-filter-buttonbar .p-button.p-component.p-button-sm .p-button-text {
+  @apply bg-surface-base border border-border text-text border-solid;
+}
+
+.p-column-filter-buttonbar .p-button.p-component.p-button-sm .p-icon {
+  @apply w-3.5 h-3.5;
+}
+
+/* -------------------------------------------------------------
+   SMALL ADJUSTMENT FOR FILTER MENU BUTTON
+------------------------------------------------------------- */
+.p-column-filter-menu-button.p-link {
+  @apply scale-[0.7];
+}
+.p-button-icon.pi{
+  @apply p-0 !m-0;
+}
+.rounded-full .p-button-label{
+  @apply h-0 !w-0;
+}
+.back-btn{
+  @apply  rounded-full items-center flex justify-center !gap-0 hover:bg-white bg-white;
+}

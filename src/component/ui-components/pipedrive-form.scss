@@ -1,0 +1,16 @@
+/* Base icon animation */
+.rotate-icon-open,
+.rotate-icon-close {
+  display: inline-block;
+  transition: transform 0.25s ease; /* smooth rotation */
+}
+
+/* When accordion is open -> rotate 180deg */
+.rotate-icon-open {
+  transform: rotate(180deg);
+}
+
+/* When closed -> normal position */
+.rotate-icon-close {
+  transform: rotate(0deg);
+}

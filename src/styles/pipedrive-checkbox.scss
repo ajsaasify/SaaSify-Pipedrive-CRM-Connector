@@ -1,0 +1,71 @@
+/* Wrapper */
+.pd-checkbox {
+  @apply text-sm;
+}
+
+/* Prime checkbox box size + border */
+.p-checkbox-box {
+  @apply w-[18px] h-[18px] bg-surface-base rounded border-border transition-all duration-[0.15s] ease-[ease-in-out] border-2 border-solid hover:border-gray-600;
+}
+
+/* Selected (checked) */
+.pd-checkbox .p-checkbox-box.p-highlight {
+  @apply border-primary bg-primary; /* dynamic primary */
+}
+.p-checkbox-box[data-p-highlight="true"] {
+  @apply text-white relative border-primary !bg-primary;
+}
+
+/* Check icon */
+.pd-checkbox .p-checkbox-box .p-checkbox-icon {
+  @apply text-xs text-primary-text; /* dynamic check color */
+}
+
+/* Disabled */
+.pd-checkbox .p-checkbox-box.p-disabled {
+  @apply border-gray-300 opacity-50 cursor-not-allowed bg-gray-100;
+}
+.pd-checkbox-label {
+  @apply text-primary-text font-normal; /* dynamic text */
+}
+/* Wrapper alignment */
+.pd-checkbox-wrapper {
+  @apply flex items-center gap-2 cursor-pointer;
+}
+
+/* Base checkbox */
+.pd-checkbox .p-checkbox-box {
+  @apply border-border;
+  @apply border-2 rounded-md flex items-center justify-center 
+         transition-all duration-150 bg-white;
+}
+.pd-checkbox .p-checkbox-box.p-highlight {
+  @apply bg-primary;
+}
+
+/* White tick */
+.pd-checkbox .p-checkbox-box .p-checkbox-icon {
+  @apply text-white text-sm;
+}
+
+
+/* Hover */
+.pd-checkbox:hover .p-checkbox-box:not(.p-disabled):not(.p-highlight) {
+  @apply border-gray-2xl;
+}
+
+/* LABEL */
+.pd-checkbox-label {
+  @apply text-sm text-gray-700 cursor-pointer select-none;
+}
+
+/* ----- SIZES ----- */
+.pd-checkbox-sm .p-checkbox-box {
+  @apply w-3.5 h-3.5;
+}
+.pd-checkbox-md .p-checkbox-box {
+  @apply w-[18px] h-[18px];
+}
+.pd-checkbox-lg .p-checkbox-box {
+  @apply w-[22px] h-[22px];
+}

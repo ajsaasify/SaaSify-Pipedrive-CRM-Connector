@@ -1,0 +1,23 @@
+export const gcpRequiredField = [
+  "customerName",
+  "country",
+  "city",
+  "customerDomain",
+  "streetAddress",
+  "industry",
+  "employee",
+  "engagementModel",
+  "region",
+  "productFamily",
+  "currency",
+  "contractVehicle",
+  "contractLength",
+  "tcv",
+  "deliveryModal",
+  "estimatedCloseDate",
+  "supportNeed",
+  "discription",
+  "terms",
+  "state",
+  "zipCode"
+];

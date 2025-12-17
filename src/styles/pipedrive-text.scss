@@ -1,0 +1,39 @@
+/* TYPE */
+.pd-text-heading {
+  @apply text-gray-900;
+}
+.pd-text-subtitle {
+  @apply text-gray-800;
+}
+.pd-text-body {
+  @apply text-gray-700;
+}
+.pd-text-caption {
+  @apply text-gray-500;
+}
+.pd-text-upper {
+  @apply uppercase tracking-wide;
+}
+
+/* SIZE */
+.pd-text-xs {
+  @apply text-xs;
+}
+.pd-text-sm {
+  @apply text-sm;
+}
+.pd-text-md {
+  @apply text-base;
+}
+.pd-text-lg {
+  @apply text-lg;
+}
+
+.pd-text-label {
+  font: 450 14px / 21px "Inter", sans-serif;
+  @apply text-text;
+}
+
+.pd-text-error {
+  @apply text-red-500 text-xs;
+}

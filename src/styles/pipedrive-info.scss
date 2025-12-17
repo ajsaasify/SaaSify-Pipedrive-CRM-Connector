@@ -1,0 +1,66 @@
+@layer components {
+  .pd-info {
+    @apply w-full rounded-md p-4 border flex items-start gap-3 text-sm;
+  }
+
+  /* Colors */
+  .pd-info-default {
+    @apply bg-gray-50 border-gray-200 text-gray-800;
+  }
+
+  .pd-info-success {
+    @apply bg-gray-lg border-green-2xl/40 text-green-3xl;
+  }
+
+  .pd-info-warning {
+    @apply bg-yellow-50 border-yellow-300 text-yellow-800;
+  }
+
+  .pd-info-danger {
+    @apply bg-red-50 border-red-300 text-red-800;
+  }
+
+  /* Title */
+  .pd-info-title {
+    @apply font-medium text-gray-900 mb-1;
+  }
+
+  /* Description */
+  .pd-info-desc {
+    @apply text-gray-700 leading-relaxed;
+  }
+
+  /* Actions (buttons row) */
+  .pd-info-actions {
+    @apply mt-3 flex gap-3;
+  }
+
+  /* Close Button */
+  .pd-info-close {
+    @apply ml-auto text-gray-400 hover:text-gray-600 cursor-pointer;
+  }
+
+  /* Icon styling */
+  .pd-info-icon {
+    @apply text-lg mt-0.5;
+  }
+}
+
+.p-tag {
+  border-width: 1px !important;
+  border-style: solid !important;
+  padding: 2px 8px !important;
+  border-radius: 6px !important;
+  font-weight: 500 !important;
+}
+
+.p-tag.p-tag-info,
+.p-tag.p-tag-success,
+.p-tag.p-tag-warning,
+.p-tag.p-tag-danger,
+.p-tag.p-tag-secondary,
+.p-tag.p-tag-contrast {
+  background: transparent !important; /* we fully control bg from Tailwind */
+  color: inherit !important;          /* Tailwind text color wins */
+  border-color: inherit !important;   /* Tailwind border wins */
+}

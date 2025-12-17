@@ -1,0 +1,2544 @@
+{
+  "alertMessage": {
+    "success": "Success.",
+    "error": "Error.",
+    "info": "Important Info.",
+    "note": "Note."
+  },
+  "buttonLabel": {
+    "reset": "Reset",
+    "pushCrm": "Push",
+    "refresh": "Refresh",
+    "edit": "Edit",
+    "update": "Update",
+    "changeStage": "Change Stage",
+    "transfer": "Transfer",
+    "associateOffer": "Associate Offer",
+    "nextStep": "Next step",
+    "add": "Add",
+    "removeOffer": "Remove Offer",
+    "replaceOffer": "Replace Offer",
+    "linkCrm": "Link HubSpot Deal",
+    "close": "Close",
+    "notifyRecipients": "Add Notification Recipients",
+    "addTag": "Add Tag",
+    "addContact": "Add Customer Recipients",
+    "addPayment": "Add Payment",
+    "linkWithCrm": "Link CRM",
+    "won": "Won",
+    "lost": "Lost",
+    "actions": "Actions",
+    "preview": "Preview",
+    "view": "View",
+    "cancelOffer": "Cancel Offer",
+    "withdrawOffer": "Withdraw",
+    "archive": "Archive",
+    "cloneOffer": "Clone",
+    "modifyExpiry": "Modify Expiry",
+    "deactivateCppo": "Deactivate",
+    "continue": "Continue",
+    "cancel": "Cancel",
+    "showFilters": "Show Filters",
+    "clearFilters": "Clear Filters",
+    "back": "Back",
+    "submit": "Submit",
+    "sendInvite": "Send Invite",
+    "link": "Link",
+    "save": "Save",
+    "search": "Search",
+    "reject": "Reject",
+    "accept": "Accept",
+    "createCosell": "Create Co-sell",
+    "createOpportunity": "Create Opportunity",
+    "resync": "Resync",
+    "getStarted": "Let's get started",
+    "createPrivateOffers": "Create Private Offer",
+    "createFunding": "Create Funding",
+    "previous": "Previous Step",
+    "next": "Next Step",
+    "saveAsDraft": "Save as Draft",
+    "createAddDimension": "Add custom dimensions",
+    "selectAllDimension": "Select All",
+    "deselectAll": "Deselect All",
+    "saveAndPublish": "Save & Publish",
+    "publish": "Publish",
+    "review": "Review Offer",
+    "saveNext": "Save & Next",
+    "templateNext": "Next",
+    "yes": "Yes",
+    "no": "No",
+    "sendEmail": "Send Email",
+    "info": "Info",
+    "addRecordUsage": "Add Record Usage",
+    "postUsage": "Post Usage",
+    "clone": "Clone"
+  },
+  "modalTitle": {
+    "update": "Update Additional Details",
+    "crm": "Look Up Deal In CRM",
+    "stage": "Update Stage",
+    "transfer": "Transfer Ownership To",
+    "associateOffer": "Associate AWS Marketplace offer",
+    "nextStep": "Add Next Step",
+    "editCosell": "Edit Co-sell",
+    "addCosell": "Create Co-sell",
+    "addOpportunity": "Create Opportunity",
+    "editOpportunity": "Edit Opportunity",
+    "addOffers": "Create Private Offers",
+    "viewDetails": "View Details",
+    "editOffers": "Edit Private Offer",
+    "replaceOffer": "Replace AWS Marketplace offer",
+    "removeOffer": "Remove AWS Marketplace Offer",
+    "rejectCosell": "Reject Invitation",
+    "acceptCosell": "Invitation Details",
+    "updateSaas": "Update SaaS Documentation",
+    "errorDetails": "Error Detail",
+    "addCosells": "Add Co-sell",
+    "filter": "Filter",
+    "linkCrm": "Link to HubSpot Deal",
+    "viewCosell": "Co-sell Details",
+    "viewOpportunity": "Opportunity Details",
+    "activityLog": "Activity log",
+    "partnerConnection": "Multi-partner",
+    "partnerConnectionDetails": "Partner Details",
+    "senderDetail": "Sender Details",
+    "viewPrivateOffers": "Private Offer",
+    "sharedPartnerDetail": "Shared Partner Details",
+    "close": "Ready to close as won or lost",
+    "createPrivateOffer": "Create Private Offer",
+    "createFunding": "Create Funding",
+    "msChangeStage": "Update Microsoft Stage Details",
+    "fundingRequest": "Funding Request",
+    "fundRequestId": "Fund Request Id",
+    "refferenceId": "Reference Id",
+    "createFundRequest": "Create Fund Request",
+    "selectPartnerInitiativeFunding": "Select Partner Initiative Funding",
+    "selectMarketplaceDevelopmentFunding": "Select Marketing Development Fund",
+    "selectIsvFunding": "Select ISV Workload Migration Program",
+    "selectIsProgram": "Select Innovation Sandbox",
+    "partnerInitiativeFunding": "Partner Initiative Funding",
+    "marketingDevelopmentFund": "Marketing Development Fund",
+    "progressBar": "Progress Stages",
+    "shareWithPartner": "Share With Partner",
+    "reviewOffer": "Preview Offer",
+    "willTarget": "Will this activity be targeting 50%+ public sector customers?",
+    "wwps": "By checking this box, you are committing Worldwide Public Sector (WWPS) MDF cash or WWPS MDF Credit from your wallet. Use of WWPS MDF wallet requires approval from your AWS partner manager.",
+    "newServiceDeployed": "New Service Deployed",
+    "fundReqInfo": "Fund Request Information",
+    "oppInfo": "Opportunity Information",
+    "projectInfo": "Project Information",
+    "creditReqInfo": "Credit Request Information",
+    "cashReqInfo": "Cash Request Information",
+    "attachments": "Attachments",
+    "addAttachment": "Please attach all supporting documents as required by each funding type, e.g., Project Plan/Checklist, AWS Pricing Calculator, Migration Capability Review, etc.",
+    "requestToClose": "Lost",
+    "won": "Close Deal",
+    "annualRecurringRevenue": "Annual Recurring Revenue (ARR) Once In Production (USD)",
+    "poFixError": "Please fix the following errors",
+    "map": "Map",
+    "selectMapProgram": "Select Migration Acceleration Program",
+    "projectDetails": "Provide project details",
+    "supportingDocuments": "Provide supporting documenattion",
+    "estimates": "Estimates",
+    "partnerScopeChecklist": "Partner scope checklist",
+    "awsReseller": "Create Authorization",
+    "ampDirect": "Create AMP Direct Private Offer",
+    "ampReseller": "Create AMP Reseller Private Offer",
+    "gcpDirect": "Create Gcp Direct Private Offer",
+    "awsResellerEdit": "Edit Authorization",
+    "ampResellerEdit": "Edit AMP Reseller Private Offer",
+    "awsReviewOffer": "Review Authorization",
+    "confirm": "CONFIRM",
+    "clone": "CLONE PRIVATE OFFER",
+    "modifyExpiry": "MODIFY EXPIRATION DATE",
+    "addUsage": "Add Usage",
+    "cloneCosell": "Clone Co-sell",
+    "offerCurrency": "OFFER CURRENCY",
+    "cppoClone": "CLONE AUTHORIZATION"
+  },
+  "ampCosell": {
+    "overview": {
+      "customerName": "Customer Name",
+      "dealName": "Deal Name",
+      "referralType": "Referral Type",
+      "msReferralId": "Microsoft Referral ID",
+      "msStatus": "Microsoft Status",
+      "partnerStatus": "Partner Status",
+      "partnerStage": "Partner Stage"
+    },
+    "customer": {
+      "customerName": "Customer Name",
+      "location": "Location",
+      "address1": "Address 1",
+      "address2": "Address 2",
+      "city": "City",
+      "state": "State",
+      "country": "Country",
+      "postalCode": "Postal Code or Zip Code",
+      "firstName": "Customer First Name",
+      "lastName": "Customer Last Name",
+      "email": "Customer E-Mail",
+      "phone": "Customer Phone"
+    },
+    "additional": {
+      "crmId": "CRM ID",
+      "campaignId": "Marketing Campaign ID",
+      "lostReason": "Lost Reason",
+      "lostReasonNotes": "Lost Reason Notes"
+    },
+    "deal": {
+      "dealName": "Deal Name",
+      "dealType": "Deal Type",
+      "helpFromMicrosoft": "Help Needed From Microsoft",
+      "allowMsSellersView": "Would You Like Microsoft Sellers To View This Deal ?",
+      "purchaseIntent": "Customer Purchase Intent",
+      "estimatedClose": "Estimated Close Date",
+      "estimatedValue": "Estimated Value",
+      "currency": "Currency",
+      "solutionArea": "Solution Area",
+      "solutionPlay": "Solution Play",
+      "partnerNotes": "Partner Notes/Customer Need",
+      "partnerRole": "Partner Role",
+      "notesToMicrosoft": "Notes To Microsoft"
+    },
+    "upsert": {
+      "location": "Entire organization",
+      "needHelp": "No help required at this point of time"
+    },
+    "inputLabelMapper": {
+      "team": {
+        "title": "Team Members"
+      },
+      "microsoftContact": {
+        "title": "Microsoft Contacts"
+      },
+      "stage": {
+        "label": "Stage",
+        "validation": "Stage is Required",
+        "wonStatus": "When you close a deal you will no longer be able to edit it. Are you sure you want to proceed?"
+      },
+      "closeReason": {
+        "label": "Reason for closing",
+        "placeholder": "Select a reason for closing this deal",
+        "validation": "Close Reason is Required",
+        "info": {
+          "label": "Your feedback is important to us",
+          "value": "Let us know why you are closing this deal so we can provide better deals in the future. We won't share this feedback with the customer. The deal will be moved to Closed after you select a reason for closing."
+        }
+      },
+      "closeNote": {
+        "label": "Note (Optional)"
+      },
+      "accordion": {
+        "customer": "Customer Company Information",
+        "contact": "Contact Information",
+        "deal": "Deal Details",
+        "customerObjective": "Customer Objective",
+        "platform": "Help from Microsoft",
+        "customerContact": "Customer Contact",
+        "customerContactOptional": "Customer Contact (Optional)",
+        "solutions": "Solutions",
+        "consent": "Consent",
+        "teamMember": "Team Members"
+      },
+      "customerCompanyName": {
+        "label": "Customer Company Name",
+        "validationMessage": "Customer Company Name is Required",
+        "tooltip": "Enter company name."
+      },
+      "address1": {
+        "label": "Address 1",
+        "validationMessage": "Address 1 is Required"
+      },
+      "city": {
+        "label": "City",
+        "validationMessage": "City is Required"
+      },
+      "country": {
+        "label": "Country",
+        "validationMessage": "Country is Required"
+      },
+      "duns": {
+        "label": "DUNS Number",
+        "validationMessage": "DUNS Number is Required",
+        "validation": "DUNS Number is Required",
+        "validationInvalid": "DUNS Number is invalid"
+      },
+      "address2": {
+        "label": "Address 2",
+        "validationMessage": "Address 2 is Required"
+      },
+      "state": {
+        "label": "State",
+        "validationMessage": "State is Required"
+      },
+      "zipcode": {
+        "label": "Postal Code or Zip Code",
+        "validationMessage": "Postal Code or Zip Code is Required"
+      },
+      "dealName": {
+        "label": "Deal Name",
+        "validationMessage": "Deal Name is Required"
+      },
+      "estimatedValue": {
+        "label": "Estimated Value",
+        "validationMessage": "Estimated Value is Required",
+        "validation": "Estimated Value is Required",
+        "validationGrtZero": "Please enter a value greater than 0",
+        "validationInvalid": "Estimated Value is invalid"
+      },
+      "canDealViewedBySeller": {
+        "label": "Would you like Microsoft sellers to view this deal",
+        "variant": "small"
+      },
+      "location": {
+        "label": "Location",
+        "validationMessage": "Location is Required"
+      },
+      "currency": {
+        "label": "Currency",
+        "validationMessage": "Currency is Required"
+      },
+      "estimatedCloseDate": {
+        "label": "Estimated Close Date",
+        "validationMessage": "Estimated Close Date is Required",
+        "validation": "Estimated Close Date should be a future date"
+      },
+      "dealType": {
+        "label": "Deal Type *",
+        "validationMessage": "Deal Type is Required"
+      },
+      "isEditDealType": {
+        "label": "Deal Type-Private or Partner-Led Deal Type cannot be changed to Service Co-sell Deal Type. Please verify entered Deal Type"
+      },
+      "crmId": {
+        "label": "CRM ID",
+        "validationMessage": "CRM ID is Required"
+      },
+      "customerPurchaseIntent": {
+        "label": "Customer Purchase Intent",
+        "validationMessage": "Customer Purchase Intent is Required",
+        "tooltip": "Specify customer's intent to transact on Microsoft marketplace"
+      },
+      "partnerRole": {
+        "label": "Partner Role",
+        "validationMessage": "Partner Role is Required"
+      },
+      "campaignId": {
+        "label": "Marketing Campaign ID",
+        "validationMessage": "Marketing Campaign ID is Required"
+      },
+      "solutionArea": {
+        "label": "Solution Area",
+        "validationMessage": "Solution Area is Required"
+      },
+      "solutionPlay": {
+        "label": "Solution Play",
+        "validationMessage": "Solution Play is Required"
+      },
+      "customerNeed": {
+        "label": "Partner Notes/Customer Need",
+        "validationMessage": "Partner Notes/Customer Need is Required",
+        "tooltip": "By providing additional notes and details on your Customer Need you will increase with Microsoft sellers."
+      },
+      "microsoftNotes": {
+        "label": "Notes to Microsoft",
+        "validationMessage": "Notes to Microsoft is Required"
+      },
+      "needHelp": {
+        "label": "Help needed from Microsoft",
+        "validationMessage": "Help needed from Microsoft is required"
+      },
+      "contactFirstName": {
+        "label": "Customer First Name",
+        "validationMessage": "Contact First Name is required"
+      },
+      "customerMember": {
+        "tooltip": "Provide a contact information for the main contact for this deal"
+      },
+      "contactLastName": {
+        "label": "Customer Last Name",
+        "validationMessage": "Contact Last Name is required"
+      },
+      "contactEmail": {
+        "label": "Customer Email",
+        "validationMessage": "Contact Email is required",
+        "validation": "Contact Email is invalid"
+      },
+      "contactPhone": {
+        "label": "Customer Phone Number",
+        "validationMessage": "Contact Phone Number is required",
+        "tooltip": "Enter the country code and full phone number."
+      },
+      "contactTitle": {
+        "label": "Customer Title"
+      },
+      "firstName": {
+        "label": "First Name",
+        "validationMessage": "First Name is required"
+      },
+      "lastName": {
+        "label": "Last Name",
+        "validationMessage": "Last Name is required"
+      },
+      "email": {
+        "label": "Email",
+        "validationMessage": "Email is required",
+        "validationInvalid": "Email is invalid",
+        "validation": "Email is required"
+      },
+      "phone": {
+        "label": "Phone Number",
+        "validationMessage": "Phone Number is required",
+        "tooltip": "Enter the country code and full phone number."
+      },
+      "solutions": {
+        "label": "Solutions",
+        "validationMessage": "Solutions is required"
+      },
+      "consent": {
+        "terms": [
+          "Provide the customer's contact information to Microsoft and invited partners if provided.",
+          "Provide my company's employee information to Microsoft and invited partners that I am inviting",
+          "Grant Microsoft and invited partners the right to use such information to contact the customer or partner employee for purposes of fulfilling Microsoft's obligations to partner and customer."
+        ],
+        "label": "Consent",
+        "description": "By checking this box, I confirm, on behalf of myself and my company, that I have obtained sufficient consent. *"
+      },
+      "info": {
+        "private": "Please note that you have changed the deal type to ",
+        "team": "You will need to enter the name, phone number, and email address of the employees working on this deal. You need to have at least one contact with all the details entered for you to create a deal. These details can be changed even after creating a deal.",
+        "yes": "This referral will be visible and actionable to the Microsoft Sales team. This referral will be a partner-led co-sell opportunity.",
+        "no": "This referral will NOT be visible or actionable to the Microsoft Sales team. The referral data will be used by internal Microsoft reporting systems for analyzing and forecasting purposes. This co-sell opportunity will be a private deal. You can upgrade a private deal at any time prior to being a non-terminal state (won, lost, declined, and expired).",
+        "tryToChangeSolution": "All the existing solutions in this deal will be removed if you change deal type to Service CO-sell."
+      }
+    },
+    "tableColumn": {
+      "contact": ["First Name", "Last Name", "Email", "Phone Number"],
+      "solutions": [
+        "Solution Name",
+        "Solution Id",
+        "Incentive Programs",
+        "Publisher Name"
+      ]
+    }
+  },
+  "gcpCosell": {
+    "overview": {
+      "identifier": "Identifier",
+      "opportunityName": "Opportunity Name",
+      "stage": "Stage",
+      "status": "Status",
+      "customerName": "Customer Name",
+      "source": "Source",
+      "estimatedCloseDate": "Estimated Close Date",
+      "opportunityAmount": "Opportunity Amount",
+      "opportunityOwner": "Opportunity Owner",
+      "opportunityOwnerEmail": "Opportunity Owner Email",
+      "contractLength": "Contract Length (Months)"
+    },
+    "dealQualify": {
+      "region": "Region",
+      "productFamily": "Product Family",
+      "estimatedTcv": "Estimated Partner Total Contract Value (TCV)",
+      "contractLength": "Contract Length (Months)",
+      "estimatedCloseDate": "Estimated Close Date",
+      "closeDatePushCount": "Close Date Push Count",
+      "decisionPhase": "Decision Phase",
+      "campaign": "Campaign",
+      "contractVehicle": "Contract Vehicle",
+      "deliveryModel": "Delivery Model",
+      "supportNeeded": "Support Needed",
+      "confidential": "Partner Designated Confidential",
+      "description": "Description",
+      "nextStep": "Next Steps",
+      "notes": "Notes",
+      "publicTenderAttestation": "Does This Opportunity Involve A Public Sector Customer"
+    },
+    "systemInfo": {
+      "cloudProvider": "Cloud Provider",
+      "sellerAccount": "Seller Account",
+      "owner": "Owner",
+      "saasifyTracking": "Saasify Tracking",
+      "cloudProviderCreationDate": "Cloud Provider Creation Date",
+      "cloudProviderLastModified": "Cloud Provider Last Modification Date",
+      "createdBy": "Created By",
+      "creationDate": "Creation Date",
+      "lastModified": "Last Modification Date",
+      "approvedDate": "Approved Date"
+    },
+    "customer": {
+      "customerName": "Customer Name",
+      "customerDomain": "Customer Domain",
+      "industry": "Industry",
+      "googleCustomerRecord": "Google Customer Record",
+      "country": "Country",
+      "state": "State",
+      "city": "City",
+      "postalCode": "Postal Code",
+      "address": "Address",
+      "employeeCount": "Number Of Employees"
+    },
+    "inputLabelMapper": {
+      "team": {
+        "title": "Contact List"
+      },
+      "opportunity": {
+        "title": "Opportunity Team"
+      },
+      "additionalWillUseSolution": {
+        "label": "Does the customer currently use this solution? *",
+        "validationMessage": "Additional Will Use Solution is required"
+      },
+      "whereDeplpoyed": {
+        "label": "Where is it deployed?",
+        "validationMessage": "Where is it deployed is required"
+      },
+      "reason": {
+        "label": "Why? Please add your reasons.",
+        "validationMessage": "Why? Please add your reasons is required"
+      },
+      "deployGCPVersionWithReson": {
+        "label": "At the time of signing the deal, will the customer deploy the GCP version of the solution? *",
+        "validationMessage": "Deploy GCP Version With Reason is required"
+      },
+      "stage": {
+        "label": "Stage",
+        "validationMessage": "Stage is required",
+        "system": "system",
+        "info": {
+          "label": "Ready to close as won or lost",
+          "value": "Send a request to your Google sales representative to close this opportunity. Once closed, no further modifications can be made."
+        },
+        "description": "Send a request to your Google sales representative to close this opportunity. Once closed, no further modifications can be made."
+      },
+      "email": {
+        "label": "Send an email to Google Sales Representative"
+      },
+      "accordion": {
+        "basic": "Basic Information",
+        "customer": "Customer Information",
+        "contact": "Contact Information",
+        "deal": "Deal Details",
+        "review": "Review & Submit",
+        "reviewDescription": "Review terms before submitting opportunity"
+      },
+      "opportunityName": {
+        "label": "Opportunity Name",
+        "validationMessage": "Opportunity Name is required"
+      },
+      "customerName": {
+        "label": "Customer Name",
+        "validationMessage": "Customer Name is required"
+      },
+      "customerDomain": {
+        "label": "Customer Domain",
+        "tooltip": "Customer's primary Google account domain",
+        "validationMessages": "Enter a valid website domain"
+      },
+      "country": {
+        "label": "Country",
+        "validationMessage": "Country is required"
+      },
+      "streetAddress": {
+        "label": "Address",
+        "validationMessage": "Address is required"
+      },
+      "streetAddress1": {
+        "label": "Address",
+        "validationMessage": "Address is required"
+      },
+      "city": {
+        "label": "City",
+        "validationMessage": "City is required"
+      },
+      "state": {
+        "label": "State",
+        "validationMessage": "State is required"
+      },
+      "zipCode": {
+        "label": "Postal Code",
+        "validationMessage": "Postal Code is required"
+      },
+      "industry": {
+        "label": "Primary Business/Industry",
+        "validationMessage": "Primary Business/Industry is required",
+        "value": "PUBLIC_SECTOR"
+      },
+      "employee": {
+        "label": "Number of Employees",
+        "validationMessage": "Number of employees is required",
+        "validationInvalid": "Number of employees is invalid",
+        "validation": "Number of employees is required"
+      },
+      "contactFirstName": {
+        "label": "First Name",
+        "validationMessage": "First Name is required"
+      },
+      "contactLastName": {
+        "label": "Last Name",
+        "validationMessage": "Last Name is required"
+      },
+      "contactEmail": {
+        "label": "Email",
+        "validationMessage": "Email is required"
+      },
+      "contactPhone": {
+        "label": "Phone",
+        "validationMessage": "Phone is required",
+        "tooltip": "Include country code, For example +1 (123) 456 7890"
+      },
+      "partnerInfo": {
+        "title": "Partner Information",
+        "validationMessage": "Partner Information is required"
+      },
+      "engagementModel": {
+        "label": "Engagement Model",
+        "validationMessage": "Engagement Model is required",
+        "tooltip": "if your company partners with Google in multiple ways, select how you'll partner for this deal."
+      },
+      "region": {
+        "label": "Region",
+        "validationMessage": "Region is required",
+        "tooltip": "Region where the opportunity is based"
+      },
+      "opportunityDetails": {
+        "title": "Opportunity Details",
+        "validationMessage": "Opportunity Details is required"
+      },
+      "productFamily": {
+        "label": "Product Family",
+        "validationMessage": "Product Family is required"
+      },
+      "contractLength": {
+        "label": "Contract Length (months)",
+        "placeholder": "Contract Length (months)",
+        "validationMessage": "Contract Length is required",
+        "validationInvalid": "Contract Length is invalid",
+        "validation": "Contract Length is required",
+        "tooltip": "This is the length in months of the lead/contract"
+      },
+      "contractVehicle": {
+        "label": "Contract Vehicle",
+        "validationMessage": "Contract Vehicle is required"
+      },
+      "currency": {
+        "label": "Currency",
+        "validationMessage": "Currency is required"
+      },
+      "tcv": {
+        "label": "Estimated Partner Total Contract Value",
+        "validationMessage": "Estimated partner Total Contract Value is required",
+        "validation": "Estimated partner Total Contract Value is required",
+        "validationInvalid": "Estimated partner Total Contract Value is invalid"
+      },
+      "estimatedCloseDate": {
+        "validationMessage": "Estimated Close Date is required",
+        "label": "Estimated Close Date"
+      },
+      "deliveryModal": {
+        "validationMessage": "Delivery Model is required",
+        "label": "Delivery Model"
+      },
+      "campaign": {
+        "validationMessage": "Campaign is required",
+        "label": "Campaign",
+        "tooltip": "The Marketing Campaign relevant to this opportunity"
+      },
+      "supportNeed": {
+        "validationMessage": "Support Needed is required",
+        "label": "Support Needed"
+      },
+      "description": {
+        "label": "Description",
+        "validationMessage": "Description is required",
+        "validation": "Description is required",
+        "validationInvalid": "Description (limit: 1000 characters recommended).",
+        "tooltip": "Briefly outline customer's business problem and pain points you are trying to solve. 1000 characters max."
+      },
+      "notes": {
+        "label": "Notes",
+        "validationMessage": "Notes is required",
+        "validation": "Notes is required",
+        "validationInvalid": "Notes (limit: 1000 characters recommended).",
+        "tooltip": "Share relevant information with the opporutnity owner. 1000 characters max."
+      },
+      "nextStep": {
+        "label": "Next steps",
+        "validationMessage": "Next steps is required",
+        "validation": "Next steps is required",
+        "validationInvalid": "Next steps (limit: 255 characters recommended).",
+        "tooltip": "Share next steps with the opporutnity owner. 255 characters max."
+      },
+      "confidential": {
+        "validationMessage": "Partner Designated confidential is required",
+        "label": "Partner Designated Confidential",
+        "description": "To maintain confidentiality, visibility will be limited to Google Cloud team member working directly on this opportunity"
+      },
+      "publicSector": {
+        "validationMessage": "Public Customer is required",
+        "label": "Does this opportunity involve a public sector customer?",
+        "description": "A \"public sector customer\" has the meaning set out in the Partner Advantage Program Guide and involve public institutions of higher education."
+      },
+      "customerContactRequested": {
+        "title": "Opportunity Terms",
+        "validationMessage": "Confirmation is required",
+        "label": "Contract By Google",
+        "description": "I confirm that the customer has requested to be contacted by Google."
+      },
+      "acknowledge": {
+        "validationMessage": "Acknowledge is required",
+        "label": "Terms of the Partner Advantage Program",
+        "validation": "Acknowledge *",
+        "description": ""
+      },
+      "terms": {
+        "validationMessage": "Deal Submission Terms is required",
+        "label": "Deal Submission Terms",
+        "validation": "Deal Submission Terms *",
+        "description": ""
+      }
+    },
+    "tableColumn": {
+      "contact": [
+        "Contact",
+        "Email",
+        "Access level",
+        "Title",
+        "Role",
+        "Primary"
+      ]
+    }
+  },
+  "awsCosell": {
+    "inputLabelMapper": {
+      "accordian": {
+        "customer": "Customer Details",
+        "project": "Project Details",
+        "marketing": "Opportunity Marketing Details",
+        "additional": "Additional Details - optional",
+        "contact": "Customer Contact Details",
+        "partnerSalesContact": "Partner Sales Contact Details",
+        "overview": "Co-sell Overview",
+        "opportunityMarketingDetails": "Opportunity Marketing Details"
+      },
+      "noCosells": "No Opportunity Co-sell!",
+      "customerDuns": {
+        "label": "Customer DUNS",
+        "description": "Customer data universal number system.",
+        "validation": "Customer Duns is 9 digits. For example: 123456789",
+        "validationMessage": "Customer DUNS is invalid.",
+        "toopTip": "Customer DUNS format : 123456789 (Mention like For example: 123456789)",
+        "placeHolder": "Enter DUNS"
+      },
+      "customerCompanyName": {
+        "label": "Customer Company Name",
+        "validationMessage": "Customer Company Name is required",
+        "validation": "Customer Company Name should not be more than 120 characters long.",
+        "placeHolder": "Enter Customer Company Name"
+      },
+      "customerWebsite": {
+        "label": "Customer Website",
+        "placeHolder": "Enter Customer Website",
+        "validationMessage": "Customer Website is required",
+        "validation": "Enter a valid website domain.",
+        "validationdomain": "Enter a valid website domain.",
+        "validationLength": "Customer Website should not be more than 255 characters long."
+      },
+      "industryVertical": {
+        "label": "Industry Vertical",
+        "value": "Other",
+        "validationMessage": "Industry Vertical is required",
+        "placeHolder": "Choose Industry Vertical"
+      },
+      "nationalSecurity": {
+        "label": "Classified National Security Information",
+        "value": "Government",
+        "country": "United States",
+        "description": {
+          "yes": "Yes: This opportunity contains classified national security information",
+          "no": " No: This opportunity does not contain classified national security information"
+        }
+      },
+      "industryOther": {
+        "label": "Industry Other",
+        "validationMessage": "Industry Other is required",
+        "validation": "Industry Other should not be more than 255 characters long.",
+        "placeHolder": "Enter Industry"
+      },
+      "streetAddress": {
+        "label": "Address",
+        "validationMessage": "Address is required",
+        "validation": "Address should not be more than 255 characters long.",
+        "placeHolder": "Enter Address"
+      },
+      "state": {
+        "label": "State/Province",
+        "validationMessage": "State/Province is required",
+        "value": "United States",
+        "placeHolder": "Choose State"
+      },
+      "country": {
+        "label": "Country",
+        "validationMessage": "Country is required",
+        "placeHolder": "Choose Country"
+      },
+      "city": {
+        "label": "City",
+        "validationMessage": "City is required",
+        "validation": "City should not be more than 255 characters long.",
+        "placeHolder": "Enter City"
+      },
+      "postalCode": {
+        "label": "Postal Code",
+        "validation": "Postal Code is required",
+        "validationMessage": "Postal Code is required",
+        "validationRequired": "Postal Code is required",
+        "placeHolder": "Enter Postal Code"
+      },
+      "awsCosell": {
+        "listItemLabel": "Primary need from AWS *",
+        "description": {
+          "yes": "Share the opportunity with AWS to receive deal assistance and support.",
+          "no": "Share this opportunity with AWS for visibility only, you will not receive deal assistance and support.",
+          "select": "Select all that apply."
+        },
+        "label": "Partner Specific needs from AWS for Co-sell",
+        "placeholder": "AWS for Co-sell",
+        "validationMessage": "Partner Specific needs from AWS for Co-sell is required",
+        "validation": "Partner Specific needs from AWS for Co-sell is required",
+        "placeHolder": "Choose all that apply"
+      },
+      "opportunityType": {
+        "listItemLabel": "Opportunity Type *",
+        "description": {
+          "expansion": "This opportunity is based on a new contract or agreement with this new customer/ logo for your company.",
+          "netNewBusiness": "This opportunity is based on an existing contact with this end customer which may include new line of business, partner product, or additional customer instances.",
+          "flatRenewal": "This opportunity is based on an esisting contract with this end customer where no expansion will take place."
+        }
+      },
+      "partnerPrimaryNeedAction": {
+        "label": "Primary need from AWS *",
+        "description": {
+          "awsSupport": "Share the opportunity with AWS to receive deal assistance and support.",
+          "awsNotSupport": "Share this opportunity with AWS for visibility only, you will not receive deal assistance and support."
+        }
+      },
+      "relatedOpportunityIndentifier": {
+        "label": "Parent Opportunity ID",
+        "description": "This original opportunity that this opportunity is renewing from.",
+        "validationMessage": "Opportunity ID must start with the letter 'O' followed by digits (e.g., O1234567).",
+        "placeHolder": "Enter Parent Opportunity ID"
+      },
+      "partnerProjectTitle": {
+        "label": "Partner Project Title",
+        "validationMessage": "Partner Project Title is required",
+        "placeHolder": "Enter Partner Project Title",
+        "validation": "Partner Project Title should not be more than 255 characters long.",
+        "limit": "Partner Project Title should not be more than 255 characters long.",
+        "duplicate": "Partner Project Title should be unique"
+      },
+      "salesActivities": {
+        "label": "Sales Activities",
+        "validationMessage": "Sales Activities is required",
+        "description": "Choose sales activities that have happened with the end-customer.",
+        "placeHolder": "Choose all that apply"
+      },
+      "customerBusinessProblem": {
+        "label": "Customer Business Problem",
+        "description": "Provide a clear description of the customer's business problem/pain point you are trying to address.",
+        "validation": "Business problem must have at least 20 characters up to a recommended maximum of 2000 characters.",
+        "validationMessage": "Customer Business Problem is required",
+        "placeHolder": "Enter Customer Business Problem"
+      },
+      "solutionsOffered": {
+        "description": "Choose the partner solutions that you're offering to this customer. If other, describe your solution.",
+        "label": "Solutions Offered",
+        "validation": "Solutions Offered selected upto 10",
+        "validationMessage": "Solutions Offered is required",
+        "placeHolder": "Choose Solutions"
+      },
+      "awsProducts": {
+        "label": "AWS Products",
+        "description": "Choose one or more AWS products that will be utilized to soleve the customer's business problem. Adding products enables AWS to connect you with the right support on this opportunity.",
+        "validation": "You have chosen an excessive number of products. The maximum products allowed are 20.",
+        "validationMessage": "AWS products is required",
+        "placeHolder": "Choose AWS Products"
+      },
+      "nextStep": {
+        "label": "Next Step",
+        "description": "Enter the next steps for this opportunity.",
+        "validation": "Next steps can have up to 255 characters",
+        "validationMessage": "Next steps is required",
+        "placeHolder": "Enter Next Step"
+      },
+      "useCase": {
+        "label": "Use Case",
+        "validationMessage": "Use Case is required",
+        "placeHolder": "Choose Use Case"
+      },
+      "deliveryModel": {
+        "label": "Delivery Model",
+        "description": "Indicate one or more applicable deployment or consumption model for your solution or service.",
+        "validationMessage": "Delivery Model is required",
+        "validation": "Delivery Model is required",
+        "placeHolder": "Choose all that apply"
+      },
+      "estimatedAWSRecurringRevenue": {
+        "label": "Estimated AWS Monthly Recurring Revenue",
+        "validationMessage": "Estimated AWS Monthly Recurring Revenue is required",
+        "validation": "Estimated AWS Monthly Recurring Revenue is invalid",
+        "valid": "Estimated AWS Monthly Recurring Revenue is required",
+        "placeHolder": "Enter Dollor Amount"
+      },
+      "targetCloseDate": {
+        "label": "Target Close Date",
+        "validationMessage": "Target Close Date is required",
+        "validation": "Target Close Date is required",
+        "invalidMessage": "Target Close Date should be a future date",
+        "placeHolder": "Enter Target Close Date"
+      },
+      "apnProgram": {
+        "placeholder": "APN Program",
+        "label": "APN Program - optional",
+        "placeHolder": "Choose all that apply"
+      },
+      "marketingSource": {
+        "description": "Is opportunity from marketing activity ? *",
+        "label": {
+          "yes": "Yes: Sourced from Marketing Activity",
+          "no": "No: Sourced from Marketing Activity"
+        }
+      },
+      "marketingCampaign": {
+        "label": "Marketing Campaign",
+        "placeHolder": "Enter Marketing Campaign"
+      },
+      "marketingUseCase": {
+        "label": "Marketing Activities Use-case",
+        "placeHolder": "Choose Marketing Activities Use-case"
+      },
+      "marketingActivityChannel": {
+        "label": "Marketing Activity Channel",
+        "placeHolder": "Choose Marketing Activity Channel"
+      },
+      "isMarketingfunds": {
+        "label": "Was marketing development funds used ? *",
+        "description": {
+          "yes": " Yes: Marketing development funds were used for this oportunity",
+          "no": "No: Marketing development funds were not used for this opportunity."
+        }
+      },
+      "crmUniqueIdentifier": {
+        "label": "Partner CRM Unique Identifier",
+        "validationMessage": "For example: 1234567",
+        "placeHolder": "Enter Partner CRM Unique Identifier"
+      },
+      "competitiveTracking": {
+        "label": "Competitive Tracking",
+        "placeHolder": "Choose Competitive Tracking"
+      },
+      "otherCompetitors": {
+        "label": "Other Competitors",
+        "validationMessage": "Other Competitors is required",
+        "placeHolder": "Enter Other Competitors",
+        "validation": "Other Competitors should not be more than 255 characters long."
+      },
+      "awsAccountId": {
+        "label": "AWS Account ID (if available)",
+        "description": "AWS accountID 12 digits.",
+        "validation": "AWS accountID 12 digits. For example: 123456456147",
+        "validationMessage": "Account Id must be 12 numerical digits",
+        "placeHolder": "Enter AWS Account ID"
+      },
+      "additonalComments": {
+        "label": "Additional Comments",
+        "description": "Enter project description, opportunity details, customer needs, etc",
+        "validation": "Additional Comments can have up to 255 characters",
+        "validationMessage": "Additional Comments is required",
+        "placeHolder": "Enter Additional Comments"
+      },
+      "contactFirstName": {
+        "label": "Customer First Name",
+        "validation": "Customer First Name should not be more than 80 characters long.",
+        "placeHolder": "Enter Customer First Name"
+      },
+      "contactLastName": {
+        "label": "Customer Last Name",
+        "validation": "Customer Last Name should not be more than 80 characters long.",
+        "placeHolder": "Enter Customer Last Name"
+      },
+      "contactEmail": {
+        "label": "Customer Email",
+        "value": "Contact Email is not valid",
+        "validation": "Customer Email should not be more than 80 characters long.",
+        "placeHolder": "Enter Customer Email"
+      },
+      "contactPhone": {
+        "label": "Customer Phone",
+        "validation": "Customer Phone should not be more than 40 characters long.",
+        "placeHolder": "Enter Customer Phone"
+      },
+      "contactTitle": {
+        "label": "Customer Title",
+        "validation": "Customer Title should not be more than 80 characters long.",
+        "placeHolder": "Enter Customer Title"
+      },
+      "primaryContactFirstName": {
+        "label": "Primary Contact First Name",
+        "validation": "Primary Contact First Name should not be more than 80 characters long.",
+        "placeHolder": "Enter Primary Customer First Name"
+      },
+      "primaryContactLastName": {
+        "label": "Primary Contact Last Name",
+        "validation": "Primary Contact Last Name should not be more than 80 characters long.",
+        "placeHolder": "Enter Primary Customer Last Name"
+      },
+      "primaryContactEmail": {
+        "label": "Primary Contact Email",
+        "value": "Contact Email is not valid",
+        "validation": "Primary Contact Email should not be more than 80 characters long.",
+        "placeHolder": "Enter Primary Customer Email"
+      },
+      "contactDescription": " Request you to fill in the end customer details in this section. Though optional it assists us in progressing faster on the opportunity. In case this is not filled, we will populate this with the opportunity submitter information, for the AWS Sales team to contact.",
+      "partnerDescription": "Provide contact information for the primary sales contact responsible for this opportunity within your organization. The AWS sales team may reach out to this individual to discuss the opportunity further.",
+      "marketingSourceAction": {
+        "label": "Is opportunity from marketing activity?"
+      },
+      "marketingSourceIsMarketingFundsAction": {
+        "label": "Was marketing development funds used?"
+      },
+      "stage": {
+        "label": "Stage",
+        "validationMessage": "Stage is required"
+      },
+      "provider": {
+        "label": "Cloud Provider"
+      },
+      "sellerCode": {
+        "label": "Seller Account",
+        "placeHolder": "Select Seller Account",
+        "validationMessage": "Seller Account is required"
+      },
+      "crmLookupUniqueIdentifier": {
+        "tooptip": "Partner CRM Unique Identifier",
+        "label": "HubSpot Deal ID",
+        "validationMessage": "HubSpot Deal ID is required",
+        "validation": "HubSpot Deal ID is invalid",
+        "invalidMessage": "HubSpot Deal ID is invalid",
+        "filterLabel": "Available Filters",
+        "filterPlaceHolder": "Select Filter"
+      },
+      "chooseTypeId": {
+        "children": "Search by Deal Id"
+      },
+      "chooseTypeFilter": {
+        "children": "Search by Filter Configurations"
+      },
+      "customerSoftwareValue": {
+        "label": "Customer Software Value",
+        "validationMessage": "Customer Software Value is required",
+        "valid": "Customer Software Value is required",
+        "validation": "Customer Software Value is invalid"
+      },
+      "procurementType": {
+        "label": "Procurement Type",
+        "validationMessage": "Procurement Type is required"
+      },
+      "contractStartDate": {
+        "label": "Contract Start Date",
+        "validationMessage": "Contract Start Date is required"
+      },
+      "currency": {
+        "label": "Currency",
+        "validationMessage": "Currency is required"
+      },
+      "contractEndDate": {
+        "label": "Contract End Date",
+        "validationMessage": "Contract End Date is required"
+      },
+      "closedReason": {
+        "label": "Closed Reason",
+        "validationMessage": "Closed Reason is required"
+      },
+      "offerID": {
+        "validationMessage": "Marketplace Offer Id is required",
+        "placeHolder": "Type an Offer ID"
+      },
+      "type": {
+        "label": "Select Offer Association Type",
+        "description": {
+          "yes": "Search for an AWS Marketplace Offer",
+          "no": "Enter an AWS Marketplace Offer ID"
+        }
+      },
+      "offerName": {
+        "placeholder": "Type an Offer Name"
+      },
+      "rejectReason": {
+        "label": "Please select a reason for declining the Invitation",
+        "validationMessage": "Select a reason for declining the Invitation"
+      },
+      "opportunityOwner": {
+        "label": "Opportunity Owner",
+        "validationMessage": "Email is required"
+      },
+      "partnerName": {
+        "label": "Partner Name",
+        "validationMessage": "Partner Name is required"
+      },
+      "partnerEngagement": {
+        "label": "Partner Engagement Type(s)",
+        "validationMessage": "Partner Engagement Type(s) is required"
+      },
+      "email": {
+        "label": "Email",
+        "validationMessage": "Email is required",
+        "validation": "Please enter a valid email address"
+      },
+      "awsId": {
+        "label": "AWS Account ID",
+        "validationMessage": "AWS Account ID is required"
+      },
+      "firstName": {
+        "label": "First Name",
+        "validationMessage": "First Name is required"
+      },
+      "lastName": {
+        "label": "Last Name",
+        "validationMessage": "Last Name is required"
+      },
+      "businessTitle": {
+        "label": "Business Title",
+        "validationMessage": "Business Title is required"
+      },
+      "phone": {
+        "label": "Phone Number",
+        "validationMessage": "Enter a valid phone number. For example: +14045550100"
+      },
+      "comment": {
+        "label": "Comments To Share With Partner",
+        "validationMessage": "Comments To Share With Partner is required",
+        "validation": "Comments To Share With Partner is required",
+        "validationMessagelimit": "Comments to share with partner (limit: 255 characters recommended)."
+      },
+      "projectTitle": {
+        "label": "Partner Project Title",
+        "placeHolder": "Enter Partner Project Title",
+        "validation": "Partner Project Title is required",
+        "validationMessage": "Partner Project Title is required",
+        "validationMessagelimit": "Partner Project Title should not be more than 255 characters long."
+      },
+      "bussinessProblem": {
+        "label": "Customer Business Problem",
+        "description": "Provide a clear description of the customer's business problem/pain point you are trying to address.",
+        "validation": "Business problem must have at least 20 characters up to a recommended maximum of 255 characters.",
+        "validationMessage": "Customer Business Problem is required",
+        "placeHolder": "Enter Customer Business Problem"
+      }
+    },
+    "accept": {
+      "status": "Status",
+      "invitationId": "Invitation Id",
+      "invitationDate": "Invitation Date",
+      "invitationMessage": "Invitation Message",
+      "postalCode": "Postal Code",
+      "country": "Country",
+      "industryVertical": "Industry Vertical",
+      "partnerAcceptanceDeadline": "Partner Acceptance Deadline",
+      "targetCloseDate": "Target Close Date",
+      "estimatedAwsMonthlyRecurringRevenue": "Estimated AWS Monthly Recurring Revenue",
+      "partnerProjectTitle": "Partner Project Title",
+      "projectDescription": "Project Description",
+      "businessProblem": "Business Problem",
+      "rejectedReason": "Rejected Reason",
+      "senderCompanyName": "Sender Company Name",
+      "senderCompanyWebsite": "Sender Company Website",
+      "receiverCompanyName": "Receiver Company Name",
+      "receiverCompanyAccountId": "Receiver Company Account Id",
+      "endUserCompanyName": "End User (Company Name)",
+      "endUserWebsite": "End User Website",
+      "opportunitySender": "Opportunity Sender"
+    },
+    "additional": {
+      "partnerCrmUniqueIdentifier": "Partner CRM Unique Identifier",
+      "competitiveTracking": "Competitive Tracking",
+      "otherCompetitors": "Other Competitors",
+      "reviewStatusReason": "Review Status Reason",
+      "apnReviewerComments": "APN Reviewer Comments",
+      "awsAccountsId": "AWS Account ID",
+      "additionalComments": "Additional Comments",
+      "closedReason": "Closed Reason",
+      "awsStage": "AWS Stage",
+      "awsCloseDate": "AWS Close Date",
+      "awsClosedLostReason": "AWS Closed Lost Reason"
+    },
+    "audit": {
+      "eventName": "Event Name",
+      "crmId": "CRM ID",
+      "crmName": "CRM Name",
+      "crmOpportunityId": "CRM Opportunity ID",
+      "referenceId": "Reference ID",
+      "coSellName": "CoSell Name",
+      "cloudCoSellIdentifier": "Cloud CoSell Identifier",
+      "schedulerAction": "Scheduler Action",
+      "errorMessage": "Error Message",
+      "providerReferenceIdentifier": "Provider Reference Identifier",
+      "saasifyReferenceId": "SaaSify Reference Id",
+      "crmReferenceId": "CRM Reference Id",
+      "eventProccesedTime": "Event Proccesed Time",
+      "requestId": "Request Id",
+      "originOfError": "Origin Of Error",
+      "userName": "User Name"
+    },
+    "contact": {
+      "awsSalesRep": "AWS Sales Rep",
+      "partnerSalesContact": "Partner Sales Contact",
+      "awsAccountManager": "AWS Account Manager",
+      "partnerDevelopmentManager": "Partner Development Manager",
+      "wwpsPartnerDevelopmentManager": "WWPS Partner Development Manager",
+      "awsPartnerSuccessManager": "AWS Partner Success Manager (PSM)",
+      "awsIsvSuccessManager": "AWS ISV Success Manager (ISM)"
+    },
+    "detailsAccordions": {
+      "audit": "Audit Log",
+      "overview": "Overview",
+      "saas": "SaaS Documentation",
+      "project": "Project Details",
+      "next": "Next Steps",
+      "marketplace": "Marketplace",
+      "customer": "Customer Details",
+      "contact": "Contacts Details",
+      "additional": "Additional Details",
+      "deals": "Deal Details",
+      "dealsQualify": "Qualification Information",
+      "systemInfo": "System Information",
+      "partnerConnection": "Partner Shared Details",
+      "invitation": "Invitation Details"
+    },
+    "customer": {
+      "customerDuns": "Customer DUNS",
+      "customerCompanyName": "Customer Company Name",
+      "website": "Website",
+      "industryVertical": "Industry Vertical",
+      "otherIndustry": "Other Industry",
+      "streetAddress": "Street Address",
+      "city": "City",
+      "state": "State",
+      "country": "Country",
+      "postalCode": "Postal Code",
+      "opportunityOwner": "Opportunity Owner",
+      "customerFirstName": "Customer First Name",
+      "customerLastName": "Customer Last Name",
+      "customerTitle": "Customer Title",
+      "customerPhone": "Customer Phone",
+      "customerEmail": "Customer Email",
+      "labels": {
+        "contact": "Customer End User Contact Details",
+        "customer": "Customer Details"
+      }
+    },
+    "marketplace": {
+      "offerId": "Offer Id",
+      "offerName": "Offer Name",
+      "offerCreatedDate": "Offer Created Date",
+      "offerExpiryDate": "Offer Expiry Date",
+      "labelAggrement": "AWS Marketplace Agreement",
+      "labelOffer": "AWS Marketplace Offer"
+    },
+    "overview": {
+      "opportunityId": "Opportunity ID",
+      "customerCompanyName": "Customer Company Name",
+      "awsMarketplaceEngagementScore": "AWS Marketplace Engagement Score",
+      "opportunityOwner": "Opportunity Owner",
+      "opportunityOwnership": "Opportunity Ownership",
+      "partnerStatus": "Partner Status",
+      "stage": "Stage",
+      "status": "Status",
+      "awsRecommendedActions": "AWS Recommended Actions"
+    },
+    "projectSegment": {
+      "partnerPrimaryNeed": "Partner Primary Need from AWS",
+      "opportunityType": "Opportunity Type",
+      "projectTitle": "Partner Project Title",
+      "parentOpportunityId": "Parent Opportunity ID",
+      "salesActivities": "Sales Activities",
+      "customerBusinessProblem": "Customer Business Problem",
+      "solutionsOffered": "Solutions Offered",
+      "awsProducts": "AWS Products",
+      "useCase": "Use Case",
+      "deliveryModel": "Delivery Model",
+      "estimatedAwsMRR": "Estimated AWS Monthly Recurring Revenue",
+      "targetCloseDate": "Target Close Date",
+      "apnProgram": "APN Program"
+    },
+    "marketing": {
+      "opportunitySource": "Opportunity Source",
+      "marketingCampaign": "Marketing Campaign",
+      "marketingUseCase": "Marketing Activities Use Case",
+      "marketingChannel": "Marketing Activity Channel",
+      "marketingDevelopmentFunds": "Marketing Development Funds",
+      "no": "No: Marketing development funds were not used for this opportunity",
+      "yes": "Yes: Marketing development funds were used for this opportunity",
+      "none": "No: Not Sourced from marketing activity.",
+      "marketingActivity": "Yes: Sourced from marketing activity."
+    },
+    "saasDocumentation": {
+      "procurementType": "Procurement Type",
+      "softwareValue": "Customer Software Value",
+      "softwareCurrency": "Customer Software Value Currency",
+      "contractStartDate": "Contract Start Date",
+      "contractEndDate": "Contract End Date"
+    },
+    "invitation": {
+      "status": "Status",
+      "invitationId": "Invitation Id",
+      "invitationDate": "Invitation Date",
+      "invitationMessage": "Invitation Message",
+      "engagementTypes": "Partner Engagement Type(s)",
+      "companyName": "End User (Company Name)",
+      "website": "End User Website",
+      "sender": "Opportunity Sender",
+      "country": "Country",
+      "postalCode": "Postal Code",
+      "industry": "Industry Vertical",
+      "deadline": "Partner Acceptance Deadline",
+      "targetCloseDate": "Target Close Date",
+      "estimatedAwsMRR": "Estimated AWS Monthly Recurring Revenue",
+      "projectTitle": "Partner Project Title",
+      "projectDescription": "Project Description",
+      "rejectionReason": "Rejected Reason"
+    },
+    "opportunity": {
+      "id": "Opportunity Id",
+      "stage": "Opportunity Stage",
+      "status": "Opportunity Status",
+      "type": "Opportunity Type",
+      "targetCloseDate": "Target Close Date",
+      "owner": "Opportunity Owner",
+      "ownerEmail": "Opportunity Owner Email",
+      "useCase": "Use case",
+      "deliveryModel": "Delivery Model",
+      "salesActivities": "Sales Activities",
+      "awsProducts": "AWS Products",
+      "primaryNeed": "Primary need from AWS",
+      "solutionsOffered": "Solutions offered",
+      "nextSteps": "Next Steps"
+    },
+    "alertSection": {
+      "apnReviewReason": "APN Review Reason: ",
+      "apnReviewComment": "APN Review Comments: ",
+      "rejectedReason": "Rejected Reason: ",
+      "noReasonProvide": "No reason provided"
+    },
+    "nextStep": {
+      "title": "Next Steps",
+      "noItems": "No Next Step History to display",
+      "add": "You haven't add an Next step with this opportunity."
+    },
+    "displayOid": {
+      "GCP": "Identifier",
+      "AWS": "Opportunity Id",
+      "AMP": "Microsoft Referral ID",
+      "separator": " : "
+    },
+    "tableColumn": {
+      "cosell": ["OPP ID", "Customer", "Stage", "Status", "Action"],
+      "invitations": ["NAME", "EMAIL", "TITLE"],
+      "nextStep": ["NEXT STEP", "CREATED DATE"],
+      "aggrement": [
+        "AGREEMENT ID",
+        "CREATED DATE",
+        "SERVICE START DATE (UTC)",
+        "SERVICE END DATE (UTC)",
+        "OFFER ID"
+      ],
+      "contact": [
+        "CONTACT TYPE",
+        "CONTACT NAME",
+        "CONTACT EMAIL",
+        "PRIMARY CONTACT PHONE"
+      ]
+    }
+  },
+  "generateMessage": {
+    "refresh": "Co-sell refreshed successfully",
+    "invitationRefresh": "Invitation refreshed successfully",
+    "pushCrm": "Push to CRM successfully.",
+    "resyncSuccess": "Co-sell resynced successfully.",
+    "multiPartnerCreate": "Adding shared partner details is in progress. Please do not refresh or close the page.",
+    "multiPartnerSuccess": "Partner Shared Details Added Successfully",
+    "updateCosellInProgress": "Update Co-sell in-progress. Do not close the popup or refresh the page.",
+    "updateGcpCosellInProgress": "Update Opportunity in-progress. Do not close the popup or refresh the page.",
+    "createCosellInProgress": "Create Co-sell in-progress. Do not close the popup or refresh the page.",
+    "createGcpCosellInProgress": "Create Opportunity in-progress. Do not close the popup or refresh the page.",
+    "editCosell": "Successfully Edited Co-sell",
+    "createCosell": "Successfully Created Co-sell",
+    "createGcpCosell": "Successfully Opportunity Co-sell",
+    "existingCosell": "Co-sell already exists for this deal. You cannot create a New Deal if the status is in Pending Submission, Submitted, In Review.",
+    "gatewayMessage": "API Request took too long to respond. Please refresh the deal page.",
+    "updateOfferInProgress": "Update Marketplace offer in-progress. Do not close the popup or refresh the page.",
+    "associateOffer": "Offer successfully associated.",
+    "removeOffer": "Offer successfully removed.",
+    "updateStageInProgress": "Change stage in-progress. Do not close the popup or refresh the page.",
+    "saasDocsInProgress": "Update SaaS Documentation in-progress. Do not close the popup or refresh the page.",
+    "changeStage": "Co-sell Stage updated successfully.",
+    "cosellExists": "Co-sell already exists for this deal. You cannot create a New Deal if the status is in Pending Submission, Submitted, In Review.",
+    "linkCrmInProgress": "Link CRM in-progress. Do not close the popup or refresh the page.",
+    "dealIdInProgress": "Fetching Deal Look Up. Do not close the popup or refresh the page.",
+    "resync": "Re-syncing the error details of the co-sell. Please do not close the popup or refresh the page.",
+    "resyncFailed": "Something went wrong while resolving Co-sell.",
+    "linkCrm": "Successfully linked with HubSpot Deal.",
+    "nextStepInProgress": "Update Next Step in-progress. Do not close the popup or refresh the page.",
+    "nextstep": "Next Step added Sucessfully.",
+    "rejectCosellInProgress": "Reject invitation in-progress. Do not close the popup or refresh the page.",
+    "rejectCosell": "Sucessfully Rejected the invitation",
+    "updateTransferOwnerInProgres": "Update Transfer Ownership in-progress. Do not close the popup or refresh the page.",
+    "transferOwnerShip": "Sucessfully Transferred Co-sell",
+    "updateCosell": "Successfully Updated Co-sell",
+    "updateGcpCosell": "Successfully Updated Opportunity",
+    "errorMessage": "Some data failed to load. Reload the page to retrieve it.",
+    "acceptCosell": "Sucessfully Accepted the invitation",
+    "acceptCosellInProgress": "Accept invitation in-progress. Do not close the popup or refresh the page.",
+    "chooseDeal": "Kindly Choose Deal",
+    "listCosell": "list Co-sell",
+    "listFunding": "list Funding",
+    "crmMapping": "CRM Mapping",
+    "reloadMapping": "The mapping ID was missing during the import. Please reload and try again.",
+    "fetchError": "An unexpected error occurred while fetching options.",
+    "teamMember": "Contact  is already in the list, please choose another contact.",
+    "textCopied": "Successfully copied",
+    "failedToCopy": "Failed copied",
+    "resetFundingRequest": "Fund Request Id refreshed successfully",
+    "privateOfferSuccess": "Private Offer successfully published!",
+    "fundingRequestSuccess": "Funding Request successfully created!",
+    "offerRequired": "AWS Marketplace offer is required",
+    "poCancelledSuccess": "Private Offer successfully cancelled!",
+    "poWithdrawnSuccess": "Private Offer successfully withdrawn!",
+    "poClonedSuccess": "Private Offer successfully cloned!",
+    "poExpirySuccessFirst": "The expiration date for",
+    "poExpirySuccessSecond": "private offer name",
+    "poExpirySuccessLast": "has been successfully modified. The new expiration date may take up to 5 minutes to reflect.",
+    "newUsageAdded": "New Usage added successfully!",
+    "resellerPoDeactivatedSuccess": "Authorization deactivated successfully.",
+    "cosellCloneSuccess": "Co-sell successfully cloned!",
+    "authorizationSuccess": "Authorization successfully published!",
+    "authorizationClonedSuccess": "Authorization successfully cloned!",
+    "noContacts": " No Contacts to display",
+    "noOffers": "No AWS Marketplace offer to display",
+    "noOffersDiscriptions": " You haven't associated an AWS Marketplace offer with this opportunity.",
+    "aggrementEmpty": "To view agreements, you first need to associate an AWS Marketplace offer with this opportunity.",
+    "supportedAggreement": " No AWS Marketplace agreements to display",
+    "forThisId": "for this id",
+    "nodataDisplay": "No data to display",
+    "request": "Your request to close this opportunity as",
+    "finalDecision": "is under review by Google sales representative, who will make the final decision. Contact Partner Support with any issues."
+  },
+  "filter": {
+    "referralType": {
+      "label": "Referral Type"
+    },
+    "status": {
+      "label": "Status"
+    },
+    "stage": {
+      "label": "Stage"
+    },
+    "customer": {
+      "label": "Customer Company Name"
+    },
+    "fundRequestId": {
+      "label": "Fund Request Id"
+    },
+    "poDealName": {
+      "label": "Search",
+      "tooltip": "Search on the basis of Offer Name, Offer ID, Buyer ID, Customer Name"
+    },
+    "productName": {
+      "label": "Product"
+    },
+    "channelType": {
+      "label": "Channel"
+    },
+    "sourceType": {
+      "label": "Source"
+    },
+    "timeRange": {
+      "label": "Time Range"
+    },
+    "fromDate": {
+      "label": "From Date"
+    },
+    "toDate": {
+      "label": "To Date"
+    },
+    "dealStatus": {
+      "label": "Status"
+    },
+    "productType": {
+      "label": "Product Type"
+    },
+    "oid": {
+      "label": "Opportunity Id"
+    },
+    "hasError": {
+      "label": "Show records with error"
+    },
+    "isAssociatedWithCrm": {
+      "label": "Show records not associated with HubSpot Deal"
+    },
+    "cosellColumn": [
+      {
+        "header": "OPP ID"
+      },
+      {
+        "header": "Customer"
+      },
+      {
+        "header": "Stage"
+      },
+      {
+        "header": "Status"
+      }
+    ],
+    "showPurchasedRecords": {
+      "label": "Show purchased records"
+    },
+    "showArchivedRecords": {
+      "label": "Show archived records"
+    }
+  },
+  "awsPrivateOffer": {
+    "awsOfferCloudDetails": {
+      "dealName": "Name",
+      "description": "Description",
+      "salesName": "Primary Sales Agent Name",
+      "salesEmail": "Primary Sales Agent Email",
+      "offerId": "Offer ID",
+      "offerType": "Offer Type",
+      "offerUrl": "Offer URL",
+      "StageName": "Stage Name",
+      "customerCompany": "Customer Company Name",
+      "customerEmail": "Customer Email",
+      "address": "Address",
+      "country": "Country",
+      "state": "State",
+      "zipCode": "Zip/Postal Code",
+      "awsId": "AWS Account ID",
+      "product": "Product",
+      "pricingModel": "Product Pricing Model",
+      "contractModel": "Contract model",
+      "usageModel": "Usage model",
+      "productId": "Product ID",
+      "fps": "Flexible Payment Schedule",
+      "offerCreated": "Offer Created Date",
+      "offerExperied": "Offer Expiration Date",
+      "renewalStatus": "Renewal Status",
+      "renewalOffer": "Renewal offer",
+      "nonRenewalOffer": "Non-Renewal offer",
+      "renewalType": "Renewal Type",
+      "contractEndDate": "Contract End Date",
+      "contractStartDate": "Contract Start Date",
+      "usageStartDate": "Usage Start Date",
+      "atAcceptance": "At Acceptance",
+      "contractDuration": "Contract Duration",
+      "usageDuration": "Usage Duration",
+      "usageEndDate": "Usage End Date",
+      "legalTermType": "Legal Term Type",
+      "termsConditions": "Terms and Conditions",
+      "purchasingOptions": "Purchasing options",
+      "multipleDimensions": "Multiple dimension per contract",
+      "singleDimensions": "Single dimension per contract"
+    },
+    "awsResellerLabelMapper": {
+      "offerCppoBasicDetails": {
+        "authorizationName": "Authorization Name",
+        "authorizationDesc": "Authorization Description",
+        "salesAgentname": "Sales Agent Name",
+        "salesAgentContact": "Sales Agent Primary Contact"
+      },
+      "offerResellerDetails": {
+        "reSellerId": "Reseller Id",
+        "privateOfferId": "Private Offer Id",
+        "buyers": "Buyer(s)",
+        "customerCompany": "Customer Company Name"
+      },
+      "offerCppoCloudDetails": {
+        "authorizationId": "Authorization ID",
+        "product": "Product",
+        "authTimeLength": "Authorization Time Length",
+        "authEndDate": "Authorization End Date",
+        "maxAllowedServiceStart": "Maximum Allowed Service Start Date",
+        "authDuration": "Authorization Duration",
+        "discountType": "Discount Type",
+        "renewal": "Renewal",
+        "eula": "End User License Agreement For Buyer",
+        "resellerAggrement": "Reseller Agreement"
+      },
+      "renderSubscription": {
+        "aggrementId": "Agreement ID",
+        "offerAcceptDate": "Offer Accepted Date",
+        "agreementStart": "Agreement Start Date",
+        "aggrementEnd": "Agreement End Date",
+        "status": "Status",
+        "autoRenewal": "Auto Renewal"
+      },
+      "renderCPPOSubscription": {
+        "privateOfferId": "Private Offer ID",
+        "aggrementId": "Agreement ID",
+        "status": "Status",
+        "offerAcceptDate": "Offer Accepted Date",
+        "agreementStart": "Agreement Start Date",
+        "agreementEnd": "Agreement End Date",
+        "customerAccountId": "Customer AWS Account ID",
+        "customerName": "Customer Name",
+        "autoRenewal": "Auto Renewal"
+      },
+      "renderProductDimension": {
+        "displayName": "Display Name",
+        "quantity": "Quantity"
+      },
+      "renderPurchaseAttributes": {
+        "chargeCustomerId": "Chargebee Customer Id",
+        "chargeSubsUrl": "Chargebee Subscription URL",
+        "chargeSubsId": "Chargebee Subscription Id"
+      },
+      "renderViewDetailsOverlay": {
+        "companyName": "Company Name",
+        "transRefference": "Transaction Reference",
+        "expectedPayMont": "Expected Payment Month",
+        "transcAmount": "Transaction Amount",
+        "expectedPay": "Expected Pay",
+        "actualPay": "Actual Pay",
+        "currency": "Currency",
+        "storeFeeAmount": "Store Fee Amount",
+        "storeFeePercent": "Store Fee Percentage",
+        "actualPayDate": "Actual Pay Date",
+        "saasSubsId": "SaaS Subscription Resource ID",
+        "status": "Status"
+      }
+    },
+    "awsReseller": {
+      "Label": {
+        "Name": {
+          "label": "Authorization Name",
+          "required": "Authorization Name is required",
+          "validationCharLimit": "Must be 150 characters or fewer.",
+          "validationInvalidChars": "Angle brackets < and > are not allowed."
+        },
+        "Description": {
+          "label": "Authorization Description",
+          "required": "Authorization Description is required"
+        },
+        "PreparedBy": {
+          "label": "Primary Sales Agent Email",
+          "validation": "Prepared By is required"
+        },
+        "NotificationRecipients": {
+          "label": "ISV Notification Recipients"
+        },
+        "AdditionalParametersJson": {
+          "label": "Custom Metadata"
+        },
+        "ResellerIds": {
+          "label": "Reseller ID"
+        },
+        "CustomerAccountId": {
+          "label": "Customer AWS Account ID"
+        },
+        "DiscountTypeName": {
+          "label": "Discount Type"
+        },
+        "OpportunityDurationTypeName": {
+          "label": "Duration Type"
+        },
+        "selleraccount": {
+          "label": "Seller Account"
+        },
+        "product": {
+          "label": "Product"
+        },
+        "durationUnit": {
+          "label": "Duration Unit"
+        },
+        "durationNumber": {
+          "label": "Duration Number"
+        },
+        "authorizationEndDate": {
+          "label": "Authorization End Date"
+        },
+        "maxServiceStartDate": {
+          "label": "Maximum Allowed Service Start Date"
+        },
+        "selectedItems": {
+          "label": "Selected Items"
+        },
+        "SchedulePrice": {
+          "label": "Payment Schedule"
+        },
+        "dimensionPrice": {
+          "label": "Pricing per Usage Dimension"
+        },
+        "DimensionName": {
+          "label": "Dimension Name"
+        },
+        "ApiName": {
+          "label": "API Name"
+        },
+        "DimensionDescription": {
+          "label": "Description"
+        },
+        "Price": {
+          "label": "Price"
+        },
+        "Date": {
+          "label": "Date"
+        },
+        "Units": {
+          "label": "Units"
+        }
+      },
+      "ValidationMessage": {
+        "invalidEmail": "Enter a valid email address",
+        "duplicateEmail": "Duplicate emails are not allowed",
+        "isvRecipientRequired": "ISV Notification Recipient required",
+        "requiredGeneric": "is required",
+        "correctFields": "Please correct the required fields.",
+        "customMetaName": "Custom metadata Name",
+        "customMetaValue": "Custom metadata Value",
+        "resellerIdRequired": "Reseller Id is Required",
+        "customerRecipientRequired": "Customer Recipient",
+        "durationNumberRequired": "Duration Number is Required",
+        "atLeastOneDimension": "Atleast 1 dimension",
+        "contractQuantityLabel": "Contract Quantity",
+        "contractPriceLabel": "Contract Price",
+        "pricingModelRequired": "Pricing model is required",
+        "selectPricingModelAlert": "Please Select a pricing model",
+        "wholeNumberOnly": "Enter a whole number.",
+        "wholeNumberGtZero": "Enter a whole number greater than 0.",
+        "daysRange": "Contract duration must be between 1 and 1826 days.",
+        "monthsRange": "Contract duration must be between 1 and 60 months.",
+        "yearsRange": "Contract duration must be between 1 and 5 years.",
+        "validNumber": "Enter a valid number.",
+        "twelveDigitNumber": "Enter a valid 12-digit number",
+        "nameTooLong": "Must be 150 characters or fewer.",
+        "nameInvalidChars": "Angle brackets < and > are not allowed.",
+        "awsRequired": "AWS Account ID is required",
+        "awsDigits": "AWS Account ID must contain exactly 12 digits.",
+        "awsNumeric": "AWS Account ID must contain only numbers.",
+        "expiryPast": "Expiration date cannot be in past",
+        "startPast": "Maximum allowed Service Start Date date cannot be in past",
+        "chooseValidMonth": "Choose valid month.",
+        "fpsRowMissing": "At least one schedule row is required",
+        "schedulePriceRequired": "Price is required",
+        "scheduleDateRequired": "Date is required",
+        "scheduleDateOrder": "Payment dates must be in chronological order.",
+        "invoiceBeforeToday": "Invoice date cannot be before today.",
+        "scheduleWithinDuration": "Selected date must be within selected duration.",
+        "expiryBeforeAllPayments": "Offer expiry date must be before all the payment schedule terms.",
+        "dimensionNameRequired": "Dimension Name is required.",
+        "dimensionNameLenOrLeadingSpace": "Dimension name must be 1 to 80 characters, and can’t start with a space.",
+        "dimensionNameLeadingSpace": "can’t start with a space.",
+        "apiNameRequired": "API name is required.",
+        "apiNameTooLong": "API name must be under 36 characters.",
+        "apiNameAllowedChars": "Only letters, numbers and underscores allowed.",
+        "dimensionDescriptionRequired": "Description is required",
+        "dimensionDescriptionLeadingSpace": "and can’t start with space.",
+        "dimensionDescriptionMax": "Maximum 1000 characters allowed.",
+        "priceMax2dp": "Enter a valid amount with up to 2 decimal places",
+        "dimPriceUpTo8dp": "Enter a number with up to 8 decimals.",
+        "contractQtyRequired": "Enter a whole number greater than 0.",
+        "contractPriceRequired": "Contract Price is required"
+      },
+      "Alert": {
+        "requiredSummarySuffix": " is Required"
+      },
+      "Summary": {
+        "customMetadata": "Custom Metadata",
+        "contractQuantity": "Contract Quantity",
+        "contractPrice": "Contract Price"
+      }
+    },
+    "privateOffersSectionName": {
+      "basicInfo": {
+        "title": "Private Offer Details",
+        "cppoTitle": "Authorization Details",
+        "tableHeader": {
+          "isvNotification": "ISV Notification Recipients",
+          "metaData": "Custom Metadata"
+        }
+      },
+      "ampList": {
+        "solutions": "Solutions",
+        "team": "Team Members",
+        "product": "Products",
+        "opportunity": "Opportunity Team",
+        "contactList": "Contact Detail"
+      },
+      "cloudProvider": {
+        "title": "Cloud Provider Details",
+        "productDetails": "Product Details",
+        "customerDetails": "Customer Details",
+        "tableHeader": {
+          "pDimension": "Product Dimensions",
+          "cppoDimension": "Units per dimension",
+          "cppoWholeSalePrice": "Wholesale Price",
+          "payment": "Payment Schedules",
+          "marketPlace": "Marketplace Metering Service dimensions",
+          "billing": "Billing Terms",
+          "pricingPerUsage": "Pricing Per Usage Dimension",
+          "cppoPricingUsage": "Additional Usage Costs",
+          "featureList": "Features List",
+          "installmentShedule": "Installment Schedule"
+        },
+        "label": "Contract Total"
+      },
+      "customer": {
+        "title": "Customer Details",
+        "resellerTitle": "Reseller Details",
+        "tableHeader": {
+          "email": "Customer Notification Recipients",
+          "resellerEmail": "Reseller Notification Recipients",
+          "column": ["Email"]
+        }
+      },
+      "subscription": {
+        "title": "Subscription Details",
+        "payout": "Payment details",
+        "tableHeader": {
+          "title": "Product Dimensions",
+          "columns": [
+            {
+              "header": "Display Name"
+            },
+            {
+              "header": "Quantity"
+            }
+          ]
+        }
+      },
+      "purchaseAttribute": {
+        "title": "Purchase Attributes",
+        "tableHeader": {
+          "attribute": "Attribute",
+          "value": "Value"
+        }
+      },
+      "usage": {
+        "title": "Usage Details",
+        "report": "Report Usage",
+        "manageUsage": "MANAGE USAGE",
+        "addUsage": "Record New Usage"
+      },
+      "provider": {
+        "cppo": "CPPO"
+      }
+    },
+    "upsertOffers": {
+      "labelMapper": {
+        "buyerAwsAccountId": {
+          "label": "Buyer AWS account ID",
+          "placeholder": "12-digit AWS account ID",
+          "validation": "Enter a valid 12-digit AWS account ID"
+        },
+        "buyerAwsAccountIds": {
+          "label": "Buyer AWS account IDs",
+          "validation": "Enter valid 12-digit AWS account IDs"
+        },
+        "createOffers": {
+          "label": "Cloud Provider",
+          "Aws_Label": "AWS Marketplace"
+        },
+        "offerType": {
+          "label": "Offer Type"
+        },
+        "basicInfo": {
+          "label": "Basic Information"
+        },
+        "cloudProvider": {
+          "label": "Cloud Provider"
+        },
+        "Name": {
+          "label": "Private Offer Name",
+          "placeholder": "Private offer name",
+          "tooltip": "The offer name is visible to buyers. We recommend including the buyer ID, company name, and a high-level description (such as upgrade, renewal). Avoid including any personally identifiable information (such as first/last name, phone number, address).",
+          "validationMessage": "Offer name can have up to 150 characters. Invalid characters are (<),(>),(\\).",
+          "validation": "Private Offer Name is Required",
+          "required": "Private Offer Name is Required",
+          "validationCharater": "Provide offer name with fewer than 150 characters.",
+          "validationInValid": "Offer name contains invalid characters (<), (>), (\\)."
+        },
+        "DealReferenceID": {
+          "label": "Private Offer Reference Id",
+          "tooltip": "This is autogenerated GUID. This will be unique for each private offer."
+        },
+        "Description": {
+          "label": "Private Offer Description",
+          "placeholder": "Description is for your reference only",
+          "tooltip": "The offer description isn't visible to buyers. Describe your offer in 2-3 sentences.",
+          "validationInvalid": "Provide offer description with fewer than 255 characters.",
+          "description": "Offer description can have up to 255 characters.",
+          "validationMessage": "Private Offer Description is Required",
+          "validation": "Private Offer Description is Required"
+        },
+        "Salesagent": {
+          "label": "Sales Agent Name",
+          "placeholder": "Sales agent name",
+          "Validation": "Sales Agent Name is Required"
+        },
+        "PreparedBy": {
+          "label": "Sales Agent Primary Contact",
+          "placeholder": "Sales agent primary contact (email)",
+          "validation": "Sales Agent Primary Contact is Required",
+          "required": "Sales Agent Primary Contact is Required"
+        },
+        "isvNotificationDetails": {
+          "label": "ISV Notification Recipients"
+        },
+        "recipientsEmail": {
+          "label": "Recipients Email",
+          "placeholder": "Email",
+          "tooltip": "Add the email addresses of the ISV personnel who should be notified about activity on the private offer.",
+          "validation": "Only 5 emails can be added"
+        },
+        "customMetadataDetails": {
+          "label": "Tags",
+          "placeholder": "Name"
+        },
+        "tagsDetails": {
+          "label": "Custom Metadata",
+          "tooltip": "Custom Metadata helps in providing additional information on the private offer that is extended to the customer and this will show up in the Email Notification which the ISV receives. This consists of a Name and Value. For Example: You can have a Custom Metadata with the Name as Region and Value as NA."
+        },
+        "customMetadataDetailsValue": {
+          "placeholder": "Value"
+        },
+        "buyerInfo": {
+          "label": "Buyer Information"
+        },
+        "CustomerName": {
+          "label": "Customer Company Name",
+          "tooltip": "Provide the name of your customer.",
+          "placeholder": "Customer"
+        },
+        "Email": {
+          "label": "Customer Email",
+          "placeholder": "Email",
+          "tooltip": "Email of the customer",
+          "validation": "AWS Enter a Valid Email"
+        },
+        "addressDetails": {
+          "label": "Address Details"
+        },
+        "AddressLine1": {
+          "label": "Address",
+          "placeholder": "Address"
+        },
+        "AddressLine2": {
+          "label": "Address Line 2",
+          "placeholder": "Address Line 2"
+        },
+        "Country": {
+          "label": "Country",
+          "placeholder": "Country"
+        },
+        "State": {
+          "label": "State",
+          "placeholder": "State"
+        },
+        "Zip": {
+          "label": "Zip/Postal Code",
+          "placeholder": "zipcode"
+        },
+        "marketPlaceAccountDetail": {
+          "label": "Marketplace Account Detail"
+        },
+        "CustomerAccountId": {
+          "label": "AWS Account ID",
+          "tooltip": "You can add the AWS account ID for up to buyer who you’d like to target with the private offer. The AWS account ID is a 12-digit number, such as 012345678901, that uniquely identifies an AWS account.",
+          "placeholder": "Only one Buyer Account ID can be added.",
+          "validation": "The AWS account ID is Required"
+        },
+        "customerNotifyRecipients": {
+          "label": "Customer Notification Recipients"
+        },
+        "customerRecipientsEmails": {
+          "label": "Recipients Email",
+          "tooltip": "Add the email addresses of the customer personnel who should be notified about the private offer.",
+          "validation": "Only 5 emails can be added",
+          "placeholder": "Email"
+        },
+        "offerTerm": {
+          "label": "Offer Term"
+        },
+        "sellerAccount": {
+          "label": "Seller Account",
+          "placeholder": "Select Seller Account",
+          "required": "Seller account is required"
+        },
+        "sellerOfferType": {
+          "label": "Offer Type",
+          "placeholder": "Select Offer Type",
+          "required": "Seller Offer Type is required"
+        },
+        "selectProduct": {
+          "label": "Product",
+          "placeholder": "Select Product"
+        },
+        "sellerProductId": {
+          "label": "Product ID",
+          "placeholder": "Product ID"
+        },
+        "pricingModelTitle": {
+          "label": "Pricing Model"
+        },
+        "pricingModelDesc": {
+          "label": "Choose a pricing model for the offer."
+        },
+        "durationUnit": {
+          "label": "Duration Unit",
+          "placeholder": "Select Duration"
+        },
+        "duration": {
+          "label": "Duration",
+          "placeholder": "Enter Number"
+        },
+        "dimensionName": {
+          "label": "Dimension name",
+          "validation": "Dimension name is required"
+        },
+        "apiName": {
+          "label": "API name",
+          "validation": "API name is required"
+        },
+        "dimensionDescription": {
+          "label": "Dimension description",
+          "validation": "Dimension description is required"
+        },
+        "offerStartDate": {
+          "label": "Start date",
+          "description": "Date the services in this offer can start begin used"
+        },
+        "offerEndDate": {
+          "label": "End date",
+          "description": "Final date the services in this offer can be used"
+        },
+        "offerExpired": {
+          "label": "Offer Expiration Date",
+          "description": "The buyer must respond to your offer by the provided date before 23:59 (UTC), otherwise the offer will expire.",
+          "tooltip": "Date this offer expires"
+        },
+        "usageExpired": {
+          "label": "Offer Expiration Date",
+          "description": "The buyer must respond to your offer by the provided date before 23:59 (UTC), otherwise the offer will expire.",
+          "tooltip": "Date this offer expires"
+        },
+        "usageDuration": {
+          "label": "Usage Duration",
+          "description": "This offer switches back to public price after the specified number of days. The subscription end date is determined from the buyer subscription date plus the below duration.",
+          "tooltip": "After the contract duration ends, buyer can use metering price for the duration specified below."
+        },
+        "previousServiceEndDate": {
+          "label": "Previous Service End Date"
+        },
+        "previousOfferId": {
+          "label": "Previous Offer ID"
+        },
+        "replacementAgrrementId": {
+          "label": "Replaced Agreement ID"
+        },
+        "reOfferExpiredDate": {
+          "label": "Offer Expiration Date",
+          "tooltip": "Date this Offer Expires",
+          "description": "Note: Offer expires at 23:59:59PM UTC on the date indicated."
+        },
+        "serviceEndDate": {
+          "label": "Service End Date",
+          "tooltip": "Service Expiration Date",
+          "description": "Final date the services in this offer can be used"
+        },
+        "previousOfferCurrency": {
+          "label": "Previous Private Offer Currency"
+        },
+        "offerCurrency": {
+          "title": "Offer Currency",
+          "label": "Currency",
+          "placeholder": "Choose Currency",
+          "tooltip": "Choose a transaction currency for this offer. You will receive payment in the selected currency.",
+          "aboTooltip": "Select currency negotiated with the buyer. You will receive payment in the selected currency.",
+          "descOne": "To enable a currency, you must set your bank disbursement preference for that currency in your Seller account settings.",
+          "descTwo": "The currency you choose will be used for all aspects of the offer. Buyers will receive the offer and pay for it using this currency, and you'll receive your payment in the same currency. After you create the offer, you cannot update the currency. To change the currency, you must create a new offer.",
+          "descThree": "If you want to receive payment using a UK bank account, you must complete the Know Your Customer process. Failure to do so will result in the inability to create offers."
+        },
+        "legalTermDocuments": {
+          "label": "Legal term documents",
+          "placeholder": "Choose File"
+        },
+        "offerPricing": {
+          "label": "Offer Pricing"
+        },
+        "offerProduct": {
+          "label": "Product"
+        },
+        "productDimension": {
+          "label": "Product Dimensions",
+          "description": "Choose from existing dimensions to include in the private offer or add custom dimensions. Any new custom dimensions added will be accessible in this product for future private offers once this offer is published.",
+          "ShortNote": "Customize the prices or units for : "
+        },
+        "quantityDimension": {
+          "label": "Quantity per contract dimension",
+          "price": "Pricing per contract dimension",
+          "description": "Specify the quantity for each selected dimension. To remove a dimension, deselect it from the table above."
+        },
+        "paymentSchedule": {
+          "label": "Buyer installment plan",
+          "description": "Enter the contract total, frequency, and first invoice date to generate an installment plan. Your invoices will be generated follow the specified frequency on the set invoice dates.",
+          "note": "The installment plan applies to the contract total. For products with usage-based pricing, any additional usage beyond the contract terms will be billed separately based on the unit price."
+        },
+        "paymentPrice": {
+          "placeholder": "Amount"
+        },
+        "totalPayment": {
+          "title": "Total payment due from buyer"
+        },
+        "reviewOffer": {
+          "title": "Review Offer"
+        },
+        "reviewOfferDetails": {
+          "offerInformation": "Offer Information",
+          "offerExpirationDate": "Offer Expiration Date",
+          "contractDuration": "Contract Duration",
+          "usageDuration": "Usage duration",
+          "servicesDate": "Service Dates",
+          "productPricing": "Product Pricing",
+          "offerCurrency": "Offer Currency",
+          "quantityPerContractDimension": "Quantity per contract dimension",
+          "buyerInstallmentPlan": "Buyer installment plan",
+          "buyerAccountId": "Buyer's AWS account ID",
+          "LegalDocuments": "Legal terms and offer documents"
+        },
+        "reviewIndividualFieldNames": {
+          "offerName": "Offer name",
+          "offerDescription": "Offer description",
+          "productId": "Product ID",
+          "Renewal": "Renewal",
+          "RenewalType": "Renewal Type",
+          "currency": "Currency",
+          "offerExpirationDate": "Offer expiration date",
+          "contractDetails": {
+            "desc": "Buyers are charged using the contract price for each dimension in this duration.",
+            "contractStartDate": "Contract Start date",
+            "contractEndDate": "Contract End Date",
+            "estimatedContractDuration": "Estimated contract duration"
+          },
+          "serviceEnddate": "Service End Date",
+          "fpsEnabled": "Flexible payment schedule",
+          "pricingModel": "Pricing model",
+          "installmentDetails": {
+            "contractTotal": "Contract total",
+            "numberOfInstallments": "Number of installments"
+          },
+          "buyerAwsAccount": "Buyer's AWS account ID",
+          "termAndConditionsDetails": {
+            "desc": "All files are combined into single PDF."
+          }
+        },
+        "authorizationEndDate": {
+          "label": "Authorization expiry is requried"
+        },
+        "totalContractValue": {
+          "label": "Contract total",
+          "description": "Contract total can include digits (0-9) and decimal points (.)."
+        },
+        "frequency": {
+          "label": "Frequency",
+          "description": "Contract total can include digits (0-9) and decimal points (.)."
+        },
+        "initalPayment": {
+          "label": "Initial payment",
+          "description": "Use this to set a different amount for the 1st payment. The remaining balance will be divided equally across subsequent payments."
+        },
+        "firstInvoiceDate": {
+          "label": "First invoice date"
+        },
+        "error": {
+          "totalContractValueMissMatch": "The total amount in the installment plan must match the total amount due.",
+          "generatePlan": "You must generate an installment plan."
+        }
+      }
+    },
+    "renderStepNames": {
+      "stepsName": [
+        "Basic Information",
+        "Buyer Information",
+        "Offer Term",
+        "Offer Pricing",
+        "Review Offer"
+      ],
+      "resellerStepsName": [
+        "Authorization Details",
+        "Reseller Details",
+        "Authorization Duration and Legal Terms",
+        "Authorization Pricing",
+        "Review and Create"
+      ]
+    }
+  },
+  "ampPrivateOffer": {
+    "createOffers": {
+      "label": "Cloud Provider",
+      "Aws_Label": "AWS Marketplace"
+    },
+    "offerType": {
+      "label": "Offer Type"
+    },
+    "basicInfo": {
+      "label": "Basic Information"
+    },
+    "ampCloudProvider": {
+      "label": "Cloud Provider"
+    },
+    "Name": {
+      "label": "Private Offer Name",
+      "placeholder": "Private offer name",
+      "tooltip": "The offer name is visible to buyers. We recommend including the buyer ID, company name, and a high-level description (such as upgrade, renewal). Avoid including any personally identifiable information (such as first/last name, phone number, address).",
+      "validationMessage": "Offer name can have up to 150 characters. Invalid characters are (<),(>),(\\).",
+      "validation": "Private Offer Name is Required",
+      "required": "Private Offer Name is Required",
+      "validationCharater": "Provide offer name with fewer than 150 characters.",
+      "validationInValid": "Offer name contains invalid characters (<), (>), (\\)."
+    },
+    "DealReferenceID": {
+      "label": "Private Offer Reference Id",
+      "tooltip": "This is autogenerated GUID. This will be unique for each private offer."
+    },
+    "Description": {
+      "label": "Private Offer Description",
+      "placeholder": "Description is for your reference only",
+      "tooltip": "The offer description isn't visible to buyers. Describe your offer in 2-3 sentences.",
+      "validationInvalid": "Provide offer description with fewer than 255 characters.",
+      "description": "Offer description can have up to 255 characters.",
+      "validationMessage": "Private Offer Description is Required",
+      "validation": "Private Offer Description is Required"
+    },
+    "Salesagent": {
+      "label": "Sales Agent Name",
+      "placeholder": "Sales agent name",
+      "Validation": "Sales Agent Name is Required"
+    },
+    "PreparedBy": {
+      "label": "Sales Agent Primary Contact",
+      "placeholder": "Sales agent primary contact (email)",
+      "validation": "Sales Agent Primary Contact is Required"
+    },
+    "isvNotificationDetails": {
+      "label": "ISV Notification Recipients"
+    },
+    "recipientsEmail": {
+      "label": "Recipients Email",
+      "placeholder": "Email",
+      "tooltip": "Add the email addresses of the ISV personnel who should be notified about activity on the private offer.",
+      "validation": "Only 5 emails can be added"
+    },
+    "customMetadataDetails": {
+      "label": "Tags",
+      "placeholder": "Name"
+    },
+    "tagsDetails": {
+      "label": "Custom Metadata",
+      "tooltip": "Custom Metadata helps in providing additional information on the private offer that is extended to the customer and this will show up in the Email Notification which the ISV receives. This consists of a Name and Value. For Example: You can have a Custom Metadata with the Name as Region and Value as NA."
+    },
+    "customMetadataDetailsValue": {
+      "placeholder": "Value"
+    },
+    "buyerInfo": {
+      "label": "Buyer Information"
+    },
+    "CustomerName": {
+      "label": "Customer Company Name",
+      "tooltip": "Provide the name of your customer.",
+      "placeholder": "Customer",
+      "validation": "Customer Company Name is Required"
+    },
+    "Email": {
+      "label": "Customer Email",
+      "placeholder": "Email",
+      "tooltip": "Email of the customer",
+      "validation": "Email is Required",
+      "validationInvalid": "Email is Invalid"
+    },
+    "addressDetails": {
+      "label": "Address Details"
+    },
+    "AddressLine1": {
+      "label": "Address",
+      "placeholder": "Address"
+    },
+    "AddressLine2": {
+      "label": "Address Line 2",
+      "placeholder": "Address Line 2"
+    },
+    "Country": {
+      "label": "Country",
+      "placeholder": "Country"
+    },
+    "State": {
+      "label": "State",
+      "placeholder": "State"
+    },
+    "Zip": {
+      "label": "Zip/Postal Code",
+      "placeholder": "zipcode"
+    },
+    "marketPlaceAccountDetail": {
+      "label": "Marketplace Account Detail"
+    },
+    "CustomerAccountId": {
+      "label": "Customer Billing Account ID",
+      "placeholder": "Enter Customer Billing Account ID",
+      "tooltip": "Provide the billing account ID of the customer.",
+      "validation": "Customer Billing Account ID is required"
+    },
+    "CustomerTenantID": {
+      "label": "Purchaser Azure AD Tenant ID",
+      "placeholder": "Purchaser Azure AD Tenant ID",
+      "tooltip": "Provide the Azure AD tenant ID of the customer.",
+      "validation": "Customer Azure AD Tenant ID is required"
+    },
+    "MarketplaceDescription": {
+      "label": "Description",
+      "description": "Offer description can have up to 255 characters.",
+      "placeholder": "Description for your reference. This will not appear on your private offer.",
+      "tooltip": "This description is visible to buyers in the marketplace. Describe your offer in 2-3 sentences.",
+      "validation": "Marketplace Description is Required"
+    },
+    "customerNotifyRecipients": {
+      "label": "Customer Notification Recipients"
+    },
+    "customerRecipientsEmails": {
+      "label": "Recipients Email",
+      "tooltip": "Add the email addresses of the customer personnel who should be notified about the private offer.",
+      "validation": "Only 5 emails can be added",
+      "placeholder": "Email"
+    },
+    "offerTerm": {
+      "label": "Offer Term"
+    },
+    "sellerAccount": {
+      "label": "Seller Account",
+      "placeholder": "Select Seller Account"
+    },
+    "sellerOfferType": {
+      "label": "Offer Type",
+      "placeholder": "Select Offer Type"
+    },
+    "selectProduct": {
+      "label": "Product",
+      "placeholder": "Select Product"
+    },
+    "sellerProductId": {
+      "label": "Product ID",
+      "placeholder": "Product ID"
+    },
+    "pricingModelTitle": {
+      "label": "Pricing Model"
+    },
+    "pricingModelDesc": {
+      "label": "Choose a pricing model for the offer."
+    },
+    "durationUnit": {
+      "label": "Duration Unit",
+      "placeholder": "Select Duration"
+    },
+    "duration": {
+      "label": "Duration",
+      "placeholder": "Enter Number"
+    },
+    "dimensionName": {
+      "label": "Dimension name",
+      "validation": "Dimension name is required"
+    },
+    "apiName": {
+      "label": "API name",
+      "validation": "API name is required"
+    },
+    "dimensionDescription": {
+      "label": "Dimension description",
+      "validation": "Dimension description is required"
+    },
+    "offerStartDate": {
+      "label": "Start date",
+      "description": "Date the services in this offer can start begin used"
+    },
+    "offerEndDate": {
+      "label": "End date",
+      "description": "Final date the services in this offer can be used"
+    },
+    "offerExpired": {
+      "label": "Offer Expiration Date",
+      "description": "The buyer must respond to your offer by the provided date before 23:59 (UTC), otherwise the offer will expire.",
+      "tooltip": "Date this offer expires"
+    },
+    "usageDuration": {
+      "label": "Usage Duration",
+      "description": "This offer switches back to public price after the specified number of days. The subscription end date is determined from the buyer subscription date plus the below duration.",
+      "tooltip": "After the contract duration ends, buyer can use metering price for the duration specified below."
+    },
+    "previousServiceEndDate": {
+      "label": "Previous Service End Date"
+    },
+    "previousOfferId": {
+      "label": "Previous Offer ID"
+    },
+    "replacementAgrrementId": {
+      "label": "Replaced Agreement ID"
+    },
+    "reOfferExpiredDate": {
+      "label": "Offer Expiration Date",
+      "tooltip": "Date this Offer Expires",
+      "description": "Note: Offer expires at 23:59:59PM UTC on the date indicated."
+    },
+    "serviceEndDate": {
+      "label": "Service End Date",
+      "tooltip": "Service Expiration Date",
+      "description": "Final date the services in this offer can be used"
+    },
+    "legalTermDocuments": {
+      "label": "Legal term documents",
+      "placeholder": "Choose File"
+    },
+    "offerPricing": {
+      "label": "Offer Pricing"
+    },
+    "offerProduct": {
+      "label": "Product"
+    },
+    "productDimension": {
+      "label": "Product Dimensions",
+      "description": "Choose from existing dimensions to include in the private offer or add custom dimensions. Any new custom dimensions added will be accessible in this product for future private offers once this offer is published.",
+      "ShortNote": "Customize the prices or units for : "
+    },
+    "quantityDimension": {
+      "label": "Quantity per contract dimension",
+      "price": "Pricing per contract dimension",
+      "description": "Specify the quantity for each selected dimension. To remove a dimension, deselect it from the table above."
+    },
+    "paymentSchedule": {
+      "label": "Payment Schedule",
+      "description": "All payment dates are in UTC."
+    },
+    "paymentPrice": {
+      "placeholder": "Amount"
+    },
+    "totalPayment": {
+      "title": "Total payment due from buyer"
+    },
+    "reviewOffer": {
+      "title": "Review Offer"
+    },
+    "reviewOfferDetails": {
+      "offerInformation": "Offer Information",
+      "offerExpirationDate": "Offer Expiration Date",
+      "contractDuration": "Contract Duration",
+      "servicesDate": "Service Dates",
+      "productPricing": "Product Pricing",
+      "quantityPerContractDimension": "Quantity per contract dimension",
+      "buyerInstallmentPlan": "Buyer installment plan",
+      "buyerAccountId": "Buyer's AWS account ID",
+      "LegalDocuments": "Legal terms and offer documents"
+    },
+    "reviewIndividualFieldNames": {
+      "offerName": "Offer name",
+      "offerDescription": "Offer description",
+      "productId": "Product ID",
+      "Renewal": "Renewal",
+      "RenewalType": "Renewal Type",
+      "offerExpirationDate": "Offer expiration date",
+      "contractDetails": {
+        "desc": "Buyers are charged using the contract price for each dimension in this duration.",
+        "contractStartDate": "Contract Start date",
+        "contractEndDate": "Contract End Date",
+        "estimatedContractDuration": "Estimated contract duration"
+      },
+      "serviceEnddate": "Service End Date",
+      "fpsEnabled": "Flexible payment schedule",
+      "pricingModel": "Pricing model",
+      "installmentDetails": {
+        "contractTotal": "Contract total (USD)",
+        "numberOfInstallments": "Number of installments"
+      },
+      "buyerAwsAccount": "Buyer's AWS account ID",
+      "termAndConditionsDetails": {
+        "desc": "All files are combined into single PDF."
+      }
+    }
+  },
+  "gcpPrivateOffer": {
+    "offerBasicDetails": {
+      "desc": "Description",
+      "primarySalesName": "Primary Sales Agent Name",
+      "primarContact": "Primary Sales Agent Email",
+      "offerId": "Offer ID",
+      "offerUrl": "Offer URL",
+      "offerType": "Offer Type"
+    },
+    "offerCustomerDetails": {
+      "customerCompanyName": "Customer Company Name",
+      "customerEmail": "Customer Email",
+      "address": "Address",
+      "country": "Country",
+      "state": "State",
+      "zip": "Zip/Postal Code",
+      "billingAccountId": "Customer Billing Account ID",
+      "notes": "Notes to your customer"
+    },
+    "offerCloudDetails": {
+      "product": "Product",
+      "plan": "Plan",
+      "paymentSchedule": "Payment Schedule",
+      "offerDuration": "Offer Duration",
+      "offerAcceptDeadline": "Offer Acceptance Deadline",
+      "offerStartType": "Offer Start Type",
+      "configure": "Configure Auto-Renew",
+      "metricDiscounts": "Metric Discounts",
+      "proration": "Proration",
+      "monthlyFlatFee": "Monthly Flat Fee",
+      "discountOnUsage": "Discount on usage",
+      "totalContract": "Total Contract Value",
+      "eula": "User License Agreement"
+    },
+    "renderSubscription": {
+      "offerName": "Offer Name",
+      "saasSubId": "SaaS Subscription Resource ID",
+      "saasSubname": "SaaS Subscription Name",
+      "customerAzureId": "Customer Azure Tenant ID",
+      "customerEmail": "Customer Email",
+      "customerName": "Customer Name",
+      "status": "Status",
+      "activationDate": "Activation Date",
+      "orderId": "Order ID",
+      "offerId": "Offer ID",
+      "createdDate": "Created Date",
+      "startDate": "Start Date",
+      "endDate": "End Date"
+    },
+    "renderPurchaseAttributesGcp": {
+      "chargCustomerId": "Chargebee Customer Id",
+      "chargeSubUrl": "Chargebee Subscription URL",
+      "chargeSubId": "Chargebee Subscription Id"
+    },
+    "renderViewDetailsOverlay": {
+      "companyName": "Company Name",
+      "transRefference": "Transaction Reference",
+      "expectedPayMont": "Expected Payment Month",
+      "transcAmount": "Transaction Amount",
+      "expectedPay": "Expected Pay",
+      "actualPay": "Actual Pay",
+      "currency": "Currency",
+      "storeFeeAmount": "Store Fee Amount",
+      "storeFeePercent": "Store Fee Percentage",
+      "actualPayDate": "Actual Pay Date",
+      "saasSubsId": "SaaS Subscription Resource ID",
+      "status": "Status"
+    }
+  }
+}

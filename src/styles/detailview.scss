@@ -1,0 +1,21 @@
+.info-field {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 5px;
+}
+.info-label {
+  font-weight: 600;
+}
+.info-value {
+  color: #444;
+}
+.tile{
+   @apply bg-white p-3 pb-0;
+}
+.display-field{
+    @apply grid gap-1;
+}
+.card-view {
+  @apply border-border border rounded-lg m-2 p-2 w-[98%];
+}
