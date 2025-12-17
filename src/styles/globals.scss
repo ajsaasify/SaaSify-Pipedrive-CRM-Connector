@@ -837,3 +837,7 @@ label {
   font-family: var(--pd-font);
   color: #6c737f;
 }
+
+.column-2{
+  @apply grid gap-x-3 md:grid-cols-2 grid-cols-1
+}

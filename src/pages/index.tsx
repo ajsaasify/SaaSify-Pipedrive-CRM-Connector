@@ -41,13 +41,31 @@ const CosellsPage = () => {
       console.error("Failed to open modal:", err);
     }
   };
+
+    const viewCosells2 = async (model:ModelType) => {
+    const params = pipeDriveParams(setParams);
+    const dealId = params?.["selectedIds"];
+    try {
+      // console.log("SDK instance:", sdk);
+      const sdk = await new AppExtensionsSDK().initialize();
+      await sdk.execute(Command.OPEN_MODAL, {
+        type: Modal.CUSTOM_MODAL,
+        action_id: "293cf82b-3d23-4068-a4b5-b5ae03c6ac6d",
+        data: { dealId: dealId || "",page:model },
+      });
+      setCurrentPage({ page: model });
+    } catch (err) {
+      console.error("Failed to open modal:", err);
+    }
+  };
   // useEffect(() => {
   //   getCosells().then((data) => {
   //     console.log("Cosells Data:", data);
   //   });
   // }, []);
-  return (
+  return (<>
     <div className="flex justify-center w-full">
+      Arul
       {/* <CosellModelPage type={ModelType.COSELL_LIST} /> */}
       <PDButton
         size={PDButtonSize.SMALL}
@@ -60,6 +78,21 @@ const CosellsPage = () => {
         label={FormButton.CREATE_COSELL}
       />
     </div>
+    <div className="flex justify-center w-full">
+      Cherath
+      {/* <CosellModelPage type={ModelType.COSELL_LIST} /> */}
+      <PDButton
+        size={PDButtonSize.SMALL}
+        onClick={() => viewCosells2(ModelType.COSELL_LIST)}
+        label="View Cosells"
+      />
+      <PDButton
+        size={PDButtonSize.SMALL}
+        onClick={() => viewCosells2(ModelType.COSELL_CLOUD_PROVIDER)}
+        label={FormButton.CREATE_COSELL}
+      />
+    </div>
+    </>
   );
 };
 
