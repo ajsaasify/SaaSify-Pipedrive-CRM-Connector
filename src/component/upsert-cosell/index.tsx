@@ -8,39 +8,33 @@ import {
   isPendingCosell,
   isPostalCodeRequired,
   minDateIput,
+  trimString,
   validatePureNumber,
 } from "@template/utils/globalHelper";
 import React from "react";
 import { CosellAction } from "@template/enum/action.enum";
-import { RC3CosellResponse } from "@template/types/cosellResponse";
 import { labelMapper } from "./helper";
 import { buildDataProperty } from "./builder";
 import {
   fetchListCosell,
   fetchSpecificCoSell,
 } from "../cosell-list/apiHandler";
-import { PipedriveContext } from "@template/types/pipedriveContext";
 import { ModalId } from "@template/enum/modal.enum";
 import { StatusState } from "@template/enum/status.enum";
 import {
   AlertNotification,
   getErrorAlert,
 } from "@template/common/messageAlert";
-import { fetchDropDowAllOptions } from "../upsert-cosell/apiHandler";
+import {
+  fetchDropDowAllOptions,
+  saveEditCosells,
+} from "../upsert-cosell/apiHandler";
 import AccordionComponent from "../ui-components/PipedriveAccordion";
 import { ToastService } from "@template/services/toast.service";
-import Input from "../ui-components/PipedriveInput";
-import InfoGrid from "../ui-components/pipdriveInfoGrid";
-import PDSelectField from "../ui-components/PipedriveDropdown";
 import { nationSecuritiesFields } from "@template/common/forms/nationalSecurities";
 import { actionCosellRequiredFields } from "@template/common/forms/cosellRequiredFields";
 import { fieldChecks } from "./validation";
 import { Tile } from "../ui-components/detailview-components";
-import { PDRadioGroup } from "../ui-components/PipedriveRadiobutton";
-import { MultiSelectField } from "../ui-components/PipedriveMultiselect";
-import TextAreaFieldBox from "../ui-components/PipedriveTextarea";
-import PDDatePicker from "../ui-components/PipedriveCalendar";
-import PDText from "../ui-components/pipedrive-text";
 import {
   ModelType,
   PDButtonSize,
@@ -49,21 +43,20 @@ import {
 } from "@template/enum/pipedrive.enum";
 import PDButton from "../ui-components/pipedriveButton";
 import AppExtensionsSDK, { Command } from "@pipedrive/app-extensions-sdk";
-import { useTranslation } from "react-i18next";
 import CustomerDetailsForm from "./CustomerDetailsForm";
 import ProjectOpportunitySection from "./ProjectOpportunitySection";
 import { MarketingSourceSection } from "./MarketingOpportunityForm";
 import AdditionalDetailsForm from "./AdditionalDetailsForm";
 import ContactDetailsForm from "./ContactDetailForm";
 import PartnerSalesContactForm from "./PartnerSalesContactForm";
+import { t } from "i18next";
 
 export const CreateCosell: React.FC<{
   actions?: any;
-  modalTitle?: string;
-  slug?: CosellAction;
-  onList?: RC3CosellResponse;
-}> = ({ actions, modalTitle, slug, onList }) => {
+  // onList?: RC3CosellResponse;
+}> = ({ actions }) => {
   const [sdk, setSdk] = useState<AppExtensionsSDK | null>(null);
+  const [slug, setSlug] = useState(CosellAction.ADD);
   const {
     data,
     optionValues,
@@ -78,6 +71,7 @@ export const CreateCosell: React.FC<{
     referenceData,
     setReferenceData,
   } = useCoSellContext();
+  let payload: any = {};
   const { LifeCycle } = data?.CoSellEntity || {};
   const initialError = useRef(false);
   const [errorStatus, setErrorStatus] = useState("");
@@ -90,22 +84,20 @@ export const CreateCosell: React.FC<{
   const readOnlyFields = getReadOnlyFields(reviewStatus as string);
   const [primaryNeedsAWS, setPrimaryNeedsAWS] = useState<string | undefined>();
   const [sellerCode, setSellerCode] = useState("");
-  const { t } = useTranslation();
+  const [loading, setLoading] = useState(false);
+  const { currentPage, setCurrentPage } = useCoSellContext();
   useEffect(() => {
     const shouldInitialize =
       (data && Object.keys(data).length > 0) ||
       (generateCosell && Object.keys(generateCosell).length > 0);
     let sellerCode = "";
-    if (onList?.SellerCode) {
-      sellerCode = onList?.SellerCode;
-    }
     if (data?.SellerCode) sellerCode = data?.SellerCode;
     if (shouldInitialize) {
       if (generateCosell?.SellerCode) sellerCode = generateCosell?.SellerCode;
       setSellerCode(sellerCode);
       assignValuesEditCosell();
     }
-  }, [data, generateCosell, onList]);
+  }, [data, generateCosell]);
   const triggerAlert = ({ type, title, message }: AlertNotification) => {
     (ToastService as any)?.[type]?.(title, message);
   };
@@ -113,43 +105,48 @@ export const CreateCosell: React.FC<{
     setIsDataFromList(true);
     const sdk = await initSdk(1000, 500);
     setSdk(sdk);
-    if (onList?.ReferenceID && onList?.SellerCode) {
-      await fetchSpecificCoSell(
-        onList.ReferenceID,
-        onList.SellerCode,
-        setData,
-        setIsDataFromList,
+    try {
+      setLoading(true);
+      console.log(currentPage);
+      if (currentPage?.params?.referenceId && currentPage?.params?.sellerCode) {
+        await fetchSpecificCoSell(
+          currentPage?.params?.referenceId,
+          currentPage?.params?.sellerCode,
+          setData,
+          setIsDataFromList,
+          triggerAlert,
+          opportunityList,
+          setOpportunityList,
+          setAmpCosell,
+          true
+        );
+      }
+      await fetchDropDowAllOptions(
+        setOptionValues,
+        initialError,
         triggerAlert,
-        opportunityList,
-        setOpportunityList,
-        setAmpCosell,
-        true
+        optionValues,
+        referenceData,
+        setReferenceData,
+        sellerCode || data?.SellerCode || currentPage?.params?.sellerCode || ""
       );
+    } finally {
+      setLoading(false);
+      setErrorStatus("");
+      setErrorValue({});
+      setIsDataFromList(false);
     }
-    await fetchDropDowAllOptions(
-      setOptionValues,
-      initialError,
-      triggerAlert,
-      optionValues,
-      referenceData,
-      setReferenceData,
-      (sellerCode || onList?.SellerCode) ?? ""
-    );
-    setErrorStatus("");
-    setErrorValue({});
-    setIsDataFromList(false);
   };
   useEffect(() => {
     init();
   }, []);
   function assignValuesEditCosell() {
     const dataProperty = buildDataProperty({
-      slug: slug as CosellAction,
+      slug: data.ReferenceID ? CosellAction.EDIT : CosellAction.ADD,
       data,
       generateCosell,
       dealName,
     });
-
     setFormValue(dataProperty);
 
     function closePanel() {
@@ -227,7 +224,7 @@ export const CreateCosell: React.FC<{
     return;
   }
   const validationMessage = (field: string) => {
-    if (!errorValue?.[field]) return (labelMapper as any)?.[field].validation;
+    if (!errorValue?.[field]) return (labelMapper as any)?.[field]?.validation;
     return (labelMapper as any)?.[field]?.validationMessage;
   };
   function readOnlyField(field: string): boolean {
@@ -398,139 +395,216 @@ export const CreateCosell: React.FC<{
     }
     return valid;
   };
+  function generateEditCosellPaylaod() {
+    payload = data;
+    if (validateFields()) {
+      payload = {
+        ...payload,
+        IsSubmitOpportunity: true,
+        OpportunityType: formValue.opportunityType,
+        CoSellEntity: {
+          ...payload.CoSellEntity,
+          Customer: {
+            ...payload.CoSellEntity?.Customer,
+            Account: {
+              ...payload.CoSellEntity?.Customer?.Account,
+              Address: {
+                ...payload.CoSellEntity?.Customer?.Account?.Address,
+                StreetAddress: trimString(formValue?.streetAddress),
+                City: trimString(formValue?.city),
+              },
+              Duns: trimString(formValue?.customerDuns),
+            },
+          },
+
+          Project: {
+            ...payload.CoSellEntity?.Project,
+            AdditionalComments: trimString(formValue?.additonalComments),
+            DeliveryModels: formValue?.deliveryModel,
+            RelatedOpportunityIdentifier: trimString(
+              formValue?.relatedOpportunityIndentifier
+            ),
+          },
+          OpportunityType: formValue?.opportunityType,
+        },
+      };
+
+      saveEditCosells(
+        slug,
+        payload,
+        triggerAlert,
+        setIsFetching,
+        actions,
+        data,
+        setData,
+        setOpportunityList,
+        opportunityList,
+        setErrorStatus
+      );
+    }
+  }
+  if (loading) {
+    return (
+      <div className="h-screen flex flex-col items-center justify-center p-5">
+        <h2>
+          {data?.ReferenceID
+            ? labelMapper.titles.editCosell
+            : labelMapper.titles.createCosell}
+        </h2>
+        <p>Loading...</p>
+      </div>
+    );
+  }
   return (
     <div className="w-full">
-      {/* customer details */}
-      <AccordionComponent
-        className="card-view"
-        defaultOpenIds={[labelMapper.accordian.customer]}
-        items={[
-          {
-            title: labelMapper.accordian.customer,
-            id: labelMapper.accordian.customer,
-            children: (
-              <Tile>
-                <CustomerDetailsForm
+      <Tile>
+        <div className="flex justify-between m-4">
+          <div className="flex items-center justify-center">
+            {data.ReferenceID && (
+              <PDButton
+                onClick={() =>
+                  setCurrentPage({ page: ModelType.COSELL_DETAIL })
+                }
+                type={PDButtonType.ACCORDION}
+                size={PDButtonSize.ICON_MEDIUM}
+                className="pi pi-arrow-left back-btn"
+              ></PDButton>
+            )}
+            <h5>
+              {data?.ReferenceID
+                ? `Opportunity Id: ${data?.CloudProviderIdentifier || "N/A"}`
+                : labelMapper.titles.createCosell}
+            </h5>
+          </div>
+        </div>
+        {/* customer details */}
+        <AccordionComponent
+          className="card-view"
+          defaultOpenIds={[labelMapper.accordian.customer]}
+          items={[
+            {
+              title: labelMapper.accordian.customer,
+              id: labelMapper.accordian.customer,
+              children: (
+                <Tile>
+                  <CustomerDetailsForm
+                    formValue={formValue}
+                    errorValue={errorValue}
+                    optionValues={optionValues}
+                    readOnlyField={readOnlyField}
+                    onChangeValue={onChangeValue}
+                    setFormValue={setFormValue}
+                    setErrorValue={setErrorValue}
+                    validatePureNumber={validatePureNumber}
+                    validationMessage={validationMessage}
+                    displayErrorMessage={displayErrorMessage}
+                    isPostalCodeRequired={isPostalCodeRequired}
+                    postalCodeRegex={postalCodeRegex}
+                  />
+                </Tile>
+              ),
+            },
+            {
+              title: labelMapper.accordian.project,
+              id: labelMapper.accordian.project,
+              children: (
+                <ProjectOpportunitySection
+                  optionValues={optionValues}
                   formValue={formValue}
                   errorValue={errorValue}
-                  labelMapper={labelMapper}
+                  primaryNeedsAWS={primaryNeedsAWS}
+                  setPrimaryNeedsAWS={setPrimaryNeedsAWS}
+                  onChangeValue={onChangeValue}
+                  readOnlyField={readOnlyField}
+                  displayErrorMessage={displayErrorMessage}
+                  validationMessage={validationMessage}
+                  validatePureNumber={validatePureNumber}
+                  setErrorValue={setErrorValue}
+                  LifeCycle={LifeCycle}
+                  StatusState={StatusState}
+                  isPendingCosell={isPendingCosell}
+                  slug={slug}
+                  reviewStatus={reviewStatus}
+                  minDateIput={minDateIput}
+                />
+              ),
+            },
+            {
+              title: labelMapper.accordian.marketing,
+              id: labelMapper.accordian.marketing,
+              children: (
+                <MarketingSourceSection
+                  formValue={formValue}
                   optionValues={optionValues}
+                  LifeCycle={LifeCycle}
                   readOnlyField={readOnlyField}
                   onChangeValue={onChangeValue}
-                  setFormValue={setFormValue}
-                  setErrorValue={setErrorValue}
-                  validatePureNumber={validatePureNumber}
-                  validationMessage={validationMessage}
-                  displayErrorMessage={displayErrorMessage}
-                  isPostalCodeRequired={isPostalCodeRequired}
-                  postalCodeRegex={postalCodeRegex}
                 />
-              </Tile>
-            ),
-          },
-          {
-            title: labelMapper.accordian.project,
-            id: labelMapper.accordian.project,
-            children: (
-              <ProjectOpportunitySection
-                labelMapper={labelMapper}
-                optionValues={optionValues}
-                formValue={formValue}
-                errorValue={errorValue}
-                primaryNeedsAWS={primaryNeedsAWS}
-                setPrimaryNeedsAWS={setPrimaryNeedsAWS}
-                onChangeValue={onChangeValue}
-                readOnlyField={readOnlyField}
-                displayErrorMessage={displayErrorMessage}
-                validationMessage={validationMessage}
-                validatePureNumber={validatePureNumber}
-                setErrorValue={setErrorValue}
-                LifeCycle={LifeCycle}
-                StatusState={StatusState}
-                isPendingCosell={isPendingCosell}
-                slug={slug}
-                reviewStatus={reviewStatus}
-                minDateIput={minDateIput}
-              />
-            ),
-          },
-          {
-            title: labelMapper.accordian.marketing,
-            id: labelMapper.accordian.marketing,
-            children: (
-              <MarketingSourceSection
-                labelMapper={labelMapper}
-                formValue={formValue}
-                optionValues={optionValues}
-                LifeCycle={LifeCycle}
-                readOnlyField={readOnlyField}
-                onChangeValue={onChangeValue}
-              />
-            ),
-          },
-          {
-            title: labelMapper.accordian.additional,
-            id: labelMapper.accordian.additional,
-            children: (
-              <AdditionalDetailsForm
-                displayErrorMessage={displayErrorMessage}
-                errorValue={errorValue}
-                formValue={formValue}
-                labelMapper={labelMapper}
-                onChangeValue={onChangeValue}
-                optionValues={optionValues}
-                readOnlyField={readOnlyField}
-                validationMessage={validationMessage}
-              />
-            ),
-          },
-          {
-            title: labelMapper.accordian.contact,
-            id: labelMapper.accordian.contact,
-            children: (
-              <ContactDetailsForm
-                displayErrorMessage={displayErrorMessage}
-                errorValue={errorValue}
-                formValue={formValue}
-                labelMapper={labelMapper}
-                onChangeValue={onChangeValue}
-                readOnlyField={readOnlyField}
-              />
-            ),
-          },
-          {
-            title: labelMapper.accordian.partnerSalesContact,
-            id: labelMapper.accordian.partnerSalesContact,
-            children: (
-              <PartnerSalesContactForm
-                displayErrorMessage={displayErrorMessage}
-                errorValue={errorValue}
-                formValue={formValue}
-                labelMapper={labelMapper}
-                onChangeValue={onChangeValue}
-                readOnlyField={readOnlyField}
-              />
-            ),
-          },
-        ]}
-      ></AccordionComponent>
-      <Tile>
-        <div className="flex justify-end gap-2">
-          <PDButton
-            size={PDButtonSize.SMALL}
-            type={PDButtonType.SECONDARY}
-            label={t("buttonLabel.cancel")}
-            onClick={() => {}}
-          ></PDButton>
-          <PDButton
-            size={PDButtonSize.SMALL}
-            type={PDButtonType.PRIMARY}
-            label={t("buttonLabel.submit")}
-            onClick={() => {
-              // setCurrentPage({ page: ModelType.COSELL_CREATE });
-            }}
-          ></PDButton>
-        </div>
+              ),
+            },
+            {
+              title: labelMapper.accordian.additional,
+              id: labelMapper.accordian.additional,
+              children: (
+                <AdditionalDetailsForm
+                  displayErrorMessage={displayErrorMessage}
+                  errorValue={errorValue}
+                  formValue={formValue}
+                  onChangeValue={onChangeValue}
+                  optionValues={optionValues}
+                  readOnlyField={readOnlyField}
+                  validationMessage={validationMessage}
+                />
+              ),
+            },
+            {
+              title: labelMapper.accordian.contact,
+              id: labelMapper.accordian.contact,
+              children: (
+                <ContactDetailsForm
+                  displayErrorMessage={displayErrorMessage}
+                  errorValue={errorValue}
+                  formValue={formValue}
+                  onChangeValue={onChangeValue}
+                  readOnlyField={readOnlyField}
+                />
+              ),
+            },
+            {
+              title: labelMapper.accordian.partnerSalesContact,
+              id: labelMapper.accordian.partnerSalesContact,
+              children: (
+                <PartnerSalesContactForm
+                  displayErrorMessage={displayErrorMessage}
+                  errorValue={errorValue}
+                  formValue={formValue}
+                  onChangeValue={onChangeValue}
+                  readOnlyField={readOnlyField}
+                />
+              ),
+            },
+          ]}
+        ></AccordionComponent>
+        <Tile>
+          <div className="flex justify-end gap-2 mb-4">
+            <PDButton
+              size={PDButtonSize.SMALL}
+              type={PDButtonType.SECONDARY}
+              label={t("buttonLabel.cancel")}
+              onClick={() => {
+                sdk?.execute(Command.CLOSE_MODAL);
+              }}
+            ></PDButton>
+            <PDButton
+              size={PDButtonSize.SMALL}
+              type={PDButtonType.PRIMARY}
+              label={t("buttonLabel.submit")}
+              onClick={() => {
+                generateEditCosellPaylaod();
+              }}
+            ></PDButton>
+          </div>
+        </Tile>
       </Tile>
     </div>
   );

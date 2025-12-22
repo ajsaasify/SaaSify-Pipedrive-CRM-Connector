@@ -5,7 +5,7 @@ import { ToastService } from "@template/services/toast.service";
 import { optionField } from "@template/types/dropdown.options";
 import { useEffect, useState } from "react";
 import { labelMapper } from "./helper";
-import { fetchCreateProps } from "./apiHandler";
+import { createCosell, fetchCreateProps } from "./apiHandler";
 import { Tile } from "../ui-components/detailview-components";
 import initSdk from "@template/helpers/modelInit";
 import { PDRadioGroup } from "../ui-components/PipedriveRadiobutton";
@@ -21,6 +21,10 @@ import { displayErrorMessage } from "@template/utils/globalHelper";
 import { DropdownOptions } from "@template/enum/options.enum";
 import { usePipedrive } from "@template/context/PipedriveContext";
 import AppExtensionsSDK, { Command } from "@pipedrive/app-extensions-sdk";
+import { FormButton } from "@template/enum/button.enum";
+import pipeDriveParams, {
+  pipedriveParams,
+} from "@template/utils/pipedrive-params";
 
 const CloudProvider = () => {
   const [isFetching, setIsFetching] = useState(false);
@@ -40,6 +44,7 @@ const CloudProvider = () => {
   const [formValue, setFormValue] = useState<Record<string, any>>({});
   const [errorState, setErrorState] = useState("");
   const [errorForm, setErrorForm] = useState<Record<string, boolean>>({});
+  const params = pipeDriveParams();
   const triggerAlert = ({ type, message, title }: AlertNotification) => {
     (ToastService as any)?.[type]?.(title, message);
   };
@@ -100,8 +105,53 @@ const CloudProvider = () => {
     setSellerCode(sellerAccountOpt);
   }, [formValue?.provider, optionValues]);
 
-  const getOverlayContent = () => {};
-
+  const handleCreateCosell = () => {
+    if (!optionValues?.cosellProvider?.length) return;
+    if (!formValue[labelMapper.sellerCode.name]) {
+      setErrorForm({ [labelMapper.sellerCode.name]: true });
+      return;
+    }
+    if (
+      formValue[labelMapper.provider.name]?.includes(requestPayload.cloud.aws)
+    ) {
+      // createCosell(
+      //   // params?.selectedIds || "",
+      //   "52024428967",
+      //   setIsFetching,
+      //   setIsError,
+      //   triggerAlert,
+      //   setGenerateCosell,
+      //   setData,
+      //   mappingCrmList,
+      //   opportunityList.length,
+      //   formValue,
+      //   setErrorState
+      // );
+      setCurrentPage({
+        page: ModelType.COSELL_CREATE,
+        params: { sellerCode: formValue[labelMapper.sellerCode.name] },
+      });
+    } else {
+      setIsFetching(true);
+      setTimeout(() => {
+        setIsFetching(false);
+      }, 50);
+    }
+  };
+  useEffect(() => {
+    console.log(!isError, isFetching);
+    // if (!isError && isFetching) {
+    //   setCurrentPage({ page: ModelType.COSELL_CREATE });
+    // }
+  }, [isFetching, isError]);
+  if (loader) {
+    return (
+      <div className="h-screen flex flex-col items-center justify-center p-5">
+        <h2>{labelMapper.cloudProvider}</h2>
+        <p>Loading...</p>
+      </div>
+    );
+  }
   return (
     <div className="flex w-full items-center p-5">
       <Tile className="w-full items-between flex gap-2 flex-col">
@@ -149,9 +199,17 @@ const CloudProvider = () => {
           <PDButton
             size={PDButtonSize.SMALL}
             type={PDButtonType.PRIMARY}
-            label={t("buttonLabel.createCosell")}
+            loading={isFetching}
+            disabled={loader || !sellerCode?.length}
+            label={
+              formValue[labelMapper.provider.name]?.includes(
+                requestPayload.cloud.gcp
+              )
+                ? FormButton.CREATE_OPPORTUNITY
+                : FormButton.CREATE_COSELL
+            }
             onClick={() => {
-              setCurrentPage({ page: ModelType.COSELL_CREATE });
+              handleCreateCosell();
             }}
           ></PDButton>
         </div>

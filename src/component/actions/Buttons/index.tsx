@@ -42,10 +42,15 @@ import { pullCosell, pushCrm } from "./apiHandler";
 // import LinkcrmModal from "../LinkCrm";
 import { requestPayload } from "@template/common/listCosell";
 import PDButton from "@template/component/ui-components/pipedriveButton";
-import { PDButtonSize, PDButtonType } from "@template/enum/pipedrive.enum";
+import {
+  ModelType,
+  PDButtonSize,
+  PDButtonType,
+} from "@template/enum/pipedrive.enum";
 import { useTranslation } from "react-i18next";
 import { AlertType } from "@template/enum/alert.enum";
 import { AlertNotification } from "@template/common/messageAlert";
+import { useHtmlContext } from "next/dist/shared/lib/html-context.shared-runtime";
 // import RejectCosell from "../RejectCosell";
 // import { acceptCosell } from "../AcceptCosell/apiHandler";
 // import { displayOid } from "../../CloudCoSellManager/helper";
@@ -89,7 +94,7 @@ const ActionButtons: React.FC<Props> = ({ actions }) => {
   const status = data?.CloudProviderStatus ?? ReviewStatus;
   const isPendingFromAoInBound = isPending(data);
   const { t } = useTranslation();
-
+  const { setCurrentPage } = useCoSellContext();
   const statusRequired = !!status;
 
   const showButtons = useMemo(
@@ -167,6 +172,11 @@ const ActionButtons: React.FC<Props> = ({ actions }) => {
         label={t("buttonLabel.edit")}
         type={PDButtonType.SECONDARY}
         size={PDButtonSize.TINY}
+        onClick={() => {
+          setCurrentPage({
+            page: ModelType.COSELL_CREATE,
+          });
+        }}
       />
       <PDButton
         className="pi pi-refresh"

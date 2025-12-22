@@ -20,28 +20,23 @@ import { pullCosell } from "@template/component/actions/Buttons/apiHandler";
 import { RC3CosellResponse } from "@template/types/cosellResponse";
 import { OptionTypes } from "@template/types/dropdown.options";
 import { EntityService } from "@template/services/options.service";
-import {
-  DropdownOptions,
-  FetchOptions,
-} from "@template/enum/options.enum";
+import { DropdownOptions, FetchOptions } from "@template/enum/options.enum";
 import { referenceDataProps } from "@template/common/constants/referenceData";
 import { ReferenceDataProps } from "@template/types/reference";
 import { fetchListCosell, handleErrors } from "../cosell-list/apiHandler";
 
 const saasifyService = new SaasifyService();
 const entityService = new EntityService();
-
 export async function saveEditCosells(
-  slug: string,
-  payload: any,
-  triggerAlert: (alert: AlertNotification) => void,
-  setIsFetching: React.Dispatch<React.SetStateAction<boolean>>,
-  actions: any,
-  data: RC3CosellResponse,
-  setData: React.Dispatch<React.SetStateAction<RC3CosellResponse>>,
-  setOpportunityList: React.Dispatch<React.SetStateAction<RC3CosellResponse[]>>,
-  opportunityList: RC3CosellResponse[],
-  context: PipedriveContext,
+  slug: string, //
+  payload: any, //
+  triggerAlert: (alert: AlertNotification) => void, //
+  setIsFetching: React.Dispatch<React.SetStateAction<boolean>>, //
+  actions: any, //
+  data: RC3CosellResponse, //
+  setData: React.Dispatch<React.SetStateAction<RC3CosellResponse>>, //
+  setOpportunityList: React.Dispatch<React.SetStateAction<RC3CosellResponse[]>>, //
+  opportunityList: RC3CosellResponse[], //
   setErrorStatus: React.Dispatch<React.SetStateAction<string>>
 ) {
   setErrorStatus("");
@@ -67,7 +62,6 @@ export async function saveEditCosells(
     }
 
     if (responseData?.Status === ResponseStatus.SUCCESS) {
-     
       if (slug != CosellAction.ADD) {
         await pullCosell(
           data,
@@ -79,9 +73,9 @@ export async function saveEditCosells(
           false
         );
       } else {
-        await fetchListCosell(context, setData, setOpportunityList);
+        await fetchListCosell(setData, setOpportunityList);
       }
-       triggerAlert(
+      triggerAlert(
         getSuccessAlert(
           slug == CosellAction.EDIT
             ? generateMessage.editCosell
@@ -95,7 +89,7 @@ export async function saveEditCosells(
     if (error.message.includes(ResponseStatus.GATEWAY_ERROR)) {
       triggerAlert(getInfoAlert(generateMessage?.gatewayMessage));
       slug == CosellAction.ADD &&
-        (await fetchListCosell(context, setData, setOpportunityList));
+        (await fetchListCosell(setData, setOpportunityList));
       actions.closeOverlay(ModalId.ACTION_COSELL);
     } else {
       setErrorStatus(error.message);
@@ -149,7 +143,7 @@ export async function fetchDropDowAllOptions(
       triggerAlert,
       referencedata
     );
-  } catch (error:any) {
+  } catch (error: any) {
     triggerAlert(getErrorAlert(error?.message));
   }
 }
@@ -170,7 +164,7 @@ export async function fetchSolutions(
         throw new Error(getResponseError(response?.value));
       }
     }
-  } catch (error:any) {
+  } catch (error: any) {
     triggerAlert(getErrorAlert(error?.message));
   }
 }
@@ -204,7 +198,7 @@ export async function fetchReference(
       });
       setReferenceData(referenceProps);
     }
-  } catch (error:any) {
+  } catch (error: any) {
     triggerAlert(getErrorAlert(error?.message));
   }
 }

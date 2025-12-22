@@ -136,7 +136,7 @@ export const fetchCreateProps = async (
 };
 
 export const createCosell = async (
-  context: PipedriveContext,
+  dealId: string,
   setIsFetching: React.Dispatch<React.SetStateAction<boolean>>,
   setIsError: React.Dispatch<React.SetStateAction<any>>,
   triggerAlert: (alert: AlertNotification) => void,
@@ -161,10 +161,9 @@ export const createCosell = async (
       formValue.provider,
       formValue[labelMapper.sellerCode.name]
     );
-
     const responseData = await saasifyService.createCosellStep1(
       formValue[labelMapper.sellerCode.name],
-      payload
+      JSON.stringify(payload)
     );
     if (responseData?.Status === ResponseStatus.ERROR) {
       throw new Error(getResponseError(responseData?.ErrorDetail));
@@ -173,7 +172,7 @@ export const createCosell = async (
       const referenceId = responseData.Data.ReferenceID;
       await linkDeal(
         referenceId,
-        context,
+        dealId,
         setIsError,
         setIsFetching,
         triggerAlert,
@@ -194,7 +193,7 @@ export const createCosell = async (
 
 const linkDeal = async (
   referenceId: string,
-  context: PipedriveContext,
+  dealId: string,
   setIsError: React.Dispatch<React.SetStateAction<any>>,
   setIsFetching: React.Dispatch<React.SetStateAction<boolean>>,
   triggerAlert: (alert: AlertNotification) => void,
@@ -204,19 +203,26 @@ const linkDeal = async (
   setErrorState: React.Dispatch<React.SetStateAction<string>>,
   sellerCode: string
 ) => {
-  const dealId = context.crm.objectId.toString();
+  /**
+   * todo
+   * fix the payload
+   */
   const payload = {
-    MappingId: mappingCrmList?.Id,
+    // MappingId: mappingCrmList?.Id,
+    MappingId: 98,
     ReferenceId: !isExisting ? dealId : `${dealId}-${isExisting}`,
-    DealReferenceID: referenceId,
+    // DealReferenceID: referenceId,
+    DealReferenceID:"aebe751d-9199-4c98-af47-530616413ede",
     CRMEntity: requestPayload.crmEntity,
     IsSubmitOpportunity: requestPayload.isSubmitOpportunity,
     IsDuplicateOpportunity: requestPayload.isDuplicateOpportunity,
   };
 
   try {
-    const responseData = await saasifyService.importDeal(payload);
-
+    const responseData = await saasifyService.importDeal(
+      JSON.stringify(payload)
+    );
+    console.log("response data", responseData);
     if (responseData?.Status === ResponseStatus.ERROR) {
       throw new Error(getResponseError(responseData?.ErrorDetail));
     }

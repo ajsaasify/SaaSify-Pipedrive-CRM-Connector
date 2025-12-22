@@ -1,312 +1,455 @@
-export const labelMapper = {
-  accordian: {
-    customer: "Customer Details",
-    project: "Project Details",
-    marketing: "Opportunity Marketing Details",
-    additional: "Additional Details - optional",
-    contact: "Customer Contact Details",
-    partnerSalesContact: "Partner Sales Contact Details",
-  },
-  customerDuns: {
-    label: "Customer DUNS",
-    name: "customerDuns",
-    discription: "Customer data universal number system.",
-    validation: "Customer Duns is 9 digits. For example: 123456789",
-    validationMessage: "Customer DUNS is invalid.",
-    toopTip:
-      "Customer DUNS format : 123456789 (Mention like For example: 123456789)",
-  },
-  customerCompanyName: {
-    label: "Customer Company Name",
-    name: "customerCompanyName",
-    validationMessage: "Customer Company Name is required",
-  },
-  customerWebsite: {
-    label: "Customer Website",
-    name: "customerWebsite",
-    placeHolder: "www.index.com",
-    validationMessage: "Customer Website is required",
-  },
-  industryVertical: {
-    label: "Industry Vertical",
-    name: "industryVertical",
-    value: "Other",
-    validationMessage: "Industry Vertical is required",
-  },
-  nationSecurities: {
-    label: "Classified National Security Information",
-    name: "nationSecurities",
-    value: "Government",
-    country: "United States",
-    defaultValue: { yes: "Yes", no: "No" },
-    discription: { yes: "", no: "" },
-  },
-  industryOther: {
-    label: "Industry Other",
-    name: "industryOther",
-    validationMessage: "Industry Other is required",
-  },
-  streetAddress: {
-    label: "Address",
-    name: "streetAddress",
-    validationMessage: "Street Address is required",
-  },
-  state: {
-    label: "State/Province",
-    name: "state",
-    validationMessage: "State/Province is required",
-    value: "United States",
-  },
-  country: {
-    label: "Country",
-    name: "country",
-    validationMessage: "Country is required",
-  },
-  city: {
-    label: "City",
-    name: "city",
-    validationMessage: "City is required",
-  },
-  postalCode: {
-    label: "Postal Code",
-    name: "postalCode",
-    validation: "Postal Code is required",
-    validationMessage: "Postal Code is required",
-  },
-  awsCosell: {
-    listItemLabel: "Primary need from AWS *",
-    discription: {
-      yes: "Share the opportunity with AWS to receive deal assistance and support.",
-      no: "Share this opportunity with AWS for visibility only, you will not receive deal assistance and support.",
-      select: "Select all that apply.",
+import { TFunction } from "i18next";
+import { t } from "i18next";
+const labels = (t: TFunction) => {
+  return {
+    titles: {
+      cosellDetail: t("modalTitle.viewCosell"),
+      editCosell: t("modalTitle.editCosell"),
+      createCosell: t("modalTitle.addCosell"),
     },
-    label: "Specific needs from AWS for Co-sell",
-    value: { yes: "None", no: "Do Not Need Support from AWS Sales Rep" },
-    name: "awsCosell",
-    placeholder: "AWS for Co-sell",
-    validationMessage: "Specific needs from AWS for Co-sell is required",
-  },
-  opportunityType: {
-    listItemLabel: "Opportunity Type *",
-    name: "opportunityType",
-    value: {
-      expansion: "Expansion",
-      netNewBusiness: "Net New Business",
-      flatRenewal: "Flat Renewal",
+    accordian: {
+      customer: t("awsCosell.inputLabelMapper.accordian.customer"),
+      project: t("awsCosell.inputLabelMapper.accordian.project"),
+      marketing: t("awsCosell.inputLabelMapper.accordian.marketing"),
+      additional: t("awsCosell.inputLabelMapper.accordian.additional"),
+      contact: t("awsCosell.inputLabelMapper.accordian.contact"),
+      partnerSalesContact: t(
+        "awsCosell.inputLabelMapper.accordian.partnerSalesContact"
+      ),
     },
-    discription: {
-      expansion:
-        "This opportunity is based on a new contract or agreement with this new customer/ logo for your company.",
-      netNewBusiness:
-        "This opportunity is based on an existing contact with this end customer which may include new line of business, partner product, or additional customer instances.",
-      flatRenewal:
-        "This opportunity is based on an esisting contract with this end customer where no expansion will take place.",
+    customerDuns: {
+      label: t("awsCosell.inputLabelMapper.customerDuns.label"),
+      name: "customerDuns",
+      discription: t("awsCosell.inputLabelMapper.customerDuns.description"),
+      validation: t("awsCosell.inputLabelMapper.customerDuns.validation"),
+      validationMessage: t(
+        "awsCosell.inputLabelMapper.customerDuns.validationMessage"
+      ),
+      toopTip: t("awsCosell.inputLabelMapper.customerDuns.toopTip"),
+      placeHolder: t("awsCosell.inputLabelMapper.customerDuns.placeHolder"),
     },
-  },
-  partnerPrimaryNeedAction: {
-    label: "Primary need from AWS *",
-    discription: {
-      awsSupport:
-        "Share the opportunity with AWS to receive deal assistance and support.",
-      awsNotSupport:
-        "Share this opportunity with AWS for visibility only, you will not receive deal assistance and support.",
+    customerCompanyName: {
+      label: t("awsCosell.inputLabelMapper.customerCompanyName.label"),
+      name: "customerCompanyName",
+      validationMessage: t(
+        "awsCosell.inputLabelMapper.customerCompanyName.validationMessage"
+      ),
+      validation: t(
+        "awsCosell.inputLabelMapper.customerCompanyName.validation"
+      ),
+      placeHolder: t(
+        "awsCosell.inputLabelMapper.customerCompanyName.placeHolder"
+      ),
     },
-    value: {
-      awsNotSupport: "Do Not Need Support from AWS Sales Rep",
-      awsSupport: "None",
+    customerWebsite: {
+      label: t("awsCosell.inputLabelMapper.customerWebsite.label"),
+      name: "customerWebsite",
+      placeHolder: t("awsCosell.inputLabelMapper.customerWebsite.placeHolder"),
+      validationMessage: t(
+        "awsCosell.inputLabelMapper.customerWebsite.validationMessage"
+      ),
     },
-  },
-  relatedOpportunityIndentifier: {
-    label: "Parent Opportunity ID",
-    name: "relatedOpportunityIndentifier",
-    description:
-      "This original opportunity that this opportunity is renewing from.",
-    validationMessage: "Parent Opportunity ID is required",
-  },
-  partnerProjectTitle: {
-    label: "Partner Project Title",
-    name: "partnerProjectTitle",
-    validationMessage: "Partner Project Title is required",
-  },
-  salesActivities: {
-    label: "Sales Activities",
-    name: "salesActivities",
-    validationMessage: "Sales Activities is required",
-    discription:
-      "Choose sales activities that have happened with the end-customer.",
-  },
-  customerBusinessProblem: {
-    label: "Customer Business Problem",
-    name: "customerBusinessProblem",
-    discription:
-      "Provide a clear description of the customer's business problem/pain point you are trying to address.",
-    validation:
-      "Business problem must have at least 20 characters up to a recommended maximum of 2000 characters.",
-    validationMessage: "Customer Business Problem is required",
-  },
-  solutionsOffered: {
-    description:
-      "Choose the partner solutions that you're offering to this customer. If other, describe your solution.",
-    label: "Solutions Offered",
-    name: "solutionsOffered",
-    validation: "Solutions Offered selected upto 10",
-    validationMessage: "Solutions Offered is required",
-  },
-  awsProducts: {
-    label: "AWS Products",
-    name: "awsProducts",
-    description:
-      "Choose one or more AWS products that will be utilized to soleve the customer's business problem. Adding products enables AWS to connect you with the right support on this opportunity.",
-    validation: "AWS products selected upto 20",
-    validationMessage: "AWS products is required",
-  },
-  nextStep: {
-    label: "Next Step",
-    name: "nextStep",
-    description: "Enter the next steps for this opportunity.",
-    validation: "Next steps can have up to 255 characters",
-    validationMessage: "Next steps is required",
-    maxLength: 255,
-  },
-  useCase: {
-    label: "Use Case",
-    name: "useCase",
-    validationMessage: "Use Case is required",
-  },
-  deliveryModel: {
-    label: "Delivery Model",
-    description:
-      "Indicate one or more applicable deployment or consumption model for your solution or service.",
-    validationMessage: "Delivery Model is required",
-    name: "deliveryModel",
-  },
-  estimatedAWSRecurringRevenue: {
-    name: "estimatedAWSRecurringRevenue",
-    label: "Estimated AWS Monthly Recurring Revenue",
-    validationMessage: "Estimated AWS Monthly Recurring Revenue is required",
-    validation: "Estimated AWS Monthly Recurring Revenue is invalid",
-    valid: "Estimated AWS Monthly Recurring Revenue is required",
-  },
-  targetCloseDate: {
-    name: "targetCloseDate",
-    label: "Target Close Date",
-    validationMessage: "Target Close Date is required",
-    validation: "Target Close Date is required",
-    invalidMessage: "Target Close Date should be a future date",
-  },
-  apnProgram: {
-    placeholder: "APN Program",
-    label: "APN Program - optional",
-    name: "apnProgram",
-  },
-  marketingSource: {
-    discription: "Is opportunity from marketing activity ? *",
-    name: "marketingSource",
-    value: { yes: "Marketing Activity", no: "None" },
-  },
-  marketingCampaign: {
-    label: "Marketing Campaign",
-    name: "marketingCampaign",
-  },
-  marketingUseCase: {
-    label: "Marketing Activities Use Case",
-    name: "marketingUseCase",
-  },
-  marketingActivityChannel: {
-    label: "Marketing Activity Channel",
-    name: "marketingActivityChannel",
-  },
-  isMarketingfunds: {
-    label: "Was marketing development funds used ? *",
-    name: "isMarketingfunds",
-    value: { yes: "Yes", no: "No" },
-  },
-  crmUniqueIdentifier: {
-    label: "Partner CRM Unique Identifier",
-    name: "crmUniqueIdentifier",
-    validationMessage: "For example: 1234567",
-  },
-  competitiveTracking: {
-    name: "competitiveTracking",
-    value: "*Other",
-    label: "Competitive Tracking",
-  },
-  otherCompetitors: {
-    label: "Other Competitors",
-    name: "otherCompetitors",
-    value: "*Other",
-    validationMessage: "Other Competitors is required",
-  },
-  awsAccountId: {
-    label: "AWS Account ID (if available)",
-    name: "awsAccountId",
-    description: "AWS accountID 12 digits.",
-    validationMessage: "For example: 123456456147",
-    validationErrorMessage: "Account Id must be 12 numerical digits",
-  },
-  additonalComments: {
-    label: "Addtional Comments",
-    name: "additonalComments",
-    description:
-      "Enter project description, opportunity details, customer pain points, customwe needs, etc.",
-    validation: "Additional Comments can have up to 255 characters",
-    validationMessage: "Additional Comments is required",
-  },
-  contactFirstName: {
-    label: "Customer First Name",
-    name: "contactFirstName",
-  },
-  contactLastName: {
-    label: "Customer Last Name",
-    name: "contactLastName",
-  },
-  contactEmail: {
-    label: "Customer E-mail",
-    name: "contactEmail",
-    value: "Contact E-mail is not valid",
-  },
-  contactPhone: {
-    label: "Customer Phone",
-    name: "contactPhone",
-  },
-  contactTitle: {
-    label: "Customer Title",
-    name: "contactTitle",
-  },
-  primaryContactFirstName: {
-    label: "Primary Contact First Name",
-    name: "primaryContactFirstName",
-  },
-  primaryContactLastName: {
-    label: "Primary Contact Last Name",
-    name: "primaryContactLastName",
-  },
-  primaryContactEmail: {
-    label: "Primary Contact E-mail",
-    name: "primaryContactEmail",
-    value: "Contact E-mail is not valid",
-  },
-  primaryContactPhone: {
-    label: "Primary Contact Phone",
-    name: "primaryContactPhone",
-  },
-  primaryContactTitle: {
-    label: "Primary Contact Title",
-    name: "primaryContactTitle",
-  },
-  contactDescription:
-    " Request you to fill in the end customer details in this section. Though optional it assists us in progressing faster on the opportunity. In case this is not filled, we will populate this with the opportunity submitter information, for the AWS Sales team to contact.",
-  partnerDescription:
-    "Provide contact information for the primary sales contact responsible for this opportunity within your organization. The AWS sales team may reach out to this individual to discuss the opportunity further.",
- 
-  marketingSourceAction: {
-    label: "Is opportunity from marketing activity?",
-  },
-  marketingSourceIsMarketingFundsAction: {
-    label: "Was marketing development funds used?",
-  },
-  projectDetails:{
-    cosellWithAws:"Co-sell with AWS",
-    doNotSupport:"Do Not Need Support from AWS Sales Rep"
-  }
+    industryVertical: {
+      label: t("awsCosell.inputLabelMapper.industryVertical.label"),
+      name: "industryVertical",
+      value: "Other",
+      validationMessage: t(
+        "awsCosell.inputLabelMapper.industryVertical.validationMessage"
+      ),
+      placeHolder: t("awsCosell.inputLabelMapper.industryVertical.placeHolder"),
+    },
+    nationSecurities: {
+      label: t("awsCosell.inputLabelMapper.nationSecurities.label"),
+      name: "nationSecurities",
+      value: "Government",
+      country: "United States",
+      defaultValue: { yes: "Yes", no: "No" },
+      discription: { yes: "", no: "" },
+    },
+    industryOther: {
+      label: t("awsCosell.inputLabelMapper.industryOther.label"),
+      name: "industryOther",
+      validationMessage: t(
+        "awsCosell.inputLabelMapper.industryOther.validationMessage"
+      ),
+    },
+    streetAddress: {
+      label: t("awsCosell.inputLabelMapper.streetAddress.label"),
+      name: "streetAddress",
+      validationMessage: t(
+        "awsCosell.inputLabelMapper.streetAddress.validationMessage"
+      ),
+      placeHolder: t("awsCosell.inputLabelMapper.streetAddress.placeHolder"),
+    },
+    state: {
+      label: t("awsCosell.inputLabelMapper.state.label"),
+      name: "state",
+      validationMessage: t(
+        "awsCosell.inputLabelMapper.state.validationMessage"
+      ),
+      placeholder: t("awsCosell.inputLabelMapper.state.placeHolder"),
+      value: "United States",
+    },
+    country: {
+      label: t("awsCosell.inputLabelMapper.country.label"),
+      name: "country",
+      validationMessage: t(
+        "awsCosell.inputLabelMapper.country.validationMessage"
+      ),
+      placeHolder: t("awsCosell.inputLabelMapper.country.placeHolder"),
+    },
+    city: {
+      label: t("awsCosell.inputLabelMapper.city.label"),
+      name: "city",
+      validationMessage: t("awsCosell.inputLabelMapper.city.validationMessage"),
+      validation: t("awsCosell.inputLabelMapper.city.validation"),
+      placeHolder: t("awsCosell.inputLabelMapper.city.placeHolder"),
+    },
+    postalCode: {
+      label: t("awsCosell.inputLabelMapper.postalCode.label"),
+      name: "postalCode",
+      validation: t("awsCosell.inputLabelMapper.postalCode.validation"),
+      validationMessage: t("awsCosell.inputLabelMapper.postalCode.label"),
+      placeHolder: t("awsCosell.inputLabelMapper.postalCode.placeHolder"),
+    },
+    awsCosell: {
+      listItemLabel: t("awsCosell.inputLabelMapper.awsCosell.listItemLabel"),
+      description: {
+        yes: t("awsCosell.inputLabelMapper.awsCosell.description.yes"),
+        no: t("awsCosell.inputLabelMapper.awsCosell.description.no"),
+        select: t("awsCosell.inputLabelMapper.awsCosell.description.select"),
+      },
+      label: t("awsCosell.inputLabelMapper.awsCosell.label"),
+      value: { yes: "None", no: "Do Not Need Support from AWS Sales Rep" },
+      name: "awsCosell",
+      placeholder: t("awsCosell.inputLabelMapper.awsCosell.placeholder"),
+      validationMessage: t(
+        "awsCosell.inputLabelMapper.awsCosell.validationMessage"
+      ),
+    },
+    opportunityType: {
+      listItemLabel: t(
+        "awsCosell.inputLabelMapper.opportunityType.listItemLabel"
+      ),
+      name: "opportunityType",
+      value: {
+        expansion: t("Expansion"),
+        netNewBusiness: t("Net New Business"),
+        flatRenewal: "Flat Renewal",
+      },
+      description: {
+        expansion: t(
+          "awsCosell.inputLabelMapper.opportunityType.description.expansion"
+        ),
+        netNewBusiness: t(
+          "awsCosell.inputLabelMapper.opportunityType.description.netNewBusiness"
+        ),
+        flatRenewal: t(
+          "awsCosell.inputLabelMapper.opportunityType.description.flatRenewal"
+        ),
+      },
+    },
+    partnerPrimaryNeedAction: {
+      label: t("awsCosell.inputLabelMapper.partnerPrimaryNeedAction.label"),
+      discription: {
+        awsSupport: t(
+          "awsCosell.inputLabelMapper.partnerPrimaryNeedAction.discription.awsSupport"
+        ),
+        awsNotSupport: t(
+          "awsCosell.inputLabelMapper.partnerPrimaryNeedAction.discription.awsNotSupport"
+        ),
+      },
+      value: {
+        awsNotSupport: "Do Not Need Support from AWS Sales Rep",
+        awsSupport: "None",
+      },
+    },
+    relatedOpportunityIndentifier: {
+      label: t(
+        "awsCosell.inputLabelMapper.relatedOpportunityIndentifier.label"
+      ),
+      name: "relatedOpportunityIndentifier",
+      description: t(
+        "awsCosell.inputLabelMapper.relatedOpportunityIndentifier.description"
+      ),
+      validationMessage: t(
+        "awsCosell.inputLabelMapper.relatedOpportunityIndentifier.validationMessage"
+      ),
+      placeHolder: t(
+        "awsCosell.inputLabelMapper.relatedOpportunityIndentifier.placeHolder"
+      ),
+    },
+    partnerProjectTitle: {
+      label: t("awsCosell.inputLabelMapper.partnerProjectTitle.label"),
+      name: "partnerProjectTitle",
+      validationMessage: t(
+        "awsCosell.inputLabelMapper.partnerProjectTitle.validationMessage"
+      ),
+      placeHolder: t(
+        "awsCosell.inputLabelMapper.partnerProjectTitle.placeHolder"
+      ),
+    },
+    salesActivities: {
+      label: t("awsCosell.inputLabelMapper.salesActivities.label"),
+      name: "salesActivities",
+      validationMessage: t(
+        "awsCosell.inputLabelMapper.salesActivities.validationMessage"
+      ),
+      placeHolder: t("awsCosell.inputLabelMapper.salesActivities.placeHolder"),
+      discription: t("awsCosell.inputLabelMapper.salesActivities.description"),
+    },
+    customerBusinessProblem: {
+      label: t("awsCosell.inputLabelMapper.customerBusinessProblem.label"),
+      name: "customerBusinessProblem",
+      discription: t(
+        "awsCosell.inputLabelMapper.customerBusinessProblem.description"
+      ),
+      validation: t(
+        "awsCosell.inputLabelMapper.customerBusinessProblem.validation"
+      ),
+      validationMessage: t(
+        "awsCosell.inputLabelMapper.customerBusinessProblem.validationMessage"
+      ),
+      placeHolder: t(
+        "awsCosell.inputLabelMapper.customerBusinessProblem.placeHolder"
+      ),
+    },
+    solutionsOffered: {
+      description: t("awsCosell.inputLabelMapper.solutionsOffered.description"),
+      label: t("awsCosell.inputLabelMapper.solutionsOffered.label"),
+      name: "solutionsOffered",
+      validation: t("awsCosell.inputLabelMapper.solutionsOffered.validation"),
+      validationMessage: t(
+        "awsCosell.inputLabelMapper.solutionsOffered.validationMessage"
+      ),
+      placeHolder: t("awsCosell.inputLabelMapper.solutionsOffered.placeHolder"),
+    },
+    awsProducts: {
+      label: t("awsCosell.inputLabelMapper.awsProducts.label"),
+      name: "awsProducts",
+      description: t("awsCosell.inputLabelMapper.awsProducts.description"),
+      validation: t("awsCosell.inputLabelMapper.awsProducts.validation"),
+      validationMessage: t(
+        "awsCosell.inputLabelMapper.awsProducts.validationMessage"
+      ),
+      placeHolder: t("awsCosell.inputLabelMapper.awsProducts.placeHolder"),
+    },
+    nextStep: {
+      label: t("awsCosell.inputLabelMapper.nextStep.label"),
+      name: "nextStep",
+      description: t("awsCosell.inputLabelMapper.nextStep.description"),
+      validation: t("awsCosell.inputLabelMapper.nextStep.validation"),
+      validationMessage: t(
+        "awsCosell.inputLabelMapper.nextStep.validationMessage"
+      ),
+      maxLength: 255,
+      placeHolder: t("awsCosell.inputLabelMapper.nextStep.placeHolder"),
+    },
+    useCase: {
+      label: t("awsCosell.inputLabelMapper.useCase.label"),
+      name: "useCase",
+      validationMessage: t(
+        "awsCosell.inputLabelMapper.useCase.validationMessage"
+      ),
+      placeHolder: t("awsCosell.inputLabelMapper.useCase.placeHolder"),
+    },
+    deliveryModel: {
+      label: t("awsCosell.inputLabelMapper.deliveryModel.label"),
+      description: t("awsCosell.inputLabelMapper.deliveryModel.description"),
+      validationMessage: t(
+        "awsCosell.inputLabelMapper.deliveryModel.validationMessage"
+      ),
+      name: "deliveryModel",
+    },
+    estimatedAWSRecurringRevenue: {
+      name: "estimatedAWSRecurringRevenue",
+      label: t("awsCosell.inputLabelMapper.estimatedAWSRecurringRevenue.label"),
+      validationMessage: t(
+        "awsCosell.inputLabelMapper.estimatedAWSRecurringRevenue.validationMessage"
+      ),
+      placeHolder: t(
+        "awsCosell.inputLabelMapper.estimatedAWSRecurringRevenue.placeHolder"
+      ),
+      validation: t(
+        "awsCosell.inputLabelMapper.estimatedAWSRecurringRevenue.validation"
+      ),
+      valid: t("awsCosell.inputLabelMapper.estimatedAWSRecurringRevenue.valid"),
+    },
+    targetCloseDate: {
+      name: "targetCloseDate",
+      label: t("awsCosell.inputLabelMapper.targetCloseDate.label"),
+      validationMessage: t(
+        "awsCosell.inputLabelMapper.targetCloseDate.validationMessage"
+      ),
+      placeHolder: t("awsCosell.inputLabelMapper.targetCloseDate.placeHolder"),
+      validation: t("awsCosell.inputLabelMapper.targetCloseDate.validation"),
+      invalidMessage: t(
+        "awsCosell.inputLabelMapper.targetCloseDate.invalidMessage"
+      ),
+    },
+    apnProgram: {
+      placeholder: t("awsCosell.inputLabelMapper.apnProgram.placeholder"),
+      label: t("awsCosell.inputLabelMapper.apnProgram.label"),
+      name: "apnProgram",
+    },
+    marketingSource: {
+      discription: t("awsCosell.inputLabelMapper.marketingSource.description"),
+      name: "marketingSource",
+      value: { yes: "Marketing Activity", no: "None" },
+    },
+    marketingCampaign: {
+      label: t("awsCosell.inputLabelMapper.marketingCampaign.label"),
+      name: "marketingCampaign",
+      placeHolder: t(
+        "awsCosell.inputLabelMapper.marketingCampaign.placeHolder"
+      ),
+    },
+    marketingUseCase: {
+      label: t("awsCosell.inputLabelMapper.marketingUseCase.label"),
+      name: "marketingUseCase",
+      placeHolder: t("awsCosell.inputLabelMapper.marketingUseCase.placeHolder"),
+    },
+    marketingActivityChannel: {
+      label: t("awsCosell.inputLabelMapper.marketingActivityChannel.label"),
+      name: "marketingActivityChannel",
+      placeHolder: t(
+        "awsCosell.inputLabelMapper.marketingActivityChannel.placeHolder"
+      ),
+    },
+    isMarketingfunds: {
+      label: t("awsCosell.inputLabelMapper.isMarketingfunds.label"),
+      name: "isMarketingfunds",
+      value: { yes: "Yes", no: "No" },
+    },
+    crmUniqueIdentifier: {
+      label: t("awsCosell.inputLabelMapper.crmUniqueIdentifier.label"),
+      name: "crmUniqueIdentifier",
+      validationMessage: t(
+        "awsCosell.inputLabelMapper.crmUniqueIdentifier.validationMessage"
+      ),
+      placeHolder: t(
+        "awsCosell.inputLabelMapper.crmUniqueIdentifier.placeHolder"
+      ),
+    },
+    competitiveTracking: {
+      name: "competitiveTracking",
+      value: "*Other",
+      label: t("awsCosell.inputLabelMapper.competitiveTracking.label"),
+      placeHolder: t(
+        "awsCosell.inputLabelMapper.competitiveTracking.placeHolder"
+      ),
+    },
+    otherCompetitors: {
+      label: t("awsCosell.inputLabelMapper.otherCompetitors.label"),
+      name: "otherCompetitors",
+      value: "*Other",
+      validationMessage: t(
+        "awsCosell.inputLabelMapper.otherCompetitors.validationMessage"
+      ),
+      placeHolder: t("awsCosell.inputLabelMapper.otherCompetitors.placeHolder"),
+    },
+    awsAccountId: {
+      label: t("awsCosell.inputLabelMapper.awsAccountId.label"),
+      name: "awsAccountId",
+      description: t("awsCosell.inputLabelMapper.awsAccountId.description"),
+      validationMessage: t(
+        "awsCosell.inputLabelMapper.awsAccountId.validationMessage"
+      ),
+      validationErrorMessage: t(
+        "awsCosell.inputLabelMapper.awsAccountId.validationErrorMessage"
+      ),
+      placeHolder: t("awsCosell.inputLabelMapper.awsAccountId.placeHolder"),
+    },
+    additonalComments: {
+      label: t("awsCosell.inputLabelMapper.additonalComments.label"),
+      name: "additonalComments",
+      description: t(
+        "awsCosell.inputLabelMapper.additonalComments.description"
+      ),
+      placeHolder: t(
+        "awsCosell.inputLabelMapper.additonalComments.placeHolder"
+      ),
+      validation: t("awsCosell.inputLabelMapper.additonalComments.validation"),
+      validationMessage: t(
+        "awsCosell.inputLabelMapper.additonalComments.validationMessage"
+      ),
+    },
+    contactFirstName: {
+      label: t("awsCosell.inputLabelMapper.contactFirstName.label"),
+      name: "contactFirstName",
+      placeHolder: t("awsCosell.inputLabelMapper.contactFirstName.placeHolder"),
+    },
+    contactLastName: {
+      label: t("awsCosell.inputLabelMapper.contactLastName.label"),
+      name: "contactLastName",
+      placeHolder: t("awsCosell.inputLabelMapper.contactLastName.placeHolder"),
+    },
+    contactEmail: {
+      label: t("awsCosell.inputLabelMapper.contactEmail.label"),
+      name: "contactEmail",
+      value: "Contact E-mail is not valid",
+      placeHolder: t("awsCosell.inputLabelMapper.contactEmail.placeHolder"),
+    },
+    contactPhone: {
+      label: t("awsCosell.inputLabelMapper.contactPhone.label"),
+      name: "contactPhone",
+      placeHolder: t("awsCosell.inputLabelMapper.contactPhone.placeHolder"),
+    },
+    contactTitle: {
+      label: t("awsCosell.inputLabelMapper.contactTitle.label"),
+      name: "contactTitle",
+      placeHolder: t("awsCosell.inputLabelMapper.contactTitle.placeHolder"),
+    },
+    primaryContactFirstName: {
+      label: t("awsCosell.inputLabelMapper.primaryContactFirstName.label"),
+      name: "primaryContactFirstName",
+      placeHolder: t(
+        "awsCosell.inputLabelMapper.primaryContactFirstName.placeHolder"
+      ),
+    },
+    primaryContactLastName: {
+      label: t("awsCosell.inputLabelMapper.primaryContactLastName.label"),
+      name: "primaryContactLastName",
+      placeHolder: t(
+        "awsCosell.inputLabelMapper.primaryContactLastName.placeHolder"
+      ),
+    },
+    primaryContactEmail: {
+      label: t("awsCosell.inputLabelMapper.primaryContactEmail.label"),
+      name: "primaryContactEmail",
+      value: "Contact E-mail is not valid",
+      placeHolder: t(
+        "awsCosell.inputLabelMapper.primaryContactEmail.placeHolder"
+      ),
+    },
+    primaryContactPhone: {
+      label: t("awsCosell.inputLabelMapper.primaryContactPhone.label"),
+      name: "primaryContactPhone",
+      placeHolder: t(
+        "awsCosell.inputLabelMapper.primaryContactPhone.placeHolder"
+      ),
+    },
+    primaryContactTitle: {
+      label: t("awsCosell.inputLabelMapper.primaryContactTitle.label"),
+      name: "primaryContactTitle",
+      placeHolder: t(
+        "awsCosell.inputLabelMapper.primaryContactTitle.placeHolder"
+      ),
+    },
+    contactDescription: t("awsCosell.inputLabelMapper.contactDescription"),
+    partnerDescription: t("awsCosell.inputLabelMapper.partnerDescription"),
+    marketingSourceAction: {
+      label: t("awsCosell.inputLabelMapper.marketingSourceAction.label"),
+    },
+    marketingSourceIsMarketingFundsAction: {
+      label: t(
+        "awsCosell.inputLabelMapper.marketingSourceIsMarketingFundsAction.label"
+      ),
+    },
+    projectDetails: {
+      cosellWithAws: "Co-sell with AWS",
+      doNotSupport: "Do Not Support",
+    },
+  };
 };
+export const labelMapper = labels(t);

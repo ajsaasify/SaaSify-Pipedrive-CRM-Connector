@@ -9,6 +9,7 @@ class HttpWrapper {
       credentials:"include",
     };
   }
+  payloadConversion=(payload:any)=>(typeof payload != "string")?JSON.stringify(payload):payload;
   public async get(url: string) {
     try {
       const response = await fetch(url, {
@@ -27,7 +28,7 @@ class HttpWrapper {
       const response = await fetch(url, {
         method: Method.POST,
         headers: this.headers,
-        body: payload,
+        body: this.payloadConversion(payload),
       });
       return await response.json();
     } catch (error: any) {
@@ -40,7 +41,7 @@ class HttpWrapper {
       const response = await fetch(url, {
         method: Method.PATCH,
         headers: this.headers,
-        body: payload,
+        body: this.payloadConversion(payload),
       });
       return await response.json();
     } catch (error: any) {

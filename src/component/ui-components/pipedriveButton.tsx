@@ -12,7 +12,7 @@ type PDButtonProps = {
   loading?: boolean;
   disabled?: boolean;
   className?: string;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEventHandler<HTMLButtonElement>) => void;
 };
 
 const PDButton: React.FC<PDButtonProps> = ({
@@ -64,7 +64,7 @@ const PDButton: React.FC<PDButtonProps> = ({
       disabled={disabled}
       loading={loading}
       className={finalClass}
-      onClick={onClick}
+      onClick={(e:any)=>onClick?.(e)}
     />
   );
 };

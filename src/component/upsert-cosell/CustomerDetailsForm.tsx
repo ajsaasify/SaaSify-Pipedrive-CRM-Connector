@@ -6,7 +6,6 @@ import { labelMapper } from "./helper";
 type CustomerDetailsFormProps = {
   formValue: any;
   errorValue: any;
-  labelMapper: typeof labelMapper;
   optionValues: OptionTypes;
   readOnlyField: (name: string) => boolean;
   onChangeValue: (name: string, value: any) => void;
@@ -18,11 +17,9 @@ type CustomerDetailsFormProps = {
   isPostalCodeRequired: (formValue: any, optionValues: any) => boolean;
   postalCodeRegex: (value: string) => void;
 };
-
 const CustomerDetailsForm = ({
   formValue,
   errorValue,
-  labelMapper,
   optionValues,
   readOnlyField,
   onChangeValue,
@@ -38,15 +35,16 @@ const CustomerDetailsForm = ({
     <>
       <Input
         onInput={(value) => {
-          setErrorValue((prev:any) => ({
+          setErrorValue((prev: any) => ({
             ...prev,
-            customerDuns: !validatePureNumber(value),
+            customerDuns: !validatePureNumber((value.target as any).value),
           }));
         }}
         onChange={(value) => {
           onChangeValue(labelMapper.customerDuns.name, value);
         }}
         value={formValue?.customerDuns}
+        placeholder={labelMapper.customerDuns.placeHolder}
         error={errorValue?.customerDuns}
         validationMessage={validationMessage(labelMapper.customerDuns.name)}
         tooltip={labelMapper.customerDuns.toopTip}
@@ -67,6 +65,7 @@ const CustomerDetailsForm = ({
             errorValue?.customerCompanyName,
             labelMapper.customerCompanyName.validationMessage
           )}
+          placeholder={labelMapper.customerCompanyName.placeHolder}
           onChange={(value) => {
             onChangeValue(labelMapper.customerCompanyName.name, value);
           }}
@@ -80,6 +79,7 @@ const CustomerDetailsForm = ({
             isrequired={true}
             value={formValue.customerWebsite}
             error={errorValue.customerWebsite}
+            
             placeholder={labelMapper.customerWebsite.placeHolder}
             validationMessage={displayErrorMessage(
               errorValue?.customerWebsite,
@@ -95,6 +95,7 @@ const CustomerDetailsForm = ({
         <PDSelectField
           label={labelMapper.country.label}
           name={labelMapper.country.name}
+          placeholder={labelMapper.country.placeHolder}
           required
           readOnly={readOnlyField(labelMapper.country.name)}
           options={optionValues?.countries || []}
@@ -111,6 +112,7 @@ const CustomerDetailsForm = ({
         <PDSelectField
           label={labelMapper.industryVertical.label}
           name={labelMapper.industryVertical.name}
+          placeholder={labelMapper.industryVertical.placeHolder}
           required
           readOnly={readOnlyField(labelMapper.industryVertical.name)}
           value={formValue.industryVertical}
@@ -123,7 +125,7 @@ const CustomerDetailsForm = ({
           onChange={(value: any) => {
             onChangeValue(labelMapper.industryVertical.name, value);
             if (value != labelMapper.nationSecurities.value) {
-              setFormValue((prev:any) => ({
+              setFormValue((prev: any) => ({
                 ...prev,
                 nationalSecurity: labelMapper.nationSecurities.defaultValue.no,
               }));
@@ -137,6 +139,7 @@ const CustomerDetailsForm = ({
               label={labelMapper.state.label}
               name={labelMapper.state.name}
               required
+              placeholder={labelMapper.state.placeholder}
               readOnly={readOnlyField(labelMapper.state.name)}
               value={formValue?.state}
               error={errorValue.state}
@@ -154,6 +157,7 @@ const CustomerDetailsForm = ({
           labelMapper.nationSecurities.defaultValue.no && (
           <>
             <Input
+            placeholder={labelMapper.city.placeHolder}
               label={labelMapper.city.label}
               name={labelMapper.city.name}
               readOnly={readOnlyField(labelMapper.city.name)}
@@ -171,6 +175,7 @@ const CustomerDetailsForm = ({
             name={labelMapper.streetAddress.name}
             readOnly={readOnlyField(labelMapper.streetAddress.name)}
             value={formValue?.streetAddress}
+            placeholder={labelMapper.streetAddress.placeHolder}
             onChange={(value) => {
               onChangeValue(labelMapper.streetAddress.name, value);
             }}
@@ -202,6 +207,7 @@ const CustomerDetailsForm = ({
           readOnly={readOnlyField(labelMapper.postalCode.name)}
           value={formValue?.postalCode}
           isrequired={true}
+          placeholder={labelMapper.postalCode.placeHolder}
           onInput={(value) => postalCodeRegex((value?.target as any)?.value)}
           error={errorValue?.postalCode}
           validationMessage={displayErrorMessage(
@@ -218,5 +224,4 @@ const CustomerDetailsForm = ({
     </>
   );
 };
-
 export default CustomerDetailsForm;

@@ -26,6 +26,7 @@ const CosellsPage = () => {
   const [params, setParams] = useState<pipedriveParams>();
   const { setCurrentPage } = useCoSellContext();
   const viewCosells = async (model:ModelType) => {
+    console.log("current model",model)
     const params = pipeDriveParams(setParams);
     const dealId = params?.["selectedIds"];
     try {
@@ -36,6 +37,7 @@ const CosellsPage = () => {
         action_id: "f5458880-50b7-4d74-b4ce-ae8e571d7f54",
         data: { dealId: dealId || "",page:model },
       });
+      console.log("model")
       setCurrentPage({ page: model });
     } catch (err) {
       console.error("Failed to open modal:", err);
@@ -58,11 +60,12 @@ const CosellsPage = () => {
       console.error("Failed to open modal:", err);
     }
   };
-  // useEffect(() => {
-  //   getCosells().then((data) => {
-  //     console.log("Cosells Data:", data);
-  //   });
-  // }, []);
+  useEffect(() => {
+    // getCosells().then((data) => {
+    //   console.log("Cosells Data:", data);
+    // });
+    console.log(pipeDriveParams())
+  }, []);
   return (<>
     <div className="flex justify-center w-full">
       Arul

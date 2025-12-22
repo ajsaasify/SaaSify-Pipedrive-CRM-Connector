@@ -857,11 +857,9 @@ export const validatePureNumber = (
   if (!value) return false;
   const valueString = value.toString().trim();
   const regex = isDecimal ? /^\d+(\.\d+)?$/ : /^\d+$/;
-
   if (!regex.test(valueString)) return false;
   const numericValue = Number(value);
   if (!withZero && numericValue === 0) return false;
-
   return true;
 };
 
@@ -1028,8 +1026,7 @@ export const isFutureDate = (baseDate: BaseDate): boolean => {
   if (!baseDate) return false;
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-
-  const targetDate = new Date(parseBaseDate(baseDate));
+  const targetDate = new Date((baseDate as unknown as  string));
   return targetDate > today;
 };
 

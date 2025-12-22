@@ -7,7 +7,6 @@ import { PDTextSize } from "@template/enum/pipedrive.enum";
 type AdditionalDetailsFormProps = {
   formValue: any;
   errorValue: any;
-  labelMapper: typeof labelMapper;
   readOnlyField: (name: string) => boolean;
   onChangeValue: (name: string, value: any) => void;
   displayErrorMessage: (error: any, message: string) => string;
@@ -16,7 +15,6 @@ type AdditionalDetailsFormProps = {
 const ContactDetailsForm = ({
   formValue,
   errorValue,
-  labelMapper,
   readOnlyField,
   onChangeValue,
   displayErrorMessage,
@@ -34,6 +32,7 @@ const ContactDetailsForm = ({
           onChange={(value) => {
             onChangeValue(labelMapper.contactFirstName.name, value);
           }}
+          placeholder={labelMapper.contactFirstName.placeHolder}
         />
         <Input
           label={labelMapper.contactLastName.label}
@@ -44,6 +43,8 @@ const ContactDetailsForm = ({
           onChange={(value) => {
             onChangeValue(labelMapper.contactLastName.name, value);
           }}
+          placeholder={labelMapper.contactLastName.placeHolder}
+
         />
         <Input
           label={labelMapper.contactTitle.label}
@@ -54,6 +55,7 @@ const ContactDetailsForm = ({
           onChange={(value) => {
             onChangeValue(labelMapper.contactTitle.name, value);
           }}
+          placeholder={labelMapper.contactTitle.placeHolder}
         />
         <Input
           label={labelMapper.contactEmail.label}
@@ -65,6 +67,7 @@ const ContactDetailsForm = ({
             errorValue?.contactEmail,
             labelMapper.contactEmail.value
           )}
+          placeholder={labelMapper.contactEmail.placeHolder}
           value={formValue?.contactEmail}
           onChange={(value) => {
             onChangeValue(labelMapper.contactEmail.name, value);
@@ -74,6 +77,7 @@ const ContactDetailsForm = ({
           label={labelMapper.contactPhone.label}
           name={labelMapper.contactPhone.label}
           tooltip={labelMapper.contactPhone.label}
+          placeholder={labelMapper.contactPhone.placeHolder}
           readOnly={readOnlyField(labelMapper.contactPhone.name)}
           value={formValue?.contactPhone}
           onChange={(value) => {

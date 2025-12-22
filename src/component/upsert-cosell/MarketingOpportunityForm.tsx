@@ -3,9 +3,10 @@ import { Tile } from "../ui-components/detailview-components";
 import { PDRadioGroup } from "../ui-components/PipedriveRadiobutton";
 import Input from "../ui-components/PipedriveInput";
 import { MultiSelectField } from "../ui-components/PipedriveMultiselect";
+import { labelMapper } from "./helper";
+import { t } from "i18next";
 
 type MarketingSourceSectionProps = {
-  labelMapper: any;
   formValue: any;
   optionValues: any;
   LifeCycle?: any;
@@ -14,7 +15,6 @@ type MarketingSourceSectionProps = {
 };
 
 export const MarketingSourceSection = ({
-  labelMapper,
   formValue,
   optionValues,
   LifeCycle,
@@ -56,6 +56,7 @@ export const MarketingSourceSection = ({
               label={labelMapper.marketingCampaign.label}
               name={labelMapper.marketingCampaign.name}
               tooltip={labelMapper.marketingCampaign.label}
+              placeholder={labelMapper.marketingCampaign.placeHolder}
               readOnly={readOnlyField(labelMapper.marketingCampaign.name)}
               onChange={(value) => {
                 onChangeValue(labelMapper.marketingCampaign.name, value);
@@ -64,6 +65,7 @@ export const MarketingSourceSection = ({
 
             <MultiSelectField
               label={labelMapper.marketingUseCase.label}
+              placeholder={labelMapper.marketingUseCase.placeHolder}
               value={formValue?.marketingUseCase}
               name={labelMapper.marketingUseCase.name}
               readOnly={readOnlyField(labelMapper.marketingUseCase.name)}
@@ -75,6 +77,7 @@ export const MarketingSourceSection = ({
 
             <MultiSelectField
               label={labelMapper.marketingActivityChannel.label}
+              placeholder={labelMapper.marketingActivityChannel.placeHolder}
               value={formValue?.marketingActivityChannel}
               name={labelMapper.marketingActivityChannel.name}
               readOnly={readOnlyField(
@@ -94,12 +97,12 @@ export const MarketingSourceSection = ({
                 options={[
                   {
                     label:
-                      "Yes: Marketing development funds were used for this opportunity",
+                      t("awsCosell.inputLabelMapper.isMarketingfunds.description.yes"),
                     value: labelMapper.isMarketingfunds.value.yes,
                   },
                   {
                     label:
-                      "No: Marketing development funds were not used for this opportunity.",
+                      t("awsCosell.inputLabelMapper.isMarketingfunds.description.no"),
                     value: labelMapper.isMarketingfunds.value.no,
                   },
                 ]}

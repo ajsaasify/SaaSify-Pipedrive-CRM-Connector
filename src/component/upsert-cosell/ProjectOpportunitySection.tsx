@@ -12,7 +12,6 @@ import TextAreaFieldBox from "../ui-components/PipedriveTextarea";
 type ProjectOpportunitySectionProps = {
   formValue: any;
   errorValue: any;
-  labelMapper: typeof labelMapper;
   optionValues: OptionTypes;
   primaryNeedsAWS: string | undefined;
   setPrimaryNeedsAWS: (value: string) => void;
@@ -31,7 +30,6 @@ type ProjectOpportunitySectionProps = {
 };
 
 const ProjectOpportunitySection = ({
-  labelMapper,
   optionValues,
   formValue,
   errorValue,
@@ -50,7 +48,6 @@ const ProjectOpportunitySection = ({
   reviewStatus,
   minDateIput,
 }: ProjectOpportunitySectionProps) => {
-
   return (
     <Tile>
       <h5>{labelMapper.awsCosell.listItemLabel}</h5>
@@ -60,12 +57,12 @@ const ProjectOpportunitySection = ({
           {
             label: labelMapper.projectDetails.cosellWithAws,
             value: labelMapper.awsCosell.value.yes,
-            info: labelMapper.awsCosell.discription.yes,
+            info: labelMapper.awsCosell.description.yes,
           },
           {
             label: labelMapper.projectDetails.doNotSupport,
             value: labelMapper.awsCosell.value.no,
-            info: labelMapper.awsCosell.discription.no,
+            info: labelMapper.awsCosell.description.no,
           },
         ]}
         value={primaryNeedsAWS}
@@ -86,11 +83,12 @@ const ProjectOpportunitySection = ({
       {primaryNeedsAWS === labelMapper.awsCosell.value.yes && (
         <>
           <MultiSelectField
-            info={labelMapper.awsCosell.discription.select}
+            info={labelMapper.awsCosell.description.select}
             label={labelMapper.awsCosell.label}
             name={labelMapper.awsCosell.name}
             value={formValue?.awsCosell}
             required={true}
+            placeholder={labelMapper.awsCosell.placeholder}
             // display="chip"
             onChange={(value) =>
               onChangeValue(labelMapper.awsCosell.name, value)
@@ -118,17 +116,17 @@ const ProjectOpportunitySection = ({
           {
             label: labelMapper.opportunityType.value.netNewBusiness,
             value: labelMapper.opportunityType.value.netNewBusiness,
-            info: labelMapper.opportunityType.discription.netNewBusiness,
+            info: labelMapper.opportunityType.description.netNewBusiness,
           },
           {
             label: labelMapper.opportunityType.value.expansion,
             value: labelMapper.opportunityType.value.expansion,
-            info: labelMapper.opportunityType.discription.expansion,
+            info: labelMapper.opportunityType.description.expansion,
           },
           {
             label: labelMapper.opportunityType.value.flatRenewal,
             value: labelMapper.opportunityType.value.flatRenewal,
-            info: labelMapper.opportunityType.discription.flatRenewal,
+            info: labelMapper.opportunityType.description.flatRenewal,
           },
         ]}
         onChange={(value) => {
@@ -149,6 +147,7 @@ const ProjectOpportunitySection = ({
           label={labelMapper.relatedOpportunityIndentifier.label}
           name={labelMapper.relatedOpportunityIndentifier.name}
           value={formValue?.relatedOpportunityIndentifier}
+          placeholder={labelMapper.relatedOpportunityIndentifier.placeHolder}
           onChange={(value) => {
             onChangeValue(
               labelMapper.relatedOpportunityIndentifier.name,
@@ -177,6 +176,7 @@ const ProjectOpportunitySection = ({
         onChange={(value) => {
           onChangeValue(labelMapper.partnerProjectTitle.name, value);
         }}
+        placeholder={labelMapper.partnerProjectTitle.placeHolder}
         error={errorValue?.partnerProjectTitle}
         validationMessage={displayErrorMessage(
           errorValue?.partnerProjectTitle,
@@ -191,6 +191,7 @@ const ProjectOpportunitySection = ({
         required={
           !formValue?.awsCosell?.includes(labelMapper.awsCosell.value.no)
         }
+        placeholder={labelMapper.salesActivities.placeHolder}
         error={errorValue?.salesActivities}
         validationMessage={displayErrorMessage(
           errorValue?.salesActivities,
@@ -209,6 +210,7 @@ const ProjectOpportunitySection = ({
         value={formValue?.customerBusinessProblem}
         isrequired={true}
         maxLength={2000}
+        placeholder={labelMapper.customerBusinessProblem.placeHolder}
         rows={3}
         error={errorValue?.customerBusinessProblem}
         validationMessage={validationMessage(
@@ -228,6 +230,7 @@ const ProjectOpportunitySection = ({
         onChange={(value) => {
           onChangeValue(labelMapper.solutionsOffered.name, value);
         }}
+        placeholder={labelMapper.solutionsOffered.placeHolder}
         readOnly={readOnlyField(labelMapper.solutionsOffered.name)}
         error={errorValue?.solutionsOffered}
         validationMessage={validationMessage(labelMapper.solutionsOffered.name)}
@@ -239,6 +242,7 @@ const ProjectOpportunitySection = ({
         info={labelMapper.awsProducts.description}
         value={formValue?.awsProducts}
         required={false}
+        placeholder={labelMapper.awsProducts.placeHolder}
         readOnly={readOnlyField(labelMapper.awsProducts.name)}
         onChange={(value) => {
           onChangeValue(labelMapper.awsProducts.name, value);
@@ -253,6 +257,7 @@ const ProjectOpportunitySection = ({
         name={labelMapper.nextStep.name}
         tooltip={labelMapper.nextStep.label}
         info={labelMapper.nextStep.description}
+        placeholder={labelMapper.nextStep.placeHolder}
         rows={4}
         maxLength={labelMapper.nextStep.maxLength}
         readOnly={readOnlyField(labelMapper.nextStep.name)}
@@ -301,6 +306,7 @@ const ProjectOpportunitySection = ({
         label={labelMapper.estimatedAWSRecurringRevenue.label}
         name={labelMapper.estimatedAWSRecurringRevenue.name}
         isrequired={true}
+        placeholder={labelMapper.estimatedAWSRecurringRevenue.placeHolder}
         error={errorValue?.estimatedAWSRecurringRevenue}
         validationMessage={displayErrorMessage(
           errorValue?.estimatedAWSRecurringRevenue,
@@ -336,6 +342,7 @@ const ProjectOpportunitySection = ({
           errorValue?.targetCloseDate,
           labelMapper.targetCloseDate.validation
         )}
+        placeholder={labelMapper.targetCloseDate.placeHolder}
         minDate={
           isPendingCosell(slug as string, reviewStatus)
             ? minDateIput()
@@ -351,6 +358,7 @@ const ProjectOpportunitySection = ({
         label={labelMapper.apnProgram.label}
         name={labelMapper.apnProgram.name}
         value={formValue?.apnProgram}
+        placeholder={labelMapper.apnProgram.placeholder}
         required={false}
         onChange={(value) => {
           onChangeValue(labelMapper.apnProgram.name, value);

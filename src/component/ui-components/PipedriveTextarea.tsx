@@ -33,7 +33,7 @@ const TextAreaFieldBox: React.FC<{
   maxLength = 3000,
 }) => (
   <div className="flex flex-col w-full mb-3">
-    {label && <PDText type={PDTextType.LABEL}>{label}</PDText>}
+    {label && <PDText type={PDTextType.LABEL}>{label} <span className="text-state-danger">{isrequired ? " *" : ""}</span></PDText>}
     {info && <div className="hub-field-info">{info}</div>}
 
     <InputTextarea

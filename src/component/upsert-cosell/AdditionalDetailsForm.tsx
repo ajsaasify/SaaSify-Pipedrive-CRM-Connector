@@ -8,7 +8,6 @@ import TextAreaFieldBox from "../ui-components/PipedriveTextarea";
 type AdditionalDetailsFormProps = {
   formValue: any;
   errorValue: any;
-  labelMapper: typeof labelMapper;
   optionValues: OptionTypes;
   readOnlyField: (name: string) => boolean;
   onChangeValue: (name: string, value: any) => void;
@@ -19,7 +18,6 @@ type AdditionalDetailsFormProps = {
 const AdditionalDetailsForm = ({
   formValue,
   errorValue,
-  labelMapper,
   optionValues,
   readOnlyField,
   onChangeValue,
@@ -33,6 +31,7 @@ const AdditionalDetailsForm = ({
       validationMessage={labelMapper.crmUniqueIdentifier.validationMessage}
       tooltip={labelMapper.crmUniqueIdentifier.label}
       isrequired={false}
+      placeholder={labelMapper.crmUniqueIdentifier.placeHolder}
       readOnly={readOnlyField(labelMapper.crmUniqueIdentifier.name)}
       value={formValue?.crmUniqueIdentifier}
       onChange={(value) => {
@@ -41,6 +40,7 @@ const AdditionalDetailsForm = ({
     />
     <PDSelectField
       label={labelMapper.competitiveTracking.label}
+      placeholder={labelMapper.competitiveTracking.placeHolder}
       name={labelMapper.competitiveTracking.name}
       tooltip={{ message: labelMapper.competitiveTracking.label }}
       readOnly={readOnlyField(labelMapper.competitiveTracking.name)}
@@ -64,6 +64,7 @@ const AdditionalDetailsForm = ({
           errorValue?.otherCompetitors,
           labelMapper.otherCompetitors.validationMessage
         )}
+        placeholder={labelMapper.otherCompetitors.placeHolder}
         value={formValue?.otherCompetitors}
         onChange={(value) => {
           onChangeValue(labelMapper.otherCompetitors.name, value);
@@ -81,6 +82,7 @@ const AdditionalDetailsForm = ({
       }
       tooltip={labelMapper.awsAccountId.label}
       isrequired={false}
+      placeholder={labelMapper.awsAccountId.placeHolder}
       readOnly={readOnlyField(labelMapper.awsAccountId.name)}
       error={errorValue?.awsAccountId}
       value={formValue?.awsAccountId}
@@ -92,6 +94,7 @@ const AdditionalDetailsForm = ({
       label={labelMapper.additonalComments.label}
       name={labelMapper.additonalComments.name}
       rows={4}
+      placeholder={labelMapper.additonalComments.placeHolder}
       maxLength={255}
       info={labelMapper.additonalComments.description}
       tooltip={labelMapper.additonalComments.label}

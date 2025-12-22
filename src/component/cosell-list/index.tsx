@@ -1,6 +1,6 @@
 "use client";
 import { CoSellItem } from "@template/types/api/getListCosellAssociateCrm.t";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import PDAdvancedTable from "../ui-components/PipedriveTable";
 import { PDColumnConfig } from "@template/types/pipedrive-table-interface";
 import { DataTablePageEvent } from "primereact/datatable";
@@ -12,6 +12,7 @@ import { useCoSellContext } from "@template/context/Cosell.context";
 import { ModelType } from "@template/enum/pipedrive.enum";
 import { useTranslation } from "react-i18next";
 import { EmptyState } from "../ui-components/empty-data";
+import { Menu } from "primereact/menu";
 
 export const CosellList = () => {
   // const params = new URLSearchParams(window.location.search);
@@ -22,10 +23,15 @@ export const CosellList = () => {
   const [totalRecords, setTotalRecords] = useState(0);
   const [loading, setLoading] = useState(false);
   const [currentCosell, setCurrentCosell] = useState<CoSellItem | null>(null);
-  const columns: PDColumnConfig[] = cosellTableColumns(setCurrentCosell);
-  const [ sdk, setSdk ] = useState<any>();
+  const menuRef = useRef<Menu>(null!);
+  const { t } = useTranslation();
+  const columns = cosellTableColumns({
+    t,
+    menuRef,
+    setCurrentCosell,
+  });
+  const [sdk, setSdk] = useState<any>();
   const { setCurrentPage } = useCoSellContext();
-  // const isTab = useTab();
 
   useEffect(() => {
     const sdk = initSdk(1000, 500);
@@ -41,19 +47,38 @@ export const CosellList = () => {
     if (e?.first !== first) setFirst(e?.first || 0);
     if (e?.rows !== rows) setRows(e?.rows || 10);
   };
-  useEffect(() => {
-    if (currentCosell?.ReferenceID) {
-      setCurrentPage({
-        page: ModelType.COSELL_DETAIL,
-        params: {
-          referenceId: currentCosell?.ReferenceID,
-          sellerCode: currentCosell?.SellerCode || "",
-        },
-      });
-    }
-  }, [currentCosell?.ReferenceID]);
   return (
     <div className="md:w-full lg:max-w-full p-4 overflow-auto">
+      <Menu
+        model={[
+          {
+            label: "Edit",
+            command: () => {
+              setCurrentPage({
+                page: ModelType.COSELL_CREATE,
+                params: {
+                  referenceId: currentCosell?.ReferenceID || "",
+                  sellerCode: currentCosell?.SellerCode || "",
+                },
+              });
+            },
+          },
+          {
+            label: "View",
+            command: () => {
+              setCurrentPage({
+                page: ModelType.COSELL_DETAIL,
+                params: {
+                  referenceId: currentCosell?.ReferenceID || "",
+                  sellerCode: currentCosell?.SellerCode || "",
+                },
+              });
+            },
+          },
+        ]}
+        popup
+        ref={menuRef}
+      />
       <PDAdvancedTable
         first={first}
         rows={rows}
