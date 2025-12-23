@@ -1,4 +1,4 @@
-import { RC3CosellResponse } from "../../types/cosellResponse";
+import type { RC3CosellResponse } from "../../types/cosellResponse";
 import {
   convertCurrency,
   displayDate,
@@ -18,7 +18,7 @@ export const saasDocumentationSegments = (data: RC3CosellResponse) => {
         label: awsConstants.saasDocumentation.softwareValue,
         value: convertCurrency(
           SoftwareRevenue?.Value?.CurrencyCode,
-          SoftwareRevenue?.Value?.Amount
+          SoftwareRevenue?.Value?.Amount,
         ),
       },
     ],

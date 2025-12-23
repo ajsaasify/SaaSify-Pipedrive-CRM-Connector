@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { Calendar, CalendarSelectionMode } from "primereact/calendar";
+import type React from "react";
+import { useState } from "react";
+import { Calendar, type CalendarSelectionMode } from "primereact/calendar";
 import { classNames } from "primereact/utils";
 
 interface PDDatePickerProps {
@@ -40,6 +41,7 @@ const PDDatePicker: React.FC<PDDatePickerProps> = ({
   return (
     <div className="flex flex-col gap-1 w-full mb-3">
       {label && (
+        // biome-ignore lint/a11y/noLabelWithoutControl: Design choices separate label
         <label className="text-sm font-medium text-gray-700">
           {label} {required && <span className="text-red-500">*</span>}
         </label>
@@ -53,7 +55,7 @@ const PDDatePicker: React.FC<PDDatePickerProps> = ({
             "border-[#c5cbd3]": !focused,
             "border-red-500": !!error,
             "opacity-60 cursor-not-allowed": disabled,
-          }
+          },
         )}
       >
         <Calendar

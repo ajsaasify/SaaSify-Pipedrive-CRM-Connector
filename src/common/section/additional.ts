@@ -1,4 +1,4 @@
-import { RC3CosellResponse } from "../../types/cosellResponse";
+import type { RC3CosellResponse } from "../../types/cosellResponse";
 import { displayDate, getValue } from "../../utils/globalHelper";
 import { awsConstants } from "../constants/awsCosellFieldMappings";
 
@@ -9,7 +9,7 @@ export const additionalSegmentData = (data: RC3CosellResponse) => {
     Customer,
     LifeCycle,
     AwsSummary,
-  } = data.CoSellEntity || {};
+  } = data?.CoSellEntity || {};
   return [
     [
       {

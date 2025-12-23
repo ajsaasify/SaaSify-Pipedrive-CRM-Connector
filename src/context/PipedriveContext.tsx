@@ -1,10 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-import AppExtensionsSDK, {
-  Command,
-  Event,
-} from "@pipedrive/app-extensions-sdk";
+import AppExtensionsSDK from "@pipedrive/app-extensions-sdk";
 
 interface PipedriveContextType {
   sdk: any | null;

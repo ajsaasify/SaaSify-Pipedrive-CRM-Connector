@@ -1,27 +1,6 @@
-import React, {
-  useState,
-  useMemo,
-  useCallback,
-  useEffect,
-  useRef,
-} from "react";
-// import {
-//   Flex,
-//   Icon,
-//   Button,
-//   LoadingButton,
-//   Text,
-//   Box,
-// } from "@hubspot/ui-extensions";
+import React, { useState } from "react";
 
-// import EditCosellModal from "../UpsertCosell";
 import { useCoSellContext } from "@template/context/Cosell.context";
-// import { ChangeStageModal } from "../ChangeStage";
-// import { AssociateModal } from "../AssociateOffers";
-import { PipedriveContext } from "@template/types/pipedriveContext";
-// import { NextStepModal } from "../NextStep";
-// import TransferOwnershipModal from "../TransferOwner";
-// import UpdateModal from "../UpdateCosell";
 import { ToastService } from "@template/services/toast.service";
 import {
   associateDisable,
@@ -45,7 +24,6 @@ import { associateOfferType } from "../../../common/forms/associateOfferType";
 import { CosellAction } from "@template/enum/action.enum";
 import { acceptCosell, pullCosell, pushCrm } from "./apiHandler";
 
-// import LinkcrmModal from "../LinkCrm";
 import { requestPayload } from "@template/common/listCosell";
 import PDButton from "@template/component/ui-components/pipedriveButton";
 import {
@@ -54,21 +32,15 @@ import {
   PDButtonType,
 } from "@template/enum/pipedrive.enum";
 import { useTranslation } from "react-i18next";
-import { AlertType } from "@template/enum/alert.enum";
 import { AlertNotification } from "@template/common/messageAlert";
-import { OverlayPanel } from "primereact/overlaypanel";
 import { Dialog } from "primereact/dialog";
-import { cloneCosellDisability } from "@template/helpers/actionDisabilityRules";
-// import CloneCosell from "@template/component/AwsProviderCosell/CloneCosell";
-// import RejectCosell from "../RejectCosell";
-// import { acceptCosell } from "../AcceptCosell/apiHandler";
-// import { displayOid } from "../../CloudCoSellManager/helper";
+import { NextStepDialog } from "@template/component/AwsProviderCosell/AddNextStep";
 
-type Props = {
+export type Props = {
   actionState: any;
 };
 
-type ConditionalActionButtonProps = {
+export type ConditionalActionButtonProps = {
   show: boolean;
   label: string;
   overlay: React.ReactNode;
@@ -124,9 +96,6 @@ const ActionButtons: React.FC<Props> = ({ actionState }) => {
     setCurrentPage,
   } = useCoSellContext();
 
-  console.log(actionState, "ActionButtons");
-  console.log(data, "---------------data-------------");
-
   const [isAccepting, setIsAccepting] = useState(false);
 
   const { DealType = requestPayload.dealType.po } = data ?? {};
@@ -136,8 +105,7 @@ const ActionButtons: React.FC<Props> = ({ actionState }) => {
 
   const isPendingFromAoInBound = isPending(data);
   const { t } = useTranslation();
-  const statusRequired = !!status;
-
+  const [showNextStep, setShowNextStep] = useState(false);
   const triggerAlert = ({ type, message, title }: AlertNotification) => {
     (ToastService as any)?.[type]?.(title, message);
   };
@@ -254,8 +222,12 @@ const ActionButtons: React.FC<Props> = ({ actionState }) => {
         disabled={actionState.nextStep.disabled}
         label={ActionButton.NEXT_STEP}
         overlay={
-          <div>{ModalTitle.NEXT_STEP}</div>
-          // <NextStepModal modalTitle={ModalTitle.NEXT_STEP} actions={{}} />
+          <NextStepDialog
+            modalTitle={ModalTitle.NEXT_STEP}
+            visible={showNextStep}
+            actions={{}}
+            onHide={() => setShowNextStep(false)}
+          />
         }
       />
 

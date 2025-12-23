@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import jwt from "jsonwebtoken";
 
-const PROTECTED_PATHS = new Set(["/portal", "/"]);
+const _PROTECTED_PATHS = new Set(["/portal", "/"]);
 
 export function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
@@ -13,12 +13,12 @@ export function proxy(req: NextRequest) {
     return NextResponse.next();
   }
 
-  let decoded: any = null;
+  let _decoded: any = null;
   if (token) {
     try {
-      decoded = jwt.decode(token);
+      _decoded = jwt.decode(token);
     } catch {
-      decoded = null;
+      _decoded = null;
     }
   }
 

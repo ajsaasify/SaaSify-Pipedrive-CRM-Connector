@@ -1,14 +1,13 @@
-import { useCoSellContext } from "@template/context/Cosell.context";
 import { requestPayload } from "@template/common/listCosell";
 import {
-  AlertNotification,
+  type AlertNotification,
   getErrorAlert,
 } from "@template/common/messageAlert";
 import { generateMessage } from "@template/common/messageAlert/generateMessage";
 import SaasifyService from "@template/services/saasify.service";
-import { RC3CosellResponse } from "@template/types/cosellResponse";
+import type { RC3CosellResponse } from "@template/types/cosellResponse";
 import { ResponseStatus } from "@template/enum/response.enum";
-import { PipedriveContext } from "@template/types/pipedriveContext";
+import type { PipedriveContext } from "@template/types/pipedriveContext";
 import {
   formatOptions,
   getResponseError,
@@ -17,15 +16,15 @@ import {
 } from "@template/utils/globalHelper";
 // import { GCPCosellResponse } from "@template/types/gcpCosell";
 import { createAceCosellTemplate } from "@template/common/createCosellPayload/ace";
-import { MappingList } from "@template/types/mapping";
-import { OptionTypes } from "@template/types/dropdown.options";
+import type { MappingList } from "@template/types/mapping";
+import type { OptionTypes } from "@template/types/dropdown.options";
 import {
   invitationEnable,
   isLaunchedCosell,
 } from "@template/component/actions/Buttons/actionDisabilityRules";
 import { fetchSolutions } from "@template/component/upsert-cosell/apiHandler";
 import { DropdownOptions, FetchOptions } from "@template/enum/options.enum";
-import React from "react";
+import type React from "react";
 import { labelMapper } from "./helper";
 import { getPartnerType } from "../cosell-list/apiHandler";
 
@@ -113,7 +112,7 @@ export const fetchCreateProps = async (
   setMappingCrmList: React.Dispatch<React.SetStateAction<MappingList[]>>,
   setloader: React.Dispatch<React.SetStateAction<boolean>>,
   triggerAlert: (alert: AlertNotification) => void,
-  context?: PipedriveContext
+  _context?: PipedriveContext
 ) => {
   try {
     setloader(true);
@@ -136,7 +135,7 @@ export const fetchCreateProps = async (
 };
 
 export const createCosell = async (
-  context: PipedriveContext,
+  dealId: string,
   setIsFetching: React.Dispatch<React.SetStateAction<boolean>>,
   setIsError: React.Dispatch<React.SetStateAction<any>>,
   triggerAlert: (alert: AlertNotification) => void,
@@ -154,17 +153,16 @@ export const createCosell = async (
     setIsFetching(true);
     const mappingCrmList =
       mappingCrm?.find(
-        (crmMapping) => crmMapping.ProviderName == requestPayload.cloud.aws
+        (crmMapping) => crmMapping.ProviderName === requestPayload.cloud.aws
       ) ?? {};
     const payload = generateCosellPayload(
       mappingCrmList,
       formValue.provider,
       formValue[labelMapper.sellerCode.name]
     );
-
     const responseData = await saasifyService.createCosellStep1(
       formValue[labelMapper.sellerCode.name],
-      payload
+      JSON.stringify(payload)
     );
     if (responseData?.Status === ResponseStatus.ERROR) {
       throw new Error(getResponseError(responseData?.ErrorDetail));
@@ -173,7 +171,7 @@ export const createCosell = async (
       const referenceId = responseData.Data.ReferenceID;
       await linkDeal(
         referenceId,
-        context,
+        dealId,
         setIsError,
         setIsFetching,
         triggerAlert,
@@ -194,29 +192,35 @@ export const createCosell = async (
 
 const linkDeal = async (
   referenceId: string,
-  context: PipedriveContext,
+  dealId: string,
   setIsError: React.Dispatch<React.SetStateAction<any>>,
   setIsFetching: React.Dispatch<React.SetStateAction<boolean>>,
   triggerAlert: (alert: AlertNotification) => void,
   setGenerateCosell: React.Dispatch<React.SetStateAction<any>>,
-  mappingCrmList: Record<string, any>,
+  _mappingCrmList: Record<string, any>,
   isExisting: number,
   setErrorState: React.Dispatch<React.SetStateAction<string>>,
   sellerCode: string
 ) => {
-  const dealId = context.crm.objectId.toString();
+  /**
+   * todo
+   * fix the payload
+   */
   const payload = {
-    MappingId: mappingCrmList?.Id,
+    // MappingId: mappingCrmList?.Id,
+    MappingId: 98,
     ReferenceId: !isExisting ? dealId : `${dealId}-${isExisting}`,
-    DealReferenceID: referenceId,
+    // DealReferenceID: referenceId,
+    DealReferenceID: "aebe751d-9199-4c98-af47-530616413ede",
     CRMEntity: requestPayload.crmEntity,
     IsSubmitOpportunity: requestPayload.isSubmitOpportunity,
     IsDuplicateOpportunity: requestPayload.isDuplicateOpportunity,
   };
 
   try {
-    const responseData = await saasifyService.importDeal(payload);
-
+    const responseData = await saasifyService.importDeal(
+      JSON.stringify(payload)
+    );
     if (responseData?.Status === ResponseStatus.ERROR) {
       throw new Error(getResponseError(responseData?.ErrorDetail));
     }
@@ -260,7 +264,7 @@ const fetchSpecificCoSell = async (
       sellerCode,
       referenceId
     );
-    if (responseData?.Status == ResponseStatus.ERROR) {
+    if (responseData?.Status === ResponseStatus.ERROR) {
       throw new Error(getResponseError(responseData?.ErrorDetail));
     }
     if (responseData?.Data) {

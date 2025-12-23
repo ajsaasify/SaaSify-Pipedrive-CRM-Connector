@@ -9,13 +9,13 @@ export interface DataPropertyType {
   customerCompanyName?: string;
   industryVertical?: string;
   industryOther?: string;
-  state?: string;
+  state?: string | null;
   streetAddress?: string;
   city?: string;
   postalCode?: string;
   country?: string;
   customerWebsite?: string;
-  nationalSecurity?:string;
+  nationalSecurity?: string;
   awsCosell?: string[];
   parentOpportunityId?: string | number;
   partnerProjectTitle?: string;
@@ -58,4 +58,61 @@ export interface opportunityType {
   "Net New Business"?: boolean;
   Expansion?: boolean;
   "Flat Renewal"?: boolean;
+}
+export interface ErrorValueInterface {
+  // Customer
+  customerDuns?: boolean;
+  customerCompanyName?: boolean;
+  country?: boolean;
+  state?: boolean;
+  city?: boolean;
+  streetAddress?: boolean;
+  postalCode?: boolean;
+  industryVertical?: boolean;
+  industryOther?: boolean;
+  customerWebsite?: boolean;
+
+  // Project / Opportunity
+  awsCosell?: boolean;
+  partnerPrimaryNeedAction?: boolean;
+  opportunityType?: boolean;
+  relatedOpportunityIndentifier?: boolean;
+  partnerProjectTitle?: boolean;
+  salesActivities?: boolean;
+  customerBusinessProblem?: boolean;
+  solutionsOffered?: boolean;
+  awsProducts?: boolean;
+  nextStep?: boolean;
+  useCase?: boolean;
+  deliveryModel?: boolean;
+  estimatedAWSRecurringRevenue?: boolean;
+  targetCloseDate?: boolean;
+  apnProgram?: boolean;
+
+  // Marketing
+  marketingSourceAction?: boolean;
+  marketingSourceIsMarketingFundsAction?: boolean;
+  marketingCampaign?: boolean;
+  marketingUseCase?: boolean;
+  marketingActivityChannel?: boolean;
+  isMarketingfunds?: boolean;
+
+  // Additional
+  crmUniqueIdentifier?: boolean;
+  competitiveTracking?: boolean;
+  otherCompetitors?: boolean;
+  awsAccountId?: boolean;
+  additonalComments?: boolean;
+
+  // Contact
+  contactFirstName?: boolean;
+  contactLastName?: boolean;
+  contactTitle?: boolean;
+  contactPhone?: boolean;
+  contactEmail?: boolean;
+
+  // Partner Sales Contact
+  primaryContactFirstName?: boolean;
+  primaryContactLastName?: boolean;
+  primaryContactEmail?: boolean;
 }

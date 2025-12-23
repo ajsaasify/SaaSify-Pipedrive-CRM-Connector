@@ -1,5 +1,5 @@
 import { backOff } from "exponential-backoff";
-import { OptionTypes } from "../types/dropdown.options";
+import type { OptionTypes } from "../types/dropdown.options";
 import { FetchOptions, DropdownOptions } from "../enum/options.enum";
 import SaasifyService from "./saasify.service";
 import { ResponseStatus } from "../enum/response.enum";
@@ -22,46 +22,46 @@ export class EntityService {
   }
   public fetchCountry(
     setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
-    cloud: string = requestPayload.cloud.aws
+    cloud: string = requestPayload.cloud.aws,
   ) {
     return this.fetchOptionsCountires(
       setOptionValues,
-      cloud == requestPayload.cloud.aws
+      cloud === requestPayload.cloud.aws
         ? DropdownOptions.COUNTRY
         : DropdownOptions.COUNTRY_GCP,
-      cloud
+      cloud,
     );
   }
 
   public fetchIndustry(
     setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
-    cloud: string = requestPayload.cloud.aws
+    cloud: string = requestPayload.cloud.aws,
   ) {
     return this.fetchOptions(
       FetchOptions.INDUSTRY,
       setOptionValues,
-      cloud == requestPayload.cloud.aws
+      cloud === requestPayload.cloud.aws
         ? DropdownOptions.INDUSTRY
         : DropdownOptions.INDUSTRY_GCP,
-      cloud
+      cloud,
     );
   }
 
   public fetchSalesActivities(
     setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
-    cloud: string = requestPayload.cloud.aws
+    cloud: string = requestPayload.cloud.aws,
   ) {
     return this.fetchOptions(
       FetchOptions.SALESACTIVITIES,
       setOptionValues,
       DropdownOptions.SALESACTIVITIES,
-      cloud
+      cloud,
     );
   }
 
   public fetchCampaignName(
     setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
-    cloud: string = requestPayload.cloud.aws
+    cloud: string = requestPayload.cloud.aws,
   ) {
     const fetchOption = cloud.includes(requestPayload.cloud.aws)
       ? FetchOptions.CAMPAIGN
@@ -71,309 +71,308 @@ export class EntityService {
       fetchOption,
       setOptionValues,
       DropdownOptions.CAMPAIGN,
-      cloud
+      cloud,
     );
   }
 
   public fetchContractVehicle(
     setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
-    cloud: string = requestPayload.cloud.aws
+    cloud: string = requestPayload.cloud.aws,
   ) {
     return this.fetchOptions(
       FetchOptions.CONTRACT_VEHICLE,
       setOptionValues,
       DropdownOptions.CONTRACT_VEHICLE,
-      cloud
+      cloud,
     );
   }
 
   public fetchDeliveryModel(
     setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
-    cloud: string = requestPayload.cloud.aws
+    cloud: string = requestPayload.cloud.aws,
   ) {
     return this.fetchOptions(
       FetchOptions.DELIVERYMODAL,
       setOptionValues,
-      cloud == requestPayload.cloud.aws
+      cloud === requestPayload.cloud.aws
         ? DropdownOptions.DELIVERYMODAL
         : DropdownOptions.DELIVERY_MODAL_GCP,
-      cloud
+      cloud,
     );
   }
 
   public fetchMarketingActivityChannel(
     setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
-    cloud: string = requestPayload.cloud.aws
+    cloud: string = requestPayload.cloud.aws,
   ) {
     return this.fetchOptions(
       FetchOptions.MARKETINGACTIVITY,
       setOptionValues,
       DropdownOptions.MARKETINGACTIVITY,
-      cloud
+      cloud,
     );
   }
 
   public fetchMarketingActivityUseCase(
     setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
-    cloud: string = requestPayload.cloud.aws
+    cloud: string = requestPayload.cloud.aws,
   ) {
     return this.fetchOptions(
       FetchOptions.MARKETINGUSECASE,
       setOptionValues,
       DropdownOptions.MARKETINGUSECASE,
-      cloud
+      cloud,
     );
   }
 
   public fetchPartnerPrimaryNeed(
     setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
-    cloud: string = requestPayload.cloud.aws
+    cloud: string = requestPayload.cloud.aws,
   ) {
     return this.fetchOptions(
       FetchOptions.PRIMARYNEED,
       setOptionValues,
       DropdownOptions.PRIMARYNEED,
-      cloud
+      cloud,
     );
   }
 
   public fetchCompetitiveTracking(
     setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
-    cloud: string = requestPayload.cloud.aws
+    cloud: string = requestPayload.cloud.aws,
   ) {
     return this.fetchOptions(
       FetchOptions.COMPETITIVETRACKING,
       setOptionValues,
       DropdownOptions.COMPETITIVETRACKING,
-      cloud
+      cloud,
     );
   }
 
   public fetchUseCase(
     setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
-    cloud: string = requestPayload.cloud.aws
+    cloud: string = requestPayload.cloud.aws,
   ) {
     return this.fetchOptions(
       FetchOptions.USECASE,
       setOptionValues,
       DropdownOptions.USECASE,
-      cloud
+      cloud,
     );
   }
 
   public fetchFilterConfig(
-    setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>
+    setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
   ) {
     return this.fetchOptionsFilter(
       setOptionValues,
-      DropdownOptions.FILTER_CONFIG
+      DropdownOptions.FILTER_CONFIG,
     );
   }
 
   public fetchStatus(
     setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
-    cloud: string = requestPayload.cloud.aws
+    cloud: string = requestPayload.cloud.aws,
   ) {
     return this.fetchOptions(
       FetchOptions.STATUS,
       setOptionValues,
       DropdownOptions.STATUS,
-      cloud
+      cloud,
     );
   }
 
   public fetchPartnerEngagement(
     setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
-    cloud?: string
+    cloud?: string,
   ) {
     return this.fetchOptions(
       FetchOptions.PARTNER_ENGAGEMENT,
       setOptionValues,
       DropdownOptions.PARTNER_ENGAGEMENT,
-      cloud
+      cloud,
     );
   }
 
   public fetchPartnerConnections(
     setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
-    sellerCode: string = requestPayload.sellerCode
+    sellerCode: string = requestPayload.sellerCode,
   ) {
     return this.fetchPartnerConnectionsProps(setOptionValues, sellerCode);
   }
 
   public fetchRejectionReason(
     setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
-    cloud: string = requestPayload.cloud.aws
+    cloud: string = requestPayload.cloud.aws,
   ) {
     return this.fetchOptions(
       FetchOptions.REJECTIONREASON,
       setOptionValues,
       DropdownOptions.REJECTIONREASON,
-      cloud
+      cloud,
     );
   }
 
   public fetchCustomerMarketplacePurchaseIntent(
     setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
-    cloud: string = requestPayload.cloud.aws
+    cloud: string = requestPayload.cloud.aws,
   ) {
     return this.fetchOptions(
       FetchOptions.PURCHASE_INTENT,
       setOptionValues,
       DropdownOptions.PURCHASE_INTENT,
-      cloud
+      cloud,
     );
   }
 
   public fetchSolutionArea(
     setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
-    cloud: string = requestPayload.cloud.amp
+    cloud: string = requestPayload.cloud.amp,
   ) {
     return this.fetchOptions(
       FetchOptions.SOLUTION_AREA,
       setOptionValues,
       DropdownOptions.SOLUTION_AREA,
-      cloud
+      cloud,
     );
   }
 
   public fetchSolutionPlay(
     setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
-    cloud: string = requestPayload.cloud.amp
+    cloud: string = requestPayload.cloud.amp,
   ) {
     return this.fetchOptions(
       FetchOptions.SOLUTION_PLAY,
       setOptionValues,
       DropdownOptions.SOLUTION_PLAY,
-      cloud
+      cloud,
     );
   }
 
   public fetchHelpType(
     setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
-    cloud: string = requestPayload.cloud.aws
+    cloud: string = requestPayload.cloud.aws,
   ) {
     return this.fetchOptions(
       FetchOptions.HELP_TYPE,
       setOptionValues,
       DropdownOptions.HELP_TYPE,
-      cloud
+      cloud,
     );
   }
 
   public fetchPartnerRole(
     setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
-    cloud: string = requestPayload.cloud.aws
+    cloud: string = requestPayload.cloud.aws,
   ) {
     return this.fetchOptions(
       FetchOptions.PARTNER_ROLE,
       setOptionValues,
       DropdownOptions.PARTNER_ROLE,
-      cloud
+      cloud,
     );
   }
 
   public fetchProcurementType(
     setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
-    cloud: string = requestPayload.cloud.aws
+    cloud: string = requestPayload.cloud.aws,
   ) {
     return this.fetchOptions(
       FetchOptions.PROCUREMENTTYPE,
       setOptionValues,
       DropdownOptions.PROCUREMENTTYPE,
-      cloud
+      cloud,
     );
   }
 
   public fetchClosedReason(
     setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
-    cloud: string = requestPayload.cloud.aws
+    cloud: string = requestPayload.cloud.aws,
   ) {
     return this.fetchOptions(
       FetchOptions.CLOSEDLOSTREASON,
       setOptionValues,
       DropdownOptions.CLOSEDLOSTREASON,
-      cloud
+      cloud,
     );
   }
 
   public fetchState(
     setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
-    cloud: string = requestPayload.cloud.aws
+    cloud: string = requestPayload.cloud.aws,
   ) {
     const isGcp = cloud?.includes(requestPayload.cloud.gcp);
     return this.fetchOptions(
       isGcp ? FetchOptions.STATES : FetchOptions.STATE,
       setOptionValues,
       isGcp ? DropdownOptions.COUNTRY_STATE_GCP : DropdownOptions.STATE,
-      cloud
+      cloud,
     );
   }
 
   public fetchStage(
     setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
-    cloud: string = requestPayload.cloud.aws
+    cloud: string = requestPayload.cloud.aws,
   ) {
     return this.fetchOptions(
       FetchOptions.STAGE,
       setOptionValues,
       DropdownOptions.STAGE,
-      cloud
+      cloud,
     );
   }
 
   public fetchCurrencyValue(
     setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
-    cloud: string = requestPayload.cloud.aws
+    cloud: string = requestPayload.cloud.aws,
   ) {
-    const isAws = cloud.includes(requestPayload.cloud.aws)
-      ;
+    const isAws = cloud.includes(requestPayload.cloud.aws);
     return this.fetchOptions(
       isAws ? FetchOptions.CURRENCYVALUE : FetchOptions.CURRENCY,
       setOptionValues,
       isAws ? DropdownOptions.CURRENCYVALUE : DropdownOptions.CURRENCY,
-      cloud
+      cloud,
     );
   }
 
   public fetchRegion(
     setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
-    cloud: string = requestPayload.cloud.aws
+    cloud: string = requestPayload.cloud.aws,
   ) {
     return this.fetchOptions(
       FetchOptions.REGION,
       setOptionValues,
       DropdownOptions.REGION,
-      cloud
+      cloud,
     );
   }
 
   public fetchProductFamily(
     setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
-    cloud: string = requestPayload.cloud.aws
+    cloud: string = requestPayload.cloud.aws,
   ) {
     return this.fetchOptions(
       FetchOptions.PRODUCT_FAMILY,
       setOptionValues,
       DropdownOptions.PRODUCT_FAMILY,
-      cloud
+      cloud,
     );
   }
 
   public fetchSupportLevel(
     setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
-    cloud: string = requestPayload.cloud.aws
+    cloud: string = requestPayload.cloud.aws,
   ) {
     return this.fetchOptions(
       FetchOptions.SUPPORT_LEVEL,
       setOptionValues,
       DropdownOptions.SUPPORT_LEVEL,
-      cloud
+      cloud,
     );
   }
 
   public async fetchProducts(
-    setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>
+    setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
   ) {
     try {
       const executeWithRetry = async () => {
@@ -391,8 +390,8 @@ export class EntityService {
       };
 
       await backOff(executeWithRetry, {
-        retry: (error, attemptNumber) => attemptNumber < 2,
-       startingDelay: 50,
+        retry: (_error, attemptNumber) => attemptNumber < 2,
+        startingDelay: 50,
       });
     } catch (error: any) {
       return {
@@ -402,7 +401,7 @@ export class EntityService {
     }
   }
   public async fetchProviders(
-    setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>
+    setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
   ) {
     try {
       const executeWithRetry = async () => {
@@ -420,7 +419,7 @@ export class EntityService {
       };
 
       await backOff(executeWithRetry, {
-        retry: (error, attemptNumber) => attemptNumber < 2,
+        retry: (_error, attemptNumber) => attemptNumber < 2,
         startingDelay: 50,
       });
     } catch (error: any) {
@@ -431,7 +430,7 @@ export class EntityService {
     }
   }
   public async fetchCrmList(
-    setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>
+    setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
   ) {
     try {
       const executeWithRetry = async () => {
@@ -448,8 +447,8 @@ export class EntityService {
       };
 
       await backOff(executeWithRetry, {
-        retry: (error, attemptNumber) => attemptNumber < 2,
-       startingDelay: 50,
+        retry: (_error, attemptNumber) => attemptNumber < 2,
+        startingDelay: 50,
       });
     } catch (error: any) {
       return {
@@ -460,7 +459,7 @@ export class EntityService {
   }
 
   public async fetchSellerCode(
-    setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>
+    setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
   ) {
     try {
       const executeWithRetry = async () => {
@@ -478,8 +477,8 @@ export class EntityService {
       };
 
       await backOff(executeWithRetry, {
-        retry: (error, attemptNumber) => attemptNumber < 2,
-       startingDelay: 50,
+        retry: (_error, attemptNumber) => attemptNumber < 2,
+        startingDelay: 50,
       });
     } catch (error: any) {
       return {
@@ -491,7 +490,7 @@ export class EntityService {
 
   public async fetchSolutions(
     setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
-    sellerCode: string
+    sellerCode: string,
   ) {
     try {
       const executeWithRetry = async () => {
@@ -508,8 +507,8 @@ export class EntityService {
       };
 
       await backOff(executeWithRetry, {
-        retry: (error, attemptNumber) => attemptNumber < 2,
-       startingDelay: 50,
+        retry: (_error, attemptNumber) => attemptNumber < 2,
+        startingDelay: 50,
       });
     } catch (error: any) {
       return {
@@ -521,19 +520,18 @@ export class EntityService {
 
   public async fetchPartnerConnectionsProps(
     setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
-    sellerCode: string
+    sellerCode: string,
   ) {
     try {
       const executeWithRetry = async () => {
-        const responseData = await this.saasifyService.getPartnerConnect(
-          sellerCode
-        );
+        const responseData =
+          await this.saasifyService.getPartnerConnect(sellerCode);
         if (responseData?.Data?.length) {
           const data = formatPartnerOptions(responseData.Data);
           updateOptionValue(
             data,
             setOptionValues,
-            DropdownOptions.PARTNER_CONNECT
+            DropdownOptions.PARTNER_CONNECT,
           );
           return { result: ResponseStatus.SUCCESS };
         }
@@ -544,8 +542,8 @@ export class EntityService {
       };
 
       await backOff(executeWithRetry, {
-        retry: (error, attemptNumber) => attemptNumber < 2,
-       startingDelay: 50,
+        retry: (_error, attemptNumber) => attemptNumber < 2,
+        startingDelay: 50,
       });
     } catch (error: any) {
       return {
@@ -559,7 +557,7 @@ export class EntityService {
     url: string,
     setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
     key: keyof OptionTypes,
-    cloud: string = requestPayload.cloud.aws
+    cloud: string = requestPayload.cloud.aws,
   ) => {
     try {
       const executeWithRetry = async () => {
@@ -567,7 +565,7 @@ export class EntityService {
         if (responseData?.Data?.length) {
           const data = formatOptions(
             responseData.Data,
-            cloud == requestPayload.cloud.gcp
+            cloud === requestPayload.cloud.gcp,
           );
           updateOptionValue(data, setOptionValues, key);
           return { result: ResponseStatus.SUCCESS, key };
@@ -579,8 +577,8 @@ export class EntityService {
       };
 
       await backOff(executeWithRetry, {
-        retry: (error, attemptNumber) => attemptNumber < 2,
-       startingDelay: 50,
+        retry: (_error, attemptNumber) => attemptNumber < 2,
+        startingDelay: 50,
       });
     } catch (error: any) {
       return {
@@ -593,7 +591,7 @@ export class EntityService {
   private fetchOptionsCountires = async (
     setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
     key: keyof OptionTypes,
-    cloud: string
+    cloud: string,
   ) => {
     try {
       const executeWithRetry = async () => {
@@ -602,7 +600,7 @@ export class EntityService {
           cloud?.includes(requestPayload.cloud.amp)
             ? await this.saasifyService.getEntity(
                 FetchOptions.COUNTRY_GCP,
-                cloud
+                cloud,
               )
             : await this.saasifyService.getCountires(cloud);
         if (responseData?.Data?.length) {
@@ -617,8 +615,8 @@ export class EntityService {
       };
 
       await backOff(executeWithRetry, {
-        retry: (error, attemptNumber) => attemptNumber < 2,
-       startingDelay: 50,
+        retry: (_error, attemptNumber) => attemptNumber < 2,
+        startingDelay: 50,
       });
     } catch (error: any) {
       return {
@@ -630,7 +628,7 @@ export class EntityService {
 
   private fetchOptionsFilter = async (
     setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
-    key: keyof OptionTypes
+    key: keyof OptionTypes,
   ) => {
     try {
       const executeWithRetry = async () => {
@@ -647,8 +645,8 @@ export class EntityService {
       };
 
       await backOff(executeWithRetry, {
-        retry: (error, attemptNumber) => attemptNumber < 2,
-       startingDelay: 50,
+        retry: (_error, attemptNumber) => attemptNumber < 2,
+        startingDelay: 50,
       });
     } catch (error: any) {
       return {

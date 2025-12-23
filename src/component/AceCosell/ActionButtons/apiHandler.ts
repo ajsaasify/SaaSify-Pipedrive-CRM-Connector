@@ -11,9 +11,9 @@ import { GCPCosellResponse } from "@template/types/gcpCosell";
 import { RC3CosellResponse } from "@template/types/cosellResponse";
 import { AmpCosellResponse } from "@template/types/ampCosell";
 import { requestPayload } from "@template/common/listCosell";
-import saasifyService from "@template/services/saasify.service";
 import { getResponseError } from "@template/utils/globalHelper";
 import { generateMessage } from "@template/common/messageAlert/generateMessage";
+import SaasifyService from "@template/services/saasify.service";
 
 // export const refreshCosell = async (
 //   aceCosell: AceCosellProps,
@@ -78,6 +78,8 @@ import { generateMessage } from "@template/common/messageAlert/generateMessage";
 //   }
 // };
 
+const saasifyService = new SaasifyService();
+
 export const refreshCosell = async (
   triggerAlert: (alert: AlertNotification) => void,
   setIsSpecificLoading: React.Dispatch<React.SetStateAction<boolean>>,
@@ -118,7 +120,7 @@ export const refreshCosell = async (
       responseData?.Data &&
       data?.CloudProvider?.includes(requestPayload?.cloud?.gcp)
     ) {
-      setData((prev) => ({
+      setData((prev: any) => ({
         ...prev,
         CoSellEntity: responseData?.Data?.CoSellEntity,
       }));

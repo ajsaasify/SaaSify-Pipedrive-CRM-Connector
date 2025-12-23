@@ -1,12 +1,13 @@
 import { useTranslation } from "react-i18next";
-import { RC3CosellResponse } from "../../types/cosellResponse";
+import type { RC3CosellResponse } from "../../types/cosellResponse";
 import { getFullName, getOpportunityOwner } from "../../utils/globalHelper";
 import { awsConstants } from "../constants/awsCosellFieldMappings";
 import { getValue } from "./accept";
+import { t } from "i18next";
 
 export const overviewSectionData = (data: RC3CosellResponse) => {
   const {
-    AwsSummary: { Insights = {} } = {},
+    AwsSummary = {},
     Identifier,
     LifeCycle,
     OpportunityTeam,
@@ -32,7 +33,7 @@ export const overviewSectionData = (data: RC3CosellResponse) => {
       },
       {
         label: t("awsCosell.overview.awsMarketplaceEngagementScore"),
-        value: getValue(Insights?.EngagementScore),
+        value: getValue(AwsSummary?.Insights?.EngagementScore),
       },
     ],
     [
@@ -62,7 +63,7 @@ export const overviewSectionData = (data: RC3CosellResponse) => {
     });
     commonSections[2].unshift({
       label: awsConstants.overview.awsRecommendedActions,
-      value: getValue(Insights?.NextBestActions),
+      value: getValue(AwsSummary?.Insights?.NextBestActions),
     });
   } else {
     commonSections[0].push({
@@ -75,7 +76,7 @@ export const overviewSectionData = (data: RC3CosellResponse) => {
     });
     commonSections[1].push({
       label: awsConstants.overview.awsRecommendedActions,
-      value: getValue(Insights?.NextBestActions),
+      value: getValue(AwsSummary?.Insights?.NextBestActions),
     });
     commonSections[2].push({
       label: "",
@@ -92,17 +93,17 @@ export const alertPopupSegment = (aceCosell: RC3CosellResponse) => {
   const labels = {
     actionRequired: [
       {
-        label: alertSection.apnReviewReason,
+        label: t("awsCosell.alertSection.apnReviewReason"),
         value: getValue(LifeCycle?.ReviewStatusReason),
       },
       {
-        label: alertSection.apnReviewComment,
+        label: t("awsCosell.alertSection.apnReviewComment"),
         value: getValue(LifeCycle?.ReviewComments),
       },
     ],
     rejected: [
       {
-        label: alertSection.rejectedReason,
+        label: t("awsCosell.alertSection.rejectedReason"),
         value: LifeCycle?.ReviewStatusReason ?? alertSection.noReasonProvide,
       },
     ],

@@ -1,3 +1,5 @@
+import { t } from "i18next";
+
 export const labelMapper = {
   cloudProvider: "Cloud Provider",
   providers: [{ label: "ACE (APN Customer Engagements)", value: "AWS" }],
@@ -5,9 +7,11 @@ export const labelMapper = {
     name: "provider",
   },
   sellerCode: {
-    label: "Seller Account",
-    placeHolder: "Select Seller Account",
+    label: t("awsCosell.inputLabelMapper.sellerCode.label"),
+    placeHolder: t("awsCosell.inputLabelMapper.sellerCode.placeHolder"),
     name: "sellerCode",
-    validationMessage:"Seller Account is required"
+    validationMessage: t(
+      "awsCosell.inputLabelMapper.sellerCode.validationMessage",
+    ),
   },
 };

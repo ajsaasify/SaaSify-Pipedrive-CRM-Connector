@@ -1,6 +1,3 @@
-import { MeterDataType } from "../../types/private-offers/dynamicColumn";
-import { formatUTCDate } from "../../utils/globalHelper";
-
 export const privateOffersList = [
   {
     TotalRows: 1,
@@ -54,8 +51,11 @@ export const cppoUsageDimenstionColumn = [
   { value: "Price", header: "Rate (USD)" },
 ];
 
-
-export const ampUsageDimenstionColumn: { value: string; header: string; checked: string | null }[] = [
+export const ampUsageDimenstionColumn: {
+  value: string;
+  header: string;
+  checked: string | null;
+}[] = [
   { value: "Description", header: "Enabled", checked: null },
   { value: "MeterName", header: "ID", checked: null },
   { value: "MeterDescription", header: "Display Name", checked: null },
@@ -63,20 +63,44 @@ export const ampUsageDimenstionColumn: { value: string; header: string; checked:
   { value: "Price", header: "Price per unit in USD", checked: null },
 ];
 
-export const getUpdatedColumns = (pricingJson: any): { value: string; header: string; checked: any }[] => {
+export const getUpdatedColumns = (
+  pricingJson: any,
+): { value: string; header: string; checked: any }[] => {
   const columns = ampUsageDimenstionColumn.map((col) => ({
     ...col,
     checked: null,
   }));
 
-  const meterData = pricingJson?.MeterData ? JSON.parse(pricingJson.MeterData) : [];;
+  const meterData = pricingJson?.MeterData
+    ? JSON.parse(pricingJson.MeterData)
+    : [];
   const addedColumns = new Set(columns.map((col) => col.value));
 
   const dynamicColumns = [
-    { key: "IsMonthlyEnabled", value: "MonthlyQuantityIncludedInBase", header: "1-Month Quantity Included in Base", checked: "IsMonthlyUnlimitedQuantity" },
-    { key: "IsAnnualEnabled", value: "AnnualQuantityIncludedInBase", header: "1-Year Quantity Included in Base", checked: "IsAnnuallyUnlimitedQuantity" },
-    { key: "IsTwoyearEnabled", value: "TwoYearQuantityIncludedInBase", header: "2-Year Quantity Included in Base", checked: "IsTwoYearUnlimitedQuantity" },
-    { key: "IsThreeyearEnabled", value: "ThreeYearQuantityIncludedInBase", header: "3-Year Quantity Included in Base", checked: "IsThreeYearUnlimitedQuantity" },
+    {
+      key: "IsMonthlyEnabled",
+      value: "MonthlyQuantityIncludedInBase",
+      header: "1-Month Quantity Included in Base",
+      checked: "IsMonthlyUnlimitedQuantity",
+    },
+    {
+      key: "IsAnnualEnabled",
+      value: "AnnualQuantityIncludedInBase",
+      header: "1-Year Quantity Included in Base",
+      checked: "IsAnnuallyUnlimitedQuantity",
+    },
+    {
+      key: "IsTwoyearEnabled",
+      value: "TwoYearQuantityIncludedInBase",
+      header: "2-Year Quantity Included in Base",
+      checked: "IsTwoYearUnlimitedQuantity",
+    },
+    {
+      key: "IsThreeyearEnabled",
+      value: "ThreeYearQuantityIncludedInBase",
+      header: "3-Year Quantity Included in Base",
+      checked: "IsThreeYearUnlimitedQuantity",
+    },
   ];
 
   dynamicColumns.forEach(({ key, value, header, checked }) => {
@@ -88,8 +112,6 @@ export const getUpdatedColumns = (pricingJson: any): { value: string; header: st
   });
   return columns;
 };
-
-
 
 export const schedulePriceColumn = [
   { value: "Date", header: "Invoice Date" },
@@ -117,23 +139,30 @@ export const cppoProductDimenstionColumn = [
 export const cppoWholeSalePriceColumn = [
   { value: "Description", header: "Name" },
   { value: "MarketplaceDescription", header: "Description" },
-  { value: "Price", header: "Rate (USD)" }
-]
-
+  { value: "Price", header: "Rate (USD)" },
+];
 
 export const featureListColumn = [
   {
-    value: "Feature", header: "Feature",
+    value: "Feature",
+    header: "Feature",
   },
   {
-    value: "Value", header: "Value", body: (value: any) => value.IsAddDetailsAvailable ? value.DatesAndQuantitiesText : value.Value,
+    value: "Value",
+    header: "Value",
+    body: (value: any) =>
+      value.IsAddDetailsAvailable ? value.DatesAndQuantitiesText : value.Value,
   },
 ];
 
 export const installmentsColumn = [
   { value: "InstallmentDate", header: "Installment Date" },
   { value: "Flatfee", header: "Flat Fee" },
-  { value: "DiscountOnUsage", header: "Discount on usage (%)", body: (value: any) => value.DiscountOnUsage || value.DiscountOnCommitment },
+  {
+    value: "DiscountOnUsage",
+    header: "Discount on usage (%)",
+    body: (value: any) => value.DiscountOnUsage || value.DiscountOnCommitment,
+  },
 ];
 
 export const tagsColumn = [

@@ -1,13 +1,13 @@
-import { Toast } from 'primereact/toast';
-import { forwardRef } from 'react';
+import { Toast } from "primereact/toast";
+import { forwardRef } from "react";
 
 export type ToastSeverity =
-  | 'success'
-  | 'info'
-  | 'warn'
-  | 'error'
-  | 'secondary'
-  | 'contrast';
+  | "success"
+  | "info"
+  | "warn"
+  | "error"
+  | "secondary"
+  | "contrast";
 
 export interface ToastMessage {
   severity: ToastSeverity;
@@ -16,10 +16,10 @@ export interface ToastMessage {
   life?: number;
 }
 
-const AppToast = forwardRef<Toast, {}>((_, ref) => {
+const AppToast = forwardRef<Toast, any>((_, ref) => {
   return <Toast ref={ref} />;
 });
 
-AppToast.displayName = 'AppToast';
+AppToast.displayName = "AppToast";
 
 export default AppToast;

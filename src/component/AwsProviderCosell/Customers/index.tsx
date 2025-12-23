@@ -1,21 +1,16 @@
+import { labelMapper } from "@template/utils/labelMappers";
 import AccordionComponent from "@template/component/ui-components/PipedriveAccordion";
 import { useCoSellContext } from "@template/context/Cosell.context";
-import { useEffect } from "react";
 import { customerSectionData as segments } from "../../../common/section/customer";
 import {
   DisplayField,
   Tile,
 } from "@template/component/ui-components/detailview-components";
-import { labelMapper } from "@template/utils/labelMappers";
 
 export const CustomerCard: React.FC = () => {
   const { data } = useCoSellContext();
   const segmentData = segments(data || {});
 
-  const { LifeCycle } = data?.CoSellEntity || {};
-  useEffect(() => {
-    // console.log(segmentData);
-  }, [data]);
   return (
     <AccordionComponent
       className="card-view"
@@ -30,6 +25,7 @@ export const CustomerCard: React.FC = () => {
                   <hr />
                   {segmentData.customerDetails.map((fields, idx) => (
                     <DisplayField
+                      // biome-ignore lint/suspicious/noArrayIndexKey: Index used as key
                       key={idx}
                       items={fields.map((item, i) => ({
                         ...item,
@@ -45,6 +41,7 @@ export const CustomerCard: React.FC = () => {
                   <hr />
                   {segmentData.endUser.map((fields, idx) => (
                     <DisplayField
+                      // biome-ignore lint/suspicious/noArrayIndexKey: Index used as key
                       key={idx}
                       items={fields.map((item, i) => ({
                         ...item,

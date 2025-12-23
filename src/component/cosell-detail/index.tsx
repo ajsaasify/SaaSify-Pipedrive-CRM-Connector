@@ -98,7 +98,7 @@ const CosellDetailView = () => {
 
   useEffect(() => {
     if (!currentPage?.params?.referenceId) return;
-    initSdk(1000, 500);
+    initSdk(window.outerWidth, window.outerHeight);
     init();
   }, []);
 
@@ -112,12 +112,6 @@ const CosellDetailView = () => {
   } else {
     return (
       <div className="w-full">
-        {/* <ActionBar
-          defaultView={defaultView}
-          isDefautView={true}
-          actionState={actionState}
-          onRefresh={() => console.log("refresh")}
-        /> */}
         <CosellDetailHeader
           setCurrentPage={setCurrentPage}
           actionState={actionState}

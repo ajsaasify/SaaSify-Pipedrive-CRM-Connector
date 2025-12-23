@@ -11,7 +11,7 @@ export const isFieldTooShort = (value: string, min: number) =>
 export const fieldChecks = (
   formValue: any,
   readOnlyFields: string[],
-  isNationalSecurities: boolean
+  isNationalSecurities: boolean,
 ) => {
   const isReadOnly = (field: string): boolean => readOnlyFields.includes(field);
   const isInvalidField = (field: string): boolean => {
@@ -93,14 +93,14 @@ export const fieldChecks = (
       field: labelMapper.state.name,
       condition:
         !isNationalSecurities &&
-        formValue?.country == labelMapper.state.value &&
+        formValue?.country === labelMapper.state.value &&
         !formValue.state &&
         !isReadOnly(labelMapper.state.name),
     },
     {
       field: labelMapper.industryOther.name,
       condition:
-        formValue?.industryVertical == labelMapper?.industryVertical?.value &&
+        formValue?.industryVertical === labelMapper?.industryVertical?.value &&
         !formValue?.industryOther &&
         !isReadOnly(labelMapper.industryOther.name),
     },

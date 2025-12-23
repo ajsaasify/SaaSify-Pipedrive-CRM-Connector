@@ -1,6 +1,7 @@
 import CosellDetailView from "@template/component/cosell-detail";
-import { ModelType } from "@template/enum/pipedrive.enum";
 
-export default function CosellModelPage({ type }: { type: ModelType }) {
-    return <CosellDetailView />
+export default function CosellModelPage() {
+  return <CosellDetailView />;
 }
+
+// ... wait, I need to see the file content to match exactly. I'll read it first.

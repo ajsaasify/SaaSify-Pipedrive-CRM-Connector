@@ -1,9 +1,9 @@
 import { validationConstraint } from "@template/common/forms/buttonActionRules";
 import { requestPayload } from "@template/common/listCosell";
-import { AmpCosellResponse } from "@template/types/ampCosell";
-import { RC3CosellResponse } from "@template/types/cosellResponse";
+import type { AmpCosellResponse } from "@template/types/ampCosell";
+import type { RC3CosellResponse } from "@template/types/cosellResponse";
 import { PartnerType } from "@template/enum/partnerType.enum";
-import { GcpStage, StageState } from "@template/enum/stage.enum";
+import { StageState } from "@template/enum/stage.enum";
 import { StatusState } from "@template/enum/status.enum";
 // import { GCPCosellResponse } from "@template/types/gcpCosell";
 import { validateDealName } from "@template/utils/globalHelper";
@@ -14,7 +14,7 @@ export const invitationEnable = (
   status?: string,
   oid?: string,
   dealType: string = requestPayload.dealType.ao,
-  data?: RC3CosellResponse
+  data?: RC3CosellResponse,
 ): boolean => {
   if ((oid || data?.CoSellEntity?.Invitation?.Id)?.includes(requestPayload.oid))
     return true;
@@ -28,13 +28,13 @@ export const invitationEnable = (
 
 export const invitationPendingEnable = (
   status?: string,
-  dealType: string = requestPayload.dealType.ao
+  dealType: string = requestPayload.dealType.ao,
 ): boolean => {
   return (
     validationConstraints.invitationPending.status.includes(
-      status as StatusState
+      status as StatusState,
     ) &&
-    (dealType == requestPayload.dealType.ao ||
+    (dealType === requestPayload.dealType.ao ||
       dealType
         ?.toLocaleLowerCase()
         ?.includes(requestPayload?.dealType?.multiPartner))
@@ -46,17 +46,17 @@ export function editDisable(
   stage?: string,
   oid?: string,
   dealType?: string,
-  data?: RC3CosellResponse
+  data?: RC3CosellResponse,
 ): boolean {
   if (invitationEnable(status, oid, dealType, data)) return false;
   if (
-    status == StatusState.ACCEPTED &&
-    data?.CoSellEntity?.LifeCycle?.ReviewStatus == StatusState?.SUBMITTED
+    status === StatusState.ACCEPTED &&
+    data?.CoSellEntity?.LifeCycle?.ReviewStatus === StatusState?.SUBMITTED
   )
     return false;
   if (
     validationConstraints.editCosell.approve.status.includes(
-      status as StatusState
+      status as StatusState,
     ) &&
     !validationConstraints.editCosell.reject.stage.includes(stage as StageState)
   )
@@ -70,18 +70,18 @@ export function updateDisable(
   partnerType?: string[],
   oid?: string,
   dealType?: string,
-  data?: RC3CosellResponse
+  data?: RC3CosellResponse,
 ): boolean {
   if (invitationEnable(status, oid, dealType, data)) return false;
   return !!(
     validationConstraints.updateCosell.approve.status.includes(
-      status as StatusState
+      status as StatusState,
     ) &&
     validationConstraints.updateCosell.approve.stage.includes(
-      stage as StageState
+      stage as StageState,
     ) &&
     partnerType?.includes(
-      validationConstraints.updateCosell?.approve.partnerType
+      validationConstraints.updateCosell?.approve.partnerType,
     )
   );
 }
@@ -91,13 +91,13 @@ export function changeStageDisable(
   stage?: string,
   oid?: string,
   dealType?: string,
-  data?: RC3CosellResponse
+  data?: RC3CosellResponse,
 ): boolean {
   if (invitationEnable(status, oid, dealType, data)) return false;
   if (!stage || !status) return false;
   if (
-    status == StatusState.ACCEPTED &&
-    data?.CoSellEntity?.LifeCycle?.ReviewStatus == StatusState?.SUBMITTED
+    status === StatusState.ACCEPTED &&
+    data?.CoSellEntity?.LifeCycle?.ReviewStatus === StatusState?.SUBMITTED
   )
     return false;
   if (validationConstraints.changeStage.status.includes(status as StatusState))
@@ -110,7 +110,7 @@ export function changeStageDisable(
 export function showSaasDocs(
   status?: string,
   stage?: string,
-  partnerType?: string[]
+  partnerType?: string[],
 ): boolean {
   return !!(
     [StatusState.APPROVED].includes(status as StatusState) &&
@@ -124,13 +124,13 @@ export function transferDisable(
   stage?: string,
   oid?: string,
   dealType?: string,
-  data?: RC3CosellResponse
+  data?: RC3CosellResponse,
 ): boolean {
   if (invitationEnable(status, oid, dealType, data)) return false;
   if (!stage || !status) return false;
   if (
-    status == StatusState.ACCEPTED &&
-    data?.CoSellEntity?.LifeCycle?.ReviewStatus == StatusState?.SUBMITTED
+    status === StatusState.ACCEPTED &&
+    data?.CoSellEntity?.LifeCycle?.ReviewStatus === StatusState?.SUBMITTED
   )
     return false;
   if (
@@ -148,14 +148,14 @@ export function associateDisable(
   offer?: boolean,
   oid?: string,
   dealType?: string,
-  data?: RC3CosellResponse
+  data?: RC3CosellResponse,
 ): boolean {
   if (invitationEnable(status, oid, dealType, data)) return false;
   if (offer) return false;
   if (!stage || !status) return false;
   if (
-    status == StatusState.ACCEPTED &&
-    data?.CoSellEntity?.LifeCycle?.ReviewStatus == StatusState?.SUBMITTED
+    status === StatusState.ACCEPTED &&
+    data?.CoSellEntity?.LifeCycle?.ReviewStatus === StatusState?.SUBMITTED
   )
     return false;
   if (
@@ -169,15 +169,15 @@ export function associateDisable(
 
 export function nextStepDisable(
   status?: string,
-  stage?: string,
+  _stage?: string,
   oid?: string,
   dealType?: string,
-  data?: RC3CosellResponse
+  data?: RC3CosellResponse,
 ): boolean {
   if (invitationEnable(status, oid, dealType, data)) return false;
   if (
     validationConstraints.nextStep.reject?.status.includes(
-      status as StatusState
+      status as StatusState,
     )
   )
     return false;
@@ -186,7 +186,7 @@ export function nextStepDisable(
 
 export function linkCrmDisable(
   cosell: RC3CosellResponse,
-  dealType: string
+  dealType: string,
 ): boolean {
   const { ReviewStatus, Stage } = cosell?.CoSellEntity?.LifeCycle ?? {};
   const status = ReviewStatus ?? cosell?.CloudProviderStatus;
@@ -224,7 +224,7 @@ export const changeStageAmp = (cosell: AmpCosellResponse): boolean => {
 export const editCosellAmp = (cosell: AmpCosellResponse): boolean => {
   const status = cosell?.CoSellEntity?.CloudProviderDetails?.Status;
   return [StatusState.ACCEPTED, StatusState.DRAFT].includes(
-    status as StatusState
+    status as StatusState,
   );
 };
 
@@ -249,7 +249,7 @@ export const isAddMultipartner = (list: RC3CosellResponse): boolean => {
     list?.CoSellEntity?.LifeCycle?.ReviewStatus ?? list?.CloudProviderStatus;
   if (!status) return false;
   return [StatusState.APPROVED, StatusState.SUBMITTED]?.includes(
-    status as StatusState
+    status as StatusState,
   );
 };
 
@@ -272,6 +272,6 @@ export const isDisplayOid = (list: RC3CosellResponse): boolean => {
     list?.CloudProviderStatus ?? list?.CoSellEntity?.Invitation?.Status ?? "";
 
   return [StatusState.PENDING, StatusState.REJECTED]?.includes(
-    status as StatusState
+    status as StatusState,
   );
 };

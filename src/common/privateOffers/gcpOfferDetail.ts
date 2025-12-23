@@ -1,9 +1,4 @@
-import {
-  camelCasetoReadView,
-  displayBoolean,
-  fallbackAsNa,
-  formatUTCDate,
-} from "../../utils/globalHelper";
+import { fallbackAsNa, formatUTCDate } from "../../utils/globalHelper";
 
 export const offerBasicDetails = (offers: any) => {
   return [
@@ -31,7 +26,7 @@ export const offerBasicDetails = (offers: any) => {
       {
         label: "Offer ID",
         value: fallbackAsNa(
-          offers.DealBasicDetails.AWSCPOfferData?.[0]?.OfferID
+          offers.DealBasicDetails.AWSCPOfferData?.[0]?.OfferID,
         ),
       },
       {
@@ -95,33 +90,40 @@ export const offerCustomerDetails = (offers: any) => {
 };
 
 export const offerCloudDetails = (offers: any) => {
-  const OfferDuration = offers?.DealTermDetails?.OfferTermDetailsJson?.ContractDuration;
-  const PaymentScheduleName = offers?.DealTermDetails?.OfferTermDetailsJson?.PaymentScheduleName;
-  let DurationValue;
-  if(PaymentScheduleName === "Quarterly"){
-    DurationValue = `${OfferDuration} ${OfferDuration > 1 ? "Quarters" : "Quarter"}`
-  }else if(PaymentScheduleName === "Annually"){
-    DurationValue = `${OfferDuration} ${OfferDuration > 1 ? "Years" : "Year"}`
-  }else{
-    DurationValue = `${OfferDuration} ${OfferDuration > 1 ? "Months" : "Month"}`
+  const OfferDuration =
+    offers?.DealTermDetails?.OfferTermDetailsJson?.ContractDuration;
+  const PaymentScheduleName =
+    offers?.DealTermDetails?.OfferTermDetailsJson?.PaymentScheduleName;
+  let DurationValue: any;
+  if (PaymentScheduleName === "Quarterly") {
+    DurationValue = `${OfferDuration} ${OfferDuration > 1 ? "Quarters" : "Quarter"}`;
+  } else if (PaymentScheduleName === "Annually") {
+    DurationValue = `${OfferDuration} ${OfferDuration > 1 ? "Years" : "Year"}`;
+  } else {
+    DurationValue = `${OfferDuration} ${OfferDuration > 1 ? "Months" : "Month"}`;
   }
-  const OfferStartType = offers?.DealTermDetails?.OfferTermDetailsJson?.OfferStartType;
+  const OfferStartType =
+    offers?.DealTermDetails?.OfferTermDetailsJson?.OfferStartType;
   const offerTypeProductName = offers?.DealTermDetails?.ProductName;
   let OfferStartTypeValue = "";
-  if (OfferStartType === "CustomerAcceptance"){
-   OfferStartTypeValue = offerTypeProductName ? "On Customer Acceptance" : "On Offer approval";
-  }else{ // need to check the offerStartType is SheduledStartDate
-    OfferStartTypeValue = "Schedule start date"
+  if (OfferStartType === "CustomerAcceptance") {
+    OfferStartTypeValue = offerTypeProductName
+      ? "On Customer Acceptance"
+      : "On Offer approval";
+  } else {
+    // need to check the offerStartType is SheduledStartDate
+    OfferStartTypeValue = "Schedule start date";
   }
-  const MetricDiscounts = offers?.DealTermDetails?.OfferTermDetailsJson?.IsMetricDiscountsEnabled;
+  const MetricDiscounts =
+    offers?.DealTermDetails?.OfferTermDetailsJson?.IsMetricDiscountsEnabled;
   const metricDiscountValue = MetricDiscounts ? "Yes" : "No";
   const AgreementName = offers?.DealTermDetails?.AgreementFileName;
   const AgreementUrl = offers?.DealTermDetails?.AgreementURL;
-  let AgreementType;
-  if(AgreementName && AgreementUrl){
-    AgreementType = AgreementName;// need to set the agreementUrl for the condition
-  }else{
-    AgreementType = "Google Cloud Marketplace Standard EULA"
+  let AgreementType: any;
+  if (AgreementName && AgreementUrl) {
+    AgreementType = AgreementName; // need to set the agreementUrl for the condition
+  } else {
+    AgreementType = "Google Cloud Marketplace Standard EULA";
   }
   const { extraData = {} } = offers.DealTermDetails.AgreementData || {};
 
@@ -130,19 +132,19 @@ export const offerCloudDetails = (offers: any) => {
       {
         label: "Product",
         value: fallbackAsNa(
-          offers?.DealTermDetails?.OfferTermDetailsJson?.OfferDescription
+          offers?.DealTermDetails?.OfferTermDetailsJson?.OfferDescription,
         ),
       },
       {
         label: "Plan",
         value: fallbackAsNa(
-          offers?.DealTermDetails?.OfferTermDetailsJson?.PlanDescription
+          offers?.DealTermDetails?.OfferTermDetailsJson?.PlanDescription,
         ),
       },
       {
         label: "Payment Schedule",
         value: fallbackAsNa(
-          offers?.DealTermDetails?.OfferTermDetailsJson?.PaymentScheduleName
+          offers?.DealTermDetails?.OfferTermDetailsJson?.PaymentScheduleName,
         ),
       },
     ],
@@ -155,7 +157,8 @@ export const offerCloudDetails = (offers: any) => {
       {
         label: "Offer Acceptance Deadline",
         value: fallbackAsNa(
-          offers?.DealTermDetails?.OfferTermDetailsJson?.OfferAcceptanceDeadline
+          offers?.DealTermDetails?.OfferTermDetailsJson
+            ?.OfferAcceptanceDeadline,
         ),
       },
       {
@@ -166,7 +169,9 @@ export const offerCloudDetails = (offers: any) => {
     [
       {
         label: "Configure Auto-Renew",
-        value: extraData?.isAutoRenew ? `Customer can auto-renew ${extraData?.numberOfRenewals} times`: "Customer can't auto-renew",
+        value: extraData?.isAutoRenew
+          ? `Customer can auto-renew ${extraData?.numberOfRenewals} times`
+          : "Customer can't auto-renew",
       },
       {
         label: "Metric Discounts",
@@ -175,25 +180,27 @@ export const offerCloudDetails = (offers: any) => {
       {
         label: "Proration",
         value: fallbackAsNa(
-          offers?.DealTermDetails?.OfferTermDetailsJson?.Proration
+          offers?.DealTermDetails?.OfferTermDetailsJson?.Proration,
         ),
       },
     ],
     [
       {
         label: "Monthly Flat Fee",
-        value:fallbackAsNa( `$${offers?.DealPricingDetails?.PricingJson?.MonthlyFlatFee}`)
+        value: fallbackAsNa(
+          `$${offers?.DealPricingDetails?.PricingJson?.MonthlyFlatFee}`,
+        ),
       },
       {
         label: "Discount on usage",
         value: fallbackAsNa(
-          `${offers?.DealPricingDetails?.PricingJson?.DiscountOnUsage}%`
+          `${offers?.DealPricingDetails?.PricingJson?.DiscountOnUsage}%`,
         ),
       },
       {
         label: "Total Contract Value",
         value: fallbackAsNa(
-          offers?.DealPricingDetails?.PricingJson?.TotalContractValue
+          offers?.DealPricingDetails?.PricingJson?.TotalContractValue,
         ),
       },
     ],
@@ -209,28 +216,28 @@ export const offerCloudDetails = (offers: any) => {
 export const renderSubscription = (subscriptions: any) => {
   let SaaSSubscriptionResourceID = returnValueFromList(
     "SaaSSubscriptionResourceID",
-    subscriptions?.SubscriptionDetails
+    subscriptions?.SubscriptionDetails,
   );
-  if (SaaSSubscriptionResourceID == "--")
+  if (SaaSSubscriptionResourceID === "--")
     SaaSSubscriptionResourceID = returnValueFromListDis(
       "SaaS Subscription Resource ID",
-      subscriptions?.SubscriptionDetails
+      subscriptions?.SubscriptionDetails,
     );
   const customerEmail = returnValueFromList(
     "CustomerEmail",
-    subscriptions?.SubscriptionDetails
+    subscriptions?.SubscriptionDetails,
   );
   const customerName = returnValueFromList(
     "CustomerName",
-    subscriptions?.SubscriptionDetails
+    subscriptions?.SubscriptionDetails,
   );
   const customerStatus = returnValueFromList(
     "Subscribed",
-    subscriptions?.SubscriptionDetails
+    subscriptions?.SubscriptionDetails,
   );
   const ActivationDate = returnValueFromList(
     "ActivatedON",
-    subscriptions?.SubscriptionDetails
+    subscriptions?.SubscriptionDetails,
   );
 
   const SaaSSubscriptionName = subscriptions?.Headers?.SubscriptionName;
@@ -249,7 +256,6 @@ export const renderSubscription = (subscriptions: any) => {
     [
       { label: "Customer Email", value: fallbackAsNa(customerEmail) },
       { label: "Customer Name", value: fallbackAsNa(customerName) },
-
     ],
     [
       { label: "Status", value: fallbackAsNa(customerStatus) },
@@ -261,15 +267,15 @@ export const renderSubscription = (subscriptions: any) => {
 export const renderPurchaseAttributes = (subscriptions: any) => {
   const chargebeeId = returnValueFromList(
     "ChargebeeCustomerId",
-    subscriptions?.SubscriptionDetails
+    subscriptions?.SubscriptionDetails,
   );
   const chargebeeSubscriptionURL = returnValueFromList(
     "ChargebeeSubscriptionDetail",
-    subscriptions?.SubscriptionDetails
+    subscriptions?.SubscriptionDetails,
   );
   const chargebeeSubscriptionID = returnValueFromList(
     "ChargebeeSubscriptionId",
-    subscriptions?.SubscriptionDetails
+    subscriptions?.SubscriptionDetails,
   );
   return [
     [
@@ -295,51 +301,51 @@ export const renderPurchaseAttributes = (subscriptions: any) => {
 export const renderViewDetailsOverlay = (subscriptions: any) => {
   const companyName = returnValueFromList(
     "Company",
-    subscriptions?.PaymentDetails
+    subscriptions?.PaymentDetails,
   );
   const transactionRefferenceId = returnValueFromList(
     "TransactionReferenceId",
-    subscriptions?.PaymentDetails
+    subscriptions?.PaymentDetails,
   );
   const ExpectedPaymentDate = returnValueFromList(
     "ExpectedPaymentDate",
-    subscriptions?.PaymentDetails
+    subscriptions?.PaymentDetails,
   );
   const TransactionAmount = returnValueFromList(
     "TransactionAmount",
-    subscriptions?.PaymentDetails
+    subscriptions?.PaymentDetails,
   );
   const ExpectedAmountInISVCurrency = returnValueFromList(
     "SaaSifyEarningAmount",
-    subscriptions?.PaymentDetails
+    subscriptions?.PaymentDetails,
   );
   const EarningAmount = returnValueFromList(
     "EarningAmount",
-    subscriptions?.PaymentDetails
+    subscriptions?.PaymentDetails,
   );
   const ISVCurrencyCode = returnValueFromList(
     "ISVCurrencyCode",
-    subscriptions?.PaymentDetails
+    subscriptions?.PaymentDetails,
   );
   const StoreFee = returnValueFromList(
     "StoreFee",
-    subscriptions?.PaymentDetails
+    subscriptions?.PaymentDetails,
   );
   const StoreFeeInPercent = returnValueFromList(
     "StoreFeeInPercent",
-    subscriptions?.PaymentDetails
+    subscriptions?.PaymentDetails,
   );
   const PayDate = returnValueFromList(
     "EarningAmount",
-    subscriptions?.PaymentDetails
+    subscriptions?.PaymentDetails,
   );
   const subsId = returnValueFromList(
     "SaaSSubscriptionResourceID",
-    subscriptions?.PaymentDetails
+    subscriptions?.PaymentDetails,
   );
   const PaymentStatus = returnValueFromList(
     "PaymentStatus",
-    subscriptions?.PaymentDetails
+    subscriptions?.PaymentDetails,
   );
   return [
     {
@@ -510,12 +516,13 @@ export const renderViewDetails = [
 ];
 
 const returnValueFromList = (attribute: string, SubscriptionDetails?: any[]) =>
-  SubscriptionDetails?.find((value) => value?.AttributeName == attribute)
+  SubscriptionDetails?.find((value) => value?.AttributeName === attribute)
     ?.AttributeValue || "--";
 
 const returnValueFromListDis = (
   attribute: string,
-  SubscriptionDetails?: any[]
+  SubscriptionDetails?: any[],
 ) =>
-  SubscriptionDetails?.find((value) => value?.AttributeDescription == attribute)
-    ?.AttributeValue || "--";
+  SubscriptionDetails?.find(
+    (value) => value?.AttributeDescription === attribute,
+  )?.AttributeValue || "--";

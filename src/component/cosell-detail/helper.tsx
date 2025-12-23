@@ -4,12 +4,12 @@ import {
   PDButtonType,
 } from "@template/enum/pipedrive.enum";
 import PDButton from "../ui-components/pipedriveButton";
-import { RC3CosellResponse } from "@template/types/cosellResponse";
-import { Dispatch, SetStateAction } from "react";
-import { useTranslation } from "react-i18next";
+import type { Dispatch, SetStateAction } from "react";
+
 import { useCoSellContext } from "@template/context/Cosell.context";
 import ActionButtons from "../actions/Buttons";
 import { ActionState } from "../actions/ActionBar";
+// import { useTranslation } from "react-i18next";
 
 export const CosellDetailHeader = ({
   actionState,
@@ -23,7 +23,7 @@ export const CosellDetailHeader = ({
     }>
   >;
 }) => {
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
   const {
     aceCosell,
     setAceCosell,

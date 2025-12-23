@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react";
+import type React from "react";
+import { useState, useEffect } from "react";
 import {
   DataTable,
-  DataTableFilterMeta,
-  DataTablePageEvent,
-  DataTableSortEvent,
+  type DataTablePageEvent,
+  type DataTableFilterMeta,
 } from "primereact/datatable";
-import { Column, ColumnFilterElementTemplateOptions } from "primereact/column";
+import {
+  Column,
+  type ColumnFilterElementTemplateOptions,
+} from "primereact/column";
 import { FilterMatchMode, FilterOperator } from "primereact/api";
 
 import { InputNumber } from "primereact/inputnumber";
@@ -19,8 +22,8 @@ import { InputIcon } from "primereact/inputicon";
 
 import {
   FilterType,
-  PDAdvancedTableProps,
-  PDColumnConfig,
+  type PDAdvancedTableProps,
+  type PDColumnConfig,
 } from "@template/types/pipedrive-table-interface";
 import {
   PDButtonType,
@@ -33,6 +36,7 @@ import { MultiSelectField } from "./PipedriveMultiselect";
 import PDText from "./pipedrive-text";
 import { Skeleton } from "primereact/skeleton";
 import { useCoSellContext } from "@template/context/Cosell.context";
+import { Paginator } from "primereact/paginator";
 
 const PDAdvancedTable: React.FC<PDAdvancedTableProps> = ({
   data,
@@ -144,7 +148,7 @@ const PDAdvancedTable: React.FC<PDAdvancedTableProps> = ({
        GLOBAL FILTER HANDLER
   -------------------------------------*/
   const onGlobalChange = (val: string) => {
-    let updated = { ...filters };
+    const updated = { ...filters };
     // ensure 'global' has a 'value' property without causing a TS error
     updated.global = { ...(updated.global as any), value: val };
     setFilters(updated);
@@ -246,7 +250,7 @@ const PDAdvancedTable: React.FC<PDAdvancedTableProps> = ({
           );
 
         case "custom":
-          return col.filterElement!(options);
+          return col.filterElement?.(options);
 
         default:
           return null;
@@ -295,6 +299,7 @@ const PDAdvancedTable: React.FC<PDAdvancedTableProps> = ({
         scrollable
         scrollHeight="400px"
         paginator={showPaginator}
+        // scrollHeight="440px"
         lazy={backendPagination}
         first={backendPagination ? first : localFirst}
         rows={backendPagination ? rows : localRows}
@@ -322,60 +327,56 @@ const PDAdvancedTable: React.FC<PDAdvancedTableProps> = ({
         globalFilterFields={globalFilterFields}
         emptyMessage={emptyMessage}
       >
-        {/* {columns.map((col, index) => (
-          <Column
-            key={col?.field + index}
-            field={!col?.body ? col?.field || "N/A" : undefined}
-            header={col.header}
-            body={(rowData) =>
-              loading ? (
-                <Skeleton width="100%" height="1.2rem" />
-              ) : col.body ? (
-                col.body(rowData)
-              ) : (
-                rowData[col?.field] || "N/A"
-              )
-            }
-            sortable={col.sortable ?? false}
-            style={{ width: col.width || "auto" }}
-            filter={!!col.filterType}
-            filterField={col.filterField || col.field}
-            filterElement={col.filterType ? getFilterTemplate(col) : undefined}
-            showFilterMatchModes={false}
-          />
-        ))} */}
         {columns.map((col, index) => {
-          const isFirstColumn = index === 0;
-          const isLastColumn = index === columns.length - 1;
+          const isFrozen = col.frozen;
+          const alignFrozen = col.alignFrozen;
 
           return (
             <Column
-              key={col?.field + index}
-              field={!col?.body ? col?.field || "N/A" : undefined}
+              key={`${col.field}-${index}`}
+              field={!col.body ? col.field ?? "--" : undefined}
               header={col.header}
-              body={(rowData) =>
-                loading ? (
-                  <Skeleton width="100%" height="1.2rem" />
-                ) : col.body ? (
-                  col.body(rowData)
-                ) : (
-                  rowData[col?.field] || "N/A"
-                )
-              }
-              sortable={col.sortable ?? false}
-              style={{ width: col.width || "200px" }}
-              filter={!!col.filterType}
-              filterField={col.filterField || col.field}
+              body={(rowData) => {
+                if (loading) {
+                  return <Skeleton width="100%" height="1.2rem" />;
+                }
+
+                if (col.body) {
+                  return col.body(rowData);
+                }
+
+                return rowData[col.field] ?? "--";
+              }}
+              sortable={!!col.sortable}
+              style={{ width: col.width ?? "200px" }}
+              filter={Boolean(col.filterType)}
+              filterField={col.filterField ?? col.field}
               filterElement={
                 col.filterType ? getFilterTemplate(col) : undefined
               }
               showFilterMatchModes={false}
-              frozen={isFirstColumn || isLastColumn}
-              alignFrozen={isLastColumn ? "right" : undefined}
+              frozen={isFrozen}
+              alignFrozen={isFrozen ? alignFrozen : undefined}
             />
           );
         })}
       </DataTable>
+      {showPaginator && (
+        <Paginator
+          first={backendPagination ? first : localFirst}
+          rows={backendPagination ? rows : localRows}
+          totalRecords={totalRecords}
+          rowsPerPageOptions={[10, 20, 50, 100]}
+          onPageChange={(e: DataTablePageEvent) => {
+            if (backendPagination) {
+              onPageChange?.(e); // backend pagination
+            } else {
+              setLocalFirst(e.first); // frontend pagination
+              setLocalRows(e.rows);
+            }
+          }}
+        />
+      )}
     </div>
   );
 };

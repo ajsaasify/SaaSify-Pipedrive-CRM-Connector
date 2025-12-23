@@ -1,4 +1,4 @@
-import { MessageBarIntents } from "../enum/messageBar.enum";
+import { MessageBarIntents } from "@template/enum/messageBar.enum";
 
 export interface MessageBarProps {
   intent?: MessageBarIntents;

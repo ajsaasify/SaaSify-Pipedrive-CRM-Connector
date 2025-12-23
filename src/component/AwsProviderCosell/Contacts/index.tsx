@@ -3,7 +3,7 @@ import { AccordianTitle } from "@template/enum/accordian.enum";
 import PDAdvancedTable from "@template/component/ui-components/PipedriveTable";
 import { ContactTableColumns } from "./helper";
 import { useCoSellContext } from "@template/context/Cosell.context";
-import { ContactLocal } from "@template/types/cosellResponse";
+import type { ContactLocal } from "@template/types/cosellResponse";
 import { EmptyState } from "@template/component/ui-components/empty-data";
 import { awsConstants } from "@template/common/constants/awsCosellFieldMappings";
 import { contactSegmentData as segment } from "@template/common/section/contact";

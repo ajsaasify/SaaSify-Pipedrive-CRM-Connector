@@ -1,4 +1,4 @@
-import { Toast } from 'primereact/toast';
+import type { Toast } from "primereact/toast";
 
 let toastRef: Toast | null = null;
 
@@ -13,7 +13,7 @@ export const ToastService = {
     detail,
     life = 2000,
   }: {
-    severity: 'success' | 'info' | 'warn' | 'error' | 'secondary' | 'contrast';
+    severity: "success" | "info" | "warn" | "error" | "secondary" | "contrast";
     summary: string;
     detail?: string;
     life?: number;
@@ -22,26 +22,26 @@ export const ToastService = {
   },
 
   success(summary: string, detail?: string) {
-    this.show({ severity: 'success', summary, detail });
+    this.show({ severity: "success", summary, detail });
   },
 
   info(summary: string, detail?: string) {
-    this.show({ severity: 'info', summary, detail });
+    this.show({ severity: "info", summary, detail });
   },
 
   warn(summary: string, detail?: string) {
-    this.show({ severity: 'warn', summary, detail });
+    this.show({ severity: "warn", summary, detail });
   },
 
   error(summary: string, detail?: string) {
-    this.show({ severity: 'error', summary, detail });
+    this.show({ severity: "error", summary, detail });
   },
 
   secondary(summary: string, detail?: string) {
-    this.show({ severity: 'secondary', summary, detail });
+    this.show({ severity: "secondary", summary, detail });
   },
 
   contrast(summary: string, detail?: string) {
-    this.show({ severity: 'contrast', summary, detail });
+    this.show({ severity: "contrast", summary, detail });
   },
 };

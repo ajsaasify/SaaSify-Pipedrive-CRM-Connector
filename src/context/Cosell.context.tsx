@@ -7,11 +7,6 @@ import React, {
 import type { OptionTypes } from "@template/types/dropdown.options";
 import type { RC3CosellResponse } from "@template/types/cosellResponse";
 import type { PaginationType } from "@template/types/paginator";
-import {
-  getDealType,
-  getStatus,
-  validateDealName,
-} from "@template/utils/globalHelper";
 import type { FilterDefaultDeal } from "@template/types/filter";
 // import type { Activitylog } from "@template/types/activity";
 import { requestPayload } from "@template/common/listCosell";
@@ -21,14 +16,17 @@ import { paginatorDefault } from "@template/common/constants/paginator";
 import type { MappingList } from "@template/types/mapping";
 import type { PartnerConnectionProps } from "@template/types/partner";
 import type { ReferenceDataProps } from "@template/types/reference";
-import { ModelType } from "@template/enum/pipedrive.enum";
 import { AceCosellProps } from "@template/types/aceCosell";
+import type { ModelType } from "@template/enum/pipedrive.enum";
+import { CoSellItem } from "@template/types/api/getListCosellAssociateCrm.t";
 
 interface CoSellContextProps {
   data: RC3CosellResponse;
   setData: React.Dispatch<React.SetStateAction<RC3CosellResponse>>;
   ampCosell: AmpCosellResponse;
   setAmpCosell: React.Dispatch<React.SetStateAction<AmpCosellResponse>>;
+  cosells: CoSellItem[];
+  setCosells: React.Dispatch<React.SetStateAction<CoSellItem[]>>;
   aceCosell: AceCosellProps;
   setAceCosell: React.Dispatch<React.SetStateAction<AceCosellProps>>;
   // gcpCosellData: GCPCosellResponse;
@@ -63,11 +61,11 @@ interface CoSellContextProps {
   // setSelectedActivityLog: React.Dispatch<React.SetStateAction<Activitylog>>;
   optionValues: OptionTypes;
   setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>;
-  isSpecificLoading: Boolean;
+  isSpecificLoading: boolean;
   setIsSpecificLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  isListLoading: Boolean;
+  isListLoading: boolean;
   setIsListLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  emptyState: Boolean;
+  emptyState: boolean;
   setEmptyState: React.Dispatch<React.SetStateAction<boolean>>;
   partnerConnections: PartnerConnectionProps[];
   setPartnerConnects: React.Dispatch<
@@ -104,6 +102,7 @@ export const CoSellProvider: React.FC<{ children: ReactNode }> = ({
   const [data, setData] = useState<RC3CosellResponse>({});
   const [ampCosell, setAmpCosell] = useState<any>({});
   const [aceCosell, setAceCosell] = useState<AceCosellProps>({});
+  const [cosells, setCosells] = useState<CoSellItem[]>([]);
   // const [gcpCosellData, setGcpCosellData] = useState<GCPCosellResponse>({});
   // const [gcpCosell, setGcpCosell] = useState<GCPCosellResponse>({});
   const [generateCosell, setGenerateCosell] = useState<RC3CosellResponse>({});
@@ -114,10 +113,10 @@ export const CoSellProvider: React.FC<{ children: ReactNode }> = ({
   );
   const [referenceData, setReferenceData] = useState<ReferenceDataProps[]>([]);
   const [editCloneEnabled, setEditCloneEnabled] = useState<boolean>(false);
-  const [referenceDataGcp, setReferenceDataGcp] = useState<
+  const [_referenceDataGcp, _setReferenceDataGcp] = useState<
     ReferenceDataProps[]
   >([]);
-  const [referenceDataAmp, setReferenceDataAmp] = useState<
+  const [_referenceDataAmp, _setReferenceDataAmp] = useState<
     ReferenceDataProps[]
   >([]);
   const [currentPage, setCurrentPage] = useState<any>();
@@ -147,6 +146,8 @@ export const CoSellProvider: React.FC<{ children: ReactNode }> = ({
         setData,
         aceCosell,
         setAceCosell,
+        cosells,
+        setCosells,
         // selectedActivityLog,
         // setSelectedActivityLog,
         ampCosell,

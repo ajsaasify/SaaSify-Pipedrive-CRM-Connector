@@ -1,4 +1,7 @@
-import { OpportunityTeam, RC3CosellResponse } from "../../types/cosellResponse";
+import type {
+  OpportunityTeam,
+  RC3CosellResponse,
+} from "../../types/cosellResponse";
 import {
   getAWSAccountOwner,
   getAWSSalesRep,

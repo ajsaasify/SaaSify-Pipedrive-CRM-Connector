@@ -1,5 +1,3 @@
-import { PartnerType } from "../enum/partnerType.enum";
-
 export interface StatisticsProps {
   countProvider?: { ProviderName?: string; SubscriptionCount?: string }[];
   countMonth?: {

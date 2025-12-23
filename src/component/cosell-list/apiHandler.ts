@@ -1,19 +1,20 @@
 import { requestPayload } from "@template/common/listCosell";
 import {
-  AlertNotification,
+  type AlertNotification,
   getErrorAlert,
+  getSuccessAlert,
 } from "@template/common/messageAlert";
 import { generateMessage } from "@template/common/messageAlert/generateMessage";
 import { ResponseStatus } from "@template/enum/response.enum";
 import SaasifyService from "@template/services/saasify.service";
-import { Activitylog } from "@template/types/activity";
-import { AmpCosellResponse } from "@template/types/ampCosell";
-import { CoSellItem } from "@template/types/api/getListCosellAssociateCrm.t";
-import { RC3CosellResponse } from "@template/types/cosellResponse";
-import { PipedriveContext } from "@template/types/pipedriveContext";
+import type { Activitylog } from "@template/types/activity";
+import type { AmpCosellResponse } from "@template/types/ampCosell";
+import type { CoSellItem } from "@template/types/api/getListCosellAssociateCrm.t";
+import type { RC3CosellResponse } from "@template/types/cosellResponse";
+import type { PipedriveContext } from "@template/types/pipedriveContext";
 import { getResponseError } from "@template/utils/globalHelper";
 import { backOff } from "exponential-backoff";
-import { Dispatch, SetStateAction } from "react";
+import type { Dispatch, SetStateAction } from "react";
 
 export const getCosellsAPI = async (
   rows: number,
@@ -46,7 +47,7 @@ const saasifyService = new SaasifyService();
 
 export async function fetchAllOptions(
   setIsListLoading: React.Dispatch<React.SetStateAction<boolean>>,
-  context: PipedriveContext,
+  _context: PipedriveContext,
   setData: React.Dispatch<React.SetStateAction<RC3CosellResponse>>,
   setOpportunityList: React.Dispatch<React.SetStateAction<RC3CosellResponse[]>>,
   initialError: React.MutableRefObject<boolean>,
@@ -60,7 +61,7 @@ export async function fetchAllOptions(
     ]);
 
     handleErrors(firstSet, initialError, triggerAlert);
-  } catch (error) {
+  } catch (_error) {
     triggerAlert(getErrorAlert(generateMessage.fetchError));
   } finally {
     !isDefaultView && setIsListLoading(false);
@@ -107,7 +108,7 @@ export const fetchListCosell = async (
   isResetData?: boolean
 ) => {
   !isResetData && setData({} as RC3CosellResponse);
-  setLoader && setLoader(true);
+  setLoader?.(true);
   try {
     const executeWithRetry = async () => {
       const responseData = await saasifyService.getListCosell(
@@ -145,10 +146,10 @@ export const fetchListCosell = async (
                 ?.CreatedDate ||
               "";
 
-            const dateA = isNaN(new Date(dateStrA).getTime())
+            const dateA = Number.isNaN(new Date(dateStrA).getTime())
               ? 0
               : new Date(dateStrA).getTime();
-            const dateB = isNaN(new Date(dateStrB).getTime())
+            const dateB = Number.isNaN(new Date(dateStrB).getTime())
               ? 0
               : new Date(dateStrB).getTime();
 
@@ -166,7 +167,7 @@ export const fetchListCosell = async (
     };
 
     await backOff(executeWithRetry, {
-      retry: (error, attemptNumber) => attemptNumber == 1,
+      retry: (_error, attemptNumber) => attemptNumber === 1,
       startingDelay: 500,
     });
   } catch (error: any) {
@@ -177,7 +178,7 @@ export const fetchListCosell = async (
       value: error.message,
     };
   } finally {
-    setLoader && setLoader(false);
+    setLoader?.(false);
   }
 };
 
@@ -204,13 +205,13 @@ export const fetchSpecificCoSell = async (
         opportunityId
       );
       if (responseData?.Data) {
-        let data = {
+        const data = {
           ...responseData?.Data,
           CoSellEntity: JSON.parse(responseData?.Data?.CoSellEntity),
         };
         setData(data || {});
         const list = opportunityList?.map((value) => {
-          if (value.ReferenceID == data?.ReferenceID) {
+          if (value.ReferenceID === data?.ReferenceID) {
             return {
               ...value,
               ErrorMessage: responseData?.Data?.ErrorMessage ?? [],
@@ -237,7 +238,7 @@ export const fetchSpecificCoSell = async (
     };
 
     await backOff(executeWithRetry, {
-      retry: (error, attemptNumber) => attemptNumber == 1,
+      retry: (_error, attemptNumber) => attemptNumber === 1,
       startingDelay: 500,
     });
   } catch (error: any) {
@@ -258,7 +259,6 @@ export const customfetchSpecificCoSell = async (
   setOpportunityList: React.Dispatch<React.SetStateAction<RC3CosellResponse[]>>,
   displayAlert?: boolean
 ) => {
-  // setData({});
   setIsSpecificLoading(true);
   try {
     const executeWithRetry = async () => {
@@ -323,7 +323,7 @@ export const fetchActivityLog = async (
         false // IsFromWebApp
       );
       if (responseData?.Data) {
-        let data = responseData?.Data?.map((value: any) => ({
+        const data = responseData?.Data?.map((value: any) => ({
           ...value,
           Context: JSON.parse(value?.Context),
         }));
@@ -335,7 +335,7 @@ export const fetchActivityLog = async (
     };
 
     await backOff(executeWithRetry, {
-      retry: (error, attemptNumber) => attemptNumber == 1,
+      retry: (_error, attemptNumber) => attemptNumber === 1,
       startingDelay: 500,
     });
   } catch (error: any) {

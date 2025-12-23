@@ -20,7 +20,7 @@ export interface RC3CosellResponse {
   DealType?: string;
   Version?: string | null;
   CRMOrigin?: string;
-  IsSubmitOpportunity?: Boolean;
+  IsSubmitOpportunity?: boolean;
 }
 
 interface CoSellEntity {

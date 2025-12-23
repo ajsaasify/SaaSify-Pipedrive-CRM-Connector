@@ -7,20 +7,15 @@ import { fetchPartnerShared } from "./apiHandler";
 import { Tile } from "@template/component/ui-components/detailview-components";
 import PDButton from "@template/component/ui-components/pipedriveButton";
 import { ActionButton } from "@template/enum/button.enum";
-import { PDButtonSize, PDButtonType } from "@template/enum/pipedrive.enum";
+import { PDButtonSize } from "@template/enum/pipedrive.enum";
 
 export const PartnerConnection = () => {
-  const [fetching, setFetching] = useState(false);
+  const [_fetching, setFetching] = useState(false);
 
-  const {
-    partnerConnections,
-    setPartnerConnects,
-    data,
-    setSelectedPartnerConnect,
-  } = useCoSellContext();
+  const { setPartnerConnects, data } = useCoSellContext();
 
-  const isInvite = isAddMultipartner(data ?? {});
-  const triggerAlert = (alert: {
+  const _isInvite = isAddMultipartner(data ?? {});
+  const triggerAlert = (_alert: {
     type: string;
     message: string;
     title: string;
@@ -30,12 +25,12 @@ export const PartnerConnection = () => {
   return (
     <AccordionComponent
       className="card-view"
-      accordionOpen={(e) => {
+      accordionOpen={(_e) => {
         fetchPartnerShared(
           setPartnerConnects,
           triggerAlert,
           setFetching,
-          data ?? {}
+          data ?? {},
         );
       }}
       items={[
@@ -48,8 +43,15 @@ export const PartnerConnection = () => {
                 <div className="flex justify-between items-cente mb-3">
                   <h5>{ModalTitle.SHARED_PARTNER_DETAIL}</h5>
                   <div className="flex gap-2">
-                    <PDButton size={PDButtonSize.TINY} label={ActionButton.Add}/>
-                    <PDButton  size={PDButtonSize.TINY} icon="pi pi-refresh" label={ActionButton.REFRESH}/>
+                    <PDButton
+                      size={PDButtonSize.TINY}
+                      label={ActionButton.Add}
+                    />
+                    <PDButton
+                      size={PDButtonSize.TINY}
+                      icon="pi pi-refresh"
+                      label={ActionButton.REFRESH}
+                    />
                   </div>
                 </div>
                 <hr />

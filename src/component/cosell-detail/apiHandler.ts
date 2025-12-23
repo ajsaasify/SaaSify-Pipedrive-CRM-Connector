@@ -1,6 +1,6 @@
 import SaasifyService from "@template/services/saasify.service";
-import { RC3CosellResponse } from "@template/types/cosellResponse";
-import { Dispatch, SetStateAction } from "react";
+import type { RC3CosellResponse } from "@template/types/cosellResponse";
+import type { Dispatch, SetStateAction } from "react";
 
 export const getSingleCosell = async (payload: {
   sellerId: string;

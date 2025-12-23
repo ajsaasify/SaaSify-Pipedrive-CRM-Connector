@@ -1,10 +1,9 @@
-import InfoGrid from "@template/component/ui-components/pipdriveInfoGrid";
 import AccordionComponent from "@template/component/ui-components/PipedriveAccordion";
 import { useCoSellContext } from "@template/context/Cosell.context";
 import {
   alertPopupSegment,
   overviewSectionData as segments,
-} from "../../../common/section/overview";
+} from "@template/common/section/overview";
 import {
   DisplayField,
   Tile,
@@ -17,8 +16,8 @@ export const OverViewCard: React.FC = () => {
   const { data, dealName } = useCoSellContext();
   const isDefautView = validateDealName(dealName, requestPayload.defaultDeals);
   const segmentData = segments(data || {});
-  const { LifeCycle } = data?.CoSellEntity || {};
-  const alertSegment = alertPopupSegment(data);
+
+  const _alertSegment = alertPopupSegment(data);
   const { t } = useTranslation();
 
   return (
@@ -37,6 +36,7 @@ export const OverViewCard: React.FC = () => {
 
                   {segmentData.map((fields, idx) => (
                     <DisplayField
+                      // biome-ignore lint/suspicious/noArrayIndexKey: Index used as key
                       key={idx}
                       items={fields.map((item, i) => ({
                         ...item,

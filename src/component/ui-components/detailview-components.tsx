@@ -1,6 +1,6 @@
 import { labelTagConfig } from "@template/common/constants/awsProjects";
 import { Tag } from "primereact/tag";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { tagSeverityClasses } from "@template/styles/tagStyles";
 
 export const InfoField = ({
@@ -27,6 +27,7 @@ export const InfoField = ({
       {severity && tagProperty?.separator && (
         <div>
           {value.split(tagProperty.separator).map((val, idx) => (
+            // biome-ignore lint/suspicious/noArrayIndexKey: Index used as key
             <Tag key={idx} className={`border m-1 ${tagClass}`}>
               {val}
             </Tag>
@@ -57,6 +58,7 @@ export const DisplayField = ({
   return (
     <div className="display-field">
       {items.map((field, idx) => (
+        // biome-ignore lint/suspicious/noArrayIndexKey: Index used as key
         <InfoField key={idx} label={field.label} value={field.value} />
       ))}
 

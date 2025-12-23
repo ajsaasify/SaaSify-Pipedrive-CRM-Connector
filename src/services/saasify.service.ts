@@ -1,11 +1,8 @@
-import { hasErrors } from "./../utils/globalHelper";
 import { requestPayload } from "../common/listCosell";
 import URLBuilder from "../helpers/urlBuilder";
-import { FetchOptions } from "../enum/options.enum";
-import { PipedriveContext } from "../types/pipedriveContext";
-import { PathParams, QueryParams } from "../types/urlBuilder";
+import type { PathParams, QueryParams } from "../types/urlBuilder";
 import HttpWrapper from "./http.service";
-import {
+import type {
   CoSellResponse,
   getListCosellAssociatePayloadCrmType,
 } from "@template/types/api/getListCosellAssociateCrm.t";
@@ -36,7 +33,7 @@ class SaasifyService {
     entity: string,
     cloud: string = requestPayload.cloud.aws
   ) {
-    const version = cloud == requestPayload.cloud.aws ? 3 : undefined;
+    const version = cloud === requestPayload.cloud.aws ? 3 : undefined;
     const url = this.buildUrl(
       "/cosell/v3/providers/:cloud/referencedata",
       { cloud },
@@ -457,7 +454,7 @@ class SaasifyService {
   }
 
   public async getReferenceData(cloud: string = requestPayload.cloud.aws) {
-    const version = cloud == requestPayload.cloud.aws ? 3 : undefined;
+    const version = cloud === requestPayload.cloud.aws ? 3 : undefined;
     const url = this.buildUrl(
       "/cosell/v3/providers/:cloud/referencedata",
       { cloud },

@@ -1,15 +1,14 @@
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { OverlayPanel } from "primereact/overlaypanel";
 import { Button } from "primereact/button";
-import { InfoTooltipProps } from "@template/types/pipedrive-ui-interface";
-
+import type { InfoTooltipProps } from "@template/types/pipedrive-ui-interface";
 
 export default function InfoTooltip({
   message,
   icon = "pi pi-question-circle",
-  activeColor="text-gray-600",
+  activeColor = "text-gray-600",
   size = 15,
-  element
+  element,
 }: InfoTooltipProps<any>) {
   const overlayRef = useRef<OverlayPanel>(null);
   const [open, setOpen] = useState(false);
@@ -60,7 +59,10 @@ export default function InfoTooltip({
         tooltip={message}
         className={`pd-btn pd-accordion-btn p-1`}
       >
-        <i className={`${icon} ${open?activeColor:""}`} style={{ fontSize: size }} />
+        <i
+          className={`${icon} ${open ? activeColor : ""}`}
+          style={{ fontSize: size }}
+        />
       </Button>
 
       {/* Tooltip */}
@@ -70,9 +72,9 @@ export default function InfoTooltip({
         showCloseIcon={false}
         className=" w-[240px] shadow-md rounded-md border border-gray-200"
       >
-        {message && <div className="text-sm text-gray-700 leading-relaxed">
-          {message}
-        </div>}
+        {message && (
+          <div className="text-sm text-gray-700 leading-relaxed">{message}</div>
+        )}
         {!message && element && <div>{element}</div>}
       </OverlayPanel>
     </>

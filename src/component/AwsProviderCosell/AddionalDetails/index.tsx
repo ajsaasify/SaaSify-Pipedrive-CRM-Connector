@@ -1,15 +1,18 @@
-import InfoGrid from "@template/component/ui-components/pipdriveInfoGrid";
+// Components
 import AccordionComponent from "@template/component/ui-components/PipedriveAccordion";
-import { useCoSellContext } from "@template/context/Cosell.context";
-import { useEffect } from "react";
-import {
-  additionalSegmentData as segments,
-} from "../../../common/section/additional";
 import {
   DisplayField,
   Tile,
 } from "@template/component/ui-components/detailview-components";
+
+// Context
+import { useCoSellContext } from "@template/context/Cosell.context";
+
+// Utils
 import { labelMapper } from "@template/utils/labelMappers";
+
+// Data
+import { additionalSegmentData as segments } from "../../../common/section/additional";
 
 export const AdditionalCard: React.FC = () => {
   const { data } = useCoSellContext();
@@ -29,6 +32,7 @@ export const AdditionalCard: React.FC = () => {
 
                   {segmentData.map((fields, idx) => (
                     <DisplayField
+                      // biome-ignore lint/suspicious/noArrayIndexKey: Index used as key
                       key={idx}
                       items={fields.map((item, i) => ({
                         ...item,

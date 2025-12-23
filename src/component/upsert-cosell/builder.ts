@@ -6,9 +6,9 @@ import {
 } from "@template/utils/globalHelper";
 import { OpportunityTeam as Team } from "@template/enum/opportunityTeam.enum";
 import { CosellAction } from "@template/enum/action.enum";
-import { DataPropertyType } from "@template/types/cosell.forms";
+import type { DataPropertyType } from "@template/types/cosell.forms";
 import { StatusState } from "@template/enum/status.enum";
-import { RC3CosellResponse } from "@template/types/cosellResponse";
+import type { RC3CosellResponse } from "@template/types/cosellResponse";
 import { requestPayload } from "@template/common/listCosell";
 
 export function buildProject(
@@ -100,7 +100,7 @@ export function buildCosellPayload({
   data: RC3CosellResponse;
   generateCosell: RC3CosellResponse;
 }) {
-  let payload = slug === CosellAction.EDIT ? data : generateCosell;
+  const payload = slug === CosellAction.EDIT ? data : generateCosell;
 
   const {
     Customer: { Contacts } = {},
@@ -242,7 +242,7 @@ export function buildDataProperty({
     useCase: Project?.CustomerUseCase,
     nationalSecurity: NationalSecurity ?? "No",
     deliveryModel: Project?.DeliveryModels,
-    estimatedAWSRecurringRevenue: isNaN(Number(customerSpend?.Amount))
+    estimatedAWSRecurringRevenue: Number.isNaN(Number(customerSpend?.Amount))
       ? 0
       : customerSpend?.Amount,
     apnProgram: Project?.ApnPrograms,

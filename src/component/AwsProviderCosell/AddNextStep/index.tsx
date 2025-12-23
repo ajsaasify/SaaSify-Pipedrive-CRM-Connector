@@ -1,43 +1,52 @@
-import {
-  Flex,
-  Modal,
-  ModalBody,
-  Button,
-  ModalFooter,
-  LoadingButton,
-  TextArea,
-} from "@hubspot/ui-extensions";
+// React
 import React, { useState } from "react";
-import { ButtonVariant, FormButton } from "../../../types/enums/button.enum";
-import { ModalId, ModalWidth } from "../../../types/enums/modal.enum";
-import { useCoSellContext } from "../../../context/Cosell.context";
-import { postNextstep } from "./apiHandler";
-import { labelMapper } from "./helper";
-import { displayErrorMessage } from "../../../utils/globalHelper";
-import { FlexJustify, Size } from "../../../types/enums/flex.enum";
-import ErrorDetails from "../../../plugin/UiComponent/ErrorDetails";
 
-export const NextStepModal: React.FC<{
-  actions: any;
+// PrimeReact
+import { Dialog } from "primereact/dialog";
+import { InputTextarea } from "primereact/inputtextarea";
+import { Button } from "primereact/button";
+
+// Context
+import { useCoSellContext } from "../../../context/Cosell.context";
+
+// API
+import { postNextstep } from "./apiHandler";
+
+// Helpers
+import { labelMapper } from "./helper";
+
+// Utils
+import { displayErrorMessage } from "../../../utils/globalHelper";
+
+// Components
+import ErrorDetails from "@template/component/ui-components/ErrorDetails";
+
+export const NextStepDialog: React.FC<{
   modalTitle: string;
-}> = ({ actions, modalTitle }) => {
+  visible: boolean;
+  onHide: () => void;
+  actions?: any;
+}> = ({ modalTitle, visible, onHide, actions }) => {
+  // State
   const [isFetching, setIsFetching] = useState(false);
   const [formValue, setFormValue] = useState<Record<string, any>>({});
   const [errorValue, setErrorValue] = useState<Record<string, boolean>>({});
+  const [errorStatus, setErrorStatus] = useState("");
+
+  // Context
   const { data, setData, opportunityList, setOpportunityList } =
     useCoSellContext();
-  const [errorStatus, setErrorStatus] = useState("");
-  function onChangeValue(name: string, value: any) {
-    setFormValue((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+
+  // Handlers
+  const onChangeValue = (name: string, value: any) => {
+    setFormValue((prev) => ({ ...prev, [name]: value }));
+
     if (errorValue[name]) {
-      let errorFind = !value || (Array.isArray(value) && !value.length);
-      setErrorValue((prev) => ({ ...prev, [name]: errorFind }));
+      const hasError = !value || (Array.isArray(value) && !value.length);
+      setErrorValue((prev) => ({ ...prev, [name]: hasError }));
     }
-    return;
-  }
+  };
+
   const triggerAlert = (alert: {
     type: string;
     message: string;
@@ -46,77 +55,91 @@ export const NextStepModal: React.FC<{
     actions.addAlert(alert);
   };
 
+  // validation
   const validateField = (): boolean => {
-    let isValid = true;
     const newErrorValue: Record<string, boolean> = {};
+    let isValid = true;
+
     if (!formValue?.nextStep) {
-      isValid = false;
       newErrorValue.nextStep = true;
-      setErrorValue(newErrorValue);
+      isValid = false;
     }
+
+    setErrorValue(newErrorValue);
     return isValid;
   };
 
+  // Ui
+  const footer = (
+    <div className="flex justify-end gap-2">
+      <Button
+        label="Cancel"
+        severity="secondary"
+        disabled={isFetching}
+        onClick={onHide}
+      />
+      <Button
+        label="Submit"
+        loading={isFetching}
+        onClick={() =>
+          postNextstep(
+            formValue,
+            validateField,
+            triggerAlert,
+            setIsFetching,
+            data,
+            actions,
+            setData,
+            setErrorStatus,
+            opportunityList,
+            setOpportunityList
+          )
+        }
+      />
+    </div>
+  );
+
   return (
-    <Modal
-      id={ModalId.NEXTSTEP}
-      title={modalTitle}
-      width={ModalWidth.MEDIUM}
-      onOpen={() => {
+    <Dialog
+      header={modalTitle}
+      visible={visible}
+      style={{ width: "35rem" }}
+      onHide={onHide}
+      footer={footer}
+      onShow={() => {
         setFormValue({ nextStep: "" });
-        setErrorStatus("");
         setErrorValue({});
+        setErrorStatus("");
       }}
+      modal
     >
-      <ModalBody>
-        <TextArea
-          label={labelMapper.nextStep.label}
-          name={labelMapper.nextStep.name}
+      <div className="field">
+        <label htmlFor={labelMapper.nextStep.name}>
+          {labelMapper.nextStep.label}
+        </label>
+
+        <InputTextarea
+          id={labelMapper.nextStep.name}
           rows={3}
-          value={formValue?.nextStep}
-          error={errorValue?.nextStep}
-          validationMessage={displayErrorMessage(
-            errorValue?.nextStep,
-            labelMapper.nextStep.validationMessage
-          )}
+          value={formValue?.nextStep || ""}
           maxLength={labelMapper.nextStep.maxLength}
-          onChange={(value) => {
-            onChangeValue(labelMapper.nextStep.name, value);
-          }}
+          className={errorValue?.nextStep ? "p-invalid" : ""}
+          onChange={(e) =>
+            onChangeValue(labelMapper.nextStep.name, e.target.value)
+          }
         />
-        <ErrorDetails errorStatus={errorStatus} />
-      </ModalBody>
-      <ModalFooter>
-        <Flex gap={Size.sm} justify={FlexJustify.END}>
-          <Button
-            variant={ButtonVariant.SECONDARY}
-            disabled={isFetching}
-            onClick={() => actions.closeOverlay(ModalId.NEXTSTEP)}
-          >
-            {FormButton.CANCEL}
-          </Button>
-          <LoadingButton
-            variant={ButtonVariant.PRIMARY}
-            loading={isFetching}
-            onClick={() => {
-              postNextstep(
-                formValue,
-                validateField,
-                triggerAlert,
-                setIsFetching,
-                data,
-                actions,
-                setData,
-                setErrorStatus,
-                opportunityList,
-                setOpportunityList
-              );
-            }}
-          >
-            {FormButton.SUBMIT}
-          </LoadingButton>
-        </Flex>
-      </ModalFooter>
-    </Modal>
+
+        {errorValue?.nextStep && (
+          <small className="p-error">
+            {displayErrorMessage(
+              errorValue?.nextStep,
+              labelMapper.nextStep.validationMessage
+            )}
+          </small>
+        )}
+      </div>
+
+      <ErrorDetails errorStatus={errorStatus} />
+    </Dialog>
   );
 };

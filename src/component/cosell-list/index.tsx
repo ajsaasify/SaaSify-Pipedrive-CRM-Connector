@@ -1,95 +1,144 @@
 "use client";
-import { CoSellItem } from "@template/types/api/getListCosellAssociateCrm.t";
-import { useEffect, useState } from "react";
-import PDAdvancedTable from "../ui-components/PipedriveTable";
-import { PDColumnConfig } from "@template/types/pipedrive-table-interface";
-import { DataTablePageEvent } from "primereact/datatable";
-import initSdk from "@template/helpers/modelInit";
-import { cosellTableColumns } from "./helper";
-import { getCosellsAPI } from "./apiHandler";
-import { useCoSellContext } from "@template/context/Cosell.context";
-import { ModelType } from "@template/enum/pipedrive.enum";
+
+// React
+import { useEffect, useRef, useState } from "react";
+
+// i18n
 import { useTranslation } from "react-i18next";
-import { EmptyState } from "../ui-components/empty-data";
-import ActionBar from "../actions/ActionBar";
-import { DefaultView } from "@template/enum/view.enum";
+
+// PrimeReact
+import type { DataTablePageEvent } from "primereact/datatable";
+import { Menu } from "primereact/menu";
+
+// Types
+import type { CoSellItem } from "@template/types/api/getListCosellAssociateCrm.t";
+
+// Enums
+import { ModelType } from "@template/enum/pipedrive.enum";
+
+// Context
+import { useCoSellContext } from "@template/context/Cosell.context";
+
+// Helpers
+import initSdk from "@template/helpers/modelInit";
 import pipeDriveParams from "@template/utils/pipedrive-params";
+import { cosellTableColumns } from "./helper";
+
+// API
+import { getCosellsAPI } from "./apiHandler";
+
+// Components
+import PDAdvancedTable from "../ui-components/PipedriveTable";
+import { EmptyState } from "../ui-components/empty-data";
 
 export const CosellList = ({ page }: { page: string }) => {
-  // const params = new URLSearchParams(window.location.search);
-  // const [dealId, selectedDealId] = useState("");
+  // i18n
+  const { t } = useTranslation();
+
+  // Context
+  const { cosells, setCosells, setCurrentPage } = useCoSellContext();
+
+  // Params
   const params = pipeDriveParams();
-  const [cosells, setCosells] = useState<CoSellItem[]>([]);
+
+  // State
+  const [currentCosell, setCurrentCosell] = useState<CoSellItem | null>(null);
   const [first, setFirst] = useState(0);
-  const [rows, setRows] = useState(10);
+  const [rows, setRows] = useState(50);
   const [totalRecords, setTotalRecords] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [currentCosell, setCurrentCosell] = useState<CoSellItem | null>(null);
-  const columns: PDColumnConfig[] = cosellTableColumns(setCurrentCosell);
-  const [sdk, setSdk] = useState<any>();
-  const {
-    setData,
-    dealName,
-    currentPage,
-    setDealName,
-    setFormValues,
-    setCurrentPage,
-  } = useCoSellContext();
-  const [defaultView, setDefaultView] = useState(DefaultView.COSELL);
-  const [filtersEnabled, setFiltersEnabled] = useState(false);
-  const [refreshEnabled, setRefreshEnabled] = useState(false);
-  // const isTab = useTab();
+  const [_sdk, setSdk] = useState<any>();
+
+  // Refs
+  const menuRef = useRef<Menu>(null!);
+
+  // Derived
+  const columns = cosellTableColumns({
+    t,
+    menuRef,
+    setCurrentCosell,
+  });
 
   useEffect(() => {
-    console.log(params, "--params--", page);
-    console.log(params, "--params--", page);
-  }, [params, page, currentPage]);
+    const updateSdkSize = () => {
+      const width = window.outerWidth - 100;
+      const height = window.outerHeight - 180;
 
-  useEffect(() => {
-    const sdk = initSdk(1000, 500);
-    setSdk(sdk);
+      const sdkInstance = initSdk(width, height);
+      setSdk(sdkInstance);
+    };
+
+    updateSdkSize(); // initial load
+    window.addEventListener("resize", updateSdkSize);
+
     getCosellsAPI(rows, first, setLoading, setCosells, setTotalRecords);
-  }, []);
+
+    return () => {
+      window.removeEventListener("resize", updateSdkSize);
+    };
+  }, [rows, first]);
 
   useEffect(() => {
-    console.log(refreshEnabled, "refreshEnabled");
     getCosellsAPI(rows, first, setLoading, setCosells, setTotalRecords);
-  }, [rows, first, refreshEnabled]);
-
-  function getCosellsAPIInital() {
-    return getCosellsAPI(rows, first, setLoading, setCosells, setTotalRecords);
-  }
+  }, [rows, first]);
 
   const onPageChange = (e: DataTablePageEvent) => {
     if (e?.first !== first) setFirst(e?.first || 0);
     if (e?.rows !== rows) setRows(e?.rows || 10);
   };
-  useEffect(() => {
-    if (currentCosell?.ReferenceID) {
-      setCurrentPage({
-        page: ModelType.COSELL_DETAIL,
-        params: {
-          referenceId: currentCosell?.ReferenceID,
-          sellerCode: currentCosell?.SellerCode || "",
-        },
-      });
-    }
-  }, [currentCosell?.ReferenceID]);
+
   return (
-    <div className="md:w-full md:max-w-[calc(100%-20px)] p-4 overflow-auto">
-      <PDAdvancedTable
-        first={first}
-        rows={rows}
-        totalRecords={totalRecords}
-        backendFiltering={false}
-        data={cosells}
-        columns={columns}
-        enableGlobalFilter={false}
-        onPageChange={onPageChange}
-        backendPagination={true}
-        loading={loading}
-        emptyMessage={EmptyState({ title: "Cosells not found" })}
-      />
+    <div className="md:w-full lg:max-w-full p-4 overflow-auto">
+      {!["Pending", "Rejected", "Expired"]?.includes(
+        currentCosell?.CloudProviderStatus ?? ""
+      ) ? (
+        <Menu
+          model={[
+            {
+              label: "Edit",
+              command: () => {
+                setCurrentPage({
+                  page: ModelType.COSELL_CREATE,
+                  params: {
+                    referenceId: currentCosell?.ReferenceID || "",
+                    sellerCode: currentCosell?.SellerCode || "",
+                  },
+                });
+              },
+            },
+
+            {
+              label: "View",
+              command: () => {
+                setCurrentPage({
+                  page: ModelType.COSELL_DETAIL,
+                  params: {
+                    referenceId: currentCosell?.ReferenceID || "",
+                    sellerCode: currentCosell?.SellerCode || "",
+                  },
+                });
+              },
+            },
+          ]}
+          popup
+          ref={menuRef}
+        />
+      ) : null}
+      <div className="custom_table">
+        <PDAdvancedTable
+          first={first}
+          rows={rows}
+          totalRecords={totalRecords}
+          backendFiltering={false}
+          data={cosells}
+          columns={columns}
+          enableGlobalFilter={false}
+          onPageChange={onPageChange}
+          backendPagination={true}
+          loading={loading}
+          emptyMessage={EmptyState({ title: "Cosells not found" })}
+        />
+      </div>
     </div>
   );
 };

@@ -1,6 +1,6 @@
-import { dateFormat } from "../types/cosell.forms";
+import type { dateFormat } from "../types/cosell.forms";
 import { StatusState } from "../enum/status.enum";
-import {
+import type {
   MarketplaceTransaction,
   OpportunityTeam,
   RC3CosellResponse,
@@ -15,26 +15,23 @@ import { DefaultCurrency } from "../enum/currency.enum";
 import moment from "moment";
 import { fallBackKey } from "../common/section/accept";
 // import { GCPCosellResponse } from "../types/gcpCosell";
-import { AmpCosellResponse } from "../types/ampCosell";
+import type { AmpCosellResponse } from "../types/ampCosell";
 // import { PartnerConnectionProps } from "../types/partner";
-import { optionField } from "../types/dropdown.options";
-// import {
-//   BaseDate,
-//   ChartColor,
-//   DateInputEventsPayload,
-// } from "@hubspot/ui-extensions";
+import type { optionField } from "../types/dropdown.options";
 import { CosellAction } from "../enum/action.enum";
 import { FetchOptions } from "../enum/options.enum";
 import { labelMapper } from "./labelMappers";
-import { PartnerConnectionProps } from "@template/types/partner";
+import type { PartnerConnectionProps } from "@template/types/partner";
 
-export interface BaseDate{
-  year:number,month:number,date:number
+export interface BaseDate {
+  year: number;
+  month: number;
+  date: number;
 }
 
 export const parseDateISO = (dateFormat?: string): dateFormat | null => {
   if (!dateFormat) return null;
-  const [year, month, date] = dateFormat?.split("T")[0]?.split("-");
+  const [year, month, date] = dateFormat?.split("T")?.[0]?.split("-") || [];
   return {
     year: parseInt(year, 10),
     month: parseInt(month, 10) - 1,
@@ -70,7 +67,7 @@ export const displayEntireDate = (dateFormat?: string | null): string => {
 
 export const parseDate = (dateFormat: string): dateFormat | null => {
   if (!dateFormat) return null;
-  const [year, month, date] = dateFormat?.split("-");
+  const [year, month, date] = dateFormat?.split("-") || [];
   return {
     year: parseInt(year, 10),
     month: parseInt(month, 10) - 1,
@@ -181,8 +178,8 @@ export const currencyNotConvertedFormat = (
 };
 
 export const trimString = (value: any): string | null => {
-  if (typeof value == "undefined") return null;
-  if (typeof value == "string" && !value) return null;
+  if (typeof value === "undefined") return null;
+  if (typeof value === "string" && !value) return null;
   if (typeof value !== "string" || !value) return value;
   return value.trim() ?? "";
 };
@@ -233,7 +230,7 @@ function getTeamMember(
   return (
     team?.find(
       (opportunity: OpportunityTeam) =>
-        opportunity?.BusinessTitle == businessTitle
+        opportunity?.BusinessTitle === businessTitle
     ) || {}
   );
 }
@@ -321,7 +318,7 @@ export const formatOptions = (options: OptionFind[], cloud?: boolean): any => {
     (option) => option.EntityName === "Country"
   );
   const formattedOptions = options.map((option) => {
-    const { Name, Description, EntityName, AdditionalAttributes = [] } = option;
+    const { Name, Description, AdditionalAttributes = [] } = option;
 
     const baseOption = {
       ...option,
@@ -338,12 +335,11 @@ export const formatOptions = (options: OptionFind[], cloud?: boolean): any => {
     return {
       ...baseOption,
       isPostalCodeRequired:
-        option.IsPostalCodeRequired ??
-        attrMap["IsPostalCodeRequired"] === "true",
-      postalCodeRegex: option.PostalCode ?? (attrMap["PostalCode"] as string),
+        option.IsPostalCodeRequired ?? attrMap.IsPostalCodeRequired === "true",
+      postalCodeRegex: option.PostalCode ?? (attrMap.PostalCode as string),
       validationMessage: option.ValidationMessage ?? "",
-      countryCode: option.ISOCode ?? attrMap["ISO2"],
-      isStateRequired: attrMap["IsStateRequired"] === "true",
+      countryCode: option.ISOCode ?? attrMap.ISO2,
+      isStateRequired: attrMap.IsStateRequired === "true",
     };
   });
 
@@ -381,7 +377,7 @@ export const formatOptionsFilter = (
   value?: string;
 }[] => {
   const optionsList = options
-    ?.filter((list) => list.CRMName == "HubSpot")
+    ?.filter((list) => list.CRMName === "HubSpot")
     ?.map((option) => {
       return { label: option?.FilterConfigName, value: option?.RecordId };
     });
@@ -394,7 +390,7 @@ export const isPostalCodeRequired = (
   optionValues: any
 ): boolean => {
   const countryOption = optionValues?.countries?.find(
-    (option:any) => option.value === formValue?.country
+    (option: any) => option.value === formValue?.country
   );
 
   const isNationalSecurityConditionMet =
@@ -640,7 +636,7 @@ export const formatUTCDateOnlyWithString = (isoString: string) => {
 export const formatUTCDateOnly = (isoString?: string) => {
   if (!isoString) return "--";
   const date = parseISO(isoString);
-  if (isNaN(date.getTime())) return "--";
+  if (Number.isNaN(date.getTime())) return "--";
   const formattedDate = format(date, "yyyy-MM-dd");
   return formattedDate;
 };
@@ -648,7 +644,7 @@ export const formatUTCDateOnly = (isoString?: string) => {
 export const formatUTCDateInstallment = (dateString?: string) => {
   if (!dateString) return "N/A";
 
-  let date;
+  let date: any;
 
   // Check if the format is MM/DD/YYYY (Type 1)
   if (/^\d{2}\/\d{2}\/\d{4}$/.test(dateString)) {
@@ -661,7 +657,7 @@ export const formatUTCDateInstallment = (dateString?: string) => {
     return "N/A"; // Invalid format
   }
 
-  if (isNaN(date.getTime())) return "N/A"; // Invalid date check
+  if (Number.isNaN(date.getTime())) return "N/A"; // Invalid date check
 
   return format(date, "yyyy-MM-dd");
 };
@@ -720,12 +716,13 @@ export const camelCasetoReadView = (text: string) => {
 };
 
 export const fallbackForNull = (value?: any) => {
-  if (value == null || typeof value == "undefined" || value == "") return "--";
+  if (value == null || typeof value === "undefined" || value === "")
+    return "--";
   return value;
 };
 
 export const showLink = (value: any) => {
-  return !value || value == "N/A" || value == fallBackKey;
+  return !value || value === "N/A" || value === fallBackKey;
 };
 
 export const getOfferDuration = (
@@ -805,7 +802,7 @@ export const displayOpportunityName = (
     }
   };
 
-  let cosellEntity;
+  let cosellEntity: any;
 
   if (cosell.CloudProvider === requestPayload?.cloud?.aws) {
     cosellEntity = parseEntity((cosell as RC3CosellResponse)?.CoSellEntity);
@@ -829,7 +826,7 @@ export const convertToLocalTime = (isoDateString?: string): string => {
   if (!isoDateString) return "--";
   const correctedDateString = isoDateString?.includes("z")
     ? isoDateString
-    : isoDateString + "z";
+    : `${isoDateString}z`;
 
   const date = new Date(correctedDateString);
 
@@ -842,7 +839,7 @@ export const formatToLocalTime = (utcTimestamp: string): string => {
 
   const date = new Date(cleanedTimestamp);
 
-  if (isNaN(date.getTime())) {
+  if (Number.isNaN(date.getTime())) {
     return "--";
   }
 
@@ -857,11 +854,9 @@ export const validatePureNumber = (
   if (!value) return false;
   const valueString = value.toString().trim();
   const regex = isDecimal ? /^\d+(\.\d+)?$/ : /^\d+$/;
-
   if (!regex.test(valueString)) return false;
   const numericValue = Number(value);
   if (!withZero && numericValue === 0) return false;
-
   return true;
 };
 
@@ -901,7 +896,7 @@ export const ignoreUnspecified = (optionField: optionField[]) => {
 
 export const snakeCaseToCamelCase = (text: string = "", fallback = "N/A") => {
   if (!text) return text ?? fallback;
-  if (typeof text != "string") return text;
+  if (typeof text !== "string") return text;
   let result = text?.replace(/_/g, " ");
   result = result
     ?.toLowerCase()
@@ -934,10 +929,7 @@ export const sortByKey = (arr: any[], key: string): any[] => {
   });
 };
 
-export const assignColor = (
-  arr: any[],
-  key: string
-): Record<string, any> => {
+export const assignColor = (arr: any[], key: string): Record<string, any> => {
   const setData = new Set<string>();
   const sortedArray = sortByKey(arr, key);
 
@@ -949,7 +941,7 @@ export const assignColor = (
   });
 
   const colorMap: Record<string, any> = {};
-  let colorIndex = 3;
+  const _colorIndex = 3;
   // Array.from(setData).forEach((keys) => {
   //   if (requestPayload.preDefinedProviderColor[keys]) {
   //     colorMap[keys] = requestPayload.preDefinedProviderColor[keys];
@@ -1028,13 +1020,12 @@ export const isFutureDate = (baseDate: BaseDate): boolean => {
   if (!baseDate) return false;
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-
-  const targetDate = new Date(parseBaseDate(baseDate));
+  const targetDate = new Date(baseDate as unknown as string);
   return targetDate > today;
 };
 
 export const isPendingCosell = (slug: string, status: string = ""): boolean =>
-  slug == CosellAction.ADD || status?.includes(StatusState.PENDING_SUBMISSION);
+  slug === CosellAction.ADD || status?.includes(StatusState.PENDING_SUBMISSION);
 
 export const setValidation = (
   labelMapper: Record<string, any>,
@@ -1157,7 +1148,7 @@ export const extractEndDate = (
   formValue: Record<string, any>,
   labelMapper: any
 ): string | null => {
-  const { year, month, date } = formValue?.offerExpired;
+  const { year, month, date } = formValue?.offerExpired || {};
   if (!year || !month || !date) return null;
   const dateObj = new Date(year, month, date);
   const durationUnit = formValue?.[labelMapper.durationUnit.name];
