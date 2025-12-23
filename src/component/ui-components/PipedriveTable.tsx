@@ -298,7 +298,8 @@ const PDAdvancedTable: React.FC<PDAdvancedTableProps> = ({
         className="pd-table"
         scrollable
         scrollHeight="400px"
-        paginator={showPaginator}
+        // paginator={showPaginator}
+        paginator={false}
         // scrollHeight="440px"
         lazy={backendPagination}
         first={backendPagination ? first : localFirst}

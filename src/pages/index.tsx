@@ -12,28 +12,10 @@ import pipeDriveParams, {
 import { useCoSellContext } from "@template/context/Cosell.context";
 
 const CosellsPage = () => {
-  const [_params, setParams] = useState<pipedriveParams>();
   const { setCurrentPage } = useCoSellContext();
+  const [_params, setParams] = useState<pipedriveParams>();
 
-  const _viewCosells = async (model: ModelType) => {
-    const params = pipeDriveParams(setParams);
-    // console.log(params)
-    const dealId = params?.selectedIds;
-    try {
-      const sdk = await new AppExtensionsSDK().initialize();
-      await sdk.execute(Command.OPEN_MODAL, {
-        type: Modal.CUSTOM_MODAL,
-        // action_id: "f5458880-50b7-4d74-b4ce-ae8e571d7f54", //OLD
-        action_id: "293cf82b-3d23-4068-a4b5-b5ae03c6ac6d", //NEW
-        data: { dealId: dealId || "", page: model },
-      });
-      setCurrentPage({ page: model });
-    } catch (err) {
-      console.error("Failed to open modal:", err);
-    }
-  };
-
-  const viewCosells2 = async (model: ModelType) => {
+  const viewCosells = async (model: ModelType) => {
     const params = pipeDriveParams(setParams);
     const dealId = params?.selectedIds;
     try {
@@ -53,7 +35,7 @@ const CosellsPage = () => {
     <div className="flex justify-center p-5 w-full">
       <PDButton
         size={PDButtonSize.SMALL}
-        onClick={() => viewCosells2(ModelType.COSELL_LIST)}
+        onClick={() => viewCosells(ModelType.COSELL_LIST)}
         label="View Cosells"
       />
     </div>
