@@ -1,7 +1,7 @@
 import PDButton from "@template/component/ui-components/pipedriveButton";
 import { PDButtonSize } from "@template/enum/pipedrive.enum";
 import SaasifyService from "@template/services/saasify.service";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ModelType } from "@template/enum/pipedrive.enum";
 import AppExtensionsSDK, {
   Command,
@@ -11,7 +11,6 @@ import pipeDriveParams, {
   type pipedriveParams,
 } from "@template/utils/pipedrive-params";
 import { useCoSellContext } from "@template/context/Cosell.context";
-import { FormButton } from "@template/enum/button.enum";
 
 const _getCosells = async () => {
   // fetch cosells data
@@ -23,7 +22,7 @@ const _getCosells = async () => {
 const CosellsPage = () => {
   const [_params, setParams] = useState<pipedriveParams>();
   const { setCurrentPage } = useCoSellContext();
-  const viewCosells = async (model: ModelType) => {
+  const _viewCosells = async (model: ModelType) => {
     const params = pipeDriveParams(setParams);
     // console.log(params)
     const dealId = params?.selectedIds;
@@ -59,15 +58,13 @@ const CosellsPage = () => {
   };
 
   return (
-    <>
-      <div className="flex justify-center p-5 w-full">
+    <div className="flex justify-center p-5 w-full">
         <PDButton
           size={PDButtonSize.SMALL}
           onClick={() => viewCosells2(ModelType.COSELL_LIST)}
           label="View Cosells"
         />
       </div>
-    </>
   );
 };
 

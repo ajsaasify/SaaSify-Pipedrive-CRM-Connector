@@ -1,6 +1,6 @@
 import type React from "react";
 import { useState, useEffect } from "react";
-import { DataTable, DataTablePageEvent, type DataTableFilterMeta } from "primereact/datatable";
+import { DataTable, type DataTablePageEvent, type DataTableFilterMeta } from "primereact/datatable";
 import {
   Column,
   type ColumnFilterElementTemplateOptions,

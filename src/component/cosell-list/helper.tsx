@@ -20,12 +20,8 @@ const EllipsisCell = ({ value, id }: { value?: string; id: string }) => {
         {value}
       </span>
       <Tooltip target={`#${id}`}>
-        <img
-          alt="logo"
-          src="/images/logo.png"
-          data-pr-tooltip="PrimeReact-Logo"
-          height="80px"
-        />
+        {/* biome-ignore lint/performance/noImgElement: Legacy implementation, keeping img for specific tooltip layout */}
+        <img alt="logo" src="/images/logo.png" data-pr-tooltip="PrimeReact-Logo" height="80px" />
         {value}
       </Tooltip>
     </>
@@ -57,11 +53,11 @@ const statusConfig: Record<string, { icon: string; color: string }> = {
     icon: "pi pi-clock",
     color: "#F1B408",
   },
-  Rejected:{
+  Rejected: {
     icon: "pi pi-times-circle",
     color: "#FF0000",
   },
-  "Action Required":{
+  "Action Required": {
     icon: "pi pi-exclamation-triangle",
     color: "#F1B408",
   },
@@ -79,12 +75,7 @@ export const cosellTableColumns = ({
   {
     field: "OpportunityName",
     header: t("awsCosell.overview.opportunityOwner"),
-    body: (rowData: CoSellItem) => (
-      <EllipsisCell
-        value={rowData.OpportunityName as string}
-        id={`opp-${rowData.ReferenceID}`}
-      />
-    ),
+    body: (rowData: CoSellItem) => <EllipsisCell value={rowData.OpportunityName as string} id={`opp-${rowData.ReferenceID}`} />,
   },
   {
     field: "CloudProviderIdentifier",
@@ -118,12 +109,7 @@ export const cosellTableColumns = ({
   {
     field: "Customer",
     header: t("awsCosell.overview.customerCompanyName"),
-    body: (rowData: CoSellItem) => (
-      <EllipsisCell
-        value={rowData.Customer as string}
-        id={`customer-${rowData.ReferenceID}`}
-      />
-    ),
+    body: (rowData: CoSellItem) => <EllipsisCell value={rowData.Customer as string} id={`customer-${rowData.ReferenceID}`} />,
   },
   {
     field: "DealType",
@@ -136,13 +122,7 @@ export const cosellTableColumns = ({
   },
   {
     field: "",
-    header: (
-      <i
-        className="pi pi-cog"
-        style={{ fontSize: "1rem" }}
-        title={t("common.actions")}
-      />
-    ),
+    header: <i className="pi pi-cog" style={{ fontSize: "1rem" }} title={t("common.actions")} />,
     frozen: true,
     alignFrozen: Align.Right,
     width: "80px",

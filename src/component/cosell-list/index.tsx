@@ -11,7 +11,6 @@ import { ModelType } from "@template/enum/pipedrive.enum";
 import { useTranslation } from "react-i18next";
 import { EmptyState } from "../ui-components/empty-data";
 import { Menu } from "primereact/menu";
-import { Paginator } from "primereact/paginator";
 
 export const CosellList = () => {
   // const params = new URLSearchParams(window.location.search);
@@ -63,9 +62,7 @@ export const CosellList = () => {
 
   return (
     <div className="md:w-full lg:max-w-full p-4 overflow-auto">
-      {!["Pending", "Rejected", "Expired"]?.includes(
-        currentCosell?.CloudProviderStatus ?? ""
-      ) ? (
+      {!["Pending", "Rejected", "Expired"]?.includes(currentCosell?.CloudProviderStatus ?? "") ? (
         <Menu
           model={[
             {
@@ -97,9 +94,7 @@ export const CosellList = () => {
           popup
           ref={menuRef}
         />
-      ) : (
-        <></>
-      )}
+      ) : null}
       <div className="custom_table">
         <PDAdvancedTable
           first={first}
