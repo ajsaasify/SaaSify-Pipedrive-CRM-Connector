@@ -1,23 +1,10 @@
 import PDButton from "@template/component/ui-components/pipedriveButton";
 import { PDButtonSize } from "@template/enum/pipedrive.enum";
-import SaasifyService from "@template/services/saasify.service";
 import { useState } from "react";
 import { ModelType } from "@template/enum/pipedrive.enum";
-import AppExtensionsSDK, {
-  Command,
-  Modal,
-} from "@pipedrive/app-extensions-sdk";
-import pipeDriveParams, {
-  type pipedriveParams,
-} from "@template/utils/pipedrive-params";
+import AppExtensionsSDK, { Command, Modal } from "@pipedrive/app-extensions-sdk";
+import pipeDriveParams, { type pipedriveParams } from "@template/utils/pipedrive-params";
 import { useCoSellContext } from "@template/context/Cosell.context";
-
-const _getCosells = async () => {
-  // fetch cosells data
-  const service = new SaasifyService();
-  const res = await service.getCosellById("auto", "51015859874");
-  return res;
-};
 
 const CosellsPage = () => {
   const [_params, setParams] = useState<pipedriveParams>();
@@ -59,12 +46,8 @@ const CosellsPage = () => {
 
   return (
     <div className="flex justify-center p-5 w-full">
-        <PDButton
-          size={PDButtonSize.SMALL}
-          onClick={() => viewCosells2(ModelType.COSELL_LIST)}
-          label="View Cosells"
-        />
-      </div>
+      <PDButton size={PDButtonSize.SMALL} onClick={() => viewCosells2(ModelType.COSELL_LIST)} label="View Cosells" />
+    </div>
   );
 };
 
