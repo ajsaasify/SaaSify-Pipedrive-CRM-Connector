@@ -1,5 +1,5 @@
 import SaasifyService from "@template/services/saasify.service";
-import React from "react";
+import  { useEffect } from "react";
 import { ModelType } from "@template/enum/pipedrive.enum";
 import { CosellList } from "@template/component/cosell-list";
 import { useCoSellContext } from "@template/context/Cosell.context";
@@ -7,6 +7,7 @@ import CosellDetailView from "@template/component/cosell-detail";
 import { CreateCosell } from "@template/component/upsert-cosell";
 import pipeDriveParams from "@template/utils/pipedrive-params";
 import CloudProvider from "@template/component/cloud-provider";
+import { storage } from "@template/utils/storage";
 
 const _getCosells = async () => {
   // fetch cosells data
@@ -18,12 +19,15 @@ const _getCosells = async () => {
 const CosellsPage = () => {
   const { currentPage, setCurrentPage } = useCoSellContext();
   const params = pipeDriveParams();
-  React.useEffect(() => {
+  useEffect(()=>{
+    if(params?.token){
+      storage.set("authToken",params?.token)
+    }
+  },[])
+  useEffect(() => {
     if (params?.data?.page && currentPage !== params?.data?.page)
-      setCurrentPage(() => {
-        return { page: params?.data?.page };
-      });
-  }, [currentPage, params?.data?.page, setCurrentPage]);
+      setCurrentPage({ page: params?.data?.page });
+  }, [params?.data?.page]);
   return (
     <div className="flex justify-center w-full">
       {currentPage?.page === ModelType.COSELL_LIST && <CosellList />}

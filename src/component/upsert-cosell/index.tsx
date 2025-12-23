@@ -97,8 +97,7 @@ export const CreateCosell: React.FC<{
       setSellerCode(sellerCode);
       assignValuesEditCosell();
     }
-    // biome-ignore lint/correctness/useExhaustiveDependencies: Deps are complex
-  }, [data, generateCosell, assignValuesEditCosell]);
+  }, [data, generateCosell]);
   const triggerAlert = ({ type, title, message }: AlertNotification) => {
     (ToastService as any)?.[type]?.(title, message);
   };
@@ -140,8 +139,7 @@ export const CreateCosell: React.FC<{
   };
   useEffect(() => {
     init();
-    // biome-ignore lint/correctness/useExhaustiveDependencies: Init runs on mount
-  }, [init]);
+  }, []);
   function assignValuesEditCosell() {
     const dataProperty = buildDataProperty({
       slug: data.ReferenceID ? CosellAction.EDIT : CosellAction.ADD,
@@ -233,7 +231,6 @@ export const CreateCosell: React.FC<{
     return readOnlyFields?.includes(field);
   }
   const postalCodeRegex = (value?: string) => {
-    console.log("redex check", value);
     const country = optionValues?.countries?.find(
       (c) => c.value === formValue?.country,
     );

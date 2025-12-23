@@ -1,12 +1,14 @@
+import { storage } from "@template/utils/storage";
 import { Method } from "../enum/http.enum";
 
 class HttpWrapper {
   private headers: HeadersInit;
-
   constructor() {
+    const token = storage.get("authToken") || "";
     this.headers = {
-      Authorization: process.env.NEXT_PUBLIC_API_TOKEN || "",
+      // Authorization: process.env.NEXT_PUBLIC_API_TOKEN || "",
       credentials: "include",
+      "X-Pipedrive-Signature": token,
     };
   }
   payloadConversion = (payload: any) =>

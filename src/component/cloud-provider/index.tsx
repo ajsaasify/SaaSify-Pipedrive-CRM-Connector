@@ -76,19 +76,17 @@ const CloudProvider = () => {
       setOptionValues,
       setMappingCrmList,
       setLoader,
-      triggerAlert,
+      triggerAlert
     );
   };
 
   useEffect(() => {
     init();
-    // biome-ignore lint/correctness/useExhaustiveDependencies: Init should run on mount/updates
-  }, [init]);
+  }, []);
 
   useEffect(() => {
     renderDefaultCosell();
-    // biome-ignore lint/correctness/useExhaustiveDependencies: Intentional dependency
-  }, [renderDefaultCosell]);
+  }, []);
 
   useEffect(() => {
     const sellerAccountOpt = (
@@ -180,7 +178,7 @@ const CloudProvider = () => {
             error={errorForm[labelMapper.sellerCode.name]}
             validationMessage={displayErrorMessage(
               errorForm[labelMapper.sellerCode.name],
-              labelMapper.sellerCode.validationMessage,
+              labelMapper.sellerCode.validationMessage
             )}
           />
         )}
@@ -200,7 +198,7 @@ const CloudProvider = () => {
             disabled={loader || !sellerCode?.length}
             label={
               formValue[labelMapper.provider.name]?.includes(
-                requestPayload.cloud.gcp,
+                requestPayload.cloud.gcp
               )
                 ? FormButton.CREATE_OPPORTUNITY
                 : FormButton.CREATE_COSELL

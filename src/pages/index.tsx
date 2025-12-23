@@ -24,8 +24,8 @@ const CosellsPage = () => {
   const [_params, setParams] = useState<pipedriveParams>();
   const { setCurrentPage } = useCoSellContext();
   const viewCosells = async (model: ModelType) => {
-    console.log("current model", model);
     const params = pipeDriveParams(setParams);
+    // console.log(params)
     const dealId = params?.selectedIds;
     try {
       // console.log("SDK instance:", sdk);
