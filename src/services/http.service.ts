@@ -1,10 +1,11 @@
 import { storage } from "@template/utils/storage";
 import { Method } from "../enum/http.enum";
+import { LocalStorage } from "@template/enum/service.enum";
 
 class HttpWrapper {
   private headers: HeadersInit;
   constructor() {
-    const token = storage.get("authToken") || "";
+    const token = storage.get(LocalStorage.TOKEN) || "";
     this.headers = {
       // Authorization: process.env.NEXT_PUBLIC_API_TOKEN || "",
       credentials: "include",

@@ -165,7 +165,7 @@ const ActionButtons: React.FC<Props> = () => {
       <PDButton
         label={t("buttonLabel.edit")}
         type={PDButtonType.SECONDARY}
-        size={PDButtonSize.TINY}
+        size={PDButtonSize.SMALL}
         onClick={() => {
           setCurrentPage({
             page: ModelType.COSELL_CREATE,
@@ -176,7 +176,7 @@ const ActionButtons: React.FC<Props> = () => {
         className="pi pi-refresh"
         label={t("buttonLabel.reset")}
         type={PDButtonType.SECONDARY}
-        size={PDButtonSize.TINY}
+        size={PDButtonSize.SMALL}
         onClick={() => {
           pullCosell(
             data,
