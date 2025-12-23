@@ -9,7 +9,7 @@ export const additionalSegmentData = (data: RC3CosellResponse) => {
     Customer,
     LifeCycle,
     AwsSummary,
-  } = data.CoSellEntity || {};
+  } = data?.CoSellEntity || {};
   return [
     [
       {

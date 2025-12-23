@@ -356,7 +356,7 @@ const labels = (t: TFunction) => {
         "awsCosell.inputLabelMapper.awsAccountId.validationMessage"
       ),
       validationErrorMessage: t(
-        "awsCosell.inputLabelMapper.awsAccountId.validationErrorMessage"
+        "awsCosell.inputLabelMapper.awsAccountId.validationMessage"
       ),
       placeHolder: t("awsCosell.inputLabelMapper.awsAccountId.placeHolder"),
     },

@@ -4,6 +4,10 @@ import { PDButtonSize } from "@template/enum/pipedrive.enum";
 import { Dispatch, SetStateAction } from "react";
 import { Menu } from "primereact/menu";
 
+enum Align {
+Right = "right",
+Left="left"
+}
 export const cosellTableColumns = ({
   t,
   menuRef,
@@ -26,6 +30,22 @@ export const cosellTableColumns = ({
     header: t("awsCosell.overview.customerCompanyName"),
   },
   {
+    field: "OpportunityName",
+    header: t("awsCosell.overview.opportunityOwnership"),
+  },
+  {
+    field: "Customer",
+    header: t("awsCosell.overview.customerCompanyName"),
+  },
+  {
+    field: "OpportunityName",
+    header: t("awsCosell.overview.opportunityOwnership"),
+  },
+  {
+    field: "Customer",
+    header: t("awsCosell.overview.customerCompanyName"),
+  },
+  {
     field: "CloudProviderStage",
     header: t("awsCosell.overview.stage"),
   },
@@ -34,8 +54,10 @@ export const cosellTableColumns = ({
     header: t("awsCosell.overview.status"),
   },
   {
-    field:"",
+    field: "",
     header: "Actions",
+    frozen: true,
+    alignFrozen: Align.Right,
     body: (rowData: CoSellItem) => (
       <PDButton
         className="pi pi-ellipsis-h back-btn"

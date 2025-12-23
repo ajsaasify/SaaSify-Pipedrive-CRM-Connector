@@ -66,6 +66,7 @@ const ProjectOpportunitySection = ({
           },
         ]}
         value={primaryNeedsAWS}
+        required={true}
         onChange={(value: string) => {
           if (
             ![StatusState.ACTION_REQUIRED].includes(LifeCycle?.ReviewStatus)

@@ -31,6 +31,8 @@ export type PDColumnConfig = {
   filterElement?: (
     options: ColumnFilterElementTemplateOptions
   ) => React.ReactNode;
+  alignFrozen?: "left" | "right";
+  frozen?: boolean;
 };
 
 export type PDAdvancedTableProps = {

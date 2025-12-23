@@ -72,7 +72,7 @@ const CloudProvider = () => {
   };
 
   const init = async () => {
-    const sdk = await initSdk(500, 300);
+    const sdk = await initSdk(window.outerWidth, window.outerHeight);
     setSdk(sdk);
     renderDefaultCosell();
     await fetchCreateProps(

@@ -3,6 +3,7 @@ import { RC3CosellResponse } from "../../types/cosellResponse";
 import { getFullName, getOpportunityOwner } from "../../utils/globalHelper";
 import { awsConstants } from "../constants/awsCosellFieldMappings";
 import { getValue } from "./accept";
+import { t } from "i18next";
 
 export const overviewSectionData = (data: RC3CosellResponse) => {
   const {
@@ -92,17 +93,17 @@ export const alertPopupSegment = (aceCosell: RC3CosellResponse) => {
   const labels = {
     actionRequired: [
       {
-        label: alertSection.apnReviewReason,
+        label: t("awsCosell.alertSection.apnReviewReason"),
         value: getValue(LifeCycle?.ReviewStatusReason),
       },
       {
-        label: alertSection.apnReviewComment,
+        label: t("awsCosell.alertSection.apnReviewComment"),
         value: getValue(LifeCycle?.ReviewComments),
       },
     ],
     rejected: [
       {
-        label: alertSection.rejectedReason,
+        label: t("awsCosell.alertSection.rejectedReason"),
         value: LifeCycle?.ReviewStatusReason ?? alertSection.noReasonProvide,
       },
     ],

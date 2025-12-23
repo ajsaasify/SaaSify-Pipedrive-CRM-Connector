@@ -1,16 +1,13 @@
-import InfoGrid from "@template/component/ui-components/pipdriveInfoGrid";
 import AccordionComponent from "@template/component/ui-components/PipedriveAccordion";
 import { useCoSellContext } from "@template/context/Cosell.context";
-import { useEffect } from "react";
 import {
   alertPopupSegment,
   overviewSectionData as segments,
-} from "../../../common/section/overview";
+} from "@template/common/section/overview";
 import {
   DisplayField,
   Tile,
 } from "@template/component/ui-components/detailview-components";
-import { labelMapper } from "@template/utils/labelMappers";
 import { useTranslation } from "react-i18next";
 
 export const OverViewCard: React.FC = () => {

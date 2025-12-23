@@ -34,10 +34,10 @@ export const CosellList = () => {
   const { setCurrentPage } = useCoSellContext();
 
   useEffect(() => {
-    const sdk = initSdk(1000, 500);
+    const sdk = initSdk(window.outerWidth, window.outerHeight);
     setSdk(sdk);
     getCosellsAPI(rows, first, setLoading, setCosells, setTotalRecords);
-  }, []);
+  }, [window]);
 
   useEffect(() => {
     getCosellsAPI(rows, first, setLoading, setCosells, setTotalRecords);
@@ -79,19 +79,21 @@ export const CosellList = () => {
         popup
         ref={menuRef}
       />
-      <PDAdvancedTable
-        first={first}
-        rows={rows}
-        totalRecords={totalRecords}
-        backendFiltering={false}
-        data={cosells}
-        columns={columns}
-        enableGlobalFilter={false}
-        onPageChange={onPageChange}
-        backendPagination={true}
-        loading={loading}
-        emptyMessage={EmptyState({ title: "Cosells not found" })}
-      />
+      <div className="max-w-[calc(100vw-80px)] overflow-auto">
+        <PDAdvancedTable
+          first={first}
+          rows={rows}
+          totalRecords={totalRecords}
+          backendFiltering={false}
+          data={cosells}
+          columns={columns}
+          enableGlobalFilter={false}
+          onPageChange={onPageChange}
+          backendPagination={true}
+          loading={loading}
+          emptyMessage={EmptyState({ title: "Cosells not found" })}
+        />
+      </div>
     </div>
   );
 };

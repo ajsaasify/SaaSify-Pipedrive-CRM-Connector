@@ -1,5 +1,5 @@
-import { Contact, RC3CosellResponse } from "@template/types/cosellResponse";
 import { PDColumnConfig } from "@template/types/pipedrive-table-interface";
+import { t } from "i18next";
 export interface agreementType{
     AgreementID?:string,
     AcceptanceTime?:string,
@@ -10,13 +10,13 @@ export interface agreementType{
 export const AggrementTableColumn: PDColumnConfig[] = [
   {
     field: "AgreementID",
-    header: "AGREEMENT ID",
+    header: t("awsCosell.tableColumn.aggrement.0"),
   },
   {
     field: "AcceptanceTime",
-    header: "CREATED DATE",
+    header:  t("awsCosell.tableColumn.aggrement.1"),
   },
-  { field: "ServiceStartDate", header: "SERVICE START DATE" },
-  { field: "ServiceEndDate", header: "SERVICE END DATE" },
-  { field: "OfferID", header: "OFFER ID" },
+  { field: "ServiceStartDate", header:  t("awsCosell.tableColumn.aggrement.2") },
+  { field: "ServiceEndDate", header:  t("awsCosell.tableColumn.aggrement.3")},
+  { field: "OfferID", header:  t("awsCosell.tableColumn.aggrement.4")},
 ];

@@ -37,7 +37,6 @@ const CosellsPage = () => {
         action_id: "f5458880-50b7-4d74-b4ce-ae8e571d7f54",
         data: { dealId: dealId || "",page:model },
       });
-      console.log("model")
       setCurrentPage({ page: model });
     } catch (err) {
       console.error("Failed to open modal:", err);

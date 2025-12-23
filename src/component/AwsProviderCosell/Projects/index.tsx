@@ -13,9 +13,6 @@ export const ProjectCard: React.FC = () => {
   const { data } = useCoSellContext();
   const segmentData = segments(data || {}, {});
   const { LifeCycle } = data?.CoSellEntity || {};
-  useEffect(() => {
-    // console.log(segmentData);
-  }, [data]);
   return (
     <AccordionComponent
       className="card-view"

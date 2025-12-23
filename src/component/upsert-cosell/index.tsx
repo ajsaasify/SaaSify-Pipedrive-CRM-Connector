@@ -14,7 +14,7 @@ import {
 import React from "react";
 import { CosellAction } from "@template/enum/action.enum";
 import { labelMapper } from "./helper";
-import { buildDataProperty } from "./builder";
+import { buildCosellPayload, buildDataProperty } from "./builder";
 import {
   fetchListCosell,
   fetchSpecificCoSell,
@@ -103,7 +103,7 @@ export const CreateCosell: React.FC<{
   };
   const init = async () => {
     setIsDataFromList(true);
-    const sdk = await initSdk(1000, 500);
+    const sdk = await initSdk(window.outerWidth, window.outerHeight);
     setSdk(sdk);
     try {
       setLoading(true);
@@ -395,9 +395,11 @@ export const CreateCosell: React.FC<{
     }
     return valid;
   };
-  function generateEditCosellPaylaod() {
+  async function generateEditCosellPaylaod() {
     payload = data;
+    console.log(formValue)
     if (validateFields()) {
+      // buildCosellPayload({formValue:formValue,CosellAction:CosellAction.EDIT,})
       payload = {
         ...payload,
         IsSubmitOpportunity: true,
@@ -412,6 +414,9 @@ export const CreateCosell: React.FC<{
                 ...payload.CoSellEntity?.Customer?.Account?.Address,
                 StreetAddress: trimString(formValue?.streetAddress),
                 City: trimString(formValue?.city),
+                CountryCode:trimString(formValue?.country),
+                PostalCode:trimString(formValue?.postalCode)
+
               },
               Duns: trimString(formValue?.customerDuns),
             },
@@ -428,8 +433,8 @@ export const CreateCosell: React.FC<{
           OpportunityType: formValue?.opportunityType,
         },
       };
-
-      saveEditCosells(
+console.log("payload",payload);
+      await saveEditCosells(
         slug,
         payload,
         triggerAlert,

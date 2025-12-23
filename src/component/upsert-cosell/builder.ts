@@ -140,6 +140,7 @@ export function buildCosellPayload({
   );
 
   const coSellEntity = payload.CoSellEntity || {};
+  console.log("formValue",formValue)
   return {
     ...payload,
     Version: payload?.Version ?? requestPayload.version?.AWS,

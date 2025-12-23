@@ -27,7 +27,7 @@ const CosellDetailView = () => {
   };
   useEffect(() => {
     if (!currentPage?.params?.referenceId) return;
-    initSdk(1000, 500);
+    const sdk = initSdk(window.outerWidth, window.outerHeight);
     init();
   }, []);
   if (isSpecificLoading) {

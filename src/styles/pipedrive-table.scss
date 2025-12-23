@@ -75,3 +75,7 @@
 .pd-table.p-datatable-striped .p-datatable-tbody > tr.p-row-even {
   @apply bg-gray-xs;
 }
+
+.p-column-header-content{
+  @apply min-w-[150px] max-w-[300px];
+}

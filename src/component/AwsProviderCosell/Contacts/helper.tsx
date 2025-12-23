@@ -1,14 +1,14 @@
-import { Contact, RC3CosellResponse } from "@template/types/cosellResponse";
 import { PDColumnConfig } from "@template/types/pipedrive-table-interface";
+import { t } from "i18next";
 export const ContactTableColumns: PDColumnConfig[] = [
   {
     field: "title",
-    header: "CONTACT TYPE",
+    header: t("awsCosell.tableColumn.contact.0"),
   },
   {
     field: "name",
-    header: "CONTACT NAME",
+    header: t("awsCosell.tableColumn.contact.1"),
   },
-  { field: "email", header: "CONTACT EMAIL" },
-  { field: "phone", header: "PRIMARY CONTACT PHONE" },
+  { field: "email", header: t("awsCosell.tableColumn.contact.2") },
+  { field: "phone", header:t("awsCosell.tableColumn.contact.3") },
 ];

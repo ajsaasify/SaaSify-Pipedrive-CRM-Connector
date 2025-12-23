@@ -17,6 +17,7 @@ type PDRadioGroupProps = {
   inline?: boolean;
   disabled?: boolean;
   readOnly?:boolean;
+  required?:boolean;
 };
 
 export const PDRadioGroup = ({
@@ -27,7 +28,8 @@ export const PDRadioGroup = ({
   onChange,
   inline = false,
   disabled = false,
-  readOnly=false
+  readOnly=false,
+  required=false
 }: PDRadioGroupProps) => {
   return (
     <div className="flex flex-col gap-2">
@@ -49,6 +51,7 @@ export const PDRadioGroup = ({
               disabled={disabled}
               className="pd-radio-item"
               readOnly={readOnly}
+              required={required}
             />
             <label
               htmlFor={`${name}-${opt.value}`}
