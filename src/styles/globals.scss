@@ -822,7 +822,7 @@ h6 {
   font-family: var(--pd-font);
 }
 
-span{
+span {
   font-family: var(--pd-font);
 }
 
@@ -838,6 +838,24 @@ label {
   color: #6c737f;
 }
 
-.column-2{
-  @apply grid gap-x-3 md:grid-cols-2 grid-cols-1
+.column-2 {
+  @apply grid gap-x-3 md:grid-cols-2 grid-cols-1;
+}
+
+.custom_table .p-datatable-wrapper {
+  @apply text-[13px] max-h-[calc(100vh-100px)] overflow-auto;
+}
+
+.ellipsis-cell {
+  display: inline-block;
+  max-width: 180px; /* adjust based on column width */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.p-tooltip .p-tooltip-text {
+  @apply bg-black text-white shadow-lg border-0 rounded-lg px-2 py-1 text-sm !important;
 }

@@ -32,6 +32,7 @@ import PDDatePicker from "./PipedriveCalendar";
 import { MultiSelectField } from "./PipedriveMultiselect";
 import PDText from "./pipedrive-text";
 import { Skeleton } from "primereact/skeleton";
+import { Paginator } from "primereact/paginator";
 
 const PDAdvancedTable: React.FC<PDAdvancedTableProps> = ({
   data,
@@ -54,7 +55,7 @@ const PDAdvancedTable: React.FC<PDAdvancedTableProps> = ({
   enableGlobalFilter = false,
   globalFilterFields = [],
   emptyMessage,
-  showPaginator=true,
+  showPaginator = true,
 }) => {
   const [filters, setFilters] = useState<DataTableFilterMeta>({});
   const [globalValue, setGlobalValue] = useState("");
@@ -278,6 +279,7 @@ const PDAdvancedTable: React.FC<PDAdvancedTableProps> = ({
   const skeletonRows = Array.from({ length: rows || 10 }).map((_, i) => ({
     id: `skeleton-${i}`,
   }));
+
   return (
     <div className="card">
       <DataTable
@@ -287,7 +289,10 @@ const PDAdvancedTable: React.FC<PDAdvancedTableProps> = ({
         showGridlines
         dataKey="id"
         className="pd-table"
-        paginator={showPaginator}
+        scrollable
+        // scrollHeight="440px"
+        // paginator={showPaginator}
+        paginator={false}
         lazy={backendPagination}
         first={backendPagination ? first : localFirst}
         rows={backendPagination ? rows : localRows}
@@ -315,31 +320,56 @@ const PDAdvancedTable: React.FC<PDAdvancedTableProps> = ({
         globalFilterFields={globalFilterFields}
         emptyMessage={emptyMessage}
       >
-        {columns.map((col, index) => (
-          <Column
-            key={col?.field+index}
-            field={!col?.body ? col?.field || "N/A" : undefined}
-            header={col.header}
-            body={(rowData) =>
-              loading ? (
-                <Skeleton width="100%" height="1.2rem" />
-              ) : col.body ? (
-                col.body(rowData)
-              ) : (
-                rowData[col?.field] || "N/A"
-              )
-            }
-            sortable={col.sortable ?? false}
-            style={{ width: col.width || "auto" }}
-            filter={!!col.filterType}
-            alignFrozen={col?.alignFrozen}
-            frozen={col?.frozen}
-            filterField={col.filterField || col.field}
-            filterElement={col.filterType ? getFilterTemplate(col) : undefined}
-            showFilterMatchModes={false}
-          />
-        ))}
+        {columns.map((col, index) => {
+          const isFrozen = col.frozen;
+          const alignFrozen = col.alignFrozen;
+
+          return (
+            <Column
+              key={`${col.field}-${index}`}
+              field={!col.body ? col.field ?? "--" : undefined}
+              header={col.header}
+              body={(rowData) => {
+                if (loading) {
+                  return <Skeleton width="100%" height="1.2rem" />;
+                }
+
+                if (col.body) {
+                  return col.body(rowData);
+                }
+
+                return rowData[col.field] ?? "--";
+              }}
+              sortable={!!col.sortable}
+              style={{ width: col.width ?? "200px" }}
+              filter={Boolean(col.filterType)}
+              filterField={col.filterField ?? col.field}
+              filterElement={
+                col.filterType ? getFilterTemplate(col) : undefined
+              }
+              showFilterMatchModes={false}
+              frozen={isFrozen}
+              alignFrozen={isFrozen ? alignFrozen : undefined}
+            />
+          );
+        })}
       </DataTable>
+      {showPaginator && (
+        <Paginator
+          first={backendPagination ? first : localFirst}
+          rows={backendPagination ? rows : localRows}
+          totalRecords={totalRecords}
+          rowsPerPageOptions={[10, 20, 50, 100]}
+          onPageChange={(e: DataTablePageEvent) => {
+            if (backendPagination) {
+              onPageChange?.(e); // backend pagination
+            } else {
+              setLocalFirst(e.first); // frontend pagination
+              setLocalRows(e.rows);
+            }
+          }}
+        />
+      )}
     </div>
   );
 };

@@ -15,13 +15,17 @@ import { CosellDetailHeader } from "./helper";
 const CosellDetailView = () => {
   const params = pipeDriveParams();
   const { setData } = useCoSellContext();
-  const { currentPage, setCurrentPage, setIsSpecificLoading, isSpecificLoading } =
-    useCoSellContext();
+  const {
+    currentPage,
+    setCurrentPage,
+    setIsSpecificLoading,
+    isSpecificLoading,
+  } = useCoSellContext();
   const init = async () => {
     await getSingleCosell({
       sellerId: currentPage?.params?.sellerCode || "",
       opportunityId: currentPage?.params?.referenceId || "",
-      setLoading:setIsSpecificLoading,
+      setLoading: setIsSpecificLoading,
       setData,
     });
   };

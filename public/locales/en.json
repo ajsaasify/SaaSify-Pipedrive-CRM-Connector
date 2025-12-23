@@ -257,7 +257,7 @@
         "teamMember": "Team Members",
         "required": "This field is required",
         "optional": "- optional",
-        "cashReqInfo":"Cash Request Information",
+        "cashReqInfo": "Cash Request Information",
         "cashReqDesc": "The finance approval guide provides guidance on how to accurately complete cash request information using your company's Amazon Payee Central account. The currency selection and invoice details must match your company’s Amazon Payee Central account.",
         "cashClaimPlan": "Cash claim plans",
         "remove": "Remove",
@@ -451,7 +451,12 @@
         "publisherName": "Publisher Name"
       },
       "contact": ["First Name", "Last Name", "Email", "Phone Number"],
-      "solutions": ["Solution Name", "Solution Id", "Incentive Programs", "Publisher Name"]
+      "solutions": [
+        "Solution Name",
+        "Solution Id",
+        "Incentive Programs",
+        "Publisher Name"
+      ]
     }
   },
   "gcpCosell": {
@@ -747,7 +752,14 @@
         "metric": "Metric",
         "description": "Description"
       },
-      "contact": ["Contact", "Email", "Access level", "Title", "Role", "Primary"]
+      "contact": [
+        "Contact",
+        "Email",
+        "Access level",
+        "Title",
+        "Role",
+        "Primary"
+      ]
     }
   },
   "awsCosell": {
@@ -1307,7 +1319,10 @@
       "partnerStatus": "Partner Status",
       "stage": "Stage",
       "status": "Status",
-      "awsRecommendedActions": "AWS Recommended Actions"
+      "awsRecommendedActions": "AWS Recommended Actions",
+      "referenceId": "Reference ID",
+      "referenceType": "Reference Type",
+      "lastModified": "Last Modified"
     },
     "projectSegment": {
       "partnerPrimaryNeed": "Partner Primary Need from AWS",
@@ -1398,8 +1413,19 @@
       "cosell": ["OPP ID", "Customer", "Stage", "Status", "Action"],
       "invitations": ["NAME", "EMAIL", "TITLE"],
       "nextStep": ["NEXT STEP", "CREATED DATE"],
-      "aggrement": ["AGREEMENT ID", "CREATED DATE", "SERVICE START DATE (UTC)", "SERVICE END DATE (UTC)", "OFFER ID"],
-      "contact": ["CONTACT TYPE", "CONTACT NAME", "CONTACT EMAIL", "PRIMARY CONTACT PHONE"]
+      "aggrement": [
+        "AGREEMENT ID",
+        "CREATED DATE",
+        "SERVICE START DATE (UTC)",
+        "SERVICE END DATE (UTC)",
+        "OFFER ID"
+      ],
+      "contact": [
+        "CONTACT TYPE",
+        "CONTACT NAME",
+        "CONTACT EMAIL",
+        "PRIMARY CONTACT PHONE"
+      ]
     },
     "multipartner": {
       "contacts": "Contacts",
@@ -2234,7 +2260,13 @@
       }
     },
     "renderStepNames": {
-      "stepsName": ["Basic Information", "Buyer Information", "Offer Term", "Offer Pricing", "Review Offer"],
+      "stepsName": [
+        "Basic Information",
+        "Buyer Information",
+        "Offer Term",
+        "Offer Pricing",
+        "Review Offer"
+      ],
       "resellerStepsName": [
         "Authorization Details",
         "Reseller Details",
