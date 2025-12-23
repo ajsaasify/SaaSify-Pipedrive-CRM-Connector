@@ -2,8 +2,14 @@ import { validatePureNumber } from "@template/utils/globalHelper";
 import { emailRegex } from "@template/utils/regex";
 import { labelMapper } from "./helper";
 
+export const isFieldTooLong = (value: string, max: number) =>
+  !!(value && value.length >= max);
+
+export const isFieldTooShort = (value: string, min: number) =>
+  !!(value && value.length <= min);
+
 export const fieldChecks = (
-  formValue:any,
+  formValue: any,
   readOnlyFields: string[],
   isNationalSecurities: boolean
 ) => {

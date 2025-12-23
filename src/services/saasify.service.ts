@@ -5,11 +5,15 @@ import { FetchOptions } from "../enum/options.enum";
 import { PipedriveContext } from "../types/pipedriveContext";
 import { PathParams, QueryParams } from "../types/urlBuilder";
 import HttpWrapper from "./http.service";
-import { CoSellResponse, getListCosellAssociatePayloadCrmType } from "@template/types/api/getListCosellAssociateCrm.t";
+import {
+  CoSellResponse,
+  getListCosellAssociatePayloadCrmType,
+} from "@template/types/api/getListCosellAssociateCrm.t";
 
 class SaasifyService {
   private httpWrapper: HttpWrapper;
   private apiUrl: string;
+
   constructor() {
     this.httpWrapper = new HttpWrapper();
     this.apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "";
@@ -45,14 +49,14 @@ class SaasifyService {
   }
 
   public async getListCosell(
-    sellerCode: string,
+    sellerCode: string
     // objectId: string | number,
     // appId: string | number,
     // portalId: string | number
   ) {
     const url = this.buildUrl(
       "/cosell/v3/selleraccounts/:sellerCode/opportunities/crmid/:objectId",
-      { sellerCode },
+      { sellerCode }
       // { appId, portalId }
     );
     return this.httpWrapper.get(url);
@@ -61,7 +65,7 @@ class SaasifyService {
   public async getListCosellAssociateCrm(
     sellerCode: string,
     payload: getListCosellAssociatePayloadCrmType
-  ):Promise<CoSellResponse> {
+  ): Promise<CoSellResponse> {
     const url = this.buildUrl(
       "/cosell/v3/selleraccounts/:sellerCode/opportunities",
       { sellerCode },

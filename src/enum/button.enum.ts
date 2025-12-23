@@ -27,6 +27,17 @@ export enum FormButton {
   SAVE_AND_PUBLISH = "Save & Publish",
   PUBLISH = "Publish",
   REVIEW = "Review Offer",
+  CLONE = "Clone",
+  BULK_UPLOAD = "Bulk Actions",
+  SAVE_NEXT = "Save & Next",
+  TEMPLATE_NEXT = "Next",
+  YES = "Yes",
+  NO = "No",
+  SEND_EMAIL = "Send Email",
+  INFO = "Info",
+  ADD_RECORD_USAGE = "Add Record Usage",
+  POST_USAGE = "Post Usage",
+  UPDATE_FEATURE = "Update Features",
 }
 export enum ActionButton {
   RESET = "Reset",
@@ -61,7 +72,7 @@ export enum ButtonSize {
 }
 
 export enum TabVariant {
-  ENCLOSED = "enclosed"
+  ENCLOSED = "enclosed",
 }
 
 export enum IconVariant {

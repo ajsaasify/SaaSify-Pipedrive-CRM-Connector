@@ -32,6 +32,7 @@ import PDDatePicker from "./PipedriveCalendar";
 import { MultiSelectField } from "./PipedriveMultiselect";
 import PDText from "./pipedrive-text";
 import { Skeleton } from "primereact/skeleton";
+import { useCoSellContext } from "@template/context/Cosell.context";
 
 const PDAdvancedTable: React.FC<PDAdvancedTableProps> = ({
   data,
@@ -54,12 +55,14 @@ const PDAdvancedTable: React.FC<PDAdvancedTableProps> = ({
   enableGlobalFilter = false,
   globalFilterFields = [],
   emptyMessage,
-  showPaginator=true,
+  showPaginator = true,
 }) => {
   const [filters, setFilters] = useState<DataTableFilterMeta>({});
   const [globalValue, setGlobalValue] = useState("");
   const [localFirst, setLocalFirst] = useState(first);
   const [localRows, setLocalRows] = useState(rows);
+  const { setData, dealName, setDealName, setFormValues } = useCoSellContext();
+
   /* ------------------------------------
     INIT FILTERS 
 -------------------------------------*/
@@ -278,15 +281,19 @@ const PDAdvancedTable: React.FC<PDAdvancedTableProps> = ({
   const skeletonRows = Array.from({ length: rows || 10 }).map((_, i) => ({
     id: `skeleton-${i}`,
   }));
+
   return (
     <div className="card">
       <DataTable
         value={loading ? skeletonRows : data}
         // loading={loading}
         header={header}
+        // header={ActionBar}
         showGridlines
         dataKey="id"
         className="pd-table"
+        scrollable
+        scrollHeight="400px"
         paginator={showPaginator}
         lazy={backendPagination}
         first={backendPagination ? first : localFirst}
@@ -315,9 +322,9 @@ const PDAdvancedTable: React.FC<PDAdvancedTableProps> = ({
         globalFilterFields={globalFilterFields}
         emptyMessage={emptyMessage}
       >
-        {columns.map((col, index) => (
+        {/* {columns.map((col, index) => (
           <Column
-            key={col?.field+index}
+            key={col?.field + index}
             field={!col?.body ? col?.field || "N/A" : undefined}
             header={col.header}
             body={(rowData) =>
@@ -336,7 +343,38 @@ const PDAdvancedTable: React.FC<PDAdvancedTableProps> = ({
             filterElement={col.filterType ? getFilterTemplate(col) : undefined}
             showFilterMatchModes={false}
           />
-        ))}
+        ))} */}
+        {columns.map((col, index) => {
+          const isFirstColumn = index === 0;
+          const isLastColumn = index === columns.length - 1;
+
+          return (
+            <Column
+              key={col?.field + index}
+              field={!col?.body ? col?.field || "N/A" : undefined}
+              header={col.header}
+              body={(rowData) =>
+                loading ? (
+                  <Skeleton width="100%" height="1.2rem" />
+                ) : col.body ? (
+                  col.body(rowData)
+                ) : (
+                  rowData[col?.field] || "N/A"
+                )
+              }
+              sortable={col.sortable ?? false}
+              style={{ width: col.width || "200px" }}
+              filter={!!col.filterType}
+              filterField={col.filterField || col.field}
+              filterElement={
+                col.filterType ? getFilterTemplate(col) : undefined
+              }
+              showFilterMatchModes={false}
+              frozen={isFirstColumn || isLastColumn}
+              alignFrozen={isLastColumn ? "right" : undefined}
+            />
+          );
+        })}
       </DataTable>
     </div>
   );

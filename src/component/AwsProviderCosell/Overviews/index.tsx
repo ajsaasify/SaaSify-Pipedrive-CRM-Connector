@@ -1,7 +1,6 @@
 import InfoGrid from "@template/component/ui-components/pipdriveInfoGrid";
 import AccordionComponent from "@template/component/ui-components/PipedriveAccordion";
 import { useCoSellContext } from "@template/context/Cosell.context";
-import { useEffect } from "react";
 import {
   alertPopupSegment,
   overviewSectionData as segments,
@@ -10,15 +9,18 @@ import {
   DisplayField,
   Tile,
 } from "@template/component/ui-components/detailview-components";
-import { labelMapper } from "@template/utils/labelMappers";
 import { useTranslation } from "react-i18next";
+import { validateDealName } from "@template/utils/globalHelper";
+import { requestPayload } from "@template/common/listCosell";
 
 export const OverViewCard: React.FC = () => {
-  const { data } = useCoSellContext();
+  const { data, dealName } = useCoSellContext();
+  const isDefautView = validateDealName(dealName, requestPayload.defaultDeals);
   const segmentData = segments(data || {});
   const { LifeCycle } = data?.CoSellEntity || {};
   const alertSegment = alertPopupSegment(data);
   const { t } = useTranslation();
+
   return (
     <AccordionComponent
       className="card-view"
@@ -30,9 +32,7 @@ export const OverViewCard: React.FC = () => {
             <>
               <div className="w-full">
                 <Tile>
-                  <h5>
-                    {t("awsCosell.inputLabelMapper.accordian.overview")}
-                  </h5>
+                  <h5>{t("awsCosell.inputLabelMapper.accordian.overview")}</h5>
                   <hr />
 
                   {segmentData.map((fields, idx) => (

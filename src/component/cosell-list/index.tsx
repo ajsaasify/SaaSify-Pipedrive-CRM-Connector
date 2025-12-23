@@ -7,15 +7,18 @@ import { DataTablePageEvent } from "primereact/datatable";
 import initSdk from "@template/helpers/modelInit";
 import { cosellTableColumns } from "./helper";
 import { getCosellsAPI } from "./apiHandler";
-import { useRouter } from "next/router";
 import { useCoSellContext } from "@template/context/Cosell.context";
 import { ModelType } from "@template/enum/pipedrive.enum";
 import { useTranslation } from "react-i18next";
 import { EmptyState } from "../ui-components/empty-data";
+import ActionBar from "../actions/ActionBar";
+import { DefaultView } from "@template/enum/view.enum";
+import pipeDriveParams from "@template/utils/pipedrive-params";
 
-export const CosellList = () => {
+export const CosellList = ({ page }: { page: string }) => {
   // const params = new URLSearchParams(window.location.search);
   // const [dealId, selectedDealId] = useState("");
+  const params = pipeDriveParams();
   const [cosells, setCosells] = useState<CoSellItem[]>([]);
   const [first, setFirst] = useState(0);
   const [rows, setRows] = useState(10);
@@ -23,9 +26,24 @@ export const CosellList = () => {
   const [loading, setLoading] = useState(false);
   const [currentCosell, setCurrentCosell] = useState<CoSellItem | null>(null);
   const columns: PDColumnConfig[] = cosellTableColumns(setCurrentCosell);
-  const [ sdk, setSdk ] = useState<any>();
-  const { setCurrentPage } = useCoSellContext();
+  const [sdk, setSdk] = useState<any>();
+  const {
+    setData,
+    dealName,
+    currentPage,
+    setDealName,
+    setFormValues,
+    setCurrentPage,
+  } = useCoSellContext();
+  const [defaultView, setDefaultView] = useState(DefaultView.COSELL);
+  const [filtersEnabled, setFiltersEnabled] = useState(false);
+  const [refreshEnabled, setRefreshEnabled] = useState(false);
   // const isTab = useTab();
+
+  useEffect(() => {
+    console.log(params, "--params--", page);
+    console.log(params, "--params--", page);
+  }, [params, page, currentPage]);
 
   useEffect(() => {
     const sdk = initSdk(1000, 500);
@@ -34,8 +52,13 @@ export const CosellList = () => {
   }, []);
 
   useEffect(() => {
+    console.log(refreshEnabled, "refreshEnabled");
     getCosellsAPI(rows, first, setLoading, setCosells, setTotalRecords);
-  }, [rows, first]);
+  }, [rows, first, refreshEnabled]);
+
+  function getCosellsAPIInital() {
+    return getCosellsAPI(rows, first, setLoading, setCosells, setTotalRecords);
+  }
 
   const onPageChange = (e: DataTablePageEvent) => {
     if (e?.first !== first) setFirst(e?.first || 0);
@@ -53,7 +76,7 @@ export const CosellList = () => {
     }
   }, [currentCosell?.ReferenceID]);
   return (
-    <div className="md:w-full lg:max-w-full p-4 overflow-auto">
+    <div className="md:w-full md:max-w-[calc(100%-20px)] p-4 overflow-auto">
       <PDAdvancedTable
         first={first}
         rows={rows}

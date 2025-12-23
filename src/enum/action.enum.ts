@@ -1,6 +1,7 @@
 export enum CosellAction {
   ADD = "add-cosell",
   EDIT = "edit-cosell",
+  CLONE = "clone-cosell",
 }
 
 export enum PrivateOffersAction {

@@ -1,6 +1,7 @@
 import {
   AlertNotification,
   getErrorAlert,
+  getInfoAlert,
   getSuccessAlert,
 } from "../../../common/messageAlert";
 import { generateMessage } from "../../../common/messageAlert/generateMessage";
@@ -8,6 +9,8 @@ import SaasifyService from "../../../services/saasify.service";
 import { RC3CosellResponse } from "../../../types/cosellResponse";
 import { ResponseStatus } from "../../../enum/response.enum";
 import { getResponseError } from "../../../utils/globalHelper";
+import { ModalId } from "@template/enum/modal.enum";
+import { requestPayload } from "@template/common/payload";
 
 const saasifyService = new SaasifyService();
 
@@ -34,7 +37,7 @@ export const pullCosell = async (
       const successMessage = isPendingFromAoInBound
         ? generateMessage.invitationRefresh
         : generateMessage.refresh;
-        
+
       alert && triggerAlert(getSuccessAlert(successMessage));
       const { CoSellEntity } = responseData?.Data;
       const dataRes = {
@@ -96,3 +99,67 @@ export const pushCrm = async (
     setIsSpecificLoading(false);
   }
 };
+
+export async function acceptCosell(
+  // setErrorStatus: React.Dispatch<React.SetStateAction<string>>,
+  cosell: RC3CosellResponse,
+  setIsFetching: React.Dispatch<React.SetStateAction<boolean>>,
+  opportunityList: RC3CosellResponse[],
+  setOpportunityList: React.Dispatch<React.SetStateAction<RC3CosellResponse[]>>,
+  triggerAlert: (alert: AlertNotification) => void,
+  setCosell: React.Dispatch<React.SetStateAction<RC3CosellResponse>>,
+  action?: any
+) {
+  const payload = {
+    CloudProvider: cosell.CloudProvider,
+    Version:
+      requestPayload.version[
+        cosell.CloudProvider as keyof typeof requestPayload.version
+      ],
+  };
+  triggerAlert(getInfoAlert(generateMessage.acceptCosellInProgress));
+  try {
+    setIsFetching(true);
+    const responseData = await saasifyService.acceptCosell(
+      cosell?.SellerCode as string,
+      cosell?.ReferenceID as string,
+      payload
+    );
+    if (responseData?.Status === ResponseStatus.ERROR) {
+      let errorMessage;
+      try {
+        errorMessage = JSON.parse(responseData.ErrorDetail);
+      } catch (error) {
+        errorMessage = responseData.ErrorDetail;
+      }
+      const errorMessages = Array.isArray(errorMessage)
+        ? errorMessage.join(", ")
+        : errorMessage;
+
+      throw new Error(errorMessages);
+    }
+    if (
+      responseData?.Status === ResponseStatus.SUCCESS &&
+      responseData?.Data?.ErrorMessage?.length
+    ) {
+      throw new Error(responseData?.Data?.ErrorMessage?.join(", "));
+    } else {
+      pullCosell(
+        cosell,
+        triggerAlert,
+        setIsFetching,
+        setCosell,
+        setOpportunityList,
+        opportunityList,
+        false
+      );
+      triggerAlert(getSuccessAlert(generateMessage.acceptCosell));
+      action.closeOverlay(ModalId.ACCEPT);
+    }
+  } catch (error: any) {
+    // setErrorStatus(error.message);
+    triggerAlert(getErrorAlert(error?.message));
+  } finally {
+    setIsFetching(false);
+  }
+}

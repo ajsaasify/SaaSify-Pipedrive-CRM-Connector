@@ -1,5 +1,8 @@
 import { requestPayload } from "@template/common/listCosell";
-import { AlertNotification, getErrorAlert } from "@template/common/messageAlert";
+import {
+  AlertNotification,
+  getErrorAlert,
+} from "@template/common/messageAlert";
 import { generateMessage } from "@template/common/messageAlert/generateMessage";
 import { ResponseStatus } from "@template/enum/response.enum";
 import SaasifyService from "@template/services/saasify.service";
@@ -17,7 +20,7 @@ export const getCosellsAPI = async (
   first: number,
   setLoading: Dispatch<SetStateAction<boolean>>,
   setCosells: Dispatch<SetStateAction<CoSellItem[]>>,
-  setTotalRecords:Dispatch<SetStateAction<number>>
+  setTotalRecords: Dispatch<SetStateAction<number>>
 ) => {
   const saasify = new SaasifyService();
   setLoading(true);
@@ -53,9 +56,7 @@ export async function fetchAllOptions(
   try {
     !isDefaultView && setIsListLoading(true);
     const firstSet = await Promise.all([
-      ...(isDefaultView
-        ? []
-        : [fetchListCosell( setData, setOpportunityList)]),
+      ...(isDefaultView ? [] : [fetchListCosell(setData, setOpportunityList)]),
     ]);
 
     handleErrors(firstSet, initialError, triggerAlert);
@@ -78,7 +79,7 @@ export const getPartnerType = async (
       throw new Error(getResponseError(responseData?.ErrorDetail));
     }
     responseData?.Data?.length && setPartnerType(responseData?.Data);
-  } catch (error:any) {
+  } catch (error: any) {
     triggerAlert(getErrorAlert(error?.message));
   }
 };
@@ -110,7 +111,7 @@ export const fetchListCosell = async (
   try {
     const executeWithRetry = async () => {
       const responseData = await saasifyService.getListCosell(
-        requestPayload.sellerCode,
+        requestPayload.sellerCode
       );
 
       if (
@@ -247,6 +248,57 @@ export const fetchSpecificCoSell = async (
   }
 };
 
+export const customfetchSpecificCoSell = async (
+  opportunityId: string,
+  sellerId: string,
+  setData: React.Dispatch<React.SetStateAction<RC3CosellResponse>>,
+  setIsSpecificLoading: React.Dispatch<React.SetStateAction<boolean>>,
+  triggerAlert: (alert: AlertNotification) => void,
+  opportunityList: RC3CosellResponse[],
+  setOpportunityList: React.Dispatch<React.SetStateAction<RC3CosellResponse[]>>,
+  displayAlert?: boolean
+) => {
+  // setData({});
+  setIsSpecificLoading(true);
+  try {
+    const executeWithRetry = async () => {
+      const responseData = await saasifyService.getCosellById(
+        sellerId,
+        opportunityId
+      );
+      if (responseData?.Data) {
+        displayAlert && triggerAlert(getSuccessAlert(generateMessage.refresh));
+        let data = {
+          ...responseData?.Data,
+          CoSellEntity: JSON.parse(responseData?.Data?.CoSellEntity),
+        };
+        setData(data || {});
+        const list = opportunityList?.map((value) => {
+          if (value.ReferenceID == opportunityId) {
+            return data;
+          } else {
+            return value;
+          }
+        });
+        setOpportunityList(list);
+      }
+      if (responseData?.Status === ResponseStatus.ERROR) {
+        throw new Error(getResponseError(responseData?.ErrorDetail));
+      }
+    };
+
+    await backOff(executeWithRetry, {
+      retry: (error, attemptNumber) => attemptNumber == 1,
+      startingDelay: 500,
+    });
+  } catch (error: any) {
+    setData({});
+    triggerAlert(getErrorAlert(error.message));
+  } finally {
+    setIsSpecificLoading(false);
+  }
+};
+
 export const fetchActivityLog = async (
   opportunityId: string,
   triggerAlert: (alert: AlertNotification) => void,
@@ -271,7 +323,7 @@ export const fetchActivityLog = async (
         false // IsFromWebApp
       );
       if (responseData?.Data) {
-        let data = responseData?.Data?.map((value:any) => ({
+        let data = responseData?.Data?.map((value: any) => ({
           ...value,
           Context: JSON.parse(value?.Context),
         }));

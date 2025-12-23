@@ -2,7 +2,7 @@ import { InputBoxProps } from "@template/types/pipedrive-ui-interface";
 import { InputText } from "primereact/inputtext";
 import PDText from "./pipedrive-text";
 import { PDTextType } from "@template/enum/pipedrive.enum";
-import { error } from "console";
+
 const Input = ({
   label,
   info,

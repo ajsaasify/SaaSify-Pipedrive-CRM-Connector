@@ -26,10 +26,12 @@ const pipeDriveParams = (
     const searchParams = Object.fromEntries(
       sp.entries()
     ) as unknown as pipedriveParams;
+
     if (typeof searchParams?.data === "string") {
       searchParams.data = JSON.parse(searchParams?.data || "");
     }
     setParams?.(searchParams);
+    console.log(searchParams, "searchParams");
     return searchParams;
   } catch (err) {
     console.warn("Cannot access parent URL (maybe cross-domain)", err);

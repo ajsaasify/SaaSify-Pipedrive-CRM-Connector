@@ -5,19 +5,6 @@
     "info": "Important Info.",
     "note": "Note."
   },
-  "layout": {
-    "selectCosell": "Select Co-sells",
-    "selectPrivateOffer": "Select Private Offers",
-    "funding": "Funding",
-    "analytics": "Analytics"
-  },
-  "cosellTable": {
-    "oppId": "Opp ID",
-    "customer": "Customer",
-    "stage": "Stage",
-    "status": "Status",
-    "action": "Action"
-  },
   "buttonLabel": {
     "reset": "Reset",
     "pushCrm": "Push",
@@ -84,9 +71,7 @@
     "info": "Info",
     "addRecordUsage": "Add Record Usage",
     "postUsage": "Post Usage",
-    "clone": "Clone",
-    "bulkUpload": "Bulk Actions",
-    "updateFeature": "Update Features"
+    "clone": "Clone"
   },
   "modalTitle": {
     "update": "Update Additional Details",
@@ -192,7 +177,7 @@
       "postalCode": "Postal Code or Zip Code",
       "firstName": "Customer First Name",
       "lastName": "Customer Last Name",
-      "email": "Customer Email",
+      "email": "Customer E-Mail",
       "phone": "Customer Phone"
     },
     "additional": {
@@ -254,18 +239,7 @@
         "customerContactOptional": "Customer Contact (Optional)",
         "solutions": "Solutions",
         "consent": "Consent",
-        "teamMember": "Team Members",
-        "required": "This field is required",
-        "optional": "- optional",
-        "cashReqInfo": "Cash Request Information",
-        "cashReqDesc": "The finance approval guide provides guidance on how to accurately complete cash request information using your company's Amazon Payee Central account. The currency selection and invoice details must match your company’s Amazon Payee Central account.",
-        "cashClaimPlan": "Cash claim plans",
-        "remove": "Remove",
-        "addAnothercashClaim": "Add another cash claim",
-        "addUpto": "You can add up to",
-        "moreClaims": "more claims.",
-        "requestedCreditAmount": "Requested credit amount",
-        "totalAmount": "Total (USD)"
+        "teamMember": "Team Members"
       },
       "customerCompanyName": {
         "label": "Customer Company Name",
@@ -440,16 +414,6 @@
       }
     },
     "tableColumn": {
-      "tableHeader": {
-        "firstName": "First Name",
-        "lastName": "Last Name",
-        "email": "email",
-        "phoneNumber": "Phone Number",
-        "solutionName": "Solution Name",
-        "solutionId": "Solution Id",
-        "incentivePrograms": "Incentive Programs",
-        "publisherName": "Publisher Name"
-      },
       "contact": ["First Name", "Last Name", "Email", "Phone Number"],
       "solutions": [
         "Solution Name",
@@ -736,22 +700,6 @@
       }
     },
     "tableColumn": {
-      "tableHeader": {
-        "contact": "Contact",
-        "email": "Email",
-        "accessLevel": "Access level",
-        "title": "Title",
-        "role": "Role",
-        "primary": "Primary",
-        "product": "Product",
-        "quantity": "Quantity",
-        "productCode": "Product code",
-        "salesPrice": "Sales price",
-        "listPrice": "List price",
-        "totalPrice": "Total price",
-        "metric": "Metric",
-        "description": "Description"
-      },
       "contact": [
         "Contact",
         "Email",
@@ -1054,7 +1002,6 @@
       },
       "contactDescription": " Request you to fill in the end customer details in this section. Though optional it assists us in progressing faster on the opportunity. In case this is not filled, we will populate this with the opportunity submitter information, for the AWS Sales team to contact.",
       "partnerDescription": "Provide contact information for the primary sales contact responsible for this opportunity within your organization. The AWS sales team may reach out to this individual to discuss the opportunity further.",
-
       "marketingSourceAction": {
         "label": "Is opportunity from marketing activity?"
       },
@@ -1118,7 +1065,7 @@
         "validationMessage": "Marketplace Offer Id is required",
         "placeHolder": "Type an Offer ID"
       },
-      "offerTypes": {
+      "type": {
         "label": "Select Offer Association Type",
         "description": {
           "yes": "Search for an AWS Marketplace Offer",
@@ -1147,8 +1094,7 @@
       "email": {
         "label": "Email",
         "validationMessage": "Email is required",
-        "validation": "Please enter a valid email address",
-        "validationInvalid": "Email is invalid"
+        "validation": "Please enter a valid email address"
       },
       "awsId": {
         "label": "AWS Account ID",
@@ -1268,9 +1214,7 @@
       "dealsQualify": "Qualification Information",
       "systemInfo": "System Information",
       "partnerConnection": "Partner Shared Details",
-      "invitation": "Invitation Details",
-      "opportunityMarket": "Opportunity Marketing Details",
-      "cosellOverview": "Co-sell Overview"
+      "invitation": "Invitation Details"
     },
     "customer": {
       "customerDuns": "Customer DUNS",
@@ -1300,15 +1244,7 @@
       "offerCreatedDate": "Offer Created Date",
       "offerExpiryDate": "Offer Expiry Date",
       "labelAggrement": "AWS Marketplace Agreement",
-      "labelOffer": "AWS Marketplace Offer",
-      "deleteConfirmation": "Are you sure you want to remove this AWS Marketplace Offer?",
-      "tableHeader": {
-        "aggrementId": "AGREEMENT ID",
-        "createdDate": "CREATED DATE",
-        "serviceStartDate": "SERVICE START DATE (UTC)",
-        "serviceEndDate": "SERVICE END DATE (UTC)",
-        "offerId": "OFFER ID"
-      }
+      "labelOffer": "AWS Marketplace Offer"
     },
     "overview": {
       "opportunityId": "Opportunity ID",
@@ -1423,21 +1359,6 @@
         "CONTACT EMAIL",
         "PRIMARY CONTACT PHONE"
       ]
-    },
-    "multipartner": {
-      "contacts": "Contacts",
-      "tableHeader": {
-        "partnerName": "Partner name",
-        "invitationStatus": "Invitation Status",
-        "opportunityStatus": "Opportunity Status",
-        "opportunityStage": "Opportunity Stage",
-        "partnerContactName": "Partner Sales Contact Name",
-        "partnerContactEmail": "Partner Sales Contact Email",
-        "partnerContactPhone": "Partner Sales Contact Phone",
-        "name": "Name",
-        "email": "email",
-        "title": "title"
-      }
     }
   },
   "generateMessage": {
@@ -1511,18 +1432,7 @@
     "forThisId": "for this id",
     "nodataDisplay": "No data to display",
     "request": "Your request to close this opportunity as",
-    "finalDecision": "is under review by Google sales representative, who will make the final decision. Contact Partner Support with any issues.",
-    "noLogsDisplay": "No Logs to display"
-  },
-  "auditLog": {
-    "tableColumn": {
-      "tableHeader": {
-        "activity": "Activity",
-        "date": "Date (local)",
-        "event": "Event",
-        "actor": "Actor"
-      }
-    }
+    "finalDecision": "is under review by Google sales representative, who will make the final decision. Contact Partner Support with any issues."
   },
   "filter": {
     "referralType": {
@@ -2629,632 +2539,6 @@
       "actualPayDate": "Actual Pay Date",
       "saasSubsId": "SaaS Subscription Resource ID",
       "status": "Status"
-    }
-  },
-  "awsBenefits": {
-    "reviewBenefits": {
-      "fundReqestInformation": "Step 1: Fund request information",
-      "contactInformation": "Contact information",
-      "fundRequestDetails": "Fund request details",
-      "publicSector": "Public sector acknowledgement",
-      "associatedOpporutniy": "Step 2: Associated opportunity",
-      "selectedOpportunity": "Selected opportunity",
-      "projectDetailTitle": "Step 3: Project details",
-      "projectDetails": "Project details",
-      "showAgreement": "Show agreements",
-      "creditRequestDetails": "Step 4: Credit request details",
-      "creditRequestInformation": "Credit request information",
-      "cashRequestDetail": "Step 4: Cash request details",
-      "cashRequestInformation": "Cash request information"
-    },
-    "inputLabelMapper": {
-      "claims": {
-        "title": "Cash claim plans",
-        "find": "Find claims",
-        "claimTitle": "Claim"
-      },
-      "accordion": {
-        "program": "Program",
-        "subCatagory": "Subcategory",
-        "typeOfFunding": "Type of funding",
-        "arrValue": "Annual recurring revenue (USD)",
-        "fundingMotion": "Funding motion",
-        "projectDetails": "Project details",
-        "creditRequestDetails": "Credit request details",
-        "creditDetails": "Credit details",
-        "requestedCreditAmount": "Requested credit amount",
-        "totalAmount": "Total (USD)"
-      },
-      "fromMappingList": {
-        "label": "Select from mapping"
-      },
-      "sellerCode": {
-        "label": "Seller account",
-        "placeHolder": "Select seller account",
-        "validationMessage": "Seller account is required",
-        "validation": "Seller account is required to proceed"
-      },
-      "cutomerjobTitle": {
-        "label": "Job title",
-        "validationMessage": "Job title is required."
-      },
-      "cutomerFirstName": {
-        "label": "First name",
-        "validationMessage": "First name is required."
-      },
-      "cutomerLastName": {
-        "label": "Last name",
-        "validationMessage": "Last name is required."
-      },
-      "cutomerEmail": {
-        "label": "Email address",
-        "validationMessage": "Email address is required."
-      },
-      "template": {
-        "name": "template",
-        "label": "Program",
-        "validation": "Selecting program is required to proceed"
-      },
-      "validationMessage": "Field is required.",
-      "infoOfStepTitle": {
-        "fundRequestInfo": "All pre-approved funding amounts are inclusive of any applicable taxes and fees, including Value Added Tax (VAT), Goods and Services Tax (GST) and similar taxes.",
-        "opportunityInfo": {
-          "paraOne": "This Funding Benefit requires a Partner-led or involved customer opportunity associated with each fund request. Here you will have access to a list of validated, open opportunities which meet the funding program's opportunity qualification criteria. Please select a qualified opportunity to associate with this fund request. If you do not see your opportunity or need access to additional opportunities presented here for your organization, please contact your AWS Alliance Team or Partner Manager. To learn more about each funding program's opportunity qualification criteria, please read the ACE Opportunity help text or review the APN Funding Program Guide.",
-          "paraTwo": "Please note that for Partner MAP Funding, each phase of MAP Fund request for a migration opportunity must only have one ACE submission for small migrations ( less than $500K ARR).",
-          "paraThree": "Partners pursuing any POC/MAP/ISV WMP/Startup (SUP) Incremental Workloads funding will now only be able to select opportunities which meet each program’s opportunity qualification criteria:",
-          "listItems": {
-            "listOne": {
-              "head": "Proof of Concept (POC):",
-              "body": "Technical Validation+"
-            },
-            "listTwo": {
-              "head": "MAP Assess Phase:",
-              "body": "Technical Validation+"
-            },
-            "listThree": {
-              "head": "MAP Mobilize Phase:",
-              "body": "Business Validation+"
-            },
-            "listFour": {
-              "head": "MAP Migrate & Modernize Phase:",
-              "body": "Committed+"
-            },
-            "listFive": {
-              "head": "ISV WMP:",
-              "body": "Launched"
-            },
-            "listSix": {
-              "head": "Startup (SUP) Incremental Workloads",
-              "body": "Linking a valid opportunity is mandatory. Migrate/Build use case = committed stage, Assess use case = qualified stage."
-            }
-          },
-          "paraFour": "Opportunities with ACE Opportunity stage values of Prospect, Qualified, or Closed/Lost will not be selectable for partners."
-        },
-        "cashRequestInfo": {
-          "paraOne": "The Finance Approval Guide provides guidance how to accurately complete cash request information using your company’s accounts in Payee Central to reduce likelihood of future Fund Request rejections at the Finance Approval stage which delays funding and approvals.",
-          "paraTwo": "Startup (SUP) Incremental Workloads:",
-          "paraThree": "Enter total cost of activity, partner contribution and customer contribution accurately."
-        },
-        "attachmentsInfo": {
-          "paraOne": "Please attach all supporting documents as required by each funding program, e.g., Project Plan, AWS Pricing Calculator, Migration Capability Review, etc.",
-          "paraTwo": "Note: The following file types are supported for attachments: .doc, .docx, .xlsx, .pptx, .pdf, .png, .jpeg, .svg, .csv.",
-          "paraThree": "Formatting Note: The following file name formats are supported for attachments: alpha numeric, spaces, \"-\" and \"_\". All other special characters are not supported.",
-          "paraFour": "Capacity Note: The maximum file size is 25MB per file and the maximum number of attachments for a fund request and associated claims is 20 unique files."
-        },
-        "addAttachments": {
-          "paraOne": "For the MDF program, Marketing Plan is an optional attachment to support your MDF fund request. For MDF Cash Claim, please attach all 3rd party receipts relating to the cost of this activity.",
-          "paraTwo": "For MAP request with Connect workloads, complete and attach the Migration Complexity Assessment Questionnaire to validate the customers ability to deploy $500K+ ARR in Connect workloads within the first 12 months of the agreement. Migration Acceleration Program (MAP): A Project Plan/Checklist is required to support your MAP fund request. An AWS Pricing Calculator is required for all phases except Assess Phase Requests with ARR under $250K. Partners participating in MAP Autopilot can their MAP Autopilot Checklist as a \"Project Plan/Checklist\" file type. For the Migration Funding program Cash Claim, please attach the customer sign-off document.",
-          "paraThree": "For Startup (SUP) Incremental Workloads: Attach the Statement of Work, Simple Monthly Calculator and Solution Architect approval in the attachment section. For requests greater than $50K, work with your AWS Sales point of contact to obtain GEO Sales leader approval and upload that as well.",
-          "paraFour": "Innovation Sandbox: A Project Plan and AWS Pricing Calculator may be required to support your Innovation Sandbox request below 10K USD. For requests over 10K USD, an Innovation Plan will be required to support your Innovation Sandbox request. To attach your AWS Pricing Calculator, either upload a .doc file with the URL string embedded or attach the output file from the AWS Pricing Calculator website.",
-          "paraFive": "Proof-of-Concept (POC): A Project Plan/Checklist is required for any requests greater than or equal to $10k in eligible funding. An AWS Pricing Calculator is required for all fund request submissions.",
-          "paraSix": "Strategic Collaboration Agreement (SCA) funds: AWS Partner Solutions Architect approval is required for any fund requests greater than or equal to $10k for each ACE opportunity. Obtain approval from your AWS Partner Solutions Architect via email and attach the email to your fund request.",
-          "paraSeven": "Please reach out to your Partner Manager if you have questions about these document requirements for each program that you are applying for."
-        }
-      },
-      "benefitsInfoStepTitle": {
-        "reviewAndSubmit": {
-          "paraOne": "Review all your fund request details before submission. Verify your program information, contact details, project specifications, and supporting documents. Use the edit buttons to make changes to any section if needed.",
-          "paraTwo": "If you submit your fund request with errors, your fund request will be rejected and you'll need to correct and resubmit your fund request."
-        },
-        "programsAndFunding": {
-          "desc": "Review your selected program details and funding configuration. This summary shows your chosen subcategory, type of funding, revenue information, and funding motion of your fund request."
-        }
-      },
-      "programs": {
-        "title": "Subcategory",
-        "label": "Subcategory",
-        "name": "programs",
-        "validationMesage": "Selecting a subcategory is required to proceed."
-      },
-      "typesOfFunding": {
-        "label": "Types of funding",
-        "selectTitle": "Type of funding *"
-      },
-      "fundingType": {
-        "name": "fundingType",
-        "validationMessage": "Funding type is required.",
-        "label": "Funding type",
-        "title": "Funding details",
-        "descripton": {
-          "CASH": "Cash is provided as reimbursement for partner professional services.",
-          "CREDITS": "AWS Promotional Credits can be applied to offset AWS usage and costs."
-        }
-      },
-      "annualRecurringRevenue": {
-        "title": "Annual recurring revenue (USD)",
-        "label": "Annual recurring revenue once in production (USD) - optional",
-        "description": "Enter annual recurring revenue (ARR) for the fund request. AWS ARR value entered must match the simple monthly calculator  ARR value.",
-        "placeholder": "Please enter annual run rate for the fund request.",
-        "name": "annualRecurringRevenue",
-        "validationMessage": "Use whole numbers only.",
-        "errorMessage": "Decimal values are not allowed.",
-        "tooltip": "Annual recurring revenue is the total annual revenue amount AWS will receive for the opportunity. This amount should match the total opportunity amount (MRR x 12 months).Proof-of-Concept Eligibility: For projects where the customer has not committed to adopting AWS, and the anticipated post-migration ARR is below $250K (USD). POC funding cannot be combined with MAP incentives, but MAP incentives can be requested upon successful completion of a POC where the customer agrees to a larger migration or modernization engagement. POC funding will be deducted from subsequent MAP funding. If ARR is greater than $250K (USD), it is recommended that the POC/Pilot activity be conducted through the MAP Mobilize Phase. Migration Eligibility: Migration Acceleration Program (MAP) requests with ARR greater than or equal to 500K (USD): All migration phases for these requests require AWS Services Path Partner with the Migration Competency, or relevant Service Delivery Designation/Workload Competency for all the phases (Asses, Mobilize and Migrate & Modernize). Migration Acceleration Program (MAP) requests with ARR less than 500K (USD): Assess and Mobilize phases requests require AWS Services Path Partner with the Migration Competency, or relevant Service Delivery Designation/Workload Competency. Migration Acceleration Program (MAP) requests with ARR less than 500K (USD): Migrate & Modernize phase require AWS Partner at Validated Stage or higher on the Services Partner Path."
-      },
-      "fundRequest": {
-        "title": "Fund request information",
-        "name": "fundRequest"
-      },
-      "programsFunding": {
-        "label": "Programs and funding",
-        "title": "Programs and funding",
-        "name": "programsFunding"
-      },
-      "contactInfo": {
-        "label": "Contact information",
-        "title": "Contact information",
-        "name": "contactInfo",
-        "desc": " Enter the contact details for the primary account to receive updates on this fund request."
-      },
-      "fundReqDetails": {
-        "label": "Fund request details",
-        "title": "Fund request details",
-        "name": "fundReqDetails"
-      },
-      "publicSectors": {
-        "label": "Public sector acknowledgement",
-        "title": "Public sector acknowledgement",
-        "name": "publicSectors"
-      },
-      "publicSectorsMarket": {
-        "label": "Public sector marketing plan",
-        "title": "Public sector marketing plan",
-        "name": "publicSectorsMarket"
-      },
-      "activityProjectName": {
-        "label": "Project name",
-        "name": "activityProjectName",
-        "validationMessage": "Project Name is required",
-        "placeholder": "Enter project name",
-        "description": "Project Name must be 1–300 characters, including spaces and special characters"
-      },
-      "dealID": {
-        "label": "Opportunity ID",
-        "name": "dealID",
-        "placeholder": "Enter Opportunity ID",
-        "tooltip": "Opportunity Id",
-        "validationMessage": "Opportunity Id is required",
-        "validation": "Opportunity Id is Invalid"
-      },
-      "programName": {
-        "label": "Subcategory name",
-        "name": "programName"
-      },
-      "fundingMotion": {
-        "label": "Funding motion",
-        "name": "fundingMotion"
-      },
-
-      "businessDescription": {
-        "label": "Business description",
-        "name": "businessDescription",
-        "validationMessage": "Business description is required",
-        "validation": "The description should be a maximum of 5,000 characters, including special characters such as space and comma.",
-        "description": "Describe your fund request, including justification, project summary, and success criteria.",
-        "placeholder": "Include the reason for requesting funding, including business justification, project summary, objectives, success criteria, MDF usage reason for cash and credit, etc.The description should be a max of 5000 characters including special characters such as space, comma, etc."
-      },
-
-      "awspricingCalculatorName": {
-        "label": "AWS Pricing Calculator estimates - optional",
-        "name": "awspricingCalculatorName",
-        "description": "https://calculator.aws/",
-        "validation": "Separate multiple links with commas (,) and no spaces. Maximum 20 links.",
-        "placeholder": "Enter the URL for AWS Pricing Calculator.For fund requests that require multiple AWS Pricing Calculators, enter each hyperlink/URL string separated by a comma (,) and ensure there are no empty spaces in between each entry",
-        "tooltip": "Please click one of the links mentioned below to navigate to the AWS Pricing Calculator or the AWS Monthly Calculator homepage. https://calculator.aws/#/ https://calculator.s3.amazonaws.com/index.html For fund requests that require multiple AWS Pricing Calculators, enter each hyperlink/URL string separated by a comma (,) and ensure there are no empty spaces in between each entry."
-      },
-      "sandboxDesignWinActivity": {
-        "label": "Sandbox Design Win Activity",
-        "name": "sandboxDesignWinActivity",
-        "validationMessage": "Sandbox Design Win Activity is required"
-      },
-      "fundrequestOwner": {
-        "label": "Fund Request Owner",
-        "name": "fundrequestOwner"
-      },
-      "activeStatus": {
-        "label": "Active Status",
-        "name": "activeStatus"
-      },
-      "fundRequestId": {
-        "label": "Fund Request Id",
-        "name": "fundRequestId"
-      },
-      "amazonARN": {
-        "label": "AWS Well-Architected Partner Program request ARNs - optional",
-        "description": "Amazon Resource Names (ARNs) for your Well-Architected Partner Program requests.",
-        "name": "amazonARN",
-        "validationMessage": "For multiple ARNs, separate each ARN using a comma (,) with no extra spaces, with a maximum of 20 ARNs.",
-        "valdiation": "The ARNs you have entered are invalid. Verify the instructions and provide the ARN(s) in the correct format.",
-        "placeholder": "arn:aws:wellarchitected:",
-        "inValidMessage": "Invalid Amazon ARN format",
-        "tooltip": "To locate an ARN, navigate to the Well-Architected Tool in the AWS Console and select the workload you are reporting, then click on Properties. This will display the ARN for that specific workload. Note: All ARNs must be in this format: arn:aws:wellarchitected:us-east-1:123456789:workload/a012b34567891011c1213d14151617eg"
-      },
-
-      "willtarget": {
-        "label": "I acknowledge that this fund request is associated with 1) an opportunity with a Public Sector end customer (i.e., customer that is a part of-or substantially owned, funded, managed, or controlled by any government at any level) or 2) activities that target Public Sector end customers.",
-        "name": "willtarget",
-        "tooltip": "The term \"Public Sector\" refers to specific engagements where end-customers are recognized as a federal, state, or local government agency, an educational or non-profit institution. Market Development Funding (MDF): by checking this box, you are committing Public Sector MDF cash or Public Sector MDF Credit from your wallet. Please reach out to your Public Sector Partner Development Manager to learn more. Innovation Sandbox: by checking this box, you are committing Public Sector Sandbox Credits. Please reach out to your Public Sector Partner Development Manager to learn more."
-      },
-      "chooseOpp": {
-        "label": "Choose associated opportunity - optional",
-        "title": "Choose associated opportunity - optional",
-        "name": "chooseOpp"
-      },
-      "supportDoc": {
-        "label": "Supporting documents",
-        "title": "Supporting documents",
-        "desc": "Upload supporting documents for this fund request.",
-        "name": "supportDoc",
-        "defaultDesc": "Please attach all supporting documents as required by each funding type, e.g., Project Plan/Checklist, AWS Pricing Calculator, Migration Capability Review, etc.",
-        "manage": "Manage Attachments"
-      },
-      "accountId": {
-        "label": "AWS account ID",
-        "name": "accountId",
-        "description": "Enter the AWS account ID that will be used for the project tied to the fund request.",
-        "placeholder": "Enter AWS Account Id for this Project",
-        "validationMessage": "AWS Account ID is invalid",
-        "valid": "AWS account ID must be 12 characters.",
-        "validation": "AWS Account Id for this Project is Required",
-        "tooltip": "A valid AWS Account ID is required for any Credit fund request (Except MDF Funding). For these Credit fund requests, AWS will apply the approved credits directly into the AWS account ID provided. Please note, only one AWS Account ID is supported in each project. Please enter the representative payer or linked Account ID for each fund request where all the approved credits will be applied to."
-      },
-      "annaualRequiringRevenue": {
-        "label": "Annual Recurring Revenue (ARR) Once In Production (USD)",
-        "name": "annaualRequiringRevenue",
-        "placeholder": "Enter Annual Recurring Revenue (ARR) Once In Production (USD)",
-        "validationMessage": "Field is required and must be greater than 0 USD.",
-        "validation": "Annual Recurring Revenue must be allowed 12 digits"
-      },
-      "plannedStartDate": {
-        "label": "Project start date",
-        "name": "plannedStartDate",
-        "description": "Select when the project starts. Work must start at least 14 business days after fund request submission.",
-        "validationMessage": "MDF requests start date cannot be in the following year. Check with your PMM or refer to funding guide if you have more questions",
-        "desc": "Select when the project starts. Work must start at least 14 business days after fund request submission."
-      },
-      "plannedEndDate": {
-        "label": "Project end date",
-        "name": "plannedEndDate",
-        "description": "Select when the project ends. Cash claims are due 30 days after this date.",
-        "validationMessage": "Planned End Date cannot be between ",
-        "desc": "Select when the project ends. Cash claims are due 30 days after this date.",
-        "validaton": "Planned End Date must be later than or equal to Planned Start Date."
-      },
-      "countryActivity": {
-        "label": "Country",
-        "name": "countryActivity",
-        "validationMessage": "Country is required",
-        "description": "Select the country where the project will be conducted in."
-      },
-      "locationState": {
-        "label": "States",
-        "name": "locationState",
-        "tooltip": "This field is eligible only if United States is the country where the activity is executed in.",
-        "placeholder": "Choose States",
-        "description": "Select all states in which the activity is conducted.",
-        "validationMessage": "States Activity is Executed is required"
-      },
-      "workLoadName": {
-        "label": "Workload name - optional",
-        "name": "workLoadName",
-        "desc": "Please select the workload relating to this project",
-        "tooltip": "Please select the workload relating to this project"
-      },
-      "existingWorkloadSource": {
-        "label": "Existing workload source",
-        "name": "existingWorkloadSource",
-        "validationMessage": "Existing workload source is required"
-      },
-      "awsArrCalculationType": {
-        "label": "AWS ARR Calculation Type",
-        "name": "awsArrCalculationType",
-        "validationMessage": "AWS ARR Calculation Type is required"
-      },
-      "newServiceDeployed": {
-        "label": "New service deployed",
-        "name": "newServiceDeployed",
-        "tooltip": "Check the box if a new service is deployed with this project."
-      },
-      "otherNotes": {
-        "label": "Other notes - optional",
-        "name": "otherNotes",
-        "placeholder": "Additional Information relating to this project",
-        "description": "Provide any additional information relating to this project."
-      },
-      "currency": {
-        "label": "Currency",
-        "name": "currency",
-        "validationMessage": "Currency is required",
-        "desc": "The currency you select must match the preferred currency selected in your company's Amazon Payee Central."
-      },
-      "totalCostActivity": {
-        "label": "Total cost of activity",
-        "name": "totalCostActivity",
-        "desc": "Enter the total projected cost for this project.",
-        "placeholder": "Enter total cost of activity"
-      },
-      "partnerContribution": {
-        "label": "Partner contribution",
-        "name": "partnerContribution",
-        "desc": "Project cost shared by AWS Partner.",
-        "placeholder": "Enter partner contribution"
-      },
-      "customerContribution": {
-        "label": "Customer contribution",
-        "name": "customerContribution",
-        "desc": "Project cost shared by customer or other parties.",
-        "placeholder": "Enter customer contribution"
-      },
-      "requestedCashFunding": {
-        "label": "Requested cash funding amount",
-        "name": "requestedCashFunding",
-        "placeholder": "Enter requested cash funding amount",
-        "validationMessage": "Cash funding amount cannot be zero for PIF program. Please revise the fund request form and try again."
-      },
-      "invoiceEntityName": {
-        "label": "Invoice entity name",
-        "name": "invoiceEntityName",
-        "validationMessage": "Invoice entity name is required",
-        "placeholder": "Enter invoice entity name",
-        "tooltip": "This name must match your company’s official tax documents and your AmazonPayee Central Account."
-      },
-      "invoiceRemitAddress": {
-        "label": "Invoice remit address",
-        "name": "invoiceRemitAddress",
-        "validationMessage": "Invoice remit address is required",
-        "placeholder": "Enter invoice remit address",
-        "tooltip": "This address must match your company’s official tax documents, invoices and your Amazon Payee Central Account."
-      },
-      "invoiceRemitAddressCountry": {
-        "label": "Invoice country",
-        "name": "invoiceRemitAddressCountry",
-        "validationMessage": "Invoice country is required"
-      },
-      "noOfClaims": {
-        "label": "Number of claims",
-        "name": "noOfClaims",
-        "tooltip": "For MDF, Please click the \"Add Another Activity/Milestone\" button if you are requesting a multi-campaign activity. Each activity represents a MDF cash activity type and can be claimed independently. For MAP, Please note that milestone payments are only available for large ($500K+ ARR) MAP Migrate & Modernize Phase deals. please click the \"Add Another Activity/Milestone\" button if you are requesting milestone payment."
-      },
-      "cashClaimPlans": {
-        "title": "Cash claim plans"
-      },
-      "fundClaimId": {
-        "label": "Fund claim ID",
-        "name": "fundClaimId"
-      },
-      "plannedMileStoneStart": {
-        "label": "Planned milestone start date",
-        "name": "plannedMileStoneStart",
-        "validationMessage": "Planned milestone start date is required."
-      },
-      "plannedMileStoneEnd": {
-        "label": "Planned milestone end date",
-        "name": "plannedMileStoneEnd",
-        "validationMessage": "Planned milestone end date is required."
-      },
-      "claimDueDate": {
-        "label": "Claim due date",
-        "name": "claimDueDate",
-        "desc": "All claims must be submitted before this date with the required Proof of Performance attached. The claim due date is calculated as 30 days after the activity planned end date and prior to December 15 of each year."
-      },
-      "projectComplete": {
-        "label": "Project completion percentage - optional",
-        "name": "projectComplete",
-        "desc": "Enter the percentage of work completed at time of milestone claim.",
-        "placeholder": "Enter % of Project Complete at this Milestone",
-        "tooltip": "Large Migrate & Modernize Partner Cash is available in milestones that are tied to the percentage of work completed. AWS recommends 3-6 milestones per migration project."
-      },
-      "expectedRevenue": {
-        "label": "Expected revenue ramp (USD) - optional",
-        "name": "expectedRevenue",
-        "desc": "Enter the expected quarterly revenue ramp, which will be validated at time of claim for payment.",
-        "placeholder": "Enter Expected Revenue Ramp for the Milestone",
-        "tooltip": "For Large Migrate & Modernize Cash deals, the AWS Partner will need to work with thecustomer to complete the Migration Tagging. Cash payment will be available in milestones that are tied to the percentage of work completed. Themilestone schedule must include an estimate of the post-migration ARR and expected quarterly revenue ramp that is aligned to timing of milestone cash payout. Upon submission of a milestone claim, AWS will validate the customer revenue against the customer revenue ramp estimate submitted for funding pre-approval. Please refer to the Migrate & Modernize Project Plan template or APN Partner Funding Benefits Guide for further guidance on the Migrate & Modernize milestone schedule."
-      },
-      "valuePerCreditCode": {
-        "label": "Value per credit code (USD)",
-        "name": "valuePerCreditCode",
-        "placeholder": "Enter Value per Credit Code (USD)",
-        "validation": "Value per Credit Code allowed must be 12 digits",
-        "validationMessage": "Value per credit code (USD) is required"
-      },
-      "noOfCode": {
-        "label": "Number of codes",
-        "name": "noOfCode",
-        "validationMessage": "Number of codes is Required",
-        "placeholder": "Enter Number of codes",
-        "validation": "Does not match pattern \"^[0-9]*$\""
-      },
-      "requestedCreditAmount": {
-        "label": "Requested Credit Amount (USD)",
-        "name": "requestedCreditAmount",
-        "validation": "Requested Credit Amount should be greater than 0 USD"
-      },
-      "secondTrancheClaim": {
-        "label": "Second Tranche Claim Consent",
-        "name": "secondTrancheClaim"
-      },
-      "creditAwsAccountId": {
-        "label": "AWS account ID",
-        "name": "creditAwsAccountId"
-      },
-      "mdfPrograms": {
-        "name": "mdfPrograms"
-      },
-      "mdfWwps": {
-        "label": "By checking this box, you are committing Worldwide Public Sector (WWPS) MDF cash or WWPS MDF Credit from your wallet. Use of WWPS MDF wallet requires approval from your AWS partner manager.",
-        "name": "mdfWwps",
-        "tooltip": "The term \"Public Sector\" refers to specific engagements where end-customers are recognized as a federal, state, or local government agency, an educational or non-profit institution. Market Development Funding (MDF): by checking this box, you are committing Public Sector MDF cash or Public Sector MDF Credit from your wallet. Please reach out to your Public Sector Partner Development Manager to learn more. Innovation Sandbox: by checking this box, you are committing Public Sector Sandbox Credits. Please reach out to your Public Sector Partner Development Manager to learn more."
-      },
-      "publicSectorDetails": {
-        "label": "Public sector agreements",
-        "name": "publicSectorDetails",
-        "descOne": "By proceeding forward, you represent and warrant that you have the legal authority to bind the APN Partner applying for funding Benefits (“Partner”) and that Partner agrees to the following:",
-        "descTwo": "Partner certifies that the project for which Partner is applying for funding Benefits (“Project”) meets the requirements for the applicable project type under the current APN Funding Guide, and does not relate to any individual Government customer (as defined in the APN Terms & Conditions ) or directly support any Government contract (including pending solicitations for Government contracts). Partner certifies that all information and materials provided to AWS in connection with this request are true, complete, and accurate. Any funding Benefits issued in response to this request must be used only to support the Project, and any AWS Promotional Credit (“Credits”) may be redeemed exclusively on the AWS Account ID you provide to AWS in connection with this application (if applicable). Partner may not use the funding Benefits in any way to benefit Government personnel (including travel, lodging, gifts, or other contributions)."
-      },
-      "customerRfx": {
-        "label": "I consent to participate in the Requests For Information (RFIs), Requests For Quotation (RFQs), or Requests For Proposal (RFPs) (collectively \"RFx\")",
-        "name": "customerRfx",
-        "desc": "RFx engine allows customers to find and request proposals from your organization through the RFx search and filtering system."
-      },
-      "wwpsConsent": {
-        "label": "I agree to the AWS Worldwide Public Sector (WWPS) terms and conditions",
-        "name": "wwpsConsent",
-        "descOne": "By checking this box, you represent and warrant that you have the legal authority to bind the APN Partner applying for funding Benefits (“Partner”) and that Partner agrees to the following:",
-        "descTwo": "Partner certifies that all information and materials provided to AWS in connection with this request (such as statements of work) are true, complete, and accurate. If Partner requests funding Benefits in connection with an opportunity or a project with an end customer, any funding Benefits must be used only to offset the customer's costs under the project for which Partner is applying for funding Benefits (\"Project\"). Where funding Benefits are provided for specific AWS Account(s), such funding Benefits may be redeemed exclusively on the AWS account ID(s) you provide to AWS. If your customer is a Government customer (as defined in the APN Terms & Conditions),",
-        "descthree": "Partner will disclose in writing to the customer that AWS is supporting the Project by providing funding Benefits (including the amount). Upon request, and to the extent permitted by applicable law or confidentiality agreement, Partner will provide AWS with a copy of such disclosure (or a portion thereof). Notwithstanding any nondisclosure agreement between Partner and AWS, AWS may also disclose details regarding the funding Benefits to the customer or other Government entities or coordinate with the customer regarding funding Benefits or the Project. Partner may not use the funding Benefits in any way to benefit Government personnel (including travel, lodging, gifts, or other contributions).",
-        "descFour": "Partner may not retain or use any portion of funding Benefits as additional compensation or margin. Partner must pass on the full value of the funding Benefits to the Government customer as a discount or rebate for the work performed under the Project. Partner may not retain any surplus funding Benefits and will inform AWS of any remaining unused funding Benefits at Project completion.",
-        "descFive": "Use of all funding Benefits is subject to the AWS Partner Network Terms & Conditions (APN Terms & Conditions), and the AWS Promotional Credit Terms & Conditions, and/or any other applicable terms, conditions, or agreements between Partner and AWS. Partner will take appropriate measures (such as confirming with the Government customer's contracting officer, ethics official, or other applicable Government customer's representative) to ensure that Partner's receipt of funding Benefits (1) complies with all applicable government procurement laws, rules, regulations, and contract provisions pertaining to discounts and rebates, as well as ethics and integrity (e.g., prohibitions against gratuities, bribery, corruption, kickbacks, conflicts of interest, false statements/claims, etc.), and (2) does not improperly influence Partner's objectivity, including where a customer expects you to provide objective recommendations or suggestions relating to cloud services."
-      },
-      "isWwpsConsent": {
-        "label": "WWPS Consent",
-        "name": "wwpsConsent",
-        "descOne": "By checking this box, you represent and warrant that you have the legal authority to bind the APN Partner applying for funding Benefits (“Partner”) and that Partner agrees to the following:",
-        "descTwo": "Partner certifies that the project for which Partner is applying for funding Benefits (“Project”) meets the requirements for the applicable project type under the current APN Funding Guide, and does not relate to any individual Government customer (as defined in the APN Terms & Conditions ) or directly support any Government contract (including pending solicitations for Government contracts). Partner certifies that all information and materials provided to AWS in connection with this request are true, complete, and accurate. Any funding Benefits issued in response to this request must be used only to support the Project, and any AWS Promotional Credit (“Credits”) may be redeemed exclusively on the AWS Account ID you provide to AWS in connection with this application (if applicable). Partner may not use the funding Benefits in any way to benefit Government personnel (including travel, lodging, gifts, or other contributions)."
-      },
-      "totalrequestedCashAmount": {
-        "label": "Total Requested MDF Cash Amount (Local Currency)",
-        "name": "totalrequestedCashAmount",
-        "desc": "Sum of Requested MDF Cash Funding from all activities below."
-      },
-      "mdfCashActivityType": {
-        "label": "MDF Cash Activity Type",
-        "name": "mdfCashActivityType",
-        "validationMessage": "MDF Cash Activity Type is required.",
-        "tooltip": "End Customer Events (in-person and virtual): Execution and promotion of an in-person or virtual event that showcases your AWS solution (i.e. networking, sporting, roundtables, partner hosted, etc."
-      },
-      "todalCostOfMdfActivity": {
-        "label": "Total Cost of MDF Activity (Local Currency)",
-        "name": "todalCostOfMdfActivity",
-        "placeholder": "Enter Total Cost of MDF Activity (Local Currency)",
-        "validationMessage": "Please enter a valid currency amount in this field",
-        "tooltip": "Please only enter the cash amount of your activity. If you need credit benefit support, please enter it under the Credit Code section below. If there is no cash amount in your activity, please enter 0."
-      },
-      "requestedMdfCashAmount": {
-        "label": "Requested MDF Cash Funding (Local Currency)",
-        "name": "requestedMdfCashAmount",
-        "placeholder": "Enter Requested MDF Cash Funding (Local Currency)",
-        "validationMessage": "Requested MDF Cash Funding (Local Currency) is required.",
-        "validation": "Please enter a valid currency amount in this field"
-      },
-      "mdfFundingPercentage": {
-        "label": "MDF Funding %",
-        "name": "mdfFundingPercentage",
-        "desc": "AWS will reimburse up to 50% of the total cash you spend on your activity.",
-        "validationMessage": "MDF offers up to 50% of your total activity cost. Please ensure your requested MDF does not exceed 50% of the total activity cost."
-      },
-      "mdfCampaignProjects": {
-        "label": "MDF Campaign # of projected leads",
-        "name": "mdfCampaignProjects",
-        "validationMessage": "Does not match pattern \"^[0-9]*$\"",
-        "placeholder": "Enter MDF Campaign # of projected leads"
-      },
-      "mdfCreditActivityType": {
-        "label": "MDF Credit Activity Type",
-        "name": "mdfCreditActivityType",
-        "validationMessage": "MDF Credit Activity Type is required.",
-        "tooltip": "End Customer Events (in-person and virtual): Execution and promotion of an in-person or virtual event that showcases your AWS solution (i.e. networking, sporting, roundtables, partner hosted, etc."
-      },
-      "attachmentFileType": {
-        "label": "File Type",
-        "name": "attachmentFileType",
-        "placeholder": "Choose an option"
-      },
-      "attachmentFileUrl": {
-        "label": "Attachment File URL",
-        "name": "attachmentFileUrl",
-        "placeholder": "Paste Attachment File URL",
-        "validation": "Enter a valid URL"
-      },
-      "reviewAndSubmit": {
-        "programs": "Program",
-        "subCatagory": "Subcategory",
-        "typeOfFunding": "Type of funding",
-        "arrValue": "Annual recurring revenue (USD)",
-        "fundingMotion": "Funding motion",
-        "contactInformation": {
-          "jobTitle": "Job title",
-          "firstName": "First name",
-          "lastName": "Last name",
-          "emailAddress": "Email address"
-        },
-        "fundReqestDetails": {
-          "fundReqId": "Fund request ID",
-          "projectName": "Project name",
-          "businessDesc": "Business description",
-          "sandboxDesignActivity": "Sandbox design win activity"
-        },
-        "publicSectorAggrements": {
-          "publicAggrementStatus": "Public sector acknowledgement status",
-          "acknowledgementDesc": "Acknowledgement"
-        },
-        "opportunityDetails": {
-          "opportunityId": "Opportunity ID",
-          "companyName": "Company name",
-          "targetCloseDate": "Target close date",
-          "createdDate": "Created date",
-          "status": "Status",
-          "partnerIdentifier": "Partner opportunity identifier"
-        },
-        "projectDetails": {
-          "awsAccountId": "AWS account ID",
-          "projectStartDate": "Project start date",
-          "projectEndDate": "Project end date",
-          "countryOfActivity": "Country of activity",
-          "states": "States",
-          "workloadName": "Workload name",
-          "newServiceDeployed": "New service deployed",
-          "otherNotes": "Other notes"
-        },
-        "publicAggrementsInfo": {
-          "rfxConsent": "RFx consent",
-          "wwpsConsent": "WWPS consent",
-          "wwpsTitle": {
-            "title": "AWS Worldwide Public Sector (WWPS) agreement",
-            "descOne": "By checking this box, you represent and warrant that you have the legal authority to bind the APN Partner applying for funding Benefits (\"Partner\") and that Partner agrees to the following:",
-            "descTwo": "Partner certifies that all information and materials provided to AWS in connection with this request (such as statements of work) are true, complete, and accurate. If Partner requests funding Benefits in connection with an opportunity or a project with an end customer, any funding Benefits must be used only to offset the customer's costs under the project for which Partner is applying for funding Benefits (\"Project\"). Where funding Benefits are provided for specific AWS Account(s), such funding Benefits may be redeemed exclusively on the AWS account ID(s) you provide to AWS. If your customer is a Government customer (as defined in the APN Terms & Conditions  ), Partner will disclose in writing to the customer that AWS is supporting the Project by providing funding Benefits (including the amount). Upon request, and to the extent permitted by applicable law or confidentiality agreement, Partner will provide AWS with a copy of such disclosure (or a portion thereof). Notwithstanding any nondisclosure agreement between Partner and AWS, AWS may also disclose details regarding the funding Benefits to the customer or other Government entities or coordinate with the customer regarding funding Benefits or the Project. Partner may not use the funding Benefits in any way to benefit Government personnel (including travel, lodging, gifts, or other contributions). Partner may not retain or use any portion of funding Benefits as additional compensation or margin. Partner must pass on the full value of the funding Benefits to the Government customer as a discount or rebate for the work performed under the Project. Partner may not retain any surplus funding Benefits and will inform AWS of any remaining unused funding Benefits at Project completion. Use of all funding Benefits is subject to the AWS Partner Network Terms & Conditions (APN Terms & Conditions), and the AWS Promotional Credit Terms & Conditions, and/or any other applicable terms, conditions, or agreements between Partner and AWS. Partner will take appropriate measures (such as confirming with the Government customer's contracting officer, ethics official, or other applicable Government customer's representative) to ensure that Partner's receipt of funding Benefits (1) complies with all applicable government procurement laws, rules, regulations, and contract provisions pertaining to discounts and rebates, as well as ethics and integrity (e.g., prohibitions against gratuities, bribery, corruption, kickbacks, conflicts of interest, false statements/claims, etc.), and (2) does not improperly influence Partner's objectivity, including where a customer expects you to provide objective recommendations or suggestions relating to cloud services."
-          },
-          "rfxTitle": {
-            "title": "Consent to participate in the Requests For Information (RFIs), Requests For Quotation (RFQs), or Requests For Proposal (RFPs) (collectively \"RFx\")",
-            "desc": "I agree to participate in the Requests For Information (RFIs), Requests For Quotation (RFQs), or Requests For Proposal (RFPs) (collectively \"RFx\"). RFx engine allows customers to find and request proposals from your organization through the RFx search and filtering system."
-          }
-        },
-        "creditDetails": {
-          "valuePerCode": "Value per credit code USD",
-          "noOfCodes": "Number of codes",
-          "requestedCreditAmount": "Requested credit amount USD",
-          "awsAccountId": "AWS account ID"
-        },
-        "cashDetails": {
-          "currency": "Currency",
-          "totalCostActivity": "Total cost of activity (USD)",
-          "partnerContribution": "Partner contribution (USD)",
-          "customerContribution": "Customer contribution (USD)",
-          "invoiceEntityName": "Invoice entity name",
-          "invoiceEntityCountry": "Invoice country",
-          "invoiceEntityAddress": "Invoice address",
-          "requestedCashFundingAmount": "Requested cash funding amount (USD)"
-        }
-      }
     }
   }
 }

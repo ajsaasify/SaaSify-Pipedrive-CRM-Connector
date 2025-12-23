@@ -4,7 +4,6 @@ import { createContext, useContext, useEffect, useState } from "react";
 import AppExtensionsSDK, {
   Command,
   Event,
-  
 } from "@pipedrive/app-extensions-sdk";
 
 interface PipedriveContextType {
@@ -22,14 +21,16 @@ export function PipedriveProvider({ children }: { children: React.ReactNode }) {
     async function initSDK() {
       try {
         const instance = await new AppExtensionsSDK().initialize();
-        setSdk(instance);
         instance.setWindow(window);
-        // Remove "Something went wrong" fallback page
+
+        // Remove fallback page
         window.parent.postMessage(
           { event: "initialize", data: { height: "auto" } },
           "*"
         );
-        console.log("Successfully Pipedrive initialized");
+
+        setSdk(instance);
+        console.log("✅ Pipedrive SDK initialized");
       } catch (err) {
         console.warn("⚠️ Failed to init Pipedrive SDK, using mock", err);
 
@@ -49,6 +50,19 @@ export function PipedriveProvider({ children }: { children: React.ReactNode }) {
 
     initSDK();
   }, []);
+
+  /** 🔍 LOG SDK ONCE IT EXISTS */
+  useEffect(() => {
+    if (sdk) {
+      console.group("🧩 Pipedrive SDK");
+      console.log("SDK instance:", sdk);
+      console.log("Identifier:", sdk?.identifier);
+      console.log("Context:", sdk?.context);
+      console.log("User Settings:", sdk?.userSettings);
+      console.groupEnd();
+    }
+  }, [sdk]);
+
   if (!sdk) return null;
 
   return (

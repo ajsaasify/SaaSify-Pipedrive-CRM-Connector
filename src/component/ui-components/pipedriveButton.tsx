@@ -12,7 +12,7 @@ type PDButtonProps = {
   loading?: boolean;
   disabled?: boolean;
   className?: string;
-  onClick?: () => void;
+  onClick?: (e: any) => void;
 };
 
 const PDButton: React.FC<PDButtonProps> = ({

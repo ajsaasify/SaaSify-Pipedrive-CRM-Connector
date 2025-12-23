@@ -22,12 +22,15 @@ import type { MappingList } from "@template/types/mapping";
 import type { PartnerConnectionProps } from "@template/types/partner";
 import type { ReferenceDataProps } from "@template/types/reference";
 import { ModelType } from "@template/enum/pipedrive.enum";
+import { AceCosellProps } from "@template/types/aceCosell";
 
 interface CoSellContextProps {
   data: RC3CosellResponse;
   setData: React.Dispatch<React.SetStateAction<RC3CosellResponse>>;
   ampCosell: AmpCosellResponse;
   setAmpCosell: React.Dispatch<React.SetStateAction<AmpCosellResponse>>;
+  aceCosell: AceCosellProps;
+  setAceCosell: React.Dispatch<React.SetStateAction<AceCosellProps>>;
   // gcpCosellData: GCPCosellResponse;
   // setGcpCosellData: React.Dispatch<React.SetStateAction<GCPCosellResponse>>;
   // gcpCosell: GCPCosellResponse;
@@ -74,9 +77,13 @@ interface CoSellContextProps {
   setSelectedPartnerConnect: React.Dispatch<
     React.SetStateAction<PartnerConnectionProps>
   >;
-  loading:boolean, setLoading:React.Dispatch<boolean>;
+  loading: boolean;
+  setLoading: React.Dispatch<boolean>;
   referenceData: ReferenceDataProps[];
   setReferenceData: React.Dispatch<React.SetStateAction<ReferenceDataProps[]>>;
+  editCloneEnabled: boolean;
+  setEditCloneEnabled: React.Dispatch<React.SetStateAction<boolean>>;
+
   // referenceDataGcp: ReferenceDataProps[];
   // setReferenceDataGcp: React.Dispatch<
   //   React.SetStateAction<ReferenceDataProps[]>
@@ -96,6 +103,7 @@ export const CoSellProvider: React.FC<{ children: ReactNode }> = ({
   const [dealName, setDealName] = useState("");
   const [data, setData] = useState<RC3CosellResponse>({});
   const [ampCosell, setAmpCosell] = useState<any>({});
+  const [aceCosell, setAceCosell] = useState<AceCosellProps>({});
   // const [gcpCosellData, setGcpCosellData] = useState<GCPCosellResponse>({});
   // const [gcpCosell, setGcpCosell] = useState<GCPCosellResponse>({});
   const [generateCosell, setGenerateCosell] = useState<RC3CosellResponse>({});
@@ -105,6 +113,7 @@ export const CoSellProvider: React.FC<{ children: ReactNode }> = ({
     []
   );
   const [referenceData, setReferenceData] = useState<ReferenceDataProps[]>([]);
+  const [editCloneEnabled, setEditCloneEnabled] = useState<boolean>(false);
   const [referenceDataGcp, setReferenceDataGcp] = useState<
     ReferenceDataProps[]
   >([]);
@@ -130,11 +139,14 @@ export const CoSellProvider: React.FC<{ children: ReactNode }> = ({
   const [paginator, setPaginator] = useState<PaginationType>(paginatorDefault);
   const [formValues, setFormValues] = useState<FilterDefaultDeal>({});
   const [loading, setLoading] = useState<boolean>(false);
+
   return (
     <CoSellContext.Provider
       value={{
         data,
         setData,
+        aceCosell,
+        setAceCosell,
         // selectedActivityLog,
         // setSelectedActivityLog,
         ampCosell,
@@ -181,6 +193,8 @@ export const CoSellProvider: React.FC<{ children: ReactNode }> = ({
         setLoading,
         referenceData,
         setReferenceData,
+        editCloneEnabled,
+        setEditCloneEnabled,
         // referenceDataGcp,
         // setReferenceDataGcp,
         // referenceDataAmp,

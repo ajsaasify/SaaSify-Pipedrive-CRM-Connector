@@ -9,10 +9,13 @@ import { Dispatch, SetStateAction } from "react";
 import { useTranslation } from "react-i18next";
 import { useCoSellContext } from "@template/context/Cosell.context";
 import ActionButtons from "../actions/Buttons";
+import { ActionState } from "../actions/ActionBar";
 
 export const CosellDetailHeader = ({
+  actionState,
   setCurrentPage,
 }: {
+  actionState: ActionState;
   setCurrentPage: Dispatch<
     SetStateAction<{
       page: ModelType;
@@ -22,14 +25,15 @@ export const CosellDetailHeader = ({
 }) => {
   const { t } = useTranslation();
   const {
-    data,
-    setData,
+    aceCosell,
+    setAceCosell,
     setIsSpecificLoading,
     partnerType,
     setOpportunityList,
     opportunityList,
     dropdownShow,
   } = useCoSellContext();
+
   return (
     <div className="flex justify-between m-4">
       <div className="flex items-center justify-center">
@@ -39,9 +43,9 @@ export const CosellDetailHeader = ({
           size={PDButtonSize.ICON_MEDIUM}
           className="pi pi-arrow-left back-btn"
         ></PDButton>
-        <h5>Opportunity Id: {data?.CloudProviderIdentifier || "N/A"}</h5>
+        <h5>Opportunity Id: {aceCosell?.CloudProviderIdentifier || "N/A"}</h5>
       </div>
-      <ActionButtons actions={{}}/>
+      <ActionButtons actionState={actionState} />
       {/* <div className="flex items-center justify-center gap-1">
         <PDButton
           label={t("buttonLabel.edit")}
