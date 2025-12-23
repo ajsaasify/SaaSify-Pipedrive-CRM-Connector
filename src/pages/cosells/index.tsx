@@ -30,7 +30,7 @@ const CosellsPage = () => {
       setCurrentPage({ page: params?.data?.page });
   }, [params?.data?.page]);
   return (
-    <div className="flex justify-center w-[95%]">
+    <div className="flex justify-center w-full">
       {currentPage?.page === ModelType.COSELL_LIST && <CosellList />}
       {currentPage?.page === ModelType.COSELL_DETAIL && <CosellDetailView />}
       {currentPage?.page === ModelType.COSELL_CREATE && <CreateCosell />}

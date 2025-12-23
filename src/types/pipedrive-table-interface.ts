@@ -20,7 +20,7 @@ export enum FilterType {
 
 export type PDColumnConfig = {
   field: string;
-  header: string;
+  header: string | React.ReactNode;
   width?: string;
   body?: (row: any) => React.ReactNode;
   sortable?: boolean;

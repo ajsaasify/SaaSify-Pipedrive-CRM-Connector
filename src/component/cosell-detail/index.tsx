@@ -21,17 +21,17 @@ const CosellDetailView = () => {
     setIsSpecificLoading,
     isSpecificLoading,
   } = useCoSellContext();
+  const init = async () => {
+    await getSingleCosell({
+      sellerId: currentPage?.params?.sellerCode || "",
+      opportunityId: currentPage?.params?.referenceId || "",
+      setLoading: setIsSpecificLoading,
+      setData,
+    });
+  };
   useEffect(() => {
     if (!currentPage?.params?.referenceId) return;
-    const _sdk = initSdk(window.outerWidth, window.outerHeight);
-    const init = async () => {
-      await getSingleCosell({
-        sellerId: currentPage?.params?.sellerCode || "",
-        opportunityId: currentPage?.params?.referenceId || "",
-        setLoading: setIsSpecificLoading,
-        setData,
-      });
-    };
+    initSdk(window.outerWidth, window.outerHeight);
     init();
   }, [
     currentPage?.params?.referenceId,

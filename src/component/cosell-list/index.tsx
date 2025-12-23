@@ -11,13 +11,14 @@ import { ModelType } from "@template/enum/pipedrive.enum";
 import { useTranslation } from "react-i18next";
 import { EmptyState } from "../ui-components/empty-data";
 import { Menu } from "primereact/menu";
+import { Paginator } from "primereact/paginator";
 
 export const CosellList = () => {
   // const params = new URLSearchParams(window.location.search);
   // const [dealId, selectedDealId] = useState("");
   const [cosells, setCosells] = useState<CoSellItem[]>([]);
   const [first, setFirst] = useState(0);
-  const [rows, setRows] = useState(10);
+  const [rows, setRows] = useState(50);
   const [totalRecords, setTotalRecords] = useState(0);
   const [loading, setLoading] = useState(false);
   const [currentCosell, setCurrentCosell] = useState<CoSellItem | null>(null);
@@ -33,10 +34,23 @@ export const CosellList = () => {
   const { setCurrentPage } = useCoSellContext();
 
   useEffect(() => {
-    const sdk = initSdk(window.outerWidth, window.outerHeight);
-    setSdk(sdk);
+    const updateSdkSize = () => {
+      const width = window.outerWidth - 100;
+      const height = window.outerHeight - 180;
+
+      const sdkInstance = initSdk(width, height);
+      setSdk(sdkInstance);
+    };
+
+    updateSdkSize(); // initial load
+    window.addEventListener("resize", updateSdkSize);
+
     getCosellsAPI(rows, first, setLoading, setCosells, setTotalRecords);
-  }, [first, rows]);
+
+    return () => {
+      window.removeEventListener("resize", updateSdkSize);
+    };
+  }, [rows, first]);
 
   useEffect(() => {
     getCosellsAPI(rows, first, setLoading, setCosells, setTotalRecords);
@@ -46,39 +60,47 @@ export const CosellList = () => {
     if (e?.first !== first) setFirst(e?.first || 0);
     if (e?.rows !== rows) setRows(e?.rows || 10);
   };
+
   return (
     <div className="md:w-full lg:max-w-full p-4 overflow-auto">
-      <Menu
-        model={[
-          {
-            label: "Edit",
-            command: () => {
-              setCurrentPage({
-                page: ModelType.COSELL_CREATE,
-                params: {
-                  referenceId: currentCosell?.ReferenceID || "",
-                  sellerCode: currentCosell?.SellerCode || "",
-                },
-              });
+      {!["Pending", "Rejected", "Expired"]?.includes(
+        currentCosell?.CloudProviderStatus ?? ""
+      ) ? (
+        <Menu
+          model={[
+            {
+              label: "Edit",
+              command: () => {
+                setCurrentPage({
+                  page: ModelType.COSELL_CREATE,
+                  params: {
+                    referenceId: currentCosell?.ReferenceID || "",
+                    sellerCode: currentCosell?.SellerCode || "",
+                  },
+                });
+              },
             },
-          },
-          {
-            label: "View",
-            command: () => {
-              setCurrentPage({
-                page: ModelType.COSELL_DETAIL,
-                params: {
-                  referenceId: currentCosell?.ReferenceID || "",
-                  sellerCode: currentCosell?.SellerCode || "",
-                },
-              });
+
+            {
+              label: "View",
+              command: () => {
+                setCurrentPage({
+                  page: ModelType.COSELL_DETAIL,
+                  params: {
+                    referenceId: currentCosell?.ReferenceID || "",
+                    sellerCode: currentCosell?.SellerCode || "",
+                  },
+                });
+              },
             },
-          },
-        ]}
-        popup
-        ref={menuRef}
-      />
-      <div className="max-w-[calc(100vw-80px)] overflow-auto">
+          ]}
+          popup
+          ref={menuRef}
+        />
+      ) : (
+        <></>
+      )}
+      <div className="custom_table">
         <PDAdvancedTable
           first={first}
           rows={rows}

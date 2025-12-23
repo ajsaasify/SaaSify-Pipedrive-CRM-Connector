@@ -1319,7 +1319,10 @@
       "partnerStatus": "Partner Status",
       "stage": "Stage",
       "status": "Status",
-      "awsRecommendedActions": "AWS Recommended Actions"
+      "awsRecommendedActions": "AWS Recommended Actions",
+      "referenceId": "Reference ID",
+      "referenceType": "Reference Type",
+      "lastModified": "Last Modified"
     },
     "projectSegment": {
       "partnerPrimaryNeed": "Partner Primary Need from AWS",

@@ -69,6 +69,10 @@
 .pd-table .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
   @apply font-semibold rounded-full bg-gray-300;
 }
+
+.p-paginator .p-paginator-pages .p-highlight{
+  @apply font-bold;
+}
 /* -----------------------------------------
      STRIPED ROWS (optional if enabled)
   ----------------------------------------- */

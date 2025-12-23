@@ -7,7 +7,6 @@ class HttpWrapper {
   constructor() {
     const token = storage.get(LocalStorage.TOKEN) || "";
     this.headers = {
-      // Authorization: process.env.NEXT_PUBLIC_API_TOKEN || "",
       credentials: "include",
       "X-Pipedrive-Signature": token,
     };

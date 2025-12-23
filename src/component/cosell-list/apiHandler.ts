@@ -34,6 +34,7 @@ export const getCosellsAPI = async (
     .then((res) => {
       if (res?.Data) {
         setCosells(res.Data);
+        console.log(res.Data, "cosell data");
         const firstData = res?.Data?.[0];
         setTotalRecords(firstData?.TotalRows);
       }
@@ -111,7 +112,7 @@ export const fetchListCosell = async (
   try {
     const executeWithRetry = async () => {
       const responseData = await saasifyService.getListCosell(
-        requestPayload.sellerCode,
+        requestPayload.sellerCode
       );
 
       if (
