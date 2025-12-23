@@ -1,23 +1,26 @@
 import { requestPayload } from "@template/common/listCosell";
-import { AlertNotification, getErrorAlert } from "@template/common/messageAlert";
+import {
+  type AlertNotification,
+  getErrorAlert,
+} from "@template/common/messageAlert";
 import { generateMessage } from "@template/common/messageAlert/generateMessage";
 import { ResponseStatus } from "@template/enum/response.enum";
 import SaasifyService from "@template/services/saasify.service";
-import { Activitylog } from "@template/types/activity";
-import { AmpCosellResponse } from "@template/types/ampCosell";
-import { CoSellItem } from "@template/types/api/getListCosellAssociateCrm.t";
-import { RC3CosellResponse } from "@template/types/cosellResponse";
-import { PipedriveContext } from "@template/types/pipedriveContext";
+import type { Activitylog } from "@template/types/activity";
+import type { AmpCosellResponse } from "@template/types/ampCosell";
+import type { CoSellItem } from "@template/types/api/getListCosellAssociateCrm.t";
+import type { RC3CosellResponse } from "@template/types/cosellResponse";
+import type { PipedriveContext } from "@template/types/pipedriveContext";
 import { getResponseError } from "@template/utils/globalHelper";
 import { backOff } from "exponential-backoff";
-import { Dispatch, SetStateAction } from "react";
+import type { Dispatch, SetStateAction } from "react";
 
 export const getCosellsAPI = async (
   rows: number,
   first: number,
   setLoading: Dispatch<SetStateAction<boolean>>,
   setCosells: Dispatch<SetStateAction<CoSellItem[]>>,
-  setTotalRecords:Dispatch<SetStateAction<number>>
+  setTotalRecords: Dispatch<SetStateAction<number>>,
 ) => {
   const saasify = new SaasifyService();
   setLoading(true);
@@ -31,6 +34,7 @@ export const getCosellsAPI = async (
     .then((res) => {
       if (res?.Data) {
         setCosells(res.Data);
+        console.log(res.Data, "cosell data");
         const firstData = res?.Data?.[0];
         setTotalRecords(firstData?.TotalRows);
       }
@@ -43,23 +47,21 @@ const saasifyService = new SaasifyService();
 
 export async function fetchAllOptions(
   setIsListLoading: React.Dispatch<React.SetStateAction<boolean>>,
-  context: PipedriveContext,
+  _context: PipedriveContext,
   setData: React.Dispatch<React.SetStateAction<RC3CosellResponse>>,
   setOpportunityList: React.Dispatch<React.SetStateAction<RC3CosellResponse[]>>,
   initialError: React.MutableRefObject<boolean>,
   triggerAlert: (alert: AlertNotification) => void,
-  isDefaultView: boolean
+  isDefaultView: boolean,
 ) {
   try {
     !isDefaultView && setIsListLoading(true);
     const firstSet = await Promise.all([
-      ...(isDefaultView
-        ? []
-        : [fetchListCosell( setData, setOpportunityList)]),
+      ...(isDefaultView ? [] : [fetchListCosell(setData, setOpportunityList)]),
     ]);
 
     handleErrors(firstSet, initialError, triggerAlert);
-  } catch (error) {
+  } catch (_error) {
     triggerAlert(getErrorAlert(generateMessage.fetchError));
   } finally {
     !isDefaultView && setIsListLoading(false);
@@ -69,7 +71,7 @@ export async function fetchAllOptions(
 export const getPartnerType = async (
   setPartnerType: React.Dispatch<React.SetStateAction<string[]>>,
   triggerAlert: (alert: AlertNotification) => void,
-  sellerCode: string
+  sellerCode: string,
 ) => {
   const saasifyService = new SaasifyService();
   try {
@@ -78,7 +80,7 @@ export const getPartnerType = async (
       throw new Error(getResponseError(responseData?.ErrorDetail));
     }
     responseData?.Data?.length && setPartnerType(responseData?.Data);
-  } catch (error:any) {
+  } catch (error: any) {
     triggerAlert(getErrorAlert(error?.message));
   }
 };
@@ -86,7 +88,7 @@ export const getPartnerType = async (
 export function handleErrors(
   results: any[],
   initialError: React.MutableRefObject<boolean>,
-  triggerAlert: (alert: AlertNotification) => void
+  triggerAlert: (alert: AlertNotification) => void,
 ) {
   const errorValue = results
     ?.filter((optionError: any) => optionError?.result === ResponseStatus.ERROR)
@@ -103,14 +105,14 @@ export const fetchListCosell = async (
   setData: React.Dispatch<React.SetStateAction<RC3CosellResponse>>,
   setOpportunityList: React.Dispatch<React.SetStateAction<RC3CosellResponse[]>>,
   setLoader?: React.Dispatch<React.SetStateAction<boolean>>,
-  isResetData?: boolean
+  isResetData?: boolean,
 ) => {
   !isResetData && setData({} as RC3CosellResponse);
-  setLoader && setLoader(true);
+  setLoader?.(true);
   try {
     const executeWithRetry = async () => {
       const responseData = await saasifyService.getListCosell(
-        requestPayload.sellerCode,
+        requestPayload.sellerCode
       );
 
       if (
@@ -125,7 +127,7 @@ export const fetchListCosell = async (
               : {};
 
             return { ...cosell, CoSellEntity };
-          }
+          },
         );
 
         const sortedList = opportunities.sort(
@@ -144,15 +146,15 @@ export const fetchListCosell = async (
                 ?.CreatedDate ||
               "";
 
-            const dateA = isNaN(new Date(dateStrA).getTime())
+            const dateA = Number.isNaN(new Date(dateStrA).getTime())
               ? 0
               : new Date(dateStrA).getTime();
-            const dateB = isNaN(new Date(dateStrB).getTime())
+            const dateB = Number.isNaN(new Date(dateStrB).getTime())
               ? 0
               : new Date(dateStrB).getTime();
 
             return dateB - dateA;
-          }
+          },
         );
         setOpportunityList(sortedList);
       } else {
@@ -165,7 +167,7 @@ export const fetchListCosell = async (
     };
 
     await backOff(executeWithRetry, {
-      retry: (error, attemptNumber) => attemptNumber == 1,
+      retry: (_error, attemptNumber) => attemptNumber === 1,
       startingDelay: 500,
     });
   } catch (error: any) {
@@ -176,7 +178,7 @@ export const fetchListCosell = async (
       value: error.message,
     };
   } finally {
-    setLoader && setLoader(false);
+    setLoader?.(false);
   }
 };
 
@@ -190,7 +192,7 @@ export const fetchSpecificCoSell = async (
   setOpportunityList: React.Dispatch<React.SetStateAction<RC3CosellResponse[]>>,
   setAmp: React.Dispatch<React.SetStateAction<any>>,
   // setGcp: React.Dispatch<React.SetStateAction<any>>,
-  neededLoader?: boolean
+  neededLoader?: boolean,
 ) => {
   setData({});
   // setGcp({});
@@ -200,22 +202,22 @@ export const fetchSpecificCoSell = async (
     const executeWithRetry = async () => {
       const responseData = await saasifyService.getCosellById(
         sellerId,
-        opportunityId
+        opportunityId,
       );
       if (responseData?.Data) {
-        let data = {
+        const data = {
           ...responseData?.Data,
           CoSellEntity: JSON.parse(responseData?.Data?.CoSellEntity),
         };
         setData(data || {});
         const list = opportunityList?.map((value) => {
-          if (value.ReferenceID == data?.ReferenceID) {
+          if (value.ReferenceID === data?.ReferenceID) {
             return {
               ...value,
               ErrorMessage: responseData?.Data?.ErrorMessage ?? [],
               CloudProviderStatus:
                 !data?.DealType?.toLocaleLowerCase()?.includes(
-                  requestPayload.dealType.multiPartner
+                  requestPayload.dealType.multiPartner,
                 )
                   ? data?.CoSellEntity?.Invitation?.Status ||
                     (data.CoSellEntity?.LifeCycle?.ReviewStatus
@@ -236,7 +238,7 @@ export const fetchSpecificCoSell = async (
     };
 
     await backOff(executeWithRetry, {
-      retry: (error, attemptNumber) => attemptNumber == 1,
+      retry: (_error, attemptNumber) => attemptNumber === 1,
       startingDelay: 500,
     });
   } catch (error: any) {
@@ -254,7 +256,7 @@ export const fetchActivityLog = async (
   setActivity: React.Dispatch<React.SetStateAction<Activitylog[]>>,
   startInd: number = 1,
   endInd: number = 10,
-  pageCount: number = 0
+  pageCount: number = 0,
 ) => {
   setActivity([]);
   setIsSpecificLoading(true);
@@ -268,10 +270,10 @@ export const fetchActivityLog = async (
         0, // offset
         pageCount, // pageCount
         "Cosell", // EntityName
-        false // IsFromWebApp
+        false, // IsFromWebApp
       );
       if (responseData?.Data) {
-        let data = responseData?.Data?.map((value:any) => ({
+        const data = responseData?.Data?.map((value: any) => ({
           ...value,
           Context: JSON.parse(value?.Context),
         }));
@@ -283,7 +285,7 @@ export const fetchActivityLog = async (
     };
 
     await backOff(executeWithRetry, {
-      retry: (error, attemptNumber) => attemptNumber == 1,
+      retry: (_error, attemptNumber) => attemptNumber === 1,
       startingDelay: 500,
     });
   } catch (error: any) {

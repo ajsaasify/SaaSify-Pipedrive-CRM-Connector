@@ -8,49 +8,55 @@ import {
   isPendingCosell,
   isPostalCodeRequired,
   minDateIput,
+  trimString,
   validatePureNumber,
 } from "@template/utils/globalHelper";
-import React from "react";
+import type React from "react";
 import { CosellAction } from "@template/enum/action.enum";
-import { RC3CosellResponse } from "@template/types/cosellResponse";
 import { labelMapper } from "./helper";
 import { buildDataProperty } from "./builder";
 import {
   fetchListCosell,
   fetchSpecificCoSell,
 } from "../cosell-list/apiHandler";
-import { PipedriveContext } from "@template/types/pipedriveContext";
 import { ModalId } from "@template/enum/modal.enum";
 import { StatusState } from "@template/enum/status.enum";
 import {
-  AlertNotification,
+  type AlertNotification,
   getErrorAlert,
 } from "@template/common/messageAlert";
-import { fetchDropDowAllOptions } from "../upsert-cosell/apiHandler";
+import {
+  fetchDropDowAllOptions,
+  saveEditCosells,
+} from "../upsert-cosell/apiHandler";
 import AccordionComponent from "../ui-components/PipedriveAccordion";
 import { ToastService } from "@template/services/toast.service";
-import Input from "../ui-components/PipedriveInput";
-import InfoGrid from "../ui-components/pipdriveInfoGrid";
-import PDSelectField from "../ui-components/PipedriveDropdown";
 import { nationSecuritiesFields } from "@template/common/forms/nationalSecurities";
 import { actionCosellRequiredFields } from "@template/common/forms/cosellRequiredFields";
 import { fieldChecks } from "./validation";
 import { Tile } from "../ui-components/detailview-components";
-import { PDRadioGroup } from "../ui-components/PipedriveRadiobutton";
-import { MultiSelectField } from "../ui-components/PipedriveMultiselect";
-import TextAreaFieldBox from "../ui-components/PipedriveTextarea";
-import PDDatePicker from "../ui-components/PipedriveCalendar";
+import {
+  ModelType,
+  PDButtonSize,
+  PDButtonType,
+} from "@template/enum/pipedrive.enum";
+import PDButton from "../ui-components/pipedriveButton";
+import type AppExtensionsSDK from "@pipedrive/app-extensions-sdk";
+import { Command } from "@pipedrive/app-extensions-sdk";
+import CustomerDetailsForm from "./CustomerDetailsForm";
+import ProjectOpportunitySection from "./ProjectOpportunitySection";
+import { MarketingSourceSection } from "./MarketingOpportunityForm";
+import AdditionalDetailsForm from "./AdditionalDetailsForm";
+import ContactDetailsForm from "./ContactDetailForm";
+import PartnerSalesContactForm from "./PartnerSalesContactForm";
+import { t } from "i18next";
 
 export const CreateCosell: React.FC<{
   actions?: any;
-  modalTitle?: string;
-  slug?: CosellAction;
-  context?: PipedriveContext;
-  onList?: RC3CosellResponse;
-}> = ({ actions, modalTitle, slug, context, onList }) => {
-  useEffect(() => {
-    initSdk(1000, 500);
-  }, []);
+  // onList?: RC3CosellResponse;
+}> = ({ actions }) => {
+  const [sdk, setSdk] = useState<AppExtensionsSDK | null>(null);
+  const [slug, _setSlug] = useState(CosellAction.ADD);
   const {
     data,
     optionValues,
@@ -65,79 +71,86 @@ export const CreateCosell: React.FC<{
     referenceData,
     setReferenceData,
   } = useCoSellContext();
+  let payload: any = {};
   const { LifeCycle } = data?.CoSellEntity || {};
   const initialError = useRef(false);
-  const [errorStatus, setErrorStatus] = useState("");
-  const [isDataFromList, setIsDataFromList] = useState(true);
+  const [_errorStatus, setErrorStatus] = useState("");
+  const [_isDataFromList, setIsDataFromList] = useState(true);
   const [errorValue, setErrorValue] = useState<Record<string, boolean>>({});
   const [formValue, setFormValue] = useState<Record<string, any>>({});
-  const [isFetching, setIsFetching] = useState(false);
+  const [_isFetching, setIsFetching] = useState(false);
   const reviewStatus =
     data?.CloudProviderStatus ?? data?.CoSellEntity?.LifeCycle?.ReviewStatus;
   const readOnlyFields = getReadOnlyFields(reviewStatus as string);
   const [primaryNeedsAWS, setPrimaryNeedsAWS] = useState<string | undefined>();
   const [sellerCode, setSellerCode] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { currentPage, setCurrentPage } = useCoSellContext();
   useEffect(() => {
     const shouldInitialize =
       (data && Object.keys(data).length > 0) ||
       (generateCosell && Object.keys(generateCosell).length > 0);
     let sellerCode = "";
-    if (onList?.SellerCode) {
-      sellerCode = onList?.SellerCode;
-    }
     if (data?.SellerCode) sellerCode = data?.SellerCode;
     if (shouldInitialize) {
       if (generateCosell?.SellerCode) sellerCode = generateCosell?.SellerCode;
       setSellerCode(sellerCode);
       assignValuesEditCosell();
     }
-  }, [data, generateCosell, onList]);
+  }, [data, generateCosell]);
   const triggerAlert = ({ type, title, message }: AlertNotification) => {
     (ToastService as any)?.[type]?.(title, message);
   };
   const init = async () => {
     setIsDataFromList(true);
-    if (onList?.ReferenceID && onList?.SellerCode) {
-      await fetchSpecificCoSell(
-        onList.ReferenceID,
-        onList.SellerCode,
-        setData,
-        setIsDataFromList,
+    const sdk = await initSdk(window.outerWidth, window.outerHeight);
+    setSdk(sdk);
+    try {
+      setLoading(true);
+      console.log(currentPage);
+      if (currentPage?.params?.referenceId && currentPage?.params?.sellerCode) {
+        await fetchSpecificCoSell(
+          currentPage?.params?.referenceId,
+          currentPage?.params?.sellerCode,
+          setData,
+          setIsDataFromList,
+          triggerAlert,
+          opportunityList,
+          setOpportunityList,
+          setAmpCosell,
+          true,
+        );
+      }
+      await fetchDropDowAllOptions(
+        setOptionValues,
+        initialError,
         triggerAlert,
-        opportunityList,
-        setOpportunityList,
-        setAmpCosell,
-        true
+        optionValues,
+        referenceData,
+        setReferenceData,
+        sellerCode || data?.SellerCode || currentPage?.params?.sellerCode || "",
       );
+    } finally {
+      setLoading(false);
+      setErrorStatus("");
+      setErrorValue({});
+      setIsDataFromList(false);
     }
-    await fetchDropDowAllOptions(
-      setOptionValues,
-      initialError,
-      triggerAlert,
-      optionValues,
-      referenceData,
-      setReferenceData,
-      (sellerCode || onList?.SellerCode) ?? ""
-    );
-    setErrorStatus("");
-    setErrorValue({});
-    setIsDataFromList(false);
   };
   useEffect(() => {
     init();
   }, []);
   function assignValuesEditCosell() {
     const dataProperty = buildDataProperty({
-      slug: slug as CosellAction,
+      slug: data.ReferenceID ? CosellAction.EDIT : CosellAction.ADD,
       data,
       generateCosell,
       dealName,
     });
-
     setFormValue(dataProperty);
 
-    function closePanel() {
-      slug == CosellAction.ADD && fetchListCosell(setData, setOpportunityList);
+    function _closePanel() {
+      slug === CosellAction.ADD && fetchListCosell(setData, setOpportunityList);
       actions.closeOverlay(ModalId.ACTION_COSELL);
       setErrorStatus("");
     }
@@ -145,10 +158,10 @@ export const CreateCosell: React.FC<{
     setPrimaryNeedsAWS(
       dataProperty?.awsCosell?.includes(labelMapper.awsCosell.value.no)
         ? labelMapper.awsCosell.value.no
-        : labelMapper.awsCosell.value.yes
+        : labelMapper.awsCosell.value.yes,
     );
   }
-  const isReviewStatusValid = [
+  const _isReviewStatusValid = [
     StatusState.APPROVED,
     StatusState.ACTION_REQUIRED,
   ].includes(LifeCycle?.ReviewStatus as StatusState);
@@ -173,7 +186,7 @@ export const CreateCosell: React.FC<{
     }
 
     if (
-      name == labelMapper.competitiveTracking.name &&
+      name === labelMapper.competitiveTracking.name &&
       value !== labelMapper.competitiveTracking.value
     ) {
       setFormValue((prev) => ({
@@ -182,8 +195,8 @@ export const CreateCosell: React.FC<{
         otherCompetitors: "",
       }));
     } else if (
-      name == labelMapper.marketingSource.name &&
-      value == labelMapper.marketingSource.value.no
+      name === labelMapper.marketingSource.name &&
+      value === labelMapper.marketingSource.value.no
     ) {
       setFormValue((prev) => ({
         ...prev,
@@ -200,7 +213,7 @@ export const CreateCosell: React.FC<{
       }));
     }
 
-    if (labelMapper.country.name == name) {
+    if (labelMapper.country.name === name) {
       setFormValue((prev) => ({
         ...prev,
         postalCode: "",
@@ -211,16 +224,15 @@ export const CreateCosell: React.FC<{
     return;
   }
   const validationMessage = (field: string) => {
-    if (!errorValue?.[field]) return (labelMapper as any)?.[field].validation;
+    if (!errorValue?.[field]) return (labelMapper as any)?.[field]?.validation;
     return (labelMapper as any)?.[field]?.validationMessage;
   };
   function readOnlyField(field: string): boolean {
     return readOnlyFields?.includes(field);
   }
   const postalCodeRegex = (value?: string) => {
-    console.log("redex check", value);
     const country = optionValues?.countries?.find(
-      (c) => c.value === formValue?.country
+      (c) => c.value === formValue?.country,
     );
 
     const postalCodePattern = country?.postalCodeRegex;
@@ -245,7 +257,7 @@ export const CreateCosell: React.FC<{
   };
   const validateFields = () => {
     let valid = true;
-    let newErrorValue: Record<string, boolean> = {};
+    const newErrorValue: Record<string, boolean> = {};
 
     const checkField = (field: string, condition: boolean) => {
       if (condition) {
@@ -256,7 +268,7 @@ export const CreateCosell: React.FC<{
 
     actionCosellRequiredFields.forEach((field) => {
       if (
-        labelMapper.nationSecurities.defaultValue.yes ==
+        labelMapper.nationSecurities.defaultValue.yes ===
           formValue?.nationalSecurity &&
         nationSecuritiesFields.includes(field)
       ) {
@@ -264,7 +276,7 @@ export const CreateCosell: React.FC<{
       }
       if (
         !readOnlyFields.includes(field) &&
-        field == labelMapper.targetCloseDate.name
+        field === labelMapper.targetCloseDate.name
       ) {
         if (isPendingCosell(slug as string, reviewStatus)) {
           checkField(field, !isFutureDate(formValue[field]));
@@ -282,10 +294,10 @@ export const CreateCosell: React.FC<{
       }
       if (
         !readOnlyFields.includes(field) &&
-        field == labelMapper.estimatedAWSRecurringRevenue.name
+        field === labelMapper.estimatedAWSRecurringRevenue.name
       ) {
         const amount = Number(formValue?.estimatedAWSRecurringRevenue);
-        if (isNaN(amount) || amount < 1) {
+        if (Number.isNaN(amount) || amount < 1) {
           valid = false;
           newErrorValue.estimatedAWSRecurringRevenue = true;
           labelMapper.estimatedAWSRecurringRevenue.valid =
@@ -297,7 +309,7 @@ export const CreateCosell: React.FC<{
         !readOnlyFields.includes(field)
       ) {
         const countryData = optionValues?.countries?.find(
-          (option) => option.value === formValue?.country
+          (option) => option.value === formValue?.country,
         );
 
         labelMapper.postalCode.validationMessage = formValue?.postalCode
@@ -324,7 +336,7 @@ export const CreateCosell: React.FC<{
 
       if (
         formValue?.awsCosell?.includes(labelMapper.awsCosell.value.no) &&
-        field == labelMapper.salesActivities?.name &&
+        field === labelMapper.salesActivities?.name &&
         !readOnlyFields.includes(field)
       ) {
         return;
@@ -337,9 +349,11 @@ export const CreateCosell: React.FC<{
     fieldChecks(
       formValue,
       readOnlyFields,
-      labelMapper.nationSecurities.defaultValue.yes ==
-        formValue?.nationalSecurity
-    ).forEach(({ field, condition }) => checkField(field, condition));
+      labelMapper.nationSecurities.defaultValue.yes ===
+        formValue?.nationalSecurity,
+    ).forEach(({ field, condition }) => {
+      checkField(field, condition);
+    });
 
     if (
       formValue?.marketingSource === labelMapper.marketingSource.value.yes &&
@@ -371,7 +385,7 @@ export const CreateCosell: React.FC<{
 
     if (!valid) {
       const errorsFieldName = Object.entries(newErrorValue).map(
-        ([field]) => field
+        ([field]) => field,
       );
       const errorLabels = errorsFieldName
         .map((field) => (labelMapper as any)?.[field]?.label || field)
@@ -382,794 +396,221 @@ export const CreateCosell: React.FC<{
     }
     return valid;
   };
+  async function generateEditCosellPaylaod() {
+    payload = data;
+    console.log(formValue);
+    if (validateFields()) {
+      // buildCosellPayload({formValue:formValue,CosellAction:CosellAction.EDIT,})
+      payload = {
+        ...payload,
+        IsSubmitOpportunity: true,
+        OpportunityType: formValue.opportunityType,
+        CoSellEntity: {
+          ...payload.CoSellEntity,
+          Customer: {
+            ...payload.CoSellEntity?.Customer,
+            Account: {
+              ...payload.CoSellEntity?.Customer?.Account,
+              Address: {
+                ...payload.CoSellEntity?.Customer?.Account?.Address,
+                StreetAddress: trimString(formValue?.streetAddress),
+                City: trimString(formValue?.city),
+                CountryCode: trimString(formValue?.country),
+                PostalCode: trimString(formValue?.postalCode),
+              },
+              Duns: trimString(formValue?.customerDuns),
+            },
+          },
+
+          Project: {
+            ...payload.CoSellEntity?.Project,
+            AdditionalComments: trimString(formValue?.additonalComments),
+            DeliveryModels: formValue?.deliveryModel,
+            RelatedOpportunityIdentifier: trimString(
+              formValue?.relatedOpportunityIndentifier,
+            ),
+          },
+          OpportunityType: formValue?.opportunityType,
+        },
+      };
+      console.log("payload", payload);
+      await saveEditCosells(
+        slug,
+        payload,
+        triggerAlert,
+        setIsFetching,
+        actions,
+        data,
+        setData,
+        setOpportunityList,
+        opportunityList,
+        setErrorStatus,
+      );
+    }
+  }
+  if (loading) {
+    return (
+      <div className="h-screen flex flex-col items-center justify-center p-5">
+        <h2>
+          {data?.ReferenceID
+            ? labelMapper.titles.editCosell
+            : labelMapper.titles.createCosell}
+        </h2>
+        <p>Loading...</p>
+      </div>
+    );
+  }
   return (
     <div className="w-full">
-      {/* customer details */}
-      <AccordionComponent
-        className="card-view"
-        defaultOpenIds={[labelMapper.accordian.customer]}
-        items={[
-          {
-            title: labelMapper.accordian.customer,
-            id: labelMapper.accordian.customer,
-            children: (
-              <>
-                <Input
-                  onInput={(value) => {
-                    setErrorValue((prev) => ({
-                      ...prev,
-                      customerDuns: !validatePureNumber(value),
-                    }));
-                  }}
-                  onChange={(value) => {
-                    onChangeValue(labelMapper.customerDuns.name, value);
-                  }}
-                  error={
-                    errorValue?.customerDuns
-                      ? validationMessage(labelMapper.customerDuns.name)
-                      : ""
-                  }
-                  value={formValue?.customerDuns}
-                  tooltip={labelMapper.customerDuns.toopTip}
-                  label={labelMapper.customerDuns.label}
-                  name={labelMapper.customerDuns.name}
-                  info={labelMapper.customerDuns.discription}
-                />
-                <div className="grid gap-x-2 md:grid-cols-2 grid-cols-1">
-                  <Input
-                    label={labelMapper.customerCompanyName.label}
-                    name={labelMapper.customerCompanyName.name}
-                    tooltip={labelMapper.customerCompanyName.label}
-                    readOnly={readOnlyField(
-                      labelMapper.customerCompanyName.name
-                    )}
-                    isrequired={true}
-                    value={formValue?.customerCompanyName}
-                    error={errorValue?.customerCompanyName}
-                    validationMessage={displayErrorMessage(
-                      errorValue?.customerCompanyName,
-                      labelMapper.customerCompanyName.validationMessage
-                    )}
-                    onChange={(value) => {
-                      onChangeValue(
-                        labelMapper.customerCompanyName.name,
-                        value
-                      );
-                    }}
-                  />
-                  {formValue?.nationalSecurity ==
-                    labelMapper.nationSecurities.defaultValue.no && (
-                    <Input
-                      label={labelMapper.customerWebsite.label}
-                      name={labelMapper.customerWebsite.name}
-                      tooltip={labelMapper.customerWebsite.label}
-                      isrequired={true}
-                      value={formValue.customerWebsite}
-                      error={errorValue.customerWebsite}
-                      placeholder={labelMapper.customerWebsite.placeHolder}
-                      validationMessage={displayErrorMessage(
-                        errorValue?.customerWebsite,
-                        labelMapper.customerWebsite.validationMessage
-                      )}
-                      readOnly={readOnlyField(labelMapper.customerWebsite.name)}
-                      onChange={(value) => {
-                        onChangeValue(labelMapper.customerWebsite.name, value);
-                      }}
-                    />
-                  )}
-                  {/* country */}
-                  <PDSelectField
-                    label={labelMapper.country.label}
-                    name={labelMapper.country.name}
-                    required
-                    readOnly={readOnlyField(labelMapper.country.name)}
-                    options={optionValues?.countries || []}
-                    value={formValue?.country}
-                    error={errorValue?.country}
-                    validationMessage={displayErrorMessage(
-                      errorValue?.country,
-                      labelMapper?.country?.validationMessage
-                    )}
-                    onChange={(value) => {
-                      onChangeValue(labelMapper.country.name, value);
-                    }}
-                  />
-                  <PDSelectField
-                    label={labelMapper.industryVertical.label}
-                    name={labelMapper.industryVertical.name}
-                    required
-                    readOnly={readOnlyField(labelMapper.industryVertical.name)}
-                    value={formValue.industryVertical}
-                    error={errorValue.industryVertical}
-                    validationMessage={displayErrorMessage(
-                      errorValue?.industryVertical,
-                      labelMapper.industryVertical.validationMessage
-                    )}
-                    options={optionValues?.industry || []}
-                    onChange={(value: any) => {
-                      onChangeValue(labelMapper.industryVertical.name, value);
-                      if (value != labelMapper.nationSecurities.value) {
-                        setFormValue((prev) => ({
-                          ...prev,
-                          nationalSecurity:
-                            labelMapper.nationSecurities.defaultValue.no,
-                        }));
-                      }
-                    }}
-                  />
-                  {formValue?.country == labelMapper.state.value &&
-                    formValue?.nationalSecurity ==
-                      labelMapper.nationSecurities.defaultValue.no && (
-                      <PDSelectField
-                        label={labelMapper.state.label}
-                        name={labelMapper.state.name}
-                        required
-                        readOnly={readOnlyField(labelMapper.state.name)}
-                        value={formValue?.state}
-                        error={errorValue.state}
-                        validationMessage={displayErrorMessage(
-                          errorValue?.state,
-                          labelMapper?.state?.validationMessage
-                        )}
-                        options={optionValues?.state || []}
-                        onChange={(value) => {
-                          onChangeValue(labelMapper.state.name, value);
-                        }}
-                      />
-                    )}
-                  {formValue?.nationalSecurity ===
-                    labelMapper.nationSecurities.defaultValue.no && (
-                    <>
-                      <Input
-                        label={labelMapper.city.label}
-                        name={labelMapper.city.name}
-                        readOnly={readOnlyField(labelMapper.city.name)}
-                        value={formValue.city}
-                        onChange={(value) => {
-                          onChangeValue(labelMapper.city.name, value);
-                        }}
-                      />
-                      {formValue?.industryVertical ==
-                        labelMapper.industryVertical.value && (
-                        <Input
-                          isrequired={true}
-                          label={labelMapper.industryOther.label}
-                          name={labelMapper.industryOther.name}
-                          readOnly={readOnlyField(
-                            labelMapper.industryOther.name
-                          )}
-                          error={errorValue.industryOther}
-                          validationMessage={displayErrorMessage(
-                            errorValue?.industryOther,
-                            labelMapper?.industryOther?.validationMessage
-                          )}
-                          value={formValue?.industryOther}
-                          onChange={(value) => {
-                            onChangeValue(
-                              labelMapper.industryOther.name,
-                              value
-                            );
-                          }}
-                        />
-                      )}
-                    </>
-                  )}
-                  {formValue?.nationalSecurity ==
-                    labelMapper.nationSecurities.defaultValue.no && (
-                    <Input
-                      label={labelMapper.streetAddress.label}
-                      name={labelMapper.streetAddress.name}
-                      readOnly={readOnlyField(labelMapper.streetAddress.name)}
-                      value={formValue?.streetAddress}
-                      onChange={(value) => {
-                        onChangeValue(labelMapper.streetAddress.name, value);
-                      }}
-                      isrequired={false}
-                    />
-                  )}
-                </div>
-                {formValue?.industryVertical ==
-                  labelMapper.industryVertical.value && (
-                  <Input
-                    isrequired={true}
-                    label={labelMapper.industryOther.label}
-                    name={labelMapper.industryOther.name}
-                    readOnly={readOnlyField(labelMapper.industryOther.name)}
-                    error={errorValue.industryOther}
-                    validationMessage={displayErrorMessage(
-                      errorValue?.industryOther,
-                      labelMapper?.industryOther?.validationMessage
-                    )}
-                    value={formValue?.industryOther}
-                    onChange={(value) => {
-                      onChangeValue(labelMapper.industryOther.name, value);
-                    }}
-                  />
-                )}
-                {isPostalCodeRequired(formValue, optionValues) ? (
-                  <Input
-                    label={labelMapper.postalCode.label}
-                    name={labelMapper.postalCode.name}
-                    readOnly={readOnlyField(labelMapper.postalCode.name)}
-                    value={formValue?.postalCode}
-                    isrequired={true}
-                    onInput={(value) =>
-                      postalCodeRegex((value?.target as any)?.value)
-                    }
-                    error={errorValue?.postalCode}
-                    validationMessage={displayErrorMessage(
-                      errorValue?.postalCode,
-                      labelMapper.postalCode.validationMessage
-                    )}
-                    onChange={(value) => {
-                      onChangeValue(labelMapper.postalCode.name, value);
-                    }}
-                  />
-                ) : (
-                  <></>
-                )}
-              </>
-            ),
-          },
-          {
-            title: labelMapper.accordian.project,
-            id: labelMapper.accordian.project,
-            children: (
-              <>
+      <Tile>
+        <div className="flex justify-between m-4">
+          <div className="flex items-center justify-center">
+            {data.ReferenceID && (
+              <PDButton
+                onClick={() =>
+                  setCurrentPage({ page: ModelType.COSELL_DETAIL })
+                }
+                type={PDButtonType.ACCORDION}
+                size={PDButtonSize.ICON_MEDIUM}
+                className="pi pi-arrow-left back-btn"
+              ></PDButton>
+            )}
+            <h5>
+              {data?.ReferenceID
+                ? `Opportunity Id: ${data?.CloudProviderIdentifier || "N/A"}`
+                : labelMapper.titles.createCosell}
+            </h5>
+          </div>
+        </div>
+        {/* customer details */}
+        <AccordionComponent
+          className="card-view"
+          defaultOpenIds={[labelMapper.accordian.customer]}
+          items={[
+            {
+              title: labelMapper.accordian.customer,
+              id: labelMapper.accordian.customer,
+              children: (
                 <Tile>
-                  <h5>{labelMapper.awsCosell.listItemLabel}</h5>
-
-                  <PDRadioGroup
-                    options={[
-                      {
-                        label: labelMapper.projectDetails.cosellWithAws,
-                        value: labelMapper.awsCosell.value.yes,
-                        info: labelMapper.awsCosell.discription.yes,
-                      },
-                      {
-                        label: labelMapper.projectDetails.doNotSupport,
-                        value: labelMapper.awsCosell.value.no,
-                        info: labelMapper.awsCosell.discription.no,
-                      },
-                    ]}
-                    value={primaryNeedsAWS}
-                    onChange={(value: string) => {
-                      if (
-                        ![StatusState.ACTION_REQUIRED].includes(
-                          LifeCycle?.ReviewStatus as StatusState
-                        )
-                      ) {
-                        setPrimaryNeedsAWS(value);
-                        if (value === labelMapper.awsCosell.value.yes) {
-                          onChangeValue(labelMapper.awsCosell.name, []);
-                        } else {
-                          onChangeValue(labelMapper.awsCosell.name, [value]);
-                        }
-                      }
-                    }}
-                    name={labelMapper.awsCosell.name}
-                  ></PDRadioGroup>
-                  {primaryNeedsAWS === labelMapper.awsCosell.value.yes && (
-                    <>
-                      <MultiSelectField
-                        info={labelMapper.awsCosell.discription.select}
-                        label={labelMapper.awsCosell.label}
-                        name={labelMapper.awsCosell.name}
-                        value={formValue?.awsCosell}
-                        required={true}
-                        // display="chip"
-                        onChange={(value) =>
-                          onChangeValue(labelMapper.awsCosell.name, value)
-                        }
-                        readOnly={readOnlyField(labelMapper.awsCosell.name)}
-                        error={errorValue?.awsCosell}
-                        validationMessage={displayErrorMessage(
-                          errorValue?.awsCosell,
-                          labelMapper.awsCosell.validationMessage
-                        )}
-                        options={
-                          optionValues?.specificAWSCoSellNeeds?.filter(
-                            (value) =>
-                              value?.label != labelMapper.awsCosell.value.no
-                          ) || []
-                        }
-                      />
-                    </>
-                  )}
-                  <h5>{labelMapper.opportunityType.listItemLabel}</h5>
-                  <PDRadioGroup
-                    name={labelMapper.opportunityType.name}
-                    value={formValue?.opportunityType}
-                    readOnly={readOnlyField(labelMapper.opportunityType.name)}
-                    options={[
-                      {
-                        label: labelMapper.opportunityType.value.netNewBusiness,
-                        value: labelMapper.opportunityType.value.netNewBusiness,
-                        info: labelMapper.opportunityType.discription
-                          .netNewBusiness,
-                      },
-                      {
-                        label: labelMapper.opportunityType.value.expansion,
-                        value: labelMapper.opportunityType.value.expansion,
-                        info: labelMapper.opportunityType.discription.expansion,
-                      },
-                      {
-                        label: labelMapper.opportunityType.value.flatRenewal,
-                        value: labelMapper.opportunityType.value.flatRenewal,
-                        info: labelMapper.opportunityType.discription
-                          .flatRenewal,
-                      },
-                    ]}
-                    onChange={(value) => {
-                      if (
-                        ![StatusState.ACTION_REQUIRED]?.includes(
-                          LifeCycle?.ReviewStatus as StatusState
-                        )
-                      ) {
-                        onChangeValue(labelMapper.opportunityType.name, value);
-                      }
-                    }}
-                  />
-                  {(formValue?.opportunityType ==
-                    labelMapper.opportunityType.value.flatRenewal ||
-                    formValue?.opportunityType ==
-                      labelMapper.opportunityType.value.expansion) && (
-                    <Input
-                      label={labelMapper.relatedOpportunityIndentifier.label}
-                      name={labelMapper.relatedOpportunityIndentifier.name}
-                      value={formValue?.relatedOpportunityIndentifier}
-                      onChange={(value) => {
-                        onChangeValue(
-                          labelMapper.relatedOpportunityIndentifier.name,
-                          value
-                        );
-                      }}
-                      info={
-                        labelMapper.relatedOpportunityIndentifier.description
-                      }
-                      tooltip={labelMapper.relatedOpportunityIndentifier.label}
-                      error={errorValue?.relatedOpportunityIndentifier}
-                      validationMessage={displayErrorMessage(
-                        errorValue.relatedOpportunityIndentifier,
-                        labelMapper.relatedOpportunityIndentifier
-                          .validationMessage
-                      )}
-                      readOnly={readOnlyField(
-                        labelMapper.relatedOpportunityIndentifier.name
-                      )}
-                    />
-                  )}
-                  <Input
-                    label={labelMapper.partnerProjectTitle.label}
-                    name={labelMapper.partnerProjectTitle.name}
-                    tooltip={labelMapper.partnerProjectTitle.label}
-                    readOnly={readOnlyField(
-                      labelMapper.partnerProjectTitle.name
-                    )}
-                    isrequired={true}
-                    value={formValue?.partnerProjectTitle}
-                    onChange={(value) => {
-                      onChangeValue(
-                        labelMapper.partnerProjectTitle.name,
-                        value
-                      );
-                    }}
-                    error={errorValue?.partnerProjectTitle}
-                    validationMessage={displayErrorMessage(
-                      errorValue?.partnerProjectTitle,
-                      labelMapper.partnerProjectTitle.validationMessage
-                    )}
-                  />
-                  <MultiSelectField
-                    label={labelMapper.salesActivities.label}
-                    name={labelMapper.salesActivities.name}
-                    readOnly={readOnlyField(labelMapper.salesActivities.name)}
-                    value={formValue?.salesActivities}
-                    required={
-                      !formValue?.awsCosell?.includes(
-                        labelMapper.awsCosell.value.no
-                      )
-                    }
-                    error={errorValue?.salesActivities}
-                    validationMessage={displayErrorMessage(
-                      errorValue?.salesActivities,
-                      labelMapper.salesActivities.validationMessage
-                    )}
-                    info={labelMapper.salesActivities.discription}
-                    onChange={(value) => {
-                      onChangeValue(labelMapper.salesActivities.name, value);
-                    }}
-                    options={optionValues?.salesActivites || []}
-                  />
-                  <TextAreaFieldBox
-                    label={labelMapper.customerBusinessProblem.label}
-                    info={labelMapper.customerBusinessProblem.discription}
-                    name={labelMapper.customerBusinessProblem.name}
-                    value={formValue?.customerBusinessProblem}
-                    isrequired={true}
-                    maxLength={2000}
-                    rows={3}
-                    error={errorValue?.customerBusinessProblem}
-                    validationMessage={validationMessage(
-                      labelMapper.customerBusinessProblem.name
-                    )}
-                    readOnly={readOnlyField(
-                      labelMapper.customerBusinessProblem.name
-                    )}
-                    onChange={(value) => {
-                      onChangeValue(
-                        labelMapper.customerBusinessProblem.name,
-                        value
-                      );
-                    }}
-                  />
-                  <MultiSelectField
-                    info={labelMapper.solutionsOffered.description}
-                    label={labelMapper.solutionsOffered.label}
-                    name={labelMapper.solutionsOffered.name}
-                    value={formValue?.solutionsOffered}
-                    required={true}
-                    onChange={(value) => {
-                      onChangeValue(labelMapper.solutionsOffered.name, value);
-                    }}
-                    readOnly={readOnlyField(labelMapper.solutionsOffered.name)}
-                    error={errorValue?.solutionsOffered}
-                    validationMessage={validationMessage(
-                      labelMapper.solutionsOffered.name
-                    )}
-                    options={optionValues?.solutions || []}
-                  />
-                  <MultiSelectField
-                    label={labelMapper.awsProducts.label}
-                    name={labelMapper.awsProducts.name}
-                    info={labelMapper.awsProducts.description}
-                    value={formValue?.awsProducts}
-                    required={false}
-                    readOnly={readOnlyField(labelMapper.awsProducts.name)}
-                    onChange={(value) => {
-                      onChangeValue(labelMapper.awsProducts.name, value);
-                    }}
-                    error={errorValue?.awsProducts}
-                    validationMessage={validationMessage(
-                      labelMapper.awsProducts.name
-                    )}
-                    options={optionValues?.AWSProducts || []}
-                  />
-
-                  <TextAreaFieldBox
-                    label={labelMapper.nextStep.label}
-                    name={labelMapper.nextStep.name}
-                    tooltip={labelMapper.nextStep.label}
-                    info={labelMapper.nextStep.description}
-                    rows={4}
-                    maxLength={labelMapper.nextStep.maxLength}
-                    readOnly={readOnlyField(labelMapper.nextStep.name)}
-                    validationMessage={validationMessage(
-                      labelMapper.nextStep.name
-                    )}
-                    value={formValue?.nextStep}
-                    error={errorValue?.nextStep}
-                    onChange={(value) => {
-                      onChangeValue(labelMapper.nextStep.name, value);
-                    }}
-                  />
-                  <PDSelectField
-                    label={labelMapper.useCase.label}
-                    name={labelMapper.useCase.name}
-                    tooltip={{ message: labelMapper.useCase.label }}
-                    readOnly={readOnlyField(labelMapper.useCase.name)}
-                    value={formValue?.useCase}
-                    error={errorValue?.useCase}
-                    validationMessage={displayErrorMessage(
-                      errorValue?.useCase,
-                      labelMapper.useCase.validationMessage
-                    )}
-                    required={true}
-                    options={optionValues?.useCase || []}
-                    onChange={(value) => {
-                      onChangeValue(labelMapper.useCase.name, value);
-                    }}
-                  />
-                  <MultiSelectField
-                    label={labelMapper.deliveryModel.label}
-                    info={labelMapper.deliveryModel.description}
-                    value={formValue?.deliveryModel}
-                    name={labelMapper.deliveryModel.name}
-                    required={true}
-                    error={errorValue?.deliveryModel}
-                    validationMessage={displayErrorMessage(
-                      errorValue?.deliveryModel,
-                      labelMapper.deliveryModel.validationMessage
-                    )}
-                    readOnly={readOnlyField(labelMapper.deliveryModel.name)}
-                    options={optionValues?.deliveryModel || []}
-                    onChange={(value) => {
-                      onChangeValue(labelMapper.deliveryModel.name, value);
-                    }}
-                  />
-                  <Input
-                    label={labelMapper.estimatedAWSRecurringRevenue.label}
-                    name={labelMapper.estimatedAWSRecurringRevenue.name}
-                    isrequired={true}
-                    error={errorValue?.estimatedAWSRecurringRevenue}
-                    validationMessage={displayErrorMessage(
-                      errorValue?.estimatedAWSRecurringRevenue,
-                      labelMapper.estimatedAWSRecurringRevenue.valid
-                    )}
-                    onInput={(value) => {
-                      value
-                        ? (labelMapper.estimatedAWSRecurringRevenue.valid =
-                            labelMapper.estimatedAWSRecurringRevenue.validation)
-                        : (labelMapper.estimatedAWSRecurringRevenue.valid =
-                            labelMapper.estimatedAWSRecurringRevenue.validationMessage);
-                      setErrorValue((prev) => ({
-                        ...prev,
-                        estimatedAWSRecurringRevenue: !validatePureNumber(
-                          value,
-                          true,
-                          false
-                        ),
-                      }));
-                    }}
-                    readOnly={readOnlyField(
-                      labelMapper.estimatedAWSRecurringRevenue.name
-                    )}
-                    value={formValue?.estimatedAWSRecurringRevenue}
-                    onChange={(value) => {
-                      onChangeValue(
-                        labelMapper.estimatedAWSRecurringRevenue.name,
-                        value
-                      );
-                    }}
-                  />
-                  <PDDatePicker
-                    label={labelMapper.targetCloseDate.label}
-                    name={labelMapper.targetCloseDate.name}
-                    required={true}
-                    error={errorValue?.targetCloseDate}
-                    validationMessage={displayErrorMessage(
-                      errorValue?.targetCloseDate,
-                      labelMapper.targetCloseDate.validation
-                    )}
-                    minDate={
-                      isPendingCosell(slug as string, reviewStatus)
-                        ? minDateIput()
-                        : undefined
-                    }
-                    readOnly={readOnlyField(labelMapper.targetCloseDate.name)}
-                    value={formValue?.targetCloseDate}
-                    onChange={(value) => {
-                      onChangeValue(labelMapper.targetCloseDate.name, value);
-                    }}
-                  />
-                  <MultiSelectField
-                    label={labelMapper.apnProgram.label}
-                    name={labelMapper.apnProgram.name}
-                    value={formValue?.apnProgram}
-                    required={false}
-                    onChange={(value) => {
-                      onChangeValue(labelMapper.apnProgram.name, value);
-                    }}
-                    readOnly={readOnlyField(labelMapper.apnProgram.name)}
-                    options={optionValues?.apnPrograms || []}
+                  <CustomerDetailsForm
+                    formValue={formValue}
+                    errorValue={errorValue}
+                    optionValues={optionValues}
+                    readOnlyField={readOnlyField}
+                    onChangeValue={onChangeValue}
+                    setFormValue={setFormValue}
+                    setErrorValue={setErrorValue}
+                    validatePureNumber={validatePureNumber}
+                    validationMessage={validationMessage}
+                    displayErrorMessage={displayErrorMessage}
+                    isPostalCodeRequired={isPostalCodeRequired}
+                    postalCodeRegex={postalCodeRegex}
                   />
                 </Tile>
-              </>
-            ),
-          },
-          {
-            title: labelMapper.accordian.marketing,
-            id: labelMapper.accordian.marketing,
-            children: (
-              <Tile>
-                <h5>{labelMapper.marketingSource.discription}</h5>
-                <PDRadioGroup
-                  name={labelMapper.marketingSource.name}
-                  value={formValue?.marketingSource}
-                  readOnly={readOnlyField(labelMapper.marketingSource.name)}
-                  options={[
-                    {
-                      label: "Yes: Sourced from Marketing Activity",
-                      value: labelMapper.marketingSource.value.yes,
-                    },
-                    {
-                      label: "No: Sourced from Marketing Activity",
-                      value: labelMapper.marketingSource.value.no,
-                    },
-                  ]}
-                  onChange={(value) => {
-                    if (
-                      ![StatusState.ACTION_REQUIRED]?.includes(
-                        LifeCycle?.ReviewStatus as StatusState
-                      )
-                    ) {
-                      onChangeValue(labelMapper.marketingSource.name, value);
-                    }
-                  }}
+              ),
+            },
+            {
+              title: labelMapper.accordian.project,
+              id: labelMapper.accordian.project,
+              children: (
+                <ProjectOpportunitySection
+                  optionValues={optionValues}
+                  formValue={formValue}
+                  errorValue={errorValue}
+                  primaryNeedsAWS={primaryNeedsAWS}
+                  setPrimaryNeedsAWS={setPrimaryNeedsAWS}
+                  onChangeValue={onChangeValue}
+                  readOnlyField={readOnlyField}
+                  displayErrorMessage={displayErrorMessage}
+                  validationMessage={validationMessage}
+                  validatePureNumber={validatePureNumber}
+                  setErrorValue={setErrorValue}
+                  LifeCycle={LifeCycle}
+                  StatusState={StatusState}
+                  isPendingCosell={isPendingCosell}
+                  slug={slug}
+                  reviewStatus={reviewStatus}
+                  minDateIput={minDateIput}
                 />
-                {formValue?.marketingSource &&
-                  formValue?.marketingSource !==
-                    labelMapper.marketingSource.value.no && (
-                    <>
-                      <Input
-                        value={formValue?.marketingCampaign}
-                        label={labelMapper.marketingCampaign.label}
-                        name={labelMapper.marketingCampaign.name}
-                        tooltip={labelMapper.marketingCampaign.label}
-                        readOnly={readOnlyField(
-                          labelMapper.marketingCampaign.name
-                        )}
-                        onChange={(value) => {
-                          onChangeValue(
-                            labelMapper.marketingCampaign.name,
-                            value
-                          );
-                        }}
-                      />
-
-                      <MultiSelectField
-                        label={labelMapper.marketingUseCase.label}
-                        value={formValue?.marketingUseCase}
-                        name={labelMapper.marketingUseCase.name}
-                        readOnly={readOnlyField(
-                          labelMapper.marketingUseCase.name
-                        )}
-                        options={optionValues?.marketingUseCase || []}
-                        onChange={(value) => {
-                          onChangeValue(
-                            labelMapper.marketingUseCase.name,
-                            value
-                          );
-                        }}
-                      />
-
-                      <MultiSelectField
-                        label={labelMapper.marketingActivityChannel.label}
-                        value={formValue?.marketingActivityChannel}
-                        name={labelMapper.marketingActivityChannel.name}
-                        readOnly={readOnlyField(
-                          labelMapper.marketingActivityChannel.name
-                        )}
-                        options={optionValues?.marketingActivityChannel || []}
-                        onChange={(value) => {
-                          onChangeValue(
-                            labelMapper.marketingActivityChannel.name,
-                            value
-                          );
-                        }}
-                      />
-
-                      <Tile>
-                        <h5>{labelMapper.isMarketingfunds.label}</h5>
-                        <PDRadioGroup
-                          name={labelMapper.isMarketingfunds.name}
-                          value={formValue?.isMarketingfunds}
-                          options={[
-                            {
-                              label:
-                                "Yes: Marketing development funds were used for this opportunity",
-                              value: labelMapper.isMarketingfunds.value.yes,
-                            },
-                            {
-                              label:
-                                "No: Marketing development funds were not used for this opportunity.",
-                              value: labelMapper.isMarketingfunds.value.no,
-                            },
-                          ]}
-                          onChange={(value) => {
-                            if (
-                              ![StatusState.ACTION_REQUIRED]?.includes(
-                                LifeCycle?.ReviewStatus as StatusState
-                              )
-                            ) {
-                              onChangeValue(
-                                labelMapper.isMarketingfunds.name,
-                                value
-                              );
-                            }
-                          }}
-                        />
-                      </Tile>
-                    </>
-                  )}
-              </Tile>
-            ),
-          },
-          {
-            title: labelMapper.accordian.additional,
-            id: labelMapper.accordian.additional,
-            children: (
-              <Tile>
-                <Input
-                  label={labelMapper.crmUniqueIdentifier.label}
-                  name={labelMapper.crmUniqueIdentifier.name}
-                  validationMessage={
-                    labelMapper.crmUniqueIdentifier.validationMessage
-                  }
-                  tooltip={labelMapper.crmUniqueIdentifier.label}
-                  isrequired={false}
-                  readOnly={readOnlyField(labelMapper.crmUniqueIdentifier.name)}
-                  value={formValue?.crmUniqueIdentifier}
-                  onChange={(value) => {
-                    onChangeValue(labelMapper.crmUniqueIdentifier.name, value);
-                  }}
+              ),
+            },
+            {
+              title: labelMapper.accordian.marketing,
+              id: labelMapper.accordian.marketing,
+              children: (
+                <MarketingSourceSection
+                  formValue={formValue}
+                  optionValues={optionValues}
+                  LifeCycle={LifeCycle}
+                  readOnlyField={readOnlyField}
+                  onChangeValue={onChangeValue}
                 />
-                <PDSelectField
-                  label={labelMapper.competitiveTracking.label}
-                  name={labelMapper.competitiveTracking.name}
-                  tooltip={{ message: labelMapper.competitiveTracking.label }}
-                  readOnly={readOnlyField(labelMapper.competitiveTracking.name)}
-                  required={false}
-                  value={formValue?.competitiveTracking}
-                  options={optionValues?.competitiveTracking || []}
-                  onChange={(value) => {
-                    onChangeValue(labelMapper.competitiveTracking.name, value);
-                  }}
+              ),
+            },
+            {
+              title: labelMapper.accordian.additional,
+              id: labelMapper.accordian.additional,
+              children: (
+                <AdditionalDetailsForm
+                  displayErrorMessage={displayErrorMessage}
+                  errorValue={errorValue}
+                  formValue={formValue}
+                  onChangeValue={onChangeValue}
+                  optionValues={optionValues}
+                  readOnlyField={readOnlyField}
+                  validationMessage={validationMessage}
                 />
-                {formValue?.competitiveTracking ==
-                  labelMapper.competitiveTracking.value && (
-                  <Input
-                    label={labelMapper.otherCompetitors.label}
-                    name={labelMapper.otherCompetitors.name}
-                    tooltip={labelMapper.otherCompetitors.label}
-                    readOnly={readOnlyField(labelMapper.otherCompetitors.name)}
-                    isrequired={true}
-                    error={errorValue?.otherCompetitors}
-                    validationMessage={displayErrorMessage(
-                      errorValue?.otherCompetitors,
-                      labelMapper.otherCompetitors.validationMessage
-                    )}
-                    value={formValue?.otherCompetitors}
-                    onChange={(value) => {
-                      onChangeValue(labelMapper.otherCompetitors.name, value);
-                    }}
-                  />
-                )}
-                <Input
-                  label={labelMapper.awsAccountId.label}
-                  name={labelMapper.awsAccountId.name}
-                  info={labelMapper.awsAccountId.description}
-                  validationMessage={
-                    !errorValue?.awsAccountId
-                      ? labelMapper.awsAccountId.validationMessage
-                      : labelMapper.awsAccountId.validationErrorMessage
-                  }
-                  tooltip={labelMapper.awsAccountId.label}
-                  isrequired={false}
-                  readOnly={readOnlyField(labelMapper.awsAccountId.name)}
-                  error={errorValue?.awsAccountId}
-                  value={formValue?.awsAccountId}
-                  onChange={(value) => {
-                    onChangeValue(labelMapper.awsAccountId.name, value);
-                  }}
+              ),
+            },
+            {
+              title: labelMapper.accordian.contact,
+              id: labelMapper.accordian.contact,
+              children: (
+                <ContactDetailsForm
+                  displayErrorMessage={displayErrorMessage}
+                  errorValue={errorValue}
+                  formValue={formValue}
+                  onChangeValue={onChangeValue}
+                  readOnlyField={readOnlyField}
                 />
-                <TextAreaFieldBox
-                  label={labelMapper.additonalComments.label}
-                  name={labelMapper.additonalComments.name}
-                  rows={4}
-                  maxLength={255}
-                  info={labelMapper.additonalComments.description}
-                  tooltip={labelMapper.additonalComments.label}
-                  readOnly={readOnlyField(labelMapper.additonalComments.name)}
-                  value={formValue?.additonalComments}
-                  onChange={(value) => {
-                    onChangeValue(labelMapper.additonalComments.name, value);
-                  }}
-                  validationMessage={validationMessage(
-                    labelMapper.additonalComments.name
-                  )}
-                  error={errorValue?.additonalComments}
+              ),
+            },
+            {
+              title: labelMapper.accordian.partnerSalesContact,
+              id: labelMapper.accordian.partnerSalesContact,
+              children: (
+                <PartnerSalesContactForm
+                  displayErrorMessage={displayErrorMessage}
+                  errorValue={errorValue}
+                  formValue={formValue}
+                  onChangeValue={onChangeValue}
+                  readOnlyField={readOnlyField}
                 />
-              </Tile>
-            ),
-          },
-          {
-            title: labelMapper.accordian.contact,
-            id: labelMapper.accordian.contact,
-            children: <></>,
-          },
-        ]}
-      ></AccordionComponent>
+              ),
+            },
+          ]}
+        ></AccordionComponent>
+        <Tile>
+          <div className="flex justify-end gap-2 mb-4">
+            <PDButton
+              size={PDButtonSize.SMALL}
+              type={PDButtonType.SECONDARY}
+              label={t("buttonLabel.cancel")}
+              onClick={() => {
+                sdk?.execute(Command.CLOSE_MODAL);
+              }}
+            ></PDButton>
+            <PDButton
+              size={PDButtonSize.SMALL}
+              type={PDButtonType.PRIMARY}
+              label={t("buttonLabel.submit")}
+              onClick={() => {
+                generateEditCosellPaylaod();
+              }}
+            ></PDButton>
+          </div>
+        </Tile>
+      </Tile>
     </div>
   );
 };

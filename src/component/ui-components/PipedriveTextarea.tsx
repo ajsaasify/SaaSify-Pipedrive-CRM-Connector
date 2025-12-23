@@ -12,10 +12,10 @@ const TextAreaFieldBox: React.FC<{
   error?: boolean;
   name?: string;
   maxLength?: number;
-  rows:number;
-  validationMessage?:string;
-  readOnly?:boolean;
-  tooltip?:string;
+  rows: number;
+  validationMessage?: string;
+  readOnly?: boolean;
+  tooltip?: string;
   onChange: (val: string) => void;
 }> = ({
   label,
@@ -33,7 +33,12 @@ const TextAreaFieldBox: React.FC<{
   maxLength = 3000,
 }) => (
   <div className="flex flex-col w-full mb-3">
-    {label && <PDText type={PDTextType.LABEL}>{label}</PDText>}
+    {label && (
+      <PDText type={PDTextType.LABEL}>
+        {label}{" "}
+        <span className="text-state-danger">{isrequired ? " *" : ""}</span>
+      </PDText>
+    )}
     {info && <div className="hub-field-info">{info}</div>}
 
     <InputTextarea
@@ -48,7 +53,7 @@ const TextAreaFieldBox: React.FC<{
       maxLength={maxLength}
       readOnly={readOnly}
       tooltip={tooltip}
-      tooltipOptions={{position:"top"}}
+      tooltipOptions={{ position: "top" }}
     />
     {error && <small className="pd-text-error">{validationMessage}</small>}
   </div>

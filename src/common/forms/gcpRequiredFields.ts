@@ -19,5 +19,5 @@ export const gcpRequiredField = [
   "discription",
   "terms",
   "state",
-  "zipCode"
+  "zipCode",
 ];

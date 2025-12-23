@@ -34,7 +34,7 @@ export enum ModalTitle {
   MS_CHANGE_STAGE = "Update Microsoft Stage Details",
   PROGRESS_BAR = "Progress Stages",
   SHARE_WITH_PARTNER = "Share With Partner",
-  REVIEW_OFFER = "Preview Offer"
+  REVIEW_OFFER = "Preview Offer",
 }
 
 export enum ModalWidth {

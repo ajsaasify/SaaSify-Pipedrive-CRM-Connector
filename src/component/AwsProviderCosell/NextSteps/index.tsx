@@ -1,14 +1,11 @@
-import React, { useEffect } from "react";
 import AccordionComponent from "@template/component/ui-components/PipedriveAccordion";
 import { AccordianTitle } from "@template/enum/accordian.enum";
 import PDAdvancedTable from "@template/component/ui-components/PipedriveTable";
 import { NextStepColumns } from "./herlper";
 import { useCoSellContext } from "@template/context/Cosell.context";
-import { StepHistory } from "@template/types/cosellResponse";
+import type { StepHistory } from "@template/types/cosellResponse";
 import { EmptyState } from "@template/component/ui-components/empty-data";
 import { awsConstants } from "@template/common/constants/awsCosellFieldMappings";
-import PDText from "@template/component/ui-components/pipedrive-text";
-import { Tile } from "@template/component/ui-components/detailview-components";
 
 const NextStepTable = ({ data }: { data: StepHistory[] }) => {
   const { title, noItems, add } = awsConstants.nextStep;

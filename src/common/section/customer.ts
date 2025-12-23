@@ -1,5 +1,5 @@
 import { labelMapper } from "@template/utils/labelMappers";
-import { RC3CosellResponse } from "../../types/cosellResponse";
+import type { RC3CosellResponse } from "../../types/cosellResponse";
 import {
   getFullName,
   getOpportunityOwner,
@@ -89,7 +89,7 @@ export const customerSectionData = (data: RC3CosellResponse) => {
     ],
   };
 
-  if (Account?.Industry == labelMapper.industryVertical.value) {
+  if (Account?.Industry === labelMapper.industryVertical.value) {
     render.customerDetails[1].push(
       {
         label: awsConstants.customer.otherIndustry,
@@ -98,7 +98,7 @@ export const customerSectionData = (data: RC3CosellResponse) => {
       {
         label: awsConstants.customer.streetAddress,
         value: getValue(Account?.Address?.StreetAddress),
-      }
+      },
     );
     render.customerDetails[2].unshift({
       label: awsConstants.customer.city,
@@ -117,7 +117,7 @@ export const customerSectionData = (data: RC3CosellResponse) => {
       {
         label: awsConstants.customer.city,
         value: getValue(Account?.Address?.City),
-      }
+      },
     );
     render.customerDetails[2].push({
       label: awsConstants.customer.postalCode,

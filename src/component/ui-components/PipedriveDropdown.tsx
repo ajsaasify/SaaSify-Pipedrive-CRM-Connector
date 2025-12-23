@@ -1,6 +1,6 @@
 import { Dropdown } from "primereact/dropdown";
 import InfoTooltip from "./PipedriveInfo";
-import { InfoTooltipProps } from "@template/types/pipedrive-ui-interface";
+import type { InfoTooltipProps } from "@template/types/pipedrive-ui-interface";
 import PDText from "./pipedrive-text";
 import { PDTextType } from "@template/enum/pipedrive.enum";
 
@@ -52,7 +52,7 @@ const PDSelectField: React.FC<{
           {tooltip?.message && <InfoTooltip message={tooltip?.message} />}
         </PDText>
       )}
-      
+
       {info && <div className="hub-field-info">{info}</div>}
       <Dropdown
         required={required}

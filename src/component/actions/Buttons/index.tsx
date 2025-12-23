@@ -1,4 +1,5 @@
-import React, { useState, useMemo, useCallback, useEffect } from "react";
+import type React from "react";
+import { useState, useMemo } from "react";
 // import {
 //   Flex,
 //   Icon,
@@ -10,9 +11,6 @@ import React, { useState, useMemo, useCallback, useEffect } from "react";
 
 // import EditCosellModal from "../UpsertCosell";
 import { useCoSellContext } from "@template/context/Cosell.context";
-// import { ChangeStageModal } from "../ChangeStage";
-// import { AssociateModal } from "../AssociateOffers";
-import { PipedriveContext } from "@template/types/pipedriveContext";
 // import { NextStepModal } from "../NextStep";
 // import TransferOwnershipModal from "../TransferOwner";
 // import UpdateModal from "../UpdateCosell";
@@ -28,24 +26,19 @@ import {
   transferDisable,
   updateDisable,
 } from "./actionDisabilityRules";
-import {
-  ActionButton,
-  ButtonSize,
-  ButtonVariant,
-  FormButton,
-} from "@template/enum/button.enum";
-import { ModalTitle } from "@template/enum/modal.enum";
-import { associateOfferType } from "../../../common/forms/associateOfferType";
-import { CosellAction } from "@template/enum/action.enum";
-import { pullCosell, pushCrm } from "./apiHandler";
+import { FormButton } from "@template/enum/button.enum";
+import { pullCosell } from "./apiHandler";
 
 // import LinkcrmModal from "../LinkCrm";
 import { requestPayload } from "@template/common/listCosell";
 import PDButton from "@template/component/ui-components/pipedriveButton";
-import { PDButtonSize, PDButtonType } from "@template/enum/pipedrive.enum";
+import {
+  ModelType,
+  PDButtonSize,
+  PDButtonType,
+} from "@template/enum/pipedrive.enum";
 import { useTranslation } from "react-i18next";
-import { AlertType } from "@template/enum/alert.enum";
-import { AlertNotification } from "@template/common/messageAlert";
+import type { AlertNotification } from "@template/common/messageAlert";
 // import RejectCosell from "../RejectCosell";
 // import { acceptCosell } from "../AcceptCosell/apiHandler";
 // import { displayOid } from "../../CloudCoSellManager/helper";
@@ -54,13 +47,12 @@ type Props = {
   actions: any;
 };
 
-const ConditionalActionButton: React.FC<{
+const _ConditionalActionButton: React.FC<{
   show: boolean;
   label: string;
   overlay: React.ReactElement;
   disabled?: boolean;
-}> = ({ show, label, overlay, disabled = false }) => {
-  const { t } = useTranslation();
+}> = ({ show, label, disabled = false }) => {
   return show ? (
     <PDButton
       label={label}
@@ -70,7 +62,7 @@ const ConditionalActionButton: React.FC<{
     />
   ) : null;
 };
-const ActionButtons: React.FC<Props> = ({ actions }) => {
+const ActionButtons: React.FC<Props> = () => {
   const {
     data,
     setData,
@@ -78,10 +70,9 @@ const ActionButtons: React.FC<Props> = ({ actions }) => {
     partnerType,
     setOpportunityList,
     opportunityList,
-    dropdownShow,
   } = useCoSellContext();
 
-  const [isAccepting, setIsAccepting] = useState(false);
+  const [isAccepting, _setIsAccepting] = useState(false);
 
   const { DealType = requestPayload.dealType.po } = data ?? {};
   const { LifeCycle } = data?.CoSellEntity || {};
@@ -89,7 +80,7 @@ const ActionButtons: React.FC<Props> = ({ actions }) => {
   const status = data?.CloudProviderStatus ?? ReviewStatus;
   const isPendingFromAoInBound = isPending(data);
   const { t } = useTranslation();
-
+  const { setCurrentPage } = useCoSellContext();
   const statusRequired = !!status;
 
   const showButtons = useMemo(
@@ -103,7 +94,7 @@ const ActionButtons: React.FC<Props> = ({ actions }) => {
         Stage,
         data?.CloudProviderIdentifier,
         DealType,
-        data
+        data,
       ),
       update:
         statusRequired &&
@@ -113,7 +104,7 @@ const ActionButtons: React.FC<Props> = ({ actions }) => {
           partnerType,
           data?.CloudProviderIdentifier,
           DealType,
-          data
+          data,
         ),
       changeStage:
         statusRequired &&
@@ -122,7 +113,7 @@ const ActionButtons: React.FC<Props> = ({ actions }) => {
           Stage,
           data?.CloudProviderIdentifier,
           DealType,
-          data
+          data,
         ),
       transfer:
         statusRequired &&
@@ -131,7 +122,7 @@ const ActionButtons: React.FC<Props> = ({ actions }) => {
           Stage,
           data?.CloudProviderIdentifier,
           DealType,
-          data
+          data,
         ),
       associate:
         statusRequired &&
@@ -142,7 +133,7 @@ const ActionButtons: React.FC<Props> = ({ actions }) => {
             ?.OfferID,
           data?.CloudProviderIdentifier,
           DealType,
-          data
+          data,
         ),
       nextStep:
         statusRequired &&
@@ -151,10 +142,18 @@ const ActionButtons: React.FC<Props> = ({ actions }) => {
           Stage,
           data?.CloudProviderIdentifier,
           DealType,
-          data
+          data,
         ),
     }),
-    [data, status, Stage, DealType, partnerType]
+    [
+      data,
+      status,
+      Stage,
+      DealType,
+      partnerType,
+      isPendingFromAoInBound,
+      statusRequired,
+    ],
   );
 
   const triggerAlert = ({ type, message, title }: AlertNotification) => {
@@ -166,13 +165,18 @@ const ActionButtons: React.FC<Props> = ({ actions }) => {
       <PDButton
         label={t("buttonLabel.edit")}
         type={PDButtonType.SECONDARY}
-        size={PDButtonSize.TINY}
+        size={PDButtonSize.SMALL}
+        onClick={() => {
+          setCurrentPage({
+            page: ModelType.COSELL_CREATE,
+          });
+        }}
       />
       <PDButton
         className="pi pi-refresh"
         label={t("buttonLabel.reset")}
         type={PDButtonType.SECONDARY}
-        size={PDButtonSize.TINY}
+        size={PDButtonSize.SMALL}
         onClick={() => {
           pullCosell(
             data,
@@ -182,7 +186,7 @@ const ActionButtons: React.FC<Props> = ({ actions }) => {
             setOpportunityList,
             opportunityList,
             true,
-            isPendingFromAoInBound
+            isPendingFromAoInBound,
           );
         }}
       />

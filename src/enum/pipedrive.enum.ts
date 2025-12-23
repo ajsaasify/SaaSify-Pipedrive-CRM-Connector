@@ -52,10 +52,10 @@ export enum PDCheckboxSize {
   MEDIUM = "MEDIUM",
   LARGE = "LARGE",
 }
-export enum ModelType{
-  COSSELL="cosell",
-  COSELL_LIST="cosell-list",
-  COSELL_DETAIL="cosell-detail",
-  COSELL_CREATE="cosell-create",
-  COSELL_CLOUD_PROVIDER="cosell-cloud-provider"
+export enum ModelType {
+  COSSELL = "cosell",
+  COSELL_LIST = "cosell-list",
+  COSELL_DETAIL = "cosell-detail",
+  COSELL_CREATE = "cosell-create",
+  COSELL_CLOUD_PROVIDER = "cosell-cloud-provider",
 }

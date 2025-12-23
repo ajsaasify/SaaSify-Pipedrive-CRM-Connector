@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import { Checkbox } from "primereact/checkbox";
 import { PDCheckboxSize } from "@template/enum/pipedrive.enum";
 
@@ -35,7 +35,12 @@ const PDCheckbox: React.FC<PDCheckboxProps> = ({
       />
 
       {label && (
-        <label className="pd-checkbox-label" onClick={() => onChange?.(!checked)}>
+        // biome-ignore lint/a11y/noLabelWithoutControl: Label separate by design
+        // biome-ignore lint/a11y/useKeyWithClickEvents: Click handled on label
+        <label
+          className="pd-checkbox-label"
+          onClick={() => onChange?.(!checked)}
+        >
           {label}
         </label>
       )}

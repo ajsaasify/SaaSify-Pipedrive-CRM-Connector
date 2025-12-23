@@ -69,9 +69,17 @@
 .pd-table .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
   @apply font-semibold rounded-full bg-gray-300;
 }
+
+.p-paginator .p-paginator-pages .p-highlight{
+  @apply font-bold;
+}
 /* -----------------------------------------
      STRIPED ROWS (optional if enabled)
   ----------------------------------------- */
 .pd-table.p-datatable-striped .p-datatable-tbody > tr.p-row-even {
   @apply bg-gray-xs;
+}
+
+.p-column-header-content{
+  @apply min-w-[150px] max-w-[300px];
 }

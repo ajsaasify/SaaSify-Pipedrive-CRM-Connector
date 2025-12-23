@@ -1,11 +1,11 @@
-import { hasErrors } from "./../utils/globalHelper";
 import { requestPayload } from "../common/listCosell";
 import URLBuilder from "../helpers/urlBuilder";
-import { FetchOptions } from "../enum/options.enum";
-import { PipedriveContext } from "../types/pipedriveContext";
-import { PathParams, QueryParams } from "../types/urlBuilder";
+import type { PathParams, QueryParams } from "../types/urlBuilder";
 import HttpWrapper from "./http.service";
-import { CoSellResponse, getListCosellAssociatePayloadCrmType } from "@template/types/api/getListCosellAssociateCrm.t";
+import type {
+  CoSellResponse,
+  getListCosellAssociatePayloadCrmType,
+} from "@template/types/api/getListCosellAssociateCrm.t";
 
 class SaasifyService {
   private httpWrapper: HttpWrapper;
@@ -18,28 +18,28 @@ class SaasifyService {
   private buildUrl(
     path: string,
     pathParams?: PathParams,
-    queryParams?: QueryParams
+    queryParams?: QueryParams,
   ): string {
     const urlBuilder = new URLBuilder(
       `${this.apiUrl}${path}`,
       pathParams,
-      queryParams
+      queryParams,
     );
     return urlBuilder.buildURL();
   }
 
   public async getEntity(
     entity: string,
-    cloud: string = requestPayload.cloud.aws
+    cloud: string = requestPayload.cloud.aws,
   ) {
-    const version = cloud == requestPayload.cloud.aws ? 3 : undefined;
+    const version = cloud === requestPayload.cloud.aws ? 3 : undefined;
     const url = this.buildUrl(
       "/cosell/v3/providers/:cloud/referencedata",
       { cloud },
       {
         version,
         entityName: entity,
-      }
+      },
     );
     return this.httpWrapper.get(url);
   }
@@ -60,12 +60,12 @@ class SaasifyService {
 
   public async getListCosellAssociateCrm(
     sellerCode: string,
-    payload: getListCosellAssociatePayloadCrmType
-  ):Promise<CoSellResponse> {
+    payload: getListCosellAssociatePayloadCrmType,
+  ): Promise<CoSellResponse> {
     const url = this.buildUrl(
       "/cosell/v3/selleraccounts/:sellerCode/opportunities",
       { sellerCode },
-      { ...payload }
+      { ...payload },
     );
     return this.httpWrapper.get(url);
   }
@@ -92,7 +92,7 @@ class SaasifyService {
   public async getPartnerType(sellerCode = requestPayload.sellerCode) {
     const url = this.buildUrl(
       `/cosell/v3/selleraccounts/:sellerCode/partnertypes`,
-      { sellerCode }
+      { sellerCode },
     );
     return this.httpWrapper.get(url);
   }
@@ -105,7 +105,7 @@ class SaasifyService {
   public async getDataForLaunch(
     CRMName: string,
     MappingId: any,
-    CRMID: number
+    CRMID: number,
   ) {
     const url = this.buildUrl(
       "/crm/Hubspot/Cosell/GetDataForLaunchFromCrm",
@@ -114,7 +114,7 @@ class SaasifyService {
         CRMName,
         MappingId,
         CRMID,
-      }
+      },
     );
     return this.httpWrapper.get(url);
   }
@@ -137,7 +137,7 @@ class SaasifyService {
 
   public async getProducts() {
     const url = this.buildUrl(
-      "/cosell/v3/providers/AWS/referencedata/products"
+      "/cosell/v3/providers/AWS/referencedata/products",
     );
     return this.httpWrapper.get(url);
   }
@@ -147,7 +147,7 @@ class SaasifyService {
       "/cosell/v3/selleraccounts/:sellerCode/solutions",
       {
         sellerCode,
-      }
+      },
     );
     return this.httpWrapper.get(url);
   }
@@ -155,7 +155,7 @@ class SaasifyService {
   public async getCosellById(sellerId: string, opportunityId: string) {
     const url = this.buildUrl(
       "/cosell/v3/selleraccounts/:sellerId/opportunities/:opportunityId",
-      { sellerId, opportunityId }
+      { sellerId, opportunityId },
     );
     return this.httpWrapper.get(url);
   }
@@ -163,11 +163,11 @@ class SaasifyService {
   public async postUpdateCosellById(
     sellerId: string,
     opportunity: string,
-    data: any
+    data: any,
   ) {
     const url = this.buildUrl(
       "/cosell/v3/selleraccounts/:sellerId/opportunities/:opportunity",
-      { sellerId, opportunity }
+      { sellerId, opportunity },
     );
     return this.httpWrapper.post(url, data);
   }
@@ -175,7 +175,7 @@ class SaasifyService {
   public async postCosellById(sellerId: string, data: any) {
     const url = this.buildUrl(
       "/cosell/v3/webportal/selleraccounts/:sellerId/opportunities",
-      { sellerId }
+      { sellerId },
     );
     return this.httpWrapper.post(url, data);
   }
@@ -183,7 +183,7 @@ class SaasifyService {
   public async createCosell(sellerId: string, data: any) {
     const url = this.buildUrl(
       "/cosell/v3/selleraccounts/:sellerId/opportunities",
-      { sellerId }
+      { sellerId },
     );
     return this.httpWrapper.post(url, data);
   }
@@ -191,7 +191,7 @@ class SaasifyService {
   public async createCosellStep1(sellerId: string, data: any) {
     const url = this.buildUrl(
       "/cosell/v3/webportal/selleraccounts/:sellerId/opportunities",
-      { sellerId }
+      { sellerId },
     );
     return this.httpWrapper.post(url, data);
   }
@@ -199,11 +199,11 @@ class SaasifyService {
   public async postTransferOwner(
     sellerId: string,
     opportunityId: string,
-    data: any
+    data: any,
   ) {
     const url = this.buildUrl(
       "/cosell/v3/selleraccounts/:sellerId/opportunities/:opportunityId/assign",
-      { sellerId, opportunityId }
+      { sellerId, opportunityId },
     );
     return this.httpWrapper.post(url, data);
   }
@@ -211,11 +211,11 @@ class SaasifyService {
   public async postAssociatePartnerOpportunity(
     sellerId: string,
     opportunityId: string,
-    data: any
+    data: any,
   ) {
     const url = this.buildUrl(
       "/cosell/v3/selleraccounts/:sellerId/opportunities/:opportunityId/associatepartneropportunity",
-      { sellerId, opportunityId }
+      { sellerId, opportunityId },
     );
     return this.httpWrapper.patch(url, data);
   }
@@ -223,11 +223,11 @@ class SaasifyService {
   public async postAssociateOffer(
     sellerId: string,
     opportunityId: string,
-    data: any
+    data: any,
   ) {
     const url = this.buildUrl(
       "/cosell/v3/selleraccounts/:sellerId/opportunities/:opportunityId/associateoffer",
-      { sellerId, opportunityId }
+      { sellerId, opportunityId },
     );
     return this.httpWrapper.post(url, data);
   }
@@ -235,11 +235,11 @@ class SaasifyService {
   public async postChangeStage(
     sellerId: string,
     opportunityId: string,
-    data: any
+    data: any,
   ) {
     const url = this.buildUrl(
       "/cosell/v3/selleraccounts/:sellerId/opportunities/:opportunityId",
-      { sellerId, opportunityId }
+      { sellerId, opportunityId },
     );
     return this.httpWrapper.post(url, data);
   }
@@ -247,11 +247,11 @@ class SaasifyService {
   public async postNextStep(
     sellerId: string,
     opportunityId: string,
-    data: any
+    data: any,
   ) {
     const url = this.buildUrl(
       "/cosell/v3/selleraccounts/:sellerId/opportunities/:opportunityId/nextstep",
-      { sellerId, opportunityId }
+      { sellerId, opportunityId },
     );
     return this.httpWrapper.patch(url, data);
   }
@@ -259,11 +259,11 @@ class SaasifyService {
   public async acceptCosell(
     sellerId: string,
     opportunityId: string,
-    data: any
+    data: any,
   ) {
     const url = this.buildUrl(
       "/cosell/v3/selleraccounts/:sellerId/opportunities/:opportunityId/accept",
-      { sellerId, opportunityId }
+      { sellerId, opportunityId },
     );
     return this.httpWrapper.post(url, data);
   }
@@ -271,11 +271,11 @@ class SaasifyService {
   public async rejectCosell(
     sellerId: string,
     opportunityId: string,
-    data: any
+    data: any,
   ) {
     const url = this.buildUrl(
       "/cosell/v3/selleraccounts/:sellerId/opportunities/:opportunityId/reject",
-      { sellerId, opportunityId }
+      { sellerId, opportunityId },
     );
     return this.httpWrapper.post(url, data);
   }
@@ -288,7 +288,7 @@ class SaasifyService {
   public async refreshCosell(sellerId: string, opportunityId: string) {
     const url = this.buildUrl(
       "/cosell/v3/selleraccounts/:sellerId/opportunities/:opportunityId/pullcosell",
-      { sellerId, opportunityId }
+      { sellerId, opportunityId },
     );
     return this.httpWrapper.get(url);
   }
@@ -296,7 +296,7 @@ class SaasifyService {
   public async resyncCosellError(sellerId: string, opportunityId: string) {
     const url = this.buildUrl(
       "/cosell/v3/selleraccounts/:sellerId/opportunities/:opportunityId/resync",
-      { sellerId, opportunityId }
+      { sellerId, opportunityId },
     );
     return this.httpWrapper.post(url);
   }
@@ -309,7 +309,7 @@ class SaasifyService {
     offset: number,
     pageCount: number,
     EntityName: string,
-    IsFromWebApp: boolean
+    IsFromWebApp: boolean,
   ) {
     const payload = {
       ReferenceID,
@@ -343,7 +343,7 @@ class SaasifyService {
   public async getCountires(cloud: string) {
     const url = this.buildUrl(
       "/cosell/v3/providers/:cloud/referencedata/countries",
-      { cloud }
+      { cloud },
     );
     return this.httpWrapper.get(url);
   }
@@ -351,7 +351,7 @@ class SaasifyService {
   public async syncPushCrm(referenceId: string) {
     const url = this.buildUrl(
       "/cosell/v3/selleraccounts/opportunities/:referenceId/pushtocrm",
-      { referenceId }
+      { referenceId },
     );
     return this.httpWrapper.get(url);
   }
@@ -372,7 +372,7 @@ class SaasifyService {
       {
         sellerCode,
         referralId,
-      }
+      },
     );
     return this.httpWrapper.get(url);
   }
@@ -380,14 +380,14 @@ class SaasifyService {
   public async postPartnerConnections(
     sellerCode: string,
     referralId: string,
-    payload: any
+    payload: any,
   ) {
     const url = this.buildUrl(
       "/cosell/v3/selleraccounts/:sellerCode/opportunities/:referralId/invitepartner",
       {
         sellerCode,
         referralId,
-      }
+      },
     );
     return this.httpWrapper.post(url, payload);
   }
@@ -397,7 +397,7 @@ class SaasifyService {
       "/cosell/v3/selleraccounts/:sellerCode/partnerconnections",
       {
         sellerCode,
-      }
+      },
     );
     return this.httpWrapper.get(url);
   }
@@ -405,7 +405,7 @@ class SaasifyService {
     cloudProvider: string,
     entityName?: string,
     version?: string,
-    referralType?: string
+    referralType?: string,
   ) {
     const cloud = cloudProvider?.includes(requestPayload.defaultView)
       ? requestPayload.cloud.aws
@@ -420,7 +420,7 @@ class SaasifyService {
         referralType,
         version,
         entityName,
-      }
+      },
     );
     return this.httpWrapper.get(url);
   }
@@ -447,26 +447,26 @@ class SaasifyService {
 
   public async subscribeCount() {
     const url = this.buildUrl(
-      "/dashboard/subscribedandunsubscirbedcountbymonth"
+      "/dashboard/subscribedandunsubscirbedcountbymonth",
     );
     return this.httpWrapper.get(url);
   }
 
   public async getReferenceData(cloud: string = requestPayload.cloud.aws) {
-    const version = cloud == requestPayload.cloud.aws ? 3 : undefined;
+    const version = cloud === requestPayload.cloud.aws ? 3 : undefined;
     const url = this.buildUrl(
       "/cosell/v3/providers/:cloud/referencedata",
       { cloud },
       {
         version,
-      }
+      },
     );
     return this.httpWrapper.get(url);
   }
 
   public async ampSolutions(
     SellerCode: string = requestPayload.sellerCode,
-    CloudProvider: string = requestPayload.cloud.amp
+    CloudProvider: string = requestPayload.cloud.amp,
   ) {
     const url = this.buildUrl("/cosell/providers/amp/solutions");
     return this.httpWrapper.post(url, {
@@ -476,7 +476,7 @@ class SaasifyService {
   }
 
   public async getSellercode(
-    SellerConfigurationType: string = requestPayload.sellerConfigurationType
+    SellerConfigurationType: string = requestPayload.sellerConfigurationType,
   ) {
     const url = this.buildUrl(
       "/staticdata/selleraccountsfordropdown",
@@ -487,7 +487,7 @@ class SaasifyService {
         // portalId: context.portal.id,
         // userEmail: context.user.email,
         // userID: context.user.id,
-      }
+      },
     );
     return this.httpWrapper.get(url);
   }
@@ -500,7 +500,7 @@ class SaasifyService {
   public async pullCosellAmp(sellerCode: string, referenceId: string) {
     const url = this.buildUrl(
       "/cosell/selleraccounts/:sellerCode/opportunities/:referenceId/pullcosell",
-      { sellerCode, referenceId }
+      { sellerCode, referenceId },
     );
     return this.httpWrapper.get(url);
   }

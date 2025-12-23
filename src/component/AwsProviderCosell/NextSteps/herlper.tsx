@@ -1,12 +1,12 @@
-import { Contact } from "@template/types/cosellResponse";
-import { PDColumnConfig } from "@template/types/pipedrive-table-interface";
+import type { PDColumnConfig } from "@template/types/pipedrive-table-interface";
+import { t } from "i18next";
 export const NextStepColumns: PDColumnConfig[] = [
   {
     field: "Value",
-    header: "NEXT STEP",
+    header: t("awsCosell.tableColumn.nextStep.0"),
   },
   {
     field: "Time",
-    header: "CREATED DATE",
+    header: t("awsCosell.tableColumn.nextStep.1"),
   },
 ];

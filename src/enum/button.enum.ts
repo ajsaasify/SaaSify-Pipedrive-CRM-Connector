@@ -61,7 +61,7 @@ export enum ButtonSize {
 }
 
 export enum TabVariant {
-  ENCLOSED = "enclosed"
+  ENCLOSED = "enclosed",
 }
 
 export enum IconVariant {

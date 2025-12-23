@@ -41,7 +41,7 @@ export const staticPrivateOffer = {
     AWSAgreementId: "agmt-854cwo7pstymm06yef5i4o1n1",
     SelectedCRMName: "SalesForce",
     CRMMappingId: 0,
-    OfferCreatedDate:  "2024-11-28T13:14:51.463",
+    OfferCreatedDate: "2024-11-28T13:14:51.463",
     StepInformation: null,
     ProviderName: "AWS",
     MaxFilesSize: 10485760,

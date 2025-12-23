@@ -38,10 +38,7 @@ export const MultiSelectField: React.FC<{
 
     return (
       <div className="flex items-center justify-between w-full h-3">
-        <span>
-          {option.label}
-          <span className="text-state-danger">{required ? " *" : ""}</span>
-        </span>
+        <span>{option.label}</span>
 
         {isSelected && <i className="pi pi-check text-sm"></i>}
       </div>

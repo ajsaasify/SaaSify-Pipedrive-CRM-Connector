@@ -1,23 +1,20 @@
-import InfoGrid from "@template/component/ui-components/pipdriveInfoGrid";
 import AccordionComponent from "@template/component/ui-components/PipedriveAccordion";
 import { useCoSellContext } from "@template/context/Cosell.context";
-import { useEffect } from "react";
 import {
   alertPopupSegment,
   overviewSectionData as segments,
-} from "../../../common/section/overview";
+} from "@template/common/section/overview";
 import {
   DisplayField,
   Tile,
 } from "@template/component/ui-components/detailview-components";
-import { labelMapper } from "@template/utils/labelMappers";
 import { useTranslation } from "react-i18next";
 
 export const OverViewCard: React.FC = () => {
   const { data } = useCoSellContext();
   const segmentData = segments(data || {});
-  const { LifeCycle } = data?.CoSellEntity || {};
-  const alertSegment = alertPopupSegment(data);
+
+  const _alertSegment = alertPopupSegment(data);
   const { t } = useTranslation();
   return (
     <AccordionComponent
@@ -30,13 +27,12 @@ export const OverViewCard: React.FC = () => {
             <>
               <div className="w-full">
                 <Tile>
-                  <h5>
-                    {t("awsCosell.inputLabelMapper.accordian.overview")}
-                  </h5>
+                  <h5>{t("awsCosell.inputLabelMapper.accordian.overview")}</h5>
                   <hr />
 
                   {segmentData.map((fields, idx) => (
                     <DisplayField
+                      // biome-ignore lint/suspicious/noArrayIndexKey: Index used as key
                       key={idx}
                       items={fields.map((item, i) => ({
                         ...item,

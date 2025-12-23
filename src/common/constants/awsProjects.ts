@@ -21,7 +21,7 @@ export type TagVarient =
   | "contrast"
   | null
   | undefined;
-  
+
 export const labelTagConfig: {
   match: LabelMatch;
   variant: TagVarient;

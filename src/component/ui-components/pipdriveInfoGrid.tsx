@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 
 interface InfoItem {
   label: string;
@@ -6,7 +6,7 @@ interface InfoItem {
 }
 
 interface InfoGridProps {
-  columns?: number;     // number of columns
+  columns?: number; // number of columns
   items: InfoItem[];
 }
 
@@ -16,6 +16,7 @@ const InfoGrid: React.FC<InfoGridProps> = ({ columns = 2, items }) => {
   return (
     <div className="grid">
       {items.map((item, idx) => (
+        // biome-ignore lint/suspicious/noArrayIndexKey: Index used as key
         <div key={idx} className={`col-${colSize} p-3`}>
           <div className="p-3 border-round surface-100">
             <div className="text-sm text-600">{item.label}</div>

@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@pipedrive/app-extensions-sdk": "^0.13.1",
+    "@saasify-ai/saasify-crm-libs": "github:SaaSify-AI/SaaSify-CRM-Libs",
     "axios": "^1.12.2",
     "date-fns": "^4.1.0",
     "exponential-backoff": "^3.1.3",

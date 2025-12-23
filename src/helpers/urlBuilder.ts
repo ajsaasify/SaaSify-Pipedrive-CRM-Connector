@@ -1,4 +1,4 @@
-import { PathParams, QueryParams } from "../types/urlBuilder";
+import type { PathParams, QueryParams } from "../types/urlBuilder";
 
 class URLBuilder {
   private baseUrl: string;
@@ -8,7 +8,7 @@ class URLBuilder {
   constructor(
     baseUrl: string,
     pathParams?: PathParams,
-    queryParams?: QueryParams
+    queryParams?: QueryParams,
   ) {
     this.baseUrl = baseUrl;
     this.pathParams = pathParams;
@@ -22,7 +22,7 @@ class URLBuilder {
       for (const [key, value] of Object.entries(this.pathParams)) {
         pathUrl = pathUrl.replace(
           new RegExp(`/:${key}(?=/|$)`, "g"),
-          `/${encodeURIComponent(String(value))}`
+          `/${encodeURIComponent(String(value))}`,
         );
       }
     }
@@ -37,7 +37,7 @@ class URLBuilder {
       .filter(([, value]) => value !== undefined)
       .map(
         ([key, value]) =>
-          `${encodeURIComponent(key)}=${encodeURIComponent(String(value))}`
+          `${encodeURIComponent(key)}=${encodeURIComponent(String(value))}`,
       )
       .join("&");
   }

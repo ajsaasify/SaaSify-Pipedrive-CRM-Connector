@@ -44,7 +44,7 @@ export const requestPayload = {
   privateOffers: "Private offers",
   defaultDeals: "saaSify deal",
   us: "United States",
-amp: {
+  amp: {
     dealType: "Service",
     private: "Private",
     ip: "IP Co-sell",

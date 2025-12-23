@@ -1,8 +1,7 @@
-import { InputBoxProps } from "@template/types/pipedrive-ui-interface";
+import type { InputBoxProps } from "@template/types/pipedrive-ui-interface";
 import { InputText } from "primereact/inputtext";
 import PDText from "./pipedrive-text";
 import { PDTextType } from "@template/enum/pipedrive.enum";
-import { error } from "console";
 const Input = ({
   label,
   info,
@@ -14,7 +13,6 @@ const Input = ({
   onInput,
   name,
   readOnly = false,
-  tooltip,
   error,
   validationMessage,
 }: InputBoxProps<string>) => {
@@ -34,7 +32,7 @@ const Input = ({
         placeholder={placeholder}
         className={`hub-input ${className}`}
         required={isrequired}
-        invalid={error ? true : false}
+        invalid={error}
         name={name}
         onInput={onInput}
         readOnly={readOnly}
