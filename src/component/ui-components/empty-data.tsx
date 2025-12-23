@@ -19,6 +19,7 @@ export const EmptyState = ({
   return (
     <div className="flex flex-col items-center text-center bg-gray-50 border border-dashed border-gray-300 rounded-xl p-5">
       {image && (
+        // biome-ignore lint/performance/noImgElement: Using standard img for now
         <img src={image} alt="empty" className="w-32 mb-5 opacity-90" />
       )}
 

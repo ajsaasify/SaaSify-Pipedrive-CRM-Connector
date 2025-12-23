@@ -8,5 +8,5 @@ export enum StatusState {
   ACTION_REQUIRED = "Action Required",
   ACCEPTED = "Accepted",
   PENDING = "Pending",
-  DRAFT="DRAFT"
+  DRAFT = "DRAFT",
 }

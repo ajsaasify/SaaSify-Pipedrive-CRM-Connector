@@ -1,9 +1,9 @@
-import { OptionTypes } from "../types/dropdown.options";
-import React from "react";
+import type { OptionTypes } from "../types/dropdown.options";
+import type React from "react";
 export const updateOptionValue = (
   options: { label?: string; value?: any }[],
   setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
-  key: string
+  key: string,
 ) => {
   setOptionValues((prev) => ({ ...prev, [key]: options }));
 };

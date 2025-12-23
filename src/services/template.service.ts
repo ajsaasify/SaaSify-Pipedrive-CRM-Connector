@@ -1,8 +1,5 @@
 import { MapRequest } from "@template/enum/request.enum";
-import type {
-  PathParams,
-  QueryParams,
-} from "../types/url.builder.interface";
+import type { PathParams, QueryParams } from "../types/url.builder.interface";
 import ApiService from "./httpClient.service";
 import URLBuilder from "@template/utils/url.builder";
 

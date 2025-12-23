@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { RC3CosellResponse } from "../../types/cosellResponse";
+import type { RC3CosellResponse } from "../../types/cosellResponse";
 import { getFullName, getOpportunityOwner } from "../../utils/globalHelper";
 import { awsConstants } from "../constants/awsCosellFieldMappings";
 import { getValue } from "./accept";

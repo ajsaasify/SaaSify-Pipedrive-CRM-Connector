@@ -44,7 +44,6 @@ const ContactDetailsForm = ({
             onChangeValue(labelMapper.contactLastName.name, value);
           }}
           placeholder={labelMapper.contactLastName.placeHolder}
-
         />
         <Input
           label={labelMapper.contactTitle.label}
@@ -65,7 +64,7 @@ const ContactDetailsForm = ({
           error={errorValue?.contactEmail}
           validationMessage={displayErrorMessage(
             errorValue?.contactEmail,
-            labelMapper.contactEmail.value
+            labelMapper.contactEmail.value,
           )}
           placeholder={labelMapper.contactEmail.placeHolder}
           value={formValue?.contactEmail}

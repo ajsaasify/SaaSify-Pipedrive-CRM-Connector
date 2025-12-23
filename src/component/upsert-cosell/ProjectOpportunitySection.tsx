@@ -1,4 +1,4 @@
-import { OptionTypes } from "@template/types/dropdown.options";
+import type { OptionTypes } from "@template/types/dropdown.options";
 import { Tile } from "../ui-components/detailview-components";
 import PDDatePicker from "../ui-components/PipedriveCalendar";
 import Input from "../ui-components/PipedriveInput";
@@ -6,7 +6,7 @@ import { MultiSelectField } from "../ui-components/PipedriveMultiselect";
 import { PDRadioGroup } from "../ui-components/PipedriveRadiobutton";
 import { labelMapper } from "./helper";
 import PDSelectField from "../ui-components/PipedriveDropdown";
-import { StatusState } from "@template/enum/status.enum";
+import type { StatusState } from "@template/enum/status.enum";
 import TextAreaFieldBox from "../ui-components/PipedriveTextarea";
 
 type ProjectOpportunitySectionProps = {
@@ -82,31 +82,27 @@ const ProjectOpportunitySection = ({
         name={labelMapper.awsCosell.name}
       ></PDRadioGroup>
       {primaryNeedsAWS === labelMapper.awsCosell.value.yes && (
-        <>
-          <MultiSelectField
-            info={labelMapper.awsCosell.description.select}
-            label={labelMapper.awsCosell.label}
-            name={labelMapper.awsCosell.name}
-            value={formValue?.awsCosell}
-            required={true}
-            placeholder={labelMapper.awsCosell.placeholder}
-            // display="chip"
-            onChange={(value) =>
-              onChangeValue(labelMapper.awsCosell.name, value)
-            }
-            readOnly={readOnlyField(labelMapper.awsCosell.name)}
-            error={errorValue?.awsCosell}
-            validationMessage={displayErrorMessage(
-              errorValue?.awsCosell,
-              labelMapper.awsCosell.validationMessage
-            )}
-            options={
-              optionValues?.specificAWSCoSellNeeds?.filter(
-                (value) => value?.label != labelMapper.awsCosell.value.no
-              ) || []
-            }
-          />
-        </>
+        <MultiSelectField
+          info={labelMapper.awsCosell.description.select}
+          label={labelMapper.awsCosell.label}
+          name={labelMapper.awsCosell.name}
+          value={formValue?.awsCosell}
+          required={true}
+          placeholder={labelMapper.awsCosell.placeholder}
+          // display="chip"
+          onChange={(value) => onChangeValue(labelMapper.awsCosell.name, value)}
+          readOnly={readOnlyField(labelMapper.awsCosell.name)}
+          error={errorValue?.awsCosell}
+          validationMessage={displayErrorMessage(
+            errorValue?.awsCosell,
+            labelMapper.awsCosell.validationMessage,
+          )}
+          options={
+            optionValues?.specificAWSCoSellNeeds?.filter(
+              (value) => value?.label !== labelMapper.awsCosell.value.no,
+            ) || []
+          }
+        />
       )}
       <h5>{labelMapper.opportunityType.listItemLabel}</h5>
       <PDRadioGroup
@@ -133,16 +129,16 @@ const ProjectOpportunitySection = ({
         onChange={(value) => {
           if (
             ![StatusState.ACTION_REQUIRED]?.includes(
-              LifeCycle?.ReviewStatus as StatusState
+              LifeCycle?.ReviewStatus as StatusState,
             )
           ) {
             onChangeValue(labelMapper.opportunityType.name, value);
           }
         }}
       />
-      {(formValue?.opportunityType ==
+      {(formValue?.opportunityType ===
         labelMapper.opportunityType.value.flatRenewal ||
-        formValue?.opportunityType ==
+        formValue?.opportunityType ===
           labelMapper.opportunityType.value.expansion) && (
         <Input
           label={labelMapper.relatedOpportunityIndentifier.label}
@@ -152,7 +148,7 @@ const ProjectOpportunitySection = ({
           onChange={(value) => {
             onChangeValue(
               labelMapper.relatedOpportunityIndentifier.name,
-              value
+              value,
             );
           }}
           info={labelMapper.relatedOpportunityIndentifier.description}
@@ -160,10 +156,10 @@ const ProjectOpportunitySection = ({
           error={errorValue?.relatedOpportunityIndentifier}
           validationMessage={displayErrorMessage(
             errorValue.relatedOpportunityIndentifier,
-            labelMapper.relatedOpportunityIndentifier.validationMessage
+            labelMapper.relatedOpportunityIndentifier.validationMessage,
           )}
           readOnly={readOnlyField(
-            labelMapper.relatedOpportunityIndentifier.name
+            labelMapper.relatedOpportunityIndentifier.name,
           )}
         />
       )}
@@ -181,7 +177,7 @@ const ProjectOpportunitySection = ({
         error={errorValue?.partnerProjectTitle}
         validationMessage={displayErrorMessage(
           errorValue?.partnerProjectTitle,
-          labelMapper.partnerProjectTitle.validationMessage
+          labelMapper.partnerProjectTitle.validationMessage,
         )}
       />
       <MultiSelectField
@@ -196,7 +192,7 @@ const ProjectOpportunitySection = ({
         error={errorValue?.salesActivities}
         validationMessage={displayErrorMessage(
           errorValue?.salesActivities,
-          labelMapper.salesActivities.validationMessage
+          labelMapper.salesActivities.validationMessage,
         )}
         info={labelMapper.salesActivities.discription}
         onChange={(value) => {
@@ -215,7 +211,7 @@ const ProjectOpportunitySection = ({
         rows={3}
         error={errorValue?.customerBusinessProblem}
         validationMessage={validationMessage(
-          labelMapper.customerBusinessProblem.name
+          labelMapper.customerBusinessProblem.name,
         )}
         readOnly={readOnlyField(labelMapper.customerBusinessProblem.name)}
         onChange={(value) => {
@@ -278,7 +274,7 @@ const ProjectOpportunitySection = ({
         error={errorValue?.useCase}
         validationMessage={displayErrorMessage(
           errorValue?.useCase,
-          labelMapper.useCase.validationMessage
+          labelMapper.useCase.validationMessage,
         )}
         required={true}
         options={optionValues?.useCase || []}
@@ -295,7 +291,7 @@ const ProjectOpportunitySection = ({
         error={errorValue?.deliveryModel}
         validationMessage={displayErrorMessage(
           errorValue?.deliveryModel,
-          labelMapper.deliveryModel.validationMessage
+          labelMapper.deliveryModel.validationMessage,
         )}
         readOnly={readOnlyField(labelMapper.deliveryModel.name)}
         options={optionValues?.deliveryModel || []}
@@ -311,20 +307,22 @@ const ProjectOpportunitySection = ({
         error={errorValue?.estimatedAWSRecurringRevenue}
         validationMessage={displayErrorMessage(
           errorValue?.estimatedAWSRecurringRevenue,
-          labelMapper.estimatedAWSRecurringRevenue.valid
+          labelMapper.estimatedAWSRecurringRevenue.valid,
         )}
         onInput={(value) => {
-          value
-            ? (labelMapper.estimatedAWSRecurringRevenue.valid =
-                labelMapper.estimatedAWSRecurringRevenue.validation)
-            : (labelMapper.estimatedAWSRecurringRevenue.valid =
-                labelMapper.estimatedAWSRecurringRevenue.validationMessage);
+          if (value) {
+            labelMapper.estimatedAWSRecurringRevenue.valid =
+              labelMapper.estimatedAWSRecurringRevenue.validation;
+          } else {
+            labelMapper.estimatedAWSRecurringRevenue.valid =
+              labelMapper.estimatedAWSRecurringRevenue.validationMessage;
+          }
           setErrorValue((prev: any) => ({
             ...prev,
             estimatedAWSRecurringRevenue: !validatePureNumber(
               value,
               true,
-              false
+              false,
             ),
           }));
         }}
@@ -341,7 +339,7 @@ const ProjectOpportunitySection = ({
         error={errorValue?.targetCloseDate}
         validationMessage={displayErrorMessage(
           errorValue?.targetCloseDate,
-          labelMapper.targetCloseDate.validation
+          labelMapper.targetCloseDate.validation,
         )}
         placeholder={labelMapper.targetCloseDate.placeHolder}
         minDate={

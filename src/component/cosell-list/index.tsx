@@ -1,13 +1,11 @@
 "use client";
-import { CoSellItem } from "@template/types/api/getListCosellAssociateCrm.t";
+import type { CoSellItem } from "@template/types/api/getListCosellAssociateCrm.t";
 import { useEffect, useRef, useState } from "react";
 import PDAdvancedTable from "../ui-components/PipedriveTable";
-import { PDColumnConfig } from "@template/types/pipedrive-table-interface";
-import { DataTablePageEvent } from "primereact/datatable";
+import type { DataTablePageEvent } from "primereact/datatable";
 import initSdk from "@template/helpers/modelInit";
 import { cosellTableColumns } from "./helper";
 import { getCosellsAPI } from "./apiHandler";
-import { useRouter } from "next/router";
 import { useCoSellContext } from "@template/context/Cosell.context";
 import { ModelType } from "@template/enum/pipedrive.enum";
 import { useTranslation } from "react-i18next";
@@ -23,6 +21,7 @@ export const CosellList = () => {
   const [totalRecords, setTotalRecords] = useState(0);
   const [loading, setLoading] = useState(false);
   const [currentCosell, setCurrentCosell] = useState<CoSellItem | null>(null);
+  // biome-ignore lint/style/noNonNullAssertion: Required for RefObject typing
   const menuRef = useRef<Menu>(null!);
   const { t } = useTranslation();
   const columns = cosellTableColumns({
@@ -30,14 +29,14 @@ export const CosellList = () => {
     menuRef,
     setCurrentCosell,
   });
-  const [sdk, setSdk] = useState<any>();
+  const [_sdk, setSdk] = useState<any>();
   const { setCurrentPage } = useCoSellContext();
 
   useEffect(() => {
     const sdk = initSdk(window.outerWidth, window.outerHeight);
     setSdk(sdk);
     getCosellsAPI(rows, first, setLoading, setCosells, setTotalRecords);
-  }, [window]);
+  }, [first, rows]);
 
   useEffect(() => {
     getCosellsAPI(rows, first, setLoading, setCosells, setTotalRecords);

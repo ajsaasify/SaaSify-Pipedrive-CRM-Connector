@@ -1,7 +1,7 @@
 export const privateOffersSectionName = {
   basicInfo: {
     title: "Private Offer Details",
-    cppoTitle : "Authorization Details",
+    cppoTitle: "Authorization Details",
     tableHeader: {
       isvNotification: "ISV Notification Recipients",
       metaData: "Custom Metadata",
@@ -64,13 +64,13 @@ export const privateOffersSectionName = {
   },
   provider: {
     cppo: "CPPO",
-  }
+  },
 };
 
 export const defaultResponseText = {
-  FPS : "Flexible payment schedule",
-  CUC : "Contract Duration Contract usage(QTY)",
-  STD : "Standard",
-  MUSD : "Month Rate (USD)",
-  UNITS : "units",
-}
+  FPS: "Flexible payment schedule",
+  CUC: "Contract Duration Contract usage(QTY)",
+  STD: "Standard",
+  MUSD: "Month Rate (USD)",
+  UNITS: "units",
+};

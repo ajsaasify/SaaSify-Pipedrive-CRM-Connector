@@ -54,7 +54,8 @@ export const statusType = [
   {
     label: "Pending",
     value: "Pending",
-    Entitylabel: "AWS Referral+AWS Multi-Partner Outbound+AWS Multi-Partner Inbound+AWS",
+    Entitylabel:
+      "AWS Referral+AWS Multi-Partner Outbound+AWS Multi-Partner Inbound+AWS",
   },
   {
     label: "Pending Submission",

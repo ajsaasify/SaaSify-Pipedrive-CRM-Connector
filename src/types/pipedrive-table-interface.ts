@@ -1,5 +1,5 @@
-import { ColumnFilterElementTemplateOptions } from "primereact/column";
-import {
+import type { ColumnFilterElementTemplateOptions } from "primereact/column";
+import type {
   DataTableFilterMeta,
   DataTablePageEvent,
   DataTableSortEvent,
@@ -29,7 +29,7 @@ export type PDColumnConfig = {
   options?: any[];
   filterPlaceholder?: string;
   filterElement?: (
-    options: ColumnFilterElementTemplateOptions
+    options: ColumnFilterElementTemplateOptions,
   ) => React.ReactNode;
   alignFrozen?: "left" | "right";
   frozen?: boolean;
@@ -59,6 +59,6 @@ export type PDAdvancedTableProps = {
   // Filters
   enableGlobalFilter?: boolean;
   globalFilterFields?: string[];
-  emptyMessage?:React.ReactNode;
-  showPaginator?:boolean;
+  emptyMessage?: React.ReactNode;
+  showPaginator?: boolean;
 };

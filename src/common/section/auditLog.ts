@@ -1,4 +1,4 @@
-import { Activitylog } from "../../types/activity";
+import type { Activitylog } from "../../types/activity";
 import {
   formatToLocalTime,
   getResponseError,

@@ -1,4 +1,4 @@
-import { OptionTypes } from "@template/types/dropdown.options";
+import type { OptionTypes } from "@template/types/dropdown.options";
 import PDSelectField from "../ui-components/PipedriveDropdown";
 import Input from "../ui-components/PipedriveInput";
 import { labelMapper } from "./helper";
@@ -63,14 +63,14 @@ const CustomerDetailsForm = ({
           error={errorValue?.customerCompanyName}
           validationMessage={displayErrorMessage(
             errorValue?.customerCompanyName,
-            labelMapper.customerCompanyName.validationMessage
+            labelMapper.customerCompanyName.validationMessage,
           )}
           placeholder={labelMapper.customerCompanyName.placeHolder}
           onChange={(value) => {
             onChangeValue(labelMapper.customerCompanyName.name, value);
           }}
         />
-        {formValue?.nationalSecurity ==
+        {formValue?.nationalSecurity ===
           labelMapper.nationSecurities.defaultValue.no && (
           <Input
             label={labelMapper.customerWebsite.label}
@@ -79,11 +79,10 @@ const CustomerDetailsForm = ({
             isrequired={true}
             value={formValue.customerWebsite}
             error={errorValue.customerWebsite}
-            
             placeholder={labelMapper.customerWebsite.placeHolder}
             validationMessage={displayErrorMessage(
               errorValue?.customerWebsite,
-              labelMapper.customerWebsite.validationMessage
+              labelMapper.customerWebsite.validationMessage,
             )}
             readOnly={readOnlyField(labelMapper.customerWebsite.name)}
             onChange={(value) => {
@@ -103,7 +102,7 @@ const CustomerDetailsForm = ({
           error={errorValue?.country}
           validationMessage={displayErrorMessage(
             errorValue?.country,
-            labelMapper?.country?.validationMessage
+            labelMapper?.country?.validationMessage,
           )}
           onChange={(value) => {
             onChangeValue(labelMapper.country.name, value);
@@ -119,12 +118,12 @@ const CustomerDetailsForm = ({
           error={errorValue.industryVertical}
           validationMessage={displayErrorMessage(
             errorValue?.industryVertical,
-            labelMapper.industryVertical.validationMessage
+            labelMapper.industryVertical.validationMessage,
           )}
           options={optionValues?.industry || []}
           onChange={(value: any) => {
             onChangeValue(labelMapper.industryVertical.name, value);
-            if (value != labelMapper.nationSecurities.value) {
+            if (value !== labelMapper.nationSecurities.value) {
               setFormValue((prev: any) => ({
                 ...prev,
                 nationalSecurity: labelMapper.nationSecurities.defaultValue.no,
@@ -132,8 +131,8 @@ const CustomerDetailsForm = ({
             }
           }}
         />
-        {formValue?.country == labelMapper.state.value &&
-          formValue?.nationalSecurity ==
+        {formValue?.country === labelMapper.state.value &&
+          formValue?.nationalSecurity ===
             labelMapper.nationSecurities.defaultValue.no && (
             <PDSelectField
               label={labelMapper.state.label}
@@ -145,7 +144,7 @@ const CustomerDetailsForm = ({
               error={errorValue.state}
               validationMessage={displayErrorMessage(
                 errorValue?.state,
-                labelMapper?.state?.validationMessage
+                labelMapper?.state?.validationMessage,
               )}
               options={optionValues?.state || []}
               onChange={(value) => {
@@ -155,20 +154,18 @@ const CustomerDetailsForm = ({
           )}
         {formValue?.nationalSecurity ===
           labelMapper.nationSecurities.defaultValue.no && (
-          <>
-            <Input
+          <Input
             placeholder={labelMapper.city.placeHolder}
-              label={labelMapper.city.label}
-              name={labelMapper.city.name}
-              readOnly={readOnlyField(labelMapper.city.name)}
-              value={formValue.city}
-              onChange={(value) => {
-                onChangeValue(labelMapper.city.name, value);
-              }}
-            />
-          </>
+            label={labelMapper.city.label}
+            name={labelMapper.city.name}
+            readOnly={readOnlyField(labelMapper.city.name)}
+            value={formValue.city}
+            onChange={(value) => {
+              onChangeValue(labelMapper.city.name, value);
+            }}
+          />
         )}
-        {formValue?.nationalSecurity ==
+        {formValue?.nationalSecurity ===
           labelMapper.nationSecurities.defaultValue.no && (
           <Input
             label={labelMapper.streetAddress.label}
@@ -183,7 +180,7 @@ const CustomerDetailsForm = ({
           />
         )}
       </div>
-      {formValue?.industryVertical == labelMapper.industryVertical.value && (
+      {formValue?.industryVertical === labelMapper.industryVertical.value && (
         <Input
           isrequired={true}
           label={labelMapper.industryOther.label}
@@ -192,7 +189,7 @@ const CustomerDetailsForm = ({
           error={errorValue.industryOther}
           validationMessage={displayErrorMessage(
             errorValue?.industryOther,
-            labelMapper?.industryOther?.validationMessage
+            labelMapper?.industryOther?.validationMessage,
           )}
           value={formValue?.industryOther}
           onChange={(value) => {
@@ -200,7 +197,7 @@ const CustomerDetailsForm = ({
           }}
         />
       )}
-      {isPostalCodeRequired(formValue, optionValues) ? (
+      {isPostalCodeRequired(formValue, optionValues) && (
         <Input
           label={labelMapper.postalCode.label}
           name={labelMapper.postalCode.name}
@@ -212,14 +209,12 @@ const CustomerDetailsForm = ({
           error={errorValue?.postalCode}
           validationMessage={displayErrorMessage(
             errorValue?.postalCode,
-            labelMapper.postalCode.validationMessage
+            labelMapper.postalCode.validationMessage,
           )}
           onChange={(value) => {
             onChangeValue(labelMapper.postalCode.name, value);
           }}
         />
-      ) : (
-        <></>
       )}
     </>
   );

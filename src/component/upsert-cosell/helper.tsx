@@ -1,4 +1,4 @@
-import { TFunction } from "i18next";
+import type { TFunction } from "i18next";
 import { t } from "i18next";
 const labels = (t: TFunction) => {
   return {
@@ -14,7 +14,7 @@ const labels = (t: TFunction) => {
       additional: t("awsCosell.inputLabelMapper.accordian.additional"),
       contact: t("awsCosell.inputLabelMapper.accordian.contact"),
       partnerSalesContact: t(
-        "awsCosell.inputLabelMapper.accordian.partnerSalesContact"
+        "awsCosell.inputLabelMapper.accordian.partnerSalesContact",
       ),
     },
     customerDuns: {
@@ -23,7 +23,7 @@ const labels = (t: TFunction) => {
       discription: t("awsCosell.inputLabelMapper.customerDuns.description"),
       validation: t("awsCosell.inputLabelMapper.customerDuns.validation"),
       validationMessage: t(
-        "awsCosell.inputLabelMapper.customerDuns.validationMessage"
+        "awsCosell.inputLabelMapper.customerDuns.validationMessage",
       ),
       toopTip: t("awsCosell.inputLabelMapper.customerDuns.toopTip"),
       placeHolder: t("awsCosell.inputLabelMapper.customerDuns.placeHolder"),
@@ -32,13 +32,13 @@ const labels = (t: TFunction) => {
       label: t("awsCosell.inputLabelMapper.customerCompanyName.label"),
       name: "customerCompanyName",
       validationMessage: t(
-        "awsCosell.inputLabelMapper.customerCompanyName.validationMessage"
+        "awsCosell.inputLabelMapper.customerCompanyName.validationMessage",
       ),
       validation: t(
-        "awsCosell.inputLabelMapper.customerCompanyName.validation"
+        "awsCosell.inputLabelMapper.customerCompanyName.validation",
       ),
       placeHolder: t(
-        "awsCosell.inputLabelMapper.customerCompanyName.placeHolder"
+        "awsCosell.inputLabelMapper.customerCompanyName.placeHolder",
       ),
     },
     customerWebsite: {
@@ -46,7 +46,7 @@ const labels = (t: TFunction) => {
       name: "customerWebsite",
       placeHolder: t("awsCosell.inputLabelMapper.customerWebsite.placeHolder"),
       validationMessage: t(
-        "awsCosell.inputLabelMapper.customerWebsite.validationMessage"
+        "awsCosell.inputLabelMapper.customerWebsite.validationMessage",
       ),
     },
     industryVertical: {
@@ -54,7 +54,7 @@ const labels = (t: TFunction) => {
       name: "industryVertical",
       value: "Other",
       validationMessage: t(
-        "awsCosell.inputLabelMapper.industryVertical.validationMessage"
+        "awsCosell.inputLabelMapper.industryVertical.validationMessage",
       ),
       placeHolder: t("awsCosell.inputLabelMapper.industryVertical.placeHolder"),
     },
@@ -70,14 +70,14 @@ const labels = (t: TFunction) => {
       label: t("awsCosell.inputLabelMapper.industryOther.label"),
       name: "industryOther",
       validationMessage: t(
-        "awsCosell.inputLabelMapper.industryOther.validationMessage"
+        "awsCosell.inputLabelMapper.industryOther.validationMessage",
       ),
     },
     streetAddress: {
       label: t("awsCosell.inputLabelMapper.streetAddress.label"),
       name: "streetAddress",
       validationMessage: t(
-        "awsCosell.inputLabelMapper.streetAddress.validationMessage"
+        "awsCosell.inputLabelMapper.streetAddress.validationMessage",
       ),
       placeHolder: t("awsCosell.inputLabelMapper.streetAddress.placeHolder"),
     },
@@ -85,7 +85,7 @@ const labels = (t: TFunction) => {
       label: t("awsCosell.inputLabelMapper.state.label"),
       name: "state",
       validationMessage: t(
-        "awsCosell.inputLabelMapper.state.validationMessage"
+        "awsCosell.inputLabelMapper.state.validationMessage",
       ),
       placeholder: t("awsCosell.inputLabelMapper.state.placeHolder"),
       value: "United States",
@@ -94,7 +94,7 @@ const labels = (t: TFunction) => {
       label: t("awsCosell.inputLabelMapper.country.label"),
       name: "country",
       validationMessage: t(
-        "awsCosell.inputLabelMapper.country.validationMessage"
+        "awsCosell.inputLabelMapper.country.validationMessage",
       ),
       placeHolder: t("awsCosell.inputLabelMapper.country.placeHolder"),
     },
@@ -124,12 +124,12 @@ const labels = (t: TFunction) => {
       name: "awsCosell",
       placeholder: t("awsCosell.inputLabelMapper.awsCosell.placeholder"),
       validationMessage: t(
-        "awsCosell.inputLabelMapper.awsCosell.validationMessage"
+        "awsCosell.inputLabelMapper.awsCosell.validationMessage",
       ),
     },
     opportunityType: {
       listItemLabel: t(
-        "awsCosell.inputLabelMapper.opportunityType.listItemLabel"
+        "awsCosell.inputLabelMapper.opportunityType.listItemLabel",
       ),
       name: "opportunityType",
       value: {
@@ -139,13 +139,13 @@ const labels = (t: TFunction) => {
       },
       description: {
         expansion: t(
-          "awsCosell.inputLabelMapper.opportunityType.description.expansion"
+          "awsCosell.inputLabelMapper.opportunityType.description.expansion",
         ),
         netNewBusiness: t(
-          "awsCosell.inputLabelMapper.opportunityType.description.netNewBusiness"
+          "awsCosell.inputLabelMapper.opportunityType.description.netNewBusiness",
         ),
         flatRenewal: t(
-          "awsCosell.inputLabelMapper.opportunityType.description.flatRenewal"
+          "awsCosell.inputLabelMapper.opportunityType.description.flatRenewal",
         ),
       },
     },
@@ -153,10 +153,10 @@ const labels = (t: TFunction) => {
       label: t("awsCosell.inputLabelMapper.partnerPrimaryNeedAction.label"),
       discription: {
         awsSupport: t(
-          "awsCosell.inputLabelMapper.partnerPrimaryNeedAction.discription.awsSupport"
+          "awsCosell.inputLabelMapper.partnerPrimaryNeedAction.discription.awsSupport",
         ),
         awsNotSupport: t(
-          "awsCosell.inputLabelMapper.partnerPrimaryNeedAction.discription.awsNotSupport"
+          "awsCosell.inputLabelMapper.partnerPrimaryNeedAction.discription.awsNotSupport",
         ),
       },
       value: {
@@ -166,34 +166,34 @@ const labels = (t: TFunction) => {
     },
     relatedOpportunityIndentifier: {
       label: t(
-        "awsCosell.inputLabelMapper.relatedOpportunityIndentifier.label"
+        "awsCosell.inputLabelMapper.relatedOpportunityIndentifier.label",
       ),
       name: "relatedOpportunityIndentifier",
       description: t(
-        "awsCosell.inputLabelMapper.relatedOpportunityIndentifier.description"
+        "awsCosell.inputLabelMapper.relatedOpportunityIndentifier.description",
       ),
       validationMessage: t(
-        "awsCosell.inputLabelMapper.relatedOpportunityIndentifier.validationMessage"
+        "awsCosell.inputLabelMapper.relatedOpportunityIndentifier.validationMessage",
       ),
       placeHolder: t(
-        "awsCosell.inputLabelMapper.relatedOpportunityIndentifier.placeHolder"
+        "awsCosell.inputLabelMapper.relatedOpportunityIndentifier.placeHolder",
       ),
     },
     partnerProjectTitle: {
       label: t("awsCosell.inputLabelMapper.partnerProjectTitle.label"),
       name: "partnerProjectTitle",
       validationMessage: t(
-        "awsCosell.inputLabelMapper.partnerProjectTitle.validationMessage"
+        "awsCosell.inputLabelMapper.partnerProjectTitle.validationMessage",
       ),
       placeHolder: t(
-        "awsCosell.inputLabelMapper.partnerProjectTitle.placeHolder"
+        "awsCosell.inputLabelMapper.partnerProjectTitle.placeHolder",
       ),
     },
     salesActivities: {
       label: t("awsCosell.inputLabelMapper.salesActivities.label"),
       name: "salesActivities",
       validationMessage: t(
-        "awsCosell.inputLabelMapper.salesActivities.validationMessage"
+        "awsCosell.inputLabelMapper.salesActivities.validationMessage",
       ),
       placeHolder: t("awsCosell.inputLabelMapper.salesActivities.placeHolder"),
       discription: t("awsCosell.inputLabelMapper.salesActivities.description"),
@@ -202,16 +202,16 @@ const labels = (t: TFunction) => {
       label: t("awsCosell.inputLabelMapper.customerBusinessProblem.label"),
       name: "customerBusinessProblem",
       discription: t(
-        "awsCosell.inputLabelMapper.customerBusinessProblem.description"
+        "awsCosell.inputLabelMapper.customerBusinessProblem.description",
       ),
       validation: t(
-        "awsCosell.inputLabelMapper.customerBusinessProblem.validation"
+        "awsCosell.inputLabelMapper.customerBusinessProblem.validation",
       ),
       validationMessage: t(
-        "awsCosell.inputLabelMapper.customerBusinessProblem.validationMessage"
+        "awsCosell.inputLabelMapper.customerBusinessProblem.validationMessage",
       ),
       placeHolder: t(
-        "awsCosell.inputLabelMapper.customerBusinessProblem.placeHolder"
+        "awsCosell.inputLabelMapper.customerBusinessProblem.placeHolder",
       ),
     },
     solutionsOffered: {
@@ -220,7 +220,7 @@ const labels = (t: TFunction) => {
       name: "solutionsOffered",
       validation: t("awsCosell.inputLabelMapper.solutionsOffered.validation"),
       validationMessage: t(
-        "awsCosell.inputLabelMapper.solutionsOffered.validationMessage"
+        "awsCosell.inputLabelMapper.solutionsOffered.validationMessage",
       ),
       placeHolder: t("awsCosell.inputLabelMapper.solutionsOffered.placeHolder"),
     },
@@ -230,7 +230,7 @@ const labels = (t: TFunction) => {
       description: t("awsCosell.inputLabelMapper.awsProducts.description"),
       validation: t("awsCosell.inputLabelMapper.awsProducts.validation"),
       validationMessage: t(
-        "awsCosell.inputLabelMapper.awsProducts.validationMessage"
+        "awsCosell.inputLabelMapper.awsProducts.validationMessage",
       ),
       placeHolder: t("awsCosell.inputLabelMapper.awsProducts.placeHolder"),
     },
@@ -240,7 +240,7 @@ const labels = (t: TFunction) => {
       description: t("awsCosell.inputLabelMapper.nextStep.description"),
       validation: t("awsCosell.inputLabelMapper.nextStep.validation"),
       validationMessage: t(
-        "awsCosell.inputLabelMapper.nextStep.validationMessage"
+        "awsCosell.inputLabelMapper.nextStep.validationMessage",
       ),
       maxLength: 255,
       placeHolder: t("awsCosell.inputLabelMapper.nextStep.placeHolder"),
@@ -249,7 +249,7 @@ const labels = (t: TFunction) => {
       label: t("awsCosell.inputLabelMapper.useCase.label"),
       name: "useCase",
       validationMessage: t(
-        "awsCosell.inputLabelMapper.useCase.validationMessage"
+        "awsCosell.inputLabelMapper.useCase.validationMessage",
       ),
       placeHolder: t("awsCosell.inputLabelMapper.useCase.placeHolder"),
     },
@@ -257,7 +257,7 @@ const labels = (t: TFunction) => {
       label: t("awsCosell.inputLabelMapper.deliveryModel.label"),
       description: t("awsCosell.inputLabelMapper.deliveryModel.description"),
       validationMessage: t(
-        "awsCosell.inputLabelMapper.deliveryModel.validationMessage"
+        "awsCosell.inputLabelMapper.deliveryModel.validationMessage",
       ),
       name: "deliveryModel",
     },
@@ -265,13 +265,13 @@ const labels = (t: TFunction) => {
       name: "estimatedAWSRecurringRevenue",
       label: t("awsCosell.inputLabelMapper.estimatedAWSRecurringRevenue.label"),
       validationMessage: t(
-        "awsCosell.inputLabelMapper.estimatedAWSRecurringRevenue.validationMessage"
+        "awsCosell.inputLabelMapper.estimatedAWSRecurringRevenue.validationMessage",
       ),
       placeHolder: t(
-        "awsCosell.inputLabelMapper.estimatedAWSRecurringRevenue.placeHolder"
+        "awsCosell.inputLabelMapper.estimatedAWSRecurringRevenue.placeHolder",
       ),
       validation: t(
-        "awsCosell.inputLabelMapper.estimatedAWSRecurringRevenue.validation"
+        "awsCosell.inputLabelMapper.estimatedAWSRecurringRevenue.validation",
       ),
       valid: t("awsCosell.inputLabelMapper.estimatedAWSRecurringRevenue.valid"),
     },
@@ -279,12 +279,12 @@ const labels = (t: TFunction) => {
       name: "targetCloseDate",
       label: t("awsCosell.inputLabelMapper.targetCloseDate.label"),
       validationMessage: t(
-        "awsCosell.inputLabelMapper.targetCloseDate.validationMessage"
+        "awsCosell.inputLabelMapper.targetCloseDate.validationMessage",
       ),
       placeHolder: t("awsCosell.inputLabelMapper.targetCloseDate.placeHolder"),
       validation: t("awsCosell.inputLabelMapper.targetCloseDate.validation"),
       invalidMessage: t(
-        "awsCosell.inputLabelMapper.targetCloseDate.invalidMessage"
+        "awsCosell.inputLabelMapper.targetCloseDate.invalidMessage",
       ),
     },
     apnProgram: {
@@ -301,7 +301,7 @@ const labels = (t: TFunction) => {
       label: t("awsCosell.inputLabelMapper.marketingCampaign.label"),
       name: "marketingCampaign",
       placeHolder: t(
-        "awsCosell.inputLabelMapper.marketingCampaign.placeHolder"
+        "awsCosell.inputLabelMapper.marketingCampaign.placeHolder",
       ),
     },
     marketingUseCase: {
@@ -313,7 +313,7 @@ const labels = (t: TFunction) => {
       label: t("awsCosell.inputLabelMapper.marketingActivityChannel.label"),
       name: "marketingActivityChannel",
       placeHolder: t(
-        "awsCosell.inputLabelMapper.marketingActivityChannel.placeHolder"
+        "awsCosell.inputLabelMapper.marketingActivityChannel.placeHolder",
       ),
     },
     isMarketingfunds: {
@@ -325,10 +325,10 @@ const labels = (t: TFunction) => {
       label: t("awsCosell.inputLabelMapper.crmUniqueIdentifier.label"),
       name: "crmUniqueIdentifier",
       validationMessage: t(
-        "awsCosell.inputLabelMapper.crmUniqueIdentifier.validationMessage"
+        "awsCosell.inputLabelMapper.crmUniqueIdentifier.validationMessage",
       ),
       placeHolder: t(
-        "awsCosell.inputLabelMapper.crmUniqueIdentifier.placeHolder"
+        "awsCosell.inputLabelMapper.crmUniqueIdentifier.placeHolder",
       ),
     },
     competitiveTracking: {
@@ -336,7 +336,7 @@ const labels = (t: TFunction) => {
       value: "*Other",
       label: t("awsCosell.inputLabelMapper.competitiveTracking.label"),
       placeHolder: t(
-        "awsCosell.inputLabelMapper.competitiveTracking.placeHolder"
+        "awsCosell.inputLabelMapper.competitiveTracking.placeHolder",
       ),
     },
     otherCompetitors: {
@@ -344,7 +344,7 @@ const labels = (t: TFunction) => {
       name: "otherCompetitors",
       value: "*Other",
       validationMessage: t(
-        "awsCosell.inputLabelMapper.otherCompetitors.validationMessage"
+        "awsCosell.inputLabelMapper.otherCompetitors.validationMessage",
       ),
       placeHolder: t("awsCosell.inputLabelMapper.otherCompetitors.placeHolder"),
     },
@@ -353,10 +353,10 @@ const labels = (t: TFunction) => {
       name: "awsAccountId",
       description: t("awsCosell.inputLabelMapper.awsAccountId.description"),
       validationMessage: t(
-        "awsCosell.inputLabelMapper.awsAccountId.validationMessage"
+        "awsCosell.inputLabelMapper.awsAccountId.validationMessage",
       ),
       validationErrorMessage: t(
-        "awsCosell.inputLabelMapper.awsAccountId.validationMessage"
+        "awsCosell.inputLabelMapper.awsAccountId.validationMessage",
       ),
       placeHolder: t("awsCosell.inputLabelMapper.awsAccountId.placeHolder"),
     },
@@ -364,14 +364,14 @@ const labels = (t: TFunction) => {
       label: t("awsCosell.inputLabelMapper.additonalComments.label"),
       name: "additonalComments",
       description: t(
-        "awsCosell.inputLabelMapper.additonalComments.description"
+        "awsCosell.inputLabelMapper.additonalComments.description",
       ),
       placeHolder: t(
-        "awsCosell.inputLabelMapper.additonalComments.placeHolder"
+        "awsCosell.inputLabelMapper.additonalComments.placeHolder",
       ),
       validation: t("awsCosell.inputLabelMapper.additonalComments.validation"),
       validationMessage: t(
-        "awsCosell.inputLabelMapper.additonalComments.validationMessage"
+        "awsCosell.inputLabelMapper.additonalComments.validationMessage",
       ),
     },
     contactFirstName: {
@@ -404,14 +404,14 @@ const labels = (t: TFunction) => {
       label: t("awsCosell.inputLabelMapper.primaryContactFirstName.label"),
       name: "primaryContactFirstName",
       placeHolder: t(
-        "awsCosell.inputLabelMapper.primaryContactFirstName.placeHolder"
+        "awsCosell.inputLabelMapper.primaryContactFirstName.placeHolder",
       ),
     },
     primaryContactLastName: {
       label: t("awsCosell.inputLabelMapper.primaryContactLastName.label"),
       name: "primaryContactLastName",
       placeHolder: t(
-        "awsCosell.inputLabelMapper.primaryContactLastName.placeHolder"
+        "awsCosell.inputLabelMapper.primaryContactLastName.placeHolder",
       ),
     },
     primaryContactEmail: {
@@ -419,21 +419,21 @@ const labels = (t: TFunction) => {
       name: "primaryContactEmail",
       value: "Contact E-mail is not valid",
       placeHolder: t(
-        "awsCosell.inputLabelMapper.primaryContactEmail.placeHolder"
+        "awsCosell.inputLabelMapper.primaryContactEmail.placeHolder",
       ),
     },
     primaryContactPhone: {
       label: t("awsCosell.inputLabelMapper.primaryContactPhone.label"),
       name: "primaryContactPhone",
       placeHolder: t(
-        "awsCosell.inputLabelMapper.primaryContactPhone.placeHolder"
+        "awsCosell.inputLabelMapper.primaryContactPhone.placeHolder",
       ),
     },
     primaryContactTitle: {
       label: t("awsCosell.inputLabelMapper.primaryContactTitle.label"),
       name: "primaryContactTitle",
       placeHolder: t(
-        "awsCosell.inputLabelMapper.primaryContactTitle.placeHolder"
+        "awsCosell.inputLabelMapper.primaryContactTitle.placeHolder",
       ),
     },
     contactDescription: t("awsCosell.inputLabelMapper.contactDescription"),
@@ -443,7 +443,7 @@ const labels = (t: TFunction) => {
     },
     marketingSourceIsMarketingFundsAction: {
       label: t(
-        "awsCosell.inputLabelMapper.marketingSourceIsMarketingFundsAction.label"
+        "awsCosell.inputLabelMapper.marketingSourceIsMarketingFundsAction.label",
       ),
     },
     projectDetails: {

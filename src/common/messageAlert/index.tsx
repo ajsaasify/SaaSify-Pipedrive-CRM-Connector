@@ -21,22 +21,26 @@ export function getInfoAlert(message: string): AlertNotification {
 }
 
 const getAlert = (message: string, type: string): AlertNotification => {
-  const title = {
-    [AlertType.ERROR]: AlertTitle.ERROR,
-    [AlertType.SUCCESS]: AlertTitle.SUCCESS,
-    [AlertType.INFO]: AlertTitle.INFO,
-  }[type] || AlertTitle.INFO;
+  const title =
+    {
+      [AlertType.ERROR]: AlertTitle.ERROR,
+      [AlertType.SUCCESS]: AlertTitle.SUCCESS,
+      [AlertType.INFO]: AlertTitle.INFO,
+    }[type] || AlertTitle.INFO;
 
   const errorMessage = message.includes(ResponseStatus.SERVER_ERROR)
     ? generateMessage.errorMessage
     : message.includes(ResponseStatus.GATEWAY_ERROR)
-    ? generateMessage.gatewayMessage
-    : message;
+      ? generateMessage.gatewayMessage
+      : message;
 
   return {
-    title: message.includes(ResponseStatus.GATEWAY_ERROR) ? AlertTitle.INFO : title,
-    type: message.includes(ResponseStatus.GATEWAY_ERROR) ? AlertType.INFO : type,
+    title: message.includes(ResponseStatus.GATEWAY_ERROR)
+      ? AlertTitle.INFO
+      : title,
+    type: message.includes(ResponseStatus.GATEWAY_ERROR)
+      ? AlertType.INFO
+      : type,
     message: errorMessage,
   };
 };
-

@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import { Button } from "primereact/button";
 import { PDButtonType, PDButtonSize } from "../../enum/pipedrive.enum";
 
@@ -64,7 +64,7 @@ const PDButton: React.FC<PDButtonProps> = ({
       disabled={disabled}
       loading={loading}
       className={finalClass}
-      onClick={(e:any)=>onClick?.(e)}
+      onClick={(e: any) => onClick?.(e)}
     />
   );
 };

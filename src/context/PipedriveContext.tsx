@@ -1,11 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-import AppExtensionsSDK, {
-  Command,
-  Event,
-  
-} from "@pipedrive/app-extensions-sdk";
+import AppExtensionsSDK from "@pipedrive/app-extensions-sdk";
 
 interface PipedriveContextType {
   sdk: any | null;
@@ -27,7 +23,7 @@ export function PipedriveProvider({ children }: { children: React.ReactNode }) {
         // Remove "Something went wrong" fallback page
         window.parent.postMessage(
           { event: "initialize", data: { height: "auto" } },
-          "*"
+          "*",
         );
         console.log("Successfully Pipedrive initialized");
       } catch (err) {

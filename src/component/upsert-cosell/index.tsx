@@ -11,10 +11,10 @@ import {
   trimString,
   validatePureNumber,
 } from "@template/utils/globalHelper";
-import React from "react";
+import type React from "react";
 import { CosellAction } from "@template/enum/action.enum";
 import { labelMapper } from "./helper";
-import { buildCosellPayload, buildDataProperty } from "./builder";
+import { buildDataProperty } from "./builder";
 import {
   fetchListCosell,
   fetchSpecificCoSell,
@@ -22,7 +22,7 @@ import {
 import { ModalId } from "@template/enum/modal.enum";
 import { StatusState } from "@template/enum/status.enum";
 import {
-  AlertNotification,
+  type AlertNotification,
   getErrorAlert,
 } from "@template/common/messageAlert";
 import {
@@ -39,10 +39,10 @@ import {
   ModelType,
   PDButtonSize,
   PDButtonType,
-  PDTextSize,
 } from "@template/enum/pipedrive.enum";
 import PDButton from "../ui-components/pipedriveButton";
-import AppExtensionsSDK, { Command } from "@pipedrive/app-extensions-sdk";
+import type AppExtensionsSDK from "@pipedrive/app-extensions-sdk";
+import { Command } from "@pipedrive/app-extensions-sdk";
 import CustomerDetailsForm from "./CustomerDetailsForm";
 import ProjectOpportunitySection from "./ProjectOpportunitySection";
 import { MarketingSourceSection } from "./MarketingOpportunityForm";
@@ -56,7 +56,7 @@ export const CreateCosell: React.FC<{
   // onList?: RC3CosellResponse;
 }> = ({ actions }) => {
   const [sdk, setSdk] = useState<AppExtensionsSDK | null>(null);
-  const [slug, setSlug] = useState(CosellAction.ADD);
+  const [slug, _setSlug] = useState(CosellAction.ADD);
   const {
     data,
     optionValues,
@@ -74,11 +74,11 @@ export const CreateCosell: React.FC<{
   let payload: any = {};
   const { LifeCycle } = data?.CoSellEntity || {};
   const initialError = useRef(false);
-  const [errorStatus, setErrorStatus] = useState("");
-  const [isDataFromList, setIsDataFromList] = useState(true);
+  const [_errorStatus, setErrorStatus] = useState("");
+  const [_isDataFromList, setIsDataFromList] = useState(true);
   const [errorValue, setErrorValue] = useState<Record<string, boolean>>({});
   const [formValue, setFormValue] = useState<Record<string, any>>({});
-  const [isFetching, setIsFetching] = useState(false);
+  const [_isFetching, setIsFetching] = useState(false);
   const reviewStatus =
     data?.CloudProviderStatus ?? data?.CoSellEntity?.LifeCycle?.ReviewStatus;
   const readOnlyFields = getReadOnlyFields(reviewStatus as string);
@@ -97,7 +97,8 @@ export const CreateCosell: React.FC<{
       setSellerCode(sellerCode);
       assignValuesEditCosell();
     }
-  }, [data, generateCosell]);
+    // biome-ignore lint/correctness/useExhaustiveDependencies: Deps are complex
+  }, [data, generateCosell, assignValuesEditCosell]);
   const triggerAlert = ({ type, title, message }: AlertNotification) => {
     (ToastService as any)?.[type]?.(title, message);
   };
@@ -118,7 +119,7 @@ export const CreateCosell: React.FC<{
           opportunityList,
           setOpportunityList,
           setAmpCosell,
-          true
+          true,
         );
       }
       await fetchDropDowAllOptions(
@@ -128,7 +129,7 @@ export const CreateCosell: React.FC<{
         optionValues,
         referenceData,
         setReferenceData,
-        sellerCode || data?.SellerCode || currentPage?.params?.sellerCode || ""
+        sellerCode || data?.SellerCode || currentPage?.params?.sellerCode || "",
       );
     } finally {
       setLoading(false);
@@ -139,7 +140,8 @@ export const CreateCosell: React.FC<{
   };
   useEffect(() => {
     init();
-  }, []);
+    // biome-ignore lint/correctness/useExhaustiveDependencies: Init runs on mount
+  }, [init]);
   function assignValuesEditCosell() {
     const dataProperty = buildDataProperty({
       slug: data.ReferenceID ? CosellAction.EDIT : CosellAction.ADD,
@@ -149,8 +151,8 @@ export const CreateCosell: React.FC<{
     });
     setFormValue(dataProperty);
 
-    function closePanel() {
-      slug == CosellAction.ADD && fetchListCosell(setData, setOpportunityList);
+    function _closePanel() {
+      slug === CosellAction.ADD && fetchListCosell(setData, setOpportunityList);
       actions.closeOverlay(ModalId.ACTION_COSELL);
       setErrorStatus("");
     }
@@ -158,10 +160,10 @@ export const CreateCosell: React.FC<{
     setPrimaryNeedsAWS(
       dataProperty?.awsCosell?.includes(labelMapper.awsCosell.value.no)
         ? labelMapper.awsCosell.value.no
-        : labelMapper.awsCosell.value.yes
+        : labelMapper.awsCosell.value.yes,
     );
   }
-  const isReviewStatusValid = [
+  const _isReviewStatusValid = [
     StatusState.APPROVED,
     StatusState.ACTION_REQUIRED,
   ].includes(LifeCycle?.ReviewStatus as StatusState);
@@ -186,7 +188,7 @@ export const CreateCosell: React.FC<{
     }
 
     if (
-      name == labelMapper.competitiveTracking.name &&
+      name === labelMapper.competitiveTracking.name &&
       value !== labelMapper.competitiveTracking.value
     ) {
       setFormValue((prev) => ({
@@ -195,8 +197,8 @@ export const CreateCosell: React.FC<{
         otherCompetitors: "",
       }));
     } else if (
-      name == labelMapper.marketingSource.name &&
-      value == labelMapper.marketingSource.value.no
+      name === labelMapper.marketingSource.name &&
+      value === labelMapper.marketingSource.value.no
     ) {
       setFormValue((prev) => ({
         ...prev,
@@ -213,7 +215,7 @@ export const CreateCosell: React.FC<{
       }));
     }
 
-    if (labelMapper.country.name == name) {
+    if (labelMapper.country.name === name) {
       setFormValue((prev) => ({
         ...prev,
         postalCode: "",
@@ -233,7 +235,7 @@ export const CreateCosell: React.FC<{
   const postalCodeRegex = (value?: string) => {
     console.log("redex check", value);
     const country = optionValues?.countries?.find(
-      (c) => c.value === formValue?.country
+      (c) => c.value === formValue?.country,
     );
 
     const postalCodePattern = country?.postalCodeRegex;
@@ -258,7 +260,7 @@ export const CreateCosell: React.FC<{
   };
   const validateFields = () => {
     let valid = true;
-    let newErrorValue: Record<string, boolean> = {};
+    const newErrorValue: Record<string, boolean> = {};
 
     const checkField = (field: string, condition: boolean) => {
       if (condition) {
@@ -269,7 +271,7 @@ export const CreateCosell: React.FC<{
 
     actionCosellRequiredFields.forEach((field) => {
       if (
-        labelMapper.nationSecurities.defaultValue.yes ==
+        labelMapper.nationSecurities.defaultValue.yes ===
           formValue?.nationalSecurity &&
         nationSecuritiesFields.includes(field)
       ) {
@@ -277,7 +279,7 @@ export const CreateCosell: React.FC<{
       }
       if (
         !readOnlyFields.includes(field) &&
-        field == labelMapper.targetCloseDate.name
+        field === labelMapper.targetCloseDate.name
       ) {
         if (isPendingCosell(slug as string, reviewStatus)) {
           checkField(field, !isFutureDate(formValue[field]));
@@ -295,10 +297,10 @@ export const CreateCosell: React.FC<{
       }
       if (
         !readOnlyFields.includes(field) &&
-        field == labelMapper.estimatedAWSRecurringRevenue.name
+        field === labelMapper.estimatedAWSRecurringRevenue.name
       ) {
         const amount = Number(formValue?.estimatedAWSRecurringRevenue);
-        if (isNaN(amount) || amount < 1) {
+        if (Number.isNaN(amount) || amount < 1) {
           valid = false;
           newErrorValue.estimatedAWSRecurringRevenue = true;
           labelMapper.estimatedAWSRecurringRevenue.valid =
@@ -310,7 +312,7 @@ export const CreateCosell: React.FC<{
         !readOnlyFields.includes(field)
       ) {
         const countryData = optionValues?.countries?.find(
-          (option) => option.value === formValue?.country
+          (option) => option.value === formValue?.country,
         );
 
         labelMapper.postalCode.validationMessage = formValue?.postalCode
@@ -337,7 +339,7 @@ export const CreateCosell: React.FC<{
 
       if (
         formValue?.awsCosell?.includes(labelMapper.awsCosell.value.no) &&
-        field == labelMapper.salesActivities?.name &&
+        field === labelMapper.salesActivities?.name &&
         !readOnlyFields.includes(field)
       ) {
         return;
@@ -350,9 +352,11 @@ export const CreateCosell: React.FC<{
     fieldChecks(
       formValue,
       readOnlyFields,
-      labelMapper.nationSecurities.defaultValue.yes ==
-        formValue?.nationalSecurity
-    ).forEach(({ field, condition }) => checkField(field, condition));
+      labelMapper.nationSecurities.defaultValue.yes ===
+        formValue?.nationalSecurity,
+    ).forEach(({ field, condition }) => {
+      checkField(field, condition);
+    });
 
     if (
       formValue?.marketingSource === labelMapper.marketingSource.value.yes &&
@@ -384,7 +388,7 @@ export const CreateCosell: React.FC<{
 
     if (!valid) {
       const errorsFieldName = Object.entries(newErrorValue).map(
-        ([field]) => field
+        ([field]) => field,
       );
       const errorLabels = errorsFieldName
         .map((field) => (labelMapper as any)?.[field]?.label || field)
@@ -397,7 +401,7 @@ export const CreateCosell: React.FC<{
   };
   async function generateEditCosellPaylaod() {
     payload = data;
-    console.log(formValue)
+    console.log(formValue);
     if (validateFields()) {
       // buildCosellPayload({formValue:formValue,CosellAction:CosellAction.EDIT,})
       payload = {
@@ -414,9 +418,8 @@ export const CreateCosell: React.FC<{
                 ...payload.CoSellEntity?.Customer?.Account?.Address,
                 StreetAddress: trimString(formValue?.streetAddress),
                 City: trimString(formValue?.city),
-                CountryCode:trimString(formValue?.country),
-                PostalCode:trimString(formValue?.postalCode)
-
+                CountryCode: trimString(formValue?.country),
+                PostalCode: trimString(formValue?.postalCode),
               },
               Duns: trimString(formValue?.customerDuns),
             },
@@ -427,13 +430,13 @@ export const CreateCosell: React.FC<{
             AdditionalComments: trimString(formValue?.additonalComments),
             DeliveryModels: formValue?.deliveryModel,
             RelatedOpportunityIdentifier: trimString(
-              formValue?.relatedOpportunityIndentifier
+              formValue?.relatedOpportunityIndentifier,
             ),
           },
           OpportunityType: formValue?.opportunityType,
         },
       };
-console.log("payload",payload);
+      console.log("payload", payload);
       await saveEditCosells(
         slug,
         payload,
@@ -444,7 +447,7 @@ console.log("payload",payload);
         setData,
         setOpportunityList,
         opportunityList,
-        setErrorStatus
+        setErrorStatus,
       );
     }
   }

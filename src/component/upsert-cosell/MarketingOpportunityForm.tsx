@@ -41,7 +41,7 @@ export const MarketingSourceSection = ({
         onChange={(value) => {
           if (
             ![StatusState.ACTION_REQUIRED]?.includes(
-              LifeCycle?.ReviewStatus as StatusState
+              LifeCycle?.ReviewStatus as StatusState,
             )
           ) {
             onChangeValue(labelMapper.marketingSource.name, value);
@@ -81,7 +81,7 @@ export const MarketingSourceSection = ({
               value={formValue?.marketingActivityChannel}
               name={labelMapper.marketingActivityChannel.name}
               readOnly={readOnlyField(
-                labelMapper.marketingActivityChannel.name
+                labelMapper.marketingActivityChannel.name,
               )}
               options={optionValues?.marketingActivityChannel || []}
               onChange={(value) => {
@@ -96,20 +96,22 @@ export const MarketingSourceSection = ({
                 value={formValue?.isMarketingfunds}
                 options={[
                   {
-                    label:
-                      t("awsCosell.inputLabelMapper.isMarketingfunds.description.yes"),
+                    label: t(
+                      "awsCosell.inputLabelMapper.isMarketingfunds.description.yes",
+                    ),
                     value: labelMapper.isMarketingfunds.value.yes,
                   },
                   {
-                    label:
-                      t("awsCosell.inputLabelMapper.isMarketingfunds.description.no"),
+                    label: t(
+                      "awsCosell.inputLabelMapper.isMarketingfunds.description.no",
+                    ),
                     value: labelMapper.isMarketingfunds.value.no,
                   },
                 ]}
                 onChange={(value) => {
                   if (
                     ![StatusState.ACTION_REQUIRED]?.includes(
-                      LifeCycle?.ReviewStatus as StatusState
+                      LifeCycle?.ReviewStatus as StatusState,
                     )
                   ) {
                     onChangeValue(labelMapper.isMarketingfunds.name, value);

@@ -16,8 +16,8 @@ type PDRadioGroupProps = {
   onChange?: (val: string) => void;
   inline?: boolean;
   disabled?: boolean;
-  readOnly?:boolean;
-  required?:boolean;
+  readOnly?: boolean;
+  required?: boolean;
 };
 
 export const PDRadioGroup = ({
@@ -28,8 +28,8 @@ export const PDRadioGroup = ({
   onChange,
   inline = false,
   disabled = false,
-  readOnly=false,
-  required=false
+  readOnly = false,
+  required = false,
 }: PDRadioGroupProps) => {
   return (
     <div className="flex flex-col gap-2">
@@ -37,11 +37,7 @@ export const PDRadioGroup = ({
 
       <div className={inline ? "flex gap-4" : "flex flex-col gap-2"}>
         {options?.map((opt) => (
-          <div
-            key={opt.value}
-            className="flex items-center gap-2 pd-radio"
-          >
-          
+          <div key={opt.value} className="flex items-center gap-2 pd-radio">
             <RadioButton
               inputId={`${name}-${opt.value}`}
               name={name}
@@ -60,7 +56,6 @@ export const PDRadioGroup = ({
               {opt.label}
               {opt?.info && <div className="hub-field-info">{opt?.info}</div>}
             </label>
-            
           </div>
         ))}
       </div>

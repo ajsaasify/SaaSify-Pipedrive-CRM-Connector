@@ -1,4 +1,4 @@
-import { OpportunityTeam } from "../../types/cosellResponse";
+import type { OpportunityTeam } from "../../types/cosellResponse";
 import { StatusState } from "../../enum/status.enum";
 import {
   currencyNotConvertedFormat,
@@ -29,10 +29,10 @@ export const acceptSegmentData = (cosell: any) => {
     SenderCompanyName?.toLowerCase() === "aws"
       ? "AWS"
       : SenderCompanyName
-      ? SenderAwsAccountId
-        ? `${SenderCompanyName} (${SenderAwsAccountId})`
-        : SenderCompanyName
-      : SenderAwsAccountId;
+        ? SenderAwsAccountId
+          ? `${SenderCompanyName} (${SenderAwsAccountId})`
+          : SenderCompanyName
+        : SenderAwsAccountId;
 
   const RejectField = ["Rejected Reason"];
   const multiPartner = [
@@ -105,7 +105,7 @@ export const acceptSegmentData = (cosell: any) => {
     {
       title: awsConstants.accept.targetCloseDate,
       value: displayDate(
-        Payload?.OpportunityInvitation?.Project?.TargetCompletionDate
+        Payload?.OpportunityInvitation?.Project?.TargetCompletionDate,
       ),
     },
     {
@@ -114,7 +114,7 @@ export const acceptSegmentData = (cosell: any) => {
         Payload?.OpportunityInvitation?.Project?.ExpectedCustomerSpend?.[0]
           ?.CurrencyCode,
         Payload?.OpportunityInvitation?.Project?.ExpectedCustomerSpend?.[0]
-          ?.Amount
+          ?.Amount,
       ),
     },
     {
@@ -134,13 +134,13 @@ export const acceptSegmentData = (cosell: any) => {
   ].filter(
     (field) =>
       !RejectField.includes(field.title) ||
-      (Status?.toLocaleLowerCase() ==
+      (Status?.toLocaleLowerCase() ===
         StatusState.REJECTED.toLocaleLowerCase() &&
-        RejectField.includes(field.title))
+        RejectField.includes(field.title)),
   );
   if (
     cosell?.DealType?.toLocaleLowerCase()?.includes(
-      requestPayload?.dealType?.multiPartner
+      requestPayload?.dealType?.multiPartner,
     )
   ) {
     fields.splice(2, 0, ...multipartnerMessage);
@@ -151,7 +151,7 @@ export const acceptSegmentData = (cosell: any) => {
     0,
     ...(cosell?.DealType?.includes(requestPayload?.dealType?.inbound)
       ? multiPartner
-      : forAws)
+      : forAws),
   );
 
   return fields;
@@ -162,7 +162,7 @@ export const getValue = (field?: any, fallback: string = fallBackKey): string =>
 
 export const toTitleCase = (
   field?: any,
-  fallback: string = fallBackKey
+  fallback: string = fallBackKey,
 ): string => {
   if (!field || typeof field !== "string") return fallback;
   return `${field[0].toLocaleUpperCase()}${field.slice(1).toLocaleLowerCase()}`;

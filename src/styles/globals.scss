@@ -1,3 +1,4 @@
+@use "sass:meta";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,15 +6,15 @@
 @import "primereact/resources/primereact.min.css";
 @import "primeicons/primeicons.css";
 
-@import "pipedrive-button.scss";
-@import "pipedrive-info.scss";
-@import "pipedrive-checkbox.scss";
-@import "pipedrive-input.scss";
-@import "pipedrive-dropdown.scss";
-@import "pipedrive-table.scss";
-@import "pipedrive-calendar.scss";
-@import "pipedrive-text.scss";
-@import "detailview.scss";
+@include meta.load-css("pipedrive-button.scss");
+@include meta.load-css("pipedrive-info.scss");
+@include meta.load-css("pipedrive-checkbox.scss");
+@include meta.load-css("pipedrive-input.scss");
+@include meta.load-css("pipedrive-dropdown.scss");
+@include meta.load-css("pipedrive-table.scss");
+@include meta.load-css("pipedrive-calendar.scss");
+@include meta.load-css("pipedrive-text.scss");
+@include meta.load-css("detailview.scss");
 
 /* -------------------------------------------------------------------
    ROOT VARIABLES

@@ -254,11 +254,11 @@ export interface CloudResultJson {
 
 export interface AmpCosellResponse {
   CRMIdentifier?: string;
-  CRMReferenceId?:string;
+  CRMReferenceId?: string;
   CoSellOpportunityJson?: CoSellOpportunityJson;
   CoSellEntity?: CoSellOpportunityJson;
   ReferralType?: string;
-  DealType?:string
+  DealType?: string;
   SaaSifyStatus?: string;
   CloudProvider?: string;
   CloudStatus?: string;

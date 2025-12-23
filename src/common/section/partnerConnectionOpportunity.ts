@@ -1,6 +1,5 @@
-import { OptionTypes } from "../../types/dropdown.options";
-import { DropdownOptions } from "../../enum/options.enum";
-import { PartnerConnectionProps } from "../../types/partner";
+import type { OptionTypes } from "../../types/dropdown.options";
+import type { PartnerConnectionProps } from "../../types/partner";
 import {
   displayDate,
   getOpportunityOwner,
@@ -12,7 +11,7 @@ import { getFullNameTeam, getValue } from "./accept";
 
 export const partnerConnectionopportunitySegmentData = (
   cosell: PartnerConnectionProps,
-  optionValues: OptionTypes
+  optionValues: OptionTypes,
 ) => {
   const { OpportunitySummary } = cosell;
   const { Solutions = [] } = OpportunitySummary?.RelatedEntityIdentifiers || {};
@@ -22,7 +21,7 @@ export const partnerConnectionopportunitySegmentData = (
       .map((item) => `${item.value} - ${item.label}`)
       ?.join(", ") || parseSemiColon(Solutions);
   const contact = getOpportunityOwner(
-    cosell?.OpportunitySummary?.OpportunityTeam
+    cosell?.OpportunitySummary?.OpportunityTeam,
   );
 
   const opportunity = [
@@ -50,7 +49,7 @@ export const partnerConnectionopportunitySegmentData = (
       {
         label: awsConstants.opportunity.targetCloseDate,
         value: displayDate(
-          OpportunitySummary?.LifecycleSummary?.TargetCloseDate
+          OpportunitySummary?.LifecycleSummary?.TargetCloseDate,
         ),
       },
       {
@@ -82,7 +81,7 @@ export const partnerConnectionopportunitySegmentData = (
       {
         label: awsConstants.opportunity.awsProducts,
         value: parseArray(
-          OpportunitySummary?.RelatedEntityIdentifiers?.AWSProducts
+          OpportunitySummary?.RelatedEntityIdentifiers?.AWSProducts,
         ),
       },
       {

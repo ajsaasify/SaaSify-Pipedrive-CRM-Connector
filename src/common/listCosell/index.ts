@@ -77,7 +77,7 @@ export const requestPayload = {
     ip: "IP Co-sell",
     stageExlude: ["created", "accepted"],
     triggerLost: "Lost",
-    stageLost:"Prospect",
+    stageLost: "Prospect",
     stageWon: { label: "Request to Lost", value: "Lost" },
   },
   gcp: {

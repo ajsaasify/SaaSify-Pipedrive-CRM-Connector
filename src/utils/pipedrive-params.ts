@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import type { Dispatch, SetStateAction } from "react";
 
 export interface pipedriveParams {
   companyId: string;
@@ -16,7 +16,7 @@ export interface pipedriveParams {
 }
 
 const pipeDriveParams = (
-  setParams?: Dispatch<SetStateAction<pipedriveParams | undefined>>
+  setParams?: Dispatch<SetStateAction<pipedriveParams | undefined>>,
 ) => {
   if (typeof window === "undefined") return;
 
@@ -24,7 +24,7 @@ const pipeDriveParams = (
     const search = window.location.search;
     const sp = new URLSearchParams(search);
     const searchParams = Object.fromEntries(
-      sp.entries()
+      sp.entries(),
     ) as unknown as pipedriveParams;
     if (typeof searchParams?.data === "string") {
       searchParams.data = JSON.parse(searchParams?.data || "");

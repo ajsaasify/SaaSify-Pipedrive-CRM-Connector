@@ -1,7 +1,7 @@
 import { trimString } from "./globalHelper";
 
 export const trimObjString = (
-  obj: Record<string, any>
+  obj: Record<string, any>,
 ): Record<string, any> => {
   const trimmed: any = {};
 

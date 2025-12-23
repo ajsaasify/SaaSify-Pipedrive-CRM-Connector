@@ -13,8 +13,8 @@ import { useTranslation } from "react-i18next";
 export const OverViewCard: React.FC = () => {
   const { data } = useCoSellContext();
   const segmentData = segments(data || {});
-  const { LifeCycle } = data?.CoSellEntity || {};
-  const alertSegment = alertPopupSegment(data);
+
+  const _alertSegment = alertPopupSegment(data);
   const { t } = useTranslation();
   return (
     <AccordionComponent
@@ -27,13 +27,12 @@ export const OverViewCard: React.FC = () => {
             <>
               <div className="w-full">
                 <Tile>
-                  <h5>
-                    {t("awsCosell.inputLabelMapper.accordian.overview")}
-                  </h5>
+                  <h5>{t("awsCosell.inputLabelMapper.accordian.overview")}</h5>
                   <hr />
 
                   {segmentData.map((fields, idx) => (
                     <DisplayField
+                      // biome-ignore lint/suspicious/noArrayIndexKey: Index used as key
                       key={idx}
                       items={fields.map((item, i) => ({
                         ...item,

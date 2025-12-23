@@ -1,4 +1,4 @@
-import { TFunction } from "i18next";
+import type { TFunction } from "i18next";
 import { t } from "i18next";
 const fields = (t: TFunction) => {
   return {
@@ -7,13 +7,16 @@ const fields = (t: TFunction) => {
       invitationId: t("awsCosell.invitation.invitationId"),
       invitationDate: t("awsCosell.invitation.invitationDate"),
       invitationMessage: t("awsCosell.invitation.invitationMessage"),
-      postalCode:t("awsCosell.invitation.postalCode"),
-      country:t("awsCosell.invitation.country"),
+      postalCode: t("awsCosell.invitation.postalCode"),
+      country: t("awsCosell.invitation.country"),
       industryVertical: t("awsCosell.invitation.industryVertical"),
-      partnerAcceptanceDeadline: t("awsCosell.invitation.partnerAcceptanceDeadline"),
+      partnerAcceptanceDeadline: t(
+        "awsCosell.invitation.partnerAcceptanceDeadline",
+      ),
       targetCloseDate: t("awsCosell.invitation.targetCloseDate"),
-      estimatedAwsMonthlyRecurringRevenue:
-        t("awsCosell.invitation.estimatedAwsMonthlyRecurringRevenue"),
+      estimatedAwsMonthlyRecurringRevenue: t(
+        "awsCosell.invitation.estimatedAwsMonthlyRecurringRevenue",
+      ),
       partnerProjectTitle: t("awsCosell.invitation.status"),
       projectDescription: "Project Description",
       businessProblem: "Business Problem",
@@ -69,7 +72,7 @@ const fields = (t: TFunction) => {
     customer: {
       customerDuns: t("awsCosell.inputLabelMapper.customerDuns.label"),
       customerCompanyName: t(
-        "awsCosell.inputLabelMapper.customerCompanyName.label"
+        "awsCosell.inputLabelMapper.customerCompanyName.label",
       ),
       website: t("awsCosell.inputLabelMapper.customerWebsite.label"),
       industryVertical: t("awsCosell.inputLabelMapper.industryVertical.label"),
@@ -96,7 +99,7 @@ const fields = (t: TFunction) => {
       opportunityId: t("awsCosell.overview.opportunityId"),
       customerCompanyName: t("awsCosell.overview.customerCompanyName"),
       awsMarketplaceEngagementScore: t(
-        "awsCosell.overview.awsMarketplaceEngagementScore"
+        "awsCosell.overview.awsMarketplaceEngagementScore",
       ),
       opportunityOwner: t("awsCosell.overview.opportunityOwner"),
       opportunityOwnership: t("awsCosell.overview.opportunityOwnership"),
@@ -122,13 +125,15 @@ const fields = (t: TFunction) => {
     },
     marketing: {
       opportunitySource: t("awsCosell.marketing.opportunitySource"),
-      marketingCampaign:t("awsCosell.marketing.marketingCampaign"),
+      marketingCampaign: t("awsCosell.marketing.marketingCampaign"),
       marketingUseCase: t("awsCosell.marketing.marketingUseCase"),
-      marketingChannel:t("awsCosell.marketing.marketingChannel"),
-      marketingDevelopmentFunds: t("awsCosell.marketing.marketingDevelopmentFunds"),
+      marketingChannel: t("awsCosell.marketing.marketingChannel"),
+      marketingDevelopmentFunds: t(
+        "awsCosell.marketing.marketingDevelopmentFunds",
+      ),
       no: t("awsCosell.marketing.no"),
       yes: t("awsCosell.marketing.yes"),
-      none:t("awsCosell.marketing.none"),
+      none: t("awsCosell.marketing.none"),
       marketingActivity: t("awsCosell.marketing.marketingActivity"),
     },
     saasDocumentation: {

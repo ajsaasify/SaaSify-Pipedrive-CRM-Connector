@@ -131,7 +131,7 @@ export const gcpStaticPrivateOffer = {
     SelleraccountID: 247,
     TenantId: 1000002,
     StepInformation: null,
-    TotalContractValue: '$200',
+    TotalContractValue: "$200",
     MarketplaceFeePercent: null,
     TotalContractValueCurrency: "USD",
     CreatedDateInMarketplace: null,

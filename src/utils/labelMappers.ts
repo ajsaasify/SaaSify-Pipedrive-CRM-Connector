@@ -6,8 +6,8 @@ export const labelMapper = {
     additional: "Additional Details",
     contact: "Customer Contact Details",
     partnerSalesContact: "Partner Sales Contact Details",
-    overview:"Co-sell Overview",
-    endUserContact:"Customer End User Contact Details"
+    overview: "Co-sell Overview",
+    endUserContact: "Customer End User Contact Details",
   },
   customerDuns: {
     label: "Customer DUNS",
@@ -300,7 +300,7 @@ export const labelMapper = {
     " Request you to fill in the end customer details in this section. Though optional it assists us in progressing faster on the opportunity. In case this is not filled, we will populate this with the opportunity submitter information, for the AWS Sales team to contact.",
   partnerDescription:
     "Provide contact information for the primary sales contact responsible for this opportunity within your organization. The AWS sales team may reach out to this individual to discuss the opportunity further.",
- 
+
   marketingSourceAction: {
     label: "Is opportunity from marketing activity?",
   },

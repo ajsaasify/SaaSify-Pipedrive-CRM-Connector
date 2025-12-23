@@ -1,5 +1,5 @@
-import { OptionTypes } from "../../types/dropdown.options";
-import { RC3CosellResponse } from "../../types/cosellResponse";
+import type { OptionTypes } from "../../types/dropdown.options";
+import type { RC3CosellResponse } from "../../types/cosellResponse";
 import {
   convertCurrency,
   displayDate,
@@ -11,7 +11,7 @@ import { awsConstants } from "../constants/awsCosellFieldMappings";
 
 export const projectSegmentData = (
   data: RC3CosellResponse,
-  optionValues: OptionTypes
+  optionValues: OptionTypes,
 ) => {
   const {
     LifeCycle,
@@ -85,7 +85,7 @@ export const projectSegmentData = (
           label: awsConstants.projectSegment.estimatedAwsMRR,
           value: convertCurrency(
             Project?.ExpectedCustomerSpend?.[0]?.CurrencyCode,
-            Project?.ExpectedCustomerSpend?.[0]?.Amount
+            Project?.ExpectedCustomerSpend?.[0]?.Amount,
           ),
         },
         {

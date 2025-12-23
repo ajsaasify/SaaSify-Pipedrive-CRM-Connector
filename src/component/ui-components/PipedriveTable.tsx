@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import type React from "react";
+import { useState, useEffect } from "react";
+import { DataTable, type DataTableFilterMeta } from "primereact/datatable";
 import {
-  DataTable,
-  DataTableFilterMeta,
-  DataTablePageEvent,
-  DataTableSortEvent,
-} from "primereact/datatable";
-import { Column, ColumnFilterElementTemplateOptions } from "primereact/column";
+  Column,
+  type ColumnFilterElementTemplateOptions,
+} from "primereact/column";
 import { FilterMatchMode, FilterOperator } from "primereact/api";
 
 import { InputNumber } from "primereact/inputnumber";
@@ -19,8 +18,8 @@ import { InputIcon } from "primereact/inputicon";
 
 import {
   FilterType,
-  PDAdvancedTableProps,
-  PDColumnConfig,
+  type PDAdvancedTableProps,
+  type PDColumnConfig,
 } from "@template/types/pipedrive-table-interface";
 import {
   PDButtonType,
@@ -54,7 +53,7 @@ const PDAdvancedTable: React.FC<PDAdvancedTableProps> = ({
   enableGlobalFilter = false,
   globalFilterFields = [],
   emptyMessage,
-  showPaginator=true,
+  showPaginator = true,
 }) => {
   const [filters, setFilters] = useState<DataTableFilterMeta>({});
   const [globalValue, setGlobalValue] = useState("");
@@ -141,7 +140,7 @@ const PDAdvancedTable: React.FC<PDAdvancedTableProps> = ({
        GLOBAL FILTER HANDLER
   -------------------------------------*/
   const onGlobalChange = (val: string) => {
-    let updated = { ...filters };
+    const updated = { ...filters };
     // ensure 'global' has a 'value' property without causing a TS error
     updated.global = { ...(updated.global as any), value: val };
     setFilters(updated);
@@ -243,7 +242,7 @@ const PDAdvancedTable: React.FC<PDAdvancedTableProps> = ({
           );
 
         case "custom":
-          return col.filterElement!(options);
+          return col.filterElement?.(options);
 
         default:
           return null;
@@ -317,7 +316,8 @@ const PDAdvancedTable: React.FC<PDAdvancedTableProps> = ({
       >
         {columns.map((col, index) => (
           <Column
-            key={col?.field+index}
+            // biome-ignore lint/suspicious/noArrayIndexKey: Index used for unique key combination
+            key={col?.field + index}
             field={!col?.body ? col?.field || "N/A" : undefined}
             header={col.header}
             body={(rowData) =>

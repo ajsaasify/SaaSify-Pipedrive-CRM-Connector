@@ -1,12 +1,12 @@
-import { CoSellItem } from "@template/types/api/getListCosellAssociateCrm.t";
+import type { CoSellItem } from "@template/types/api/getListCosellAssociateCrm.t";
 import PDButton from "../ui-components/pipedriveButton";
 import { PDButtonSize } from "@template/enum/pipedrive.enum";
-import { Dispatch, SetStateAction } from "react";
-import { Menu } from "primereact/menu";
+import type { Dispatch, SetStateAction } from "react";
+import type { Menu } from "primereact/menu";
 
 enum Align {
-Right = "right",
-Left="left"
+  Right = "right",
+  Left = "left",
 }
 export const cosellTableColumns = ({
   t,

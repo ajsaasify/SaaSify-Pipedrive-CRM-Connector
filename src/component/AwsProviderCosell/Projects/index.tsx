@@ -1,7 +1,5 @@
-import InfoGrid from "@template/component/ui-components/pipdriveInfoGrid";
 import AccordionComponent from "@template/component/ui-components/PipedriveAccordion";
 import { useCoSellContext } from "@template/context/Cosell.context";
-import { useEffect } from "react";
 import { projectSegmentData as segments } from "../../../common/section/project";
 import {
   DisplayField,
@@ -12,7 +10,7 @@ import { labelMapper } from "@template/utils/labelMappers";
 export const ProjectCard: React.FC = () => {
   const { data } = useCoSellContext();
   const segmentData = segments(data || {}, {});
-  const { LifeCycle } = data?.CoSellEntity || {};
+
   return (
     <AccordionComponent
       className="card-view"
@@ -28,6 +26,7 @@ export const ProjectCard: React.FC = () => {
 
                   {segmentData.marketDetail.map((fields, idx) => (
                     <DisplayField
+                      // biome-ignore lint/suspicious/noArrayIndexKey: Index used as key
                       key={idx}
                       items={fields.map((item, i) => ({
                         ...item,
@@ -43,6 +42,7 @@ export const ProjectCard: React.FC = () => {
                   <hr />
                   {segmentData.projectDetails.map((fields, idx) => (
                     <DisplayField
+                      // biome-ignore lint/suspicious/noArrayIndexKey: Index used as key
                       key={idx}
                       items={fields.map((item, i) => ({
                         ...item,

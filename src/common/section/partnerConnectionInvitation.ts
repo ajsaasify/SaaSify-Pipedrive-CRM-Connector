@@ -1,6 +1,5 @@
-import { OpportunityTeam } from "../../types/cosellResponse";
 import { StatusState } from "../../enum/status.enum";
-import { PartnerConnectionProps } from "../../types/partner";
+import type { PartnerConnectionProps } from "../../types/partner";
 import {
   currencyNotConvertedFormat,
   displayDate,
@@ -11,7 +10,7 @@ import { awsConstants } from "../constants/awsCosellFieldMappings";
 import { getValue, toTitleCase } from "./accept";
 
 export const partnerConnectionInvitationSegmentData = (
-  cosell: PartnerConnectionProps
+  cosell: PartnerConnectionProps,
 ) => {
   const {
     Payload,
@@ -28,10 +27,10 @@ export const partnerConnectionInvitationSegmentData = (
     SenderCompanyName?.toLowerCase() === "aws"
       ? "AWS"
       : SenderCompanyName
-      ? SenderAwsAccountId
-        ? `${SenderCompanyName} (${SenderAwsAccountId})`
-        : SenderCompanyName
-      : SenderAwsAccountId;
+        ? SenderAwsAccountId
+          ? `${SenderCompanyName} (${SenderAwsAccountId})`
+          : SenderCompanyName
+        : SenderAwsAccountId;
 
   const RejectField = [awsConstants.invitation.rejectionReason];
 
@@ -52,7 +51,7 @@ export const partnerConnectionInvitationSegmentData = (
     {
       title: awsConstants.invitation.engagementTypes,
       value: parseArray(
-        Payload?.OpportunityInvitation?.ReceiverResponsibilities
+        Payload?.OpportunityInvitation?.ReceiverResponsibilities,
       ),
     },
     {
@@ -83,7 +82,7 @@ export const partnerConnectionInvitationSegmentData = (
     {
       title: awsConstants.invitation.targetCloseDate,
       value: displayDate(
-        Payload?.OpportunityInvitation?.Project?.TargetCompletionDate
+        Payload?.OpportunityInvitation?.Project?.TargetCompletionDate,
       ),
     },
     {
@@ -92,7 +91,7 @@ export const partnerConnectionInvitationSegmentData = (
         Payload?.OpportunityInvitation?.Project?.ExpectedCustomerSpend?.[0]
           ?.CurrencyCode,
         Payload?.OpportunityInvitation?.Project?.ExpectedCustomerSpend?.[0]
-          ?.Amount
+          ?.Amount,
       ),
     },
     {
@@ -112,7 +111,7 @@ export const partnerConnectionInvitationSegmentData = (
       !RejectField.includes(field.title) ||
       (Status?.toLocaleLowerCase() ===
         StatusState.REJECTED.toLocaleLowerCase() &&
-        RejectField.includes(field.title))
+        RejectField.includes(field.title)),
   );
 
   return fields;

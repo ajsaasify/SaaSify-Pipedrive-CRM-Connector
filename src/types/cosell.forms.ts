@@ -9,13 +9,13 @@ export interface DataPropertyType {
   customerCompanyName?: string;
   industryVertical?: string;
   industryOther?: string;
-  state?: string|null;
+  state?: string | null;
   streetAddress?: string;
   city?: string;
   postalCode?: string;
   country?: string;
   customerWebsite?: string;
-  nationalSecurity?:string;
+  nationalSecurity?: string;
   awsCosell?: string[];
   parentOpportunityId?: string | number;
   partnerProjectTitle?: string;

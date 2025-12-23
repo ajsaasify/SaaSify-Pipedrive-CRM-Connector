@@ -8,7 +8,7 @@ import { CreateCosell } from "@template/component/upsert-cosell";
 import pipeDriveParams from "@template/utils/pipedrive-params";
 import CloudProvider from "@template/component/cloud-provider";
 
-const getCosells = async () => {
+const _getCosells = async () => {
   // fetch cosells data
   const service = new SaasifyService();
   const res = await service.getCosellById("auto", "51015859874");
@@ -23,7 +23,7 @@ const CosellsPage = () => {
       setCurrentPage(() => {
         return { page: params?.data?.page };
       });
-  }, []);
+  }, [currentPage, params?.data?.page, setCurrentPage]);
   return (
     <div className="flex justify-center w-full">
       {currentPage?.page === ModelType.COSELL_LIST && <CosellList />}

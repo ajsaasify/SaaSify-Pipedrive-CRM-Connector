@@ -1,6 +1,6 @@
-import { dateFormat } from "../types/cosell.forms";
+import type { dateFormat } from "../types/cosell.forms";
 import { StatusState } from "../enum/status.enum";
-import {
+import type {
   MarketplaceTransaction,
   OpportunityTeam,
   RC3CosellResponse,
@@ -15,9 +15,9 @@ import { DefaultCurrency } from "../enum/currency.enum";
 import moment from "moment";
 import { fallBackKey } from "../common/section/accept";
 // import { GCPCosellResponse } from "../types/gcpCosell";
-import { AmpCosellResponse } from "../types/ampCosell";
+import type { AmpCosellResponse } from "../types/ampCosell";
 // import { PartnerConnectionProps } from "../types/partner";
-import { optionField } from "../types/dropdown.options";
+import type { optionField } from "../types/dropdown.options";
 // import {
 //   BaseDate,
 //   ChartColor,
@@ -26,15 +26,17 @@ import { optionField } from "../types/dropdown.options";
 import { CosellAction } from "../enum/action.enum";
 import { FetchOptions } from "../enum/options.enum";
 import { labelMapper } from "./labelMappers";
-import { PartnerConnectionProps } from "@template/types/partner";
+import type { PartnerConnectionProps } from "@template/types/partner";
 
-export interface BaseDate{
-  year:number,month:number,date:number
+export interface BaseDate {
+  year: number;
+  month: number;
+  date: number;
 }
 
 export const parseDateISO = (dateFormat?: string): dateFormat | null => {
   if (!dateFormat) return null;
-  const [year, month, date] = dateFormat?.split("T")[0]?.split("-");
+  const [year, month, date] = dateFormat?.split("T")?.[0]?.split("-") || [];
   return {
     year: parseInt(year, 10),
     month: parseInt(month, 10) - 1,
@@ -70,7 +72,7 @@ export const displayEntireDate = (dateFormat?: string | null): string => {
 
 export const parseDate = (dateFormat: string): dateFormat | null => {
   if (!dateFormat) return null;
-  const [year, month, date] = dateFormat?.split("-");
+  const [year, month, date] = dateFormat?.split("-") || [];
   return {
     year: parseInt(year, 10),
     month: parseInt(month, 10) - 1,
@@ -158,7 +160,7 @@ export const formatPrice = (price: any) => {
 
 export const convertCurrency = (
   symbol: string | undefined,
-  price: number | undefined | string
+  price: number | undefined | string,
 ): string => {
   if (typeof price !== "number" && !price) return fallBackKey;
   return new Intl.NumberFormat("en-US", {
@@ -175,14 +177,14 @@ export const combineUnitsAndNanos = (units: number, nanos: number): number => {
 
 export const currencyNotConvertedFormat = (
   symbol: string | undefined,
-  price: number | undefined | string
+  price: number | undefined | string,
 ): string => {
   return price ? `${price} ${symbol}` : fallBackKey;
 };
 
 export const trimString = (value: any): string | null => {
-  if (typeof value == "undefined") return null;
-  if (typeof value == "string" && !value) return null;
+  if (typeof value === "undefined") return null;
+  if (typeof value === "string" && !value) return null;
   if (typeof value !== "string" || !value) return value;
   return value.trim() ?? "";
 };
@@ -196,13 +198,13 @@ export function getOpportunityOwner(team?: OpportunityTeam[]): OpportunityTeam {
 }
 
 export function getPartnerAccountManager(
-  team?: OpportunityTeam[]
+  team?: OpportunityTeam[],
 ): OpportunityTeam {
   return getTeamMember(team, Team.PARTNER_MANAGER);
 }
 
 export function getPartnerDevelopmentManager(
-  team?: OpportunityTeam[]
+  team?: OpportunityTeam[],
 ): OpportunityTeam {
   return getTeamMember(team, Team.PDM);
 }
@@ -228,12 +230,12 @@ export function getPSM(team?: OpportunityTeam[]): OpportunityTeam {
 
 function getTeamMember(
   team?: OpportunityTeam[],
-  businessTitle?: string
+  businessTitle?: string,
 ): OpportunityTeam {
   return (
     team?.find(
       (opportunity: OpportunityTeam) =>
-        opportunity?.BusinessTitle == businessTitle
+        opportunity?.BusinessTitle === businessTitle,
     ) || {}
   );
 }
@@ -274,7 +276,7 @@ export const getResponseError = (error?: string | string[]): string => {
 };
 
 export const formatProductOptions = (
-  options: { ProductName: string; AWSProductCode: string }[]
+  options: { ProductName: string; AWSProductCode: string }[],
 ): { label: string; value: string }[] => {
   return options.map((options) => ({
     label: options.ProductName,
@@ -285,7 +287,7 @@ export const formatProductOptions = (
 export const mapOptions = (
   options: any[],
   valueKey: string,
-  labelKey?: string
+  labelKey?: string,
 ) => {
   return options?.map((option: any) => ({
     ...option,
@@ -308,7 +310,7 @@ interface OptionFind {
 
 export const someOptionsPossiblity = (
   optionField: OptionFind[],
-  condition: (e: OptionFind) => boolean
+  condition: (e: OptionFind) => boolean,
 ) => {
   return optionField?.some((option) => {
     return condition(option);
@@ -318,10 +320,10 @@ export const someOptionsPossiblity = (
 export const formatOptions = (options: OptionFind[], cloud?: boolean): any => {
   const isCountryEntity = someOptionsPossiblity(
     options,
-    (option) => option.EntityName === "Country"
+    (option) => option.EntityName === "Country",
   );
   const formattedOptions = options.map((option) => {
-    const { Name, Description, EntityName, AdditionalAttributes = [] } = option;
+    const { Name, Description, AdditionalAttributes = [] } = option;
 
     const baseOption = {
       ...option,
@@ -332,25 +334,24 @@ export const formatOptions = (options: OptionFind[], cloud?: boolean): any => {
     if (!isCountryEntity) return baseOption;
 
     const attrMap = Object.fromEntries(
-      AdditionalAttributes.map((attr) => [attr.Key, attr.Value])
+      AdditionalAttributes.map((attr) => [attr.Key, attr.Value]),
     );
 
     return {
       ...baseOption,
       isPostalCodeRequired:
-        option.IsPostalCodeRequired ??
-        attrMap["IsPostalCodeRequired"] === "true",
-      postalCodeRegex: option.PostalCode ?? (attrMap["PostalCode"] as string),
+        option.IsPostalCodeRequired ?? attrMap.IsPostalCodeRequired === "true",
+      postalCodeRegex: option.PostalCode ?? (attrMap.PostalCode as string),
       validationMessage: option.ValidationMessage ?? "",
-      countryCode: option.ISOCode ?? attrMap["ISO2"],
-      isStateRequired: attrMap["IsStateRequired"] === "true",
+      countryCode: option.ISOCode ?? attrMap.ISO2,
+      isStateRequired: attrMap.IsStateRequired === "true",
     };
   });
 
   const shouldSort = someOptionsPossiblity(formattedOptions, (option) =>
     [FetchOptions.PARTNER_ROLE, FetchOptions.CURRENCY].includes(
-      (option.EntityName ?? "") as FetchOptions
-    )
+      (option.EntityName ?? "") as FetchOptions,
+    ),
   );
   let sortedOptions = shouldSort
     ? sortByKey(formattedOptions, "label")
@@ -359,7 +360,7 @@ export const formatOptions = (options: OptionFind[], cloud?: boolean): any => {
   if (
     someOptionsPossiblity(
       formattedOptions,
-      (o) => o.EntityName === FetchOptions.CURRENCY
+      (o) => o.EntityName === FetchOptions.CURRENCY,
     )
   ) {
     const usd = sortedOptions.find((o) => o.Name === DefaultCurrency.USD);
@@ -375,13 +376,13 @@ export const formatOptionsFilter = (
     RecordId?: string;
     FilterConfigName?: string;
     CRMName?: string;
-  }[]
+  }[],
 ): {
   label?: string;
   value?: string;
 }[] => {
   const optionsList = options
-    ?.filter((list) => list.CRMName == "HubSpot")
+    ?.filter((list) => list.CRMName === "HubSpot")
     ?.map((option) => {
       return { label: option?.FilterConfigName, value: option?.RecordId };
     });
@@ -391,10 +392,10 @@ export const formatOptionsFilter = (
 // Validation for isPostalCodeRequired
 export const isPostalCodeRequired = (
   formValue: any,
-  optionValues: any
+  optionValues: any,
 ): boolean => {
   const countryOption = optionValues?.countries?.find(
-    (option:any) => option.value === formValue?.country
+    (option: any) => option.value === formValue?.country,
   );
 
   const isNationalSecurityConditionMet =
@@ -411,7 +412,7 @@ export const isPostalCodeRequired = (
 };
 
 export const formatPartnerOptions = (
-  options: { PartnerName: string; PartnerAWSAccountId: string }[]
+  options: { PartnerName: string; PartnerAWSAccountId: string }[],
 ): { label: string; value: string }[] => {
   const optionList = options.map((options) => ({
     label: options.PartnerName,
@@ -421,26 +422,26 @@ export const formatPartnerOptions = (
 };
 
 export const formatSolutionsOptions = (
-  options: { Name: string; Id: string }[]
+  options: { Name: string; Id: string }[],
 ): any[] => {
   const optionList = options?.map(
     (options: { Name: string; Id: string; ID?: string }) => ({
       ...options,
       label: options.Name,
       value: options.Id ?? options.ID,
-    })
+    }),
   );
   return removeDuplicates(optionList as optionField[]);
 };
 
 export const formatSellerCodeOptions = (
-  options: { Name: string; SellerCode: string }[]
+  options: { Name: string; SellerCode: string }[],
 ): { label: string; value: string }[] => {
   const optionList = options.map(
     (options: { Name: string; SellerCode: string }) => ({
       label: options.Name,
       value: options.SellerCode,
-    })
+    }),
   );
   return removeDuplicates(optionList as optionField[]);
 };
@@ -450,7 +451,7 @@ export const formatCosellOptions = (
     MappingName: string;
     Id: number;
     CRMName: string;
-  }[]
+  }[],
 ) => {
   const optionList = options.map((option) => ({
     value: option.Id,
@@ -493,7 +494,7 @@ export const getStatus = (dealName: string): string => {
 
 export const displayErrorMessage = (
   condition: boolean,
-  message: string
+  message: string,
 ): string => {
   return condition ? message : "";
 };
@@ -552,14 +553,14 @@ export const getTomorrowDateBase = (): BaseDate => {
 };
 
 export const getMinStartDate = (
-  offerExpired: dateFormat
+  offerExpired: dateFormat,
 ): dateFormat | undefined => {
   if (!offerExpired?.year) return undefined;
 
   const date = new Date(
     offerExpired.year,
     offerExpired.month,
-    offerExpired.date
+    offerExpired.date,
   );
   const nextDay = addDays(date, 1);
 
@@ -584,14 +585,14 @@ export const getMaxStartDateThree = (): {
 };
 
 export const getMaxStartDateFive = (
-  offerStartDate: dateFormat
+  offerStartDate: dateFormat,
 ): dateFormat | undefined => {
   if (!offerStartDate?.year) return undefined;
 
   const date = new Date(
     offerStartDate.year,
     offerStartDate.month,
-    offerStartDate.date
+    offerStartDate.date,
   );
   const fiveYearsLater = addYears(date, 5);
 
@@ -625,7 +626,7 @@ export function convertToEndOfDayISOFromParts({
 }): string {
   // JavaScript Date uses 0-based months, so subtract 1
   const endOfDayUTC = new Date(
-    Date.UTC(year, month - 1, date, 23, 59, 59, 999)
+    Date.UTC(year, month - 1, date, 23, 59, 59, 999),
   );
   return endOfDayUTC.toISOString();
 }
@@ -640,7 +641,7 @@ export const formatUTCDateOnlyWithString = (isoString: string) => {
 export const formatUTCDateOnly = (isoString?: string) => {
   if (!isoString) return "--";
   const date = parseISO(isoString);
-  if (isNaN(date.getTime())) return "--";
+  if (Number.isNaN(date.getTime())) return "--";
   const formattedDate = format(date, "yyyy-MM-dd");
   return formattedDate;
 };
@@ -648,7 +649,7 @@ export const formatUTCDateOnly = (isoString?: string) => {
 export const formatUTCDateInstallment = (dateString?: string) => {
   if (!dateString) return "N/A";
 
-  let date;
+  let date: any;
 
   // Check if the format is MM/DD/YYYY (Type 1)
   if (/^\d{2}\/\d{2}\/\d{4}$/.test(dateString)) {
@@ -661,7 +662,7 @@ export const formatUTCDateInstallment = (dateString?: string) => {
     return "N/A"; // Invalid format
   }
 
-  if (isNaN(date.getTime())) return "N/A"; // Invalid date check
+  if (Number.isNaN(date.getTime())) return "N/A"; // Invalid date check
 
   return format(date, "yyyy-MM-dd");
 };
@@ -705,7 +706,7 @@ export const googleRecord = (
   compName: string,
   street: string,
   city: string,
-  zipcode: string
+  zipcode: string,
 ) => {
   const value: string[] = [];
   if (compName) value.push(compName);
@@ -720,17 +721,18 @@ export const camelCasetoReadView = (text: string) => {
 };
 
 export const fallbackForNull = (value?: any) => {
-  if (value == null || typeof value == "undefined" || value == "") return "--";
+  if (value == null || typeof value === "undefined" || value === "")
+    return "--";
   return value;
 };
 
 export const showLink = (value: any) => {
-  return !value || value == "N/A" || value == fallBackKey;
+  return !value || value === "N/A" || value === fallBackKey;
 };
 
 export const getOfferDuration = (
   offerCreatedDate: string,
-  offerExpiredDate: string
+  offerExpiredDate: string,
 ): number => {
   const createdDate = new Date(offerCreatedDate);
   const expiredDate = new Date(offerExpiredDate);
@@ -759,7 +761,7 @@ export const parseIsoString = (dateFormat?: string): string | null => {
 };
 
 export const parseDateInput = (
-  data: dateFormat = { year: 1000, date: 1, month: 0 }
+  data: dateFormat = { year: 1000, date: 1, month: 0 },
 ) => {
   return { day: data.date, month: data.month + 1, year: data.year };
 };
@@ -791,7 +793,7 @@ export const displayOpportunityName = (
   // cosell: RC3CosellResponse | GCPCosellResponse | AmpCosellResponse,
   cosell: RC3CosellResponse | AmpCosellResponse,
 
-  fallback: string = "N/A"
+  fallback: string = "N/A",
 ): string => {
   if (!cosell || !cosell.CloudProvider) return fallback;
 
@@ -805,7 +807,7 @@ export const displayOpportunityName = (
     }
   };
 
-  let cosellEntity;
+  let cosellEntity: any;
 
   if (cosell.CloudProvider === requestPayload?.cloud?.aws) {
     cosellEntity = parseEntity((cosell as RC3CosellResponse)?.CoSellEntity);
@@ -829,7 +831,7 @@ export const convertToLocalTime = (isoDateString?: string): string => {
   if (!isoDateString) return "--";
   const correctedDateString = isoDateString?.includes("z")
     ? isoDateString
-    : isoDateString + "z";
+    : `${isoDateString}z`;
 
   const date = new Date(correctedDateString);
 
@@ -842,7 +844,7 @@ export const formatToLocalTime = (utcTimestamp: string): string => {
 
   const date = new Date(cleanedTimestamp);
 
-  if (isNaN(date.getTime())) {
+  if (Number.isNaN(date.getTime())) {
     return "--";
   }
 
@@ -852,7 +854,7 @@ export const formatToLocalTime = (utcTimestamp: string): string => {
 export const validatePureNumber = (
   value: any,
   isDecimal: boolean = false,
-  withZero: boolean = true
+  withZero: boolean = true,
 ) => {
   if (!value) return false;
   const valueString = value.toString().trim();
@@ -899,7 +901,7 @@ export const ignoreUnspecified = (optionField: optionField[]) => {
 
 export const snakeCaseToCamelCase = (text: string = "", fallback = "N/A") => {
   if (!text) return text ?? fallback;
-  if (typeof text != "string") return text;
+  if (typeof text !== "string") return text;
   let result = text?.replace(/_/g, " ");
   result = result
     ?.toLowerCase()
@@ -932,10 +934,7 @@ export const sortByKey = (arr: any[], key: string): any[] => {
   });
 };
 
-export const assignColor = (
-  arr: any[],
-  key: string
-): Record<string, any> => {
+export const assignColor = (arr: any[], key: string): Record<string, any> => {
   const setData = new Set<string>();
   const sortedArray = sortByKey(arr, key);
 
@@ -947,7 +946,7 @@ export const assignColor = (
   });
 
   const colorMap: Record<string, any> = {};
-  let colorIndex = 3;
+  const _colorIndex = 3;
   // Array.from(setData).forEach((keys) => {
   //   if (requestPayload.preDefinedProviderColor[keys]) {
   //     colorMap[keys] = requestPayload.preDefinedProviderColor[keys];
@@ -1026,17 +1025,17 @@ export const isFutureDate = (baseDate: BaseDate): boolean => {
   if (!baseDate) return false;
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  const targetDate = new Date((baseDate as unknown as  string));
+  const targetDate = new Date(baseDate as unknown as string);
   return targetDate > today;
 };
 
 export const isPendingCosell = (slug: string, status: string = ""): boolean =>
-  slug == CosellAction.ADD || status?.includes(StatusState.PENDING_SUBMISSION);
+  slug === CosellAction.ADD || status?.includes(StatusState.PENDING_SUBMISSION);
 
 export const setValidation = (
   labelMapper: Record<string, any>,
   field: string,
-  isValid: boolean
+  isValid: boolean,
 ) => {
   labelMapper[field].validation = isValid
     ? labelMapper[field].validationInvalid
@@ -1044,7 +1043,7 @@ export const setValidation = (
 };
 
 export const getOfferIdwithOutAggrementId = (
-  marketplaceTransactions?: MarketplaceTransaction[]
+  marketplaceTransactions?: MarketplaceTransaction[],
 ) => {
   const offerId = marketplaceTransactions?.[0]?.MarketplaceOffer?.OfferID;
   return offerId;
@@ -1061,7 +1060,7 @@ export const mapSellerCode = (options: { [key: string]: string }[]) => {
 };
 export const getPrivateOfferStep = (
   step: string,
-  currentStep?: number
+  currentStep?: number,
 ): string => {
   switch (step) {
     case "BasicInformation":
@@ -1089,7 +1088,7 @@ export const parseBaseDateTodate = (
         date: number;
       }
     | null
-    | undefined
+    | undefined,
 ): string | null => {
   if (!formatDate) return null;
   const { year, month, date } = formatDate;
@@ -1106,7 +1105,7 @@ export const parseBaseDateTodate = (
 // };
 
 export const toBaseDate = (
-  value: string | BaseDate | null | undefined
+  value: string | BaseDate | null | undefined,
 ): any | null => {
   if (!value) return null;
 
@@ -1135,9 +1134,7 @@ export const toBaseDate = (
       year,
       month,
       date,
-      formattedDate: `${year}-${String(month).padStart(2, "0")}-${String(
-        date
-      ).padStart(2, "0")}`,
+      formattedDate: `${year}-${String(month).padStart(2, "0")}-${String(date).padStart(2, "0")}`,
     };
   }
 
@@ -1152,9 +1149,9 @@ export const baseDateToString = (date: BaseDate): string => {
 
 export const extractEndDate = (
   formValue: Record<string, any>,
-  labelMapper: any
+  labelMapper: any,
 ): string | null => {
-  const { year, month, date } = formValue?.offerExpired;
+  const { year, month, date } = formValue?.offerExpired || {};
   if (!year || !month || !date) return null;
   const dateObj = new Date(year, month, date);
   const durationUnit = formValue?.[labelMapper.durationUnit.name];
@@ -1169,7 +1166,7 @@ export const extractEndDate = (
 
 export const formatContractDuration = (
   formValue: Record<string, any>,
-  labelMapper: any
+  labelMapper: any,
 ): string => {
   const durationUnit = formValue?.[labelMapper.durationUnit.name];
   const duration = formValue?.duration ?? 0;
@@ -1195,7 +1192,7 @@ export const parseAndCalculateSchedulePrice = (schedulePrice: any[]) => {
 
   const totalAmount = parsedList.reduce(
     (acc: number, curr: any) => acc + parseFloat(curr.Price),
-    0
+    0,
   );
 
   return {

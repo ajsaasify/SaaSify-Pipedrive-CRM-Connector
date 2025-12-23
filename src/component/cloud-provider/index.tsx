@@ -1,11 +1,11 @@
 import { requestPayload } from "@template/common/listCosell";
-import { AlertNotification } from "@template/common/messageAlert";
+import type { AlertNotification } from "@template/common/messageAlert";
 import { useCoSellContext } from "@template/context/Cosell.context";
 import { ToastService } from "@template/services/toast.service";
-import { optionField } from "@template/types/dropdown.options";
+import type { optionField } from "@template/types/dropdown.options";
 import { useEffect, useState } from "react";
 import { labelMapper } from "./helper";
-import { createCosell, fetchCreateProps } from "./apiHandler";
+import { fetchCreateProps } from "./apiHandler";
 import { Tile } from "../ui-components/detailview-components";
 import initSdk from "@template/helpers/modelInit";
 import { PDRadioGroup } from "../ui-components/PipedriveRadiobutton";
@@ -19,32 +19,27 @@ import {
 import PDSelectField from "../ui-components/PipedriveDropdown";
 import { displayErrorMessage } from "@template/utils/globalHelper";
 import { DropdownOptions } from "@template/enum/options.enum";
-import { usePipedrive } from "@template/context/PipedriveContext";
-import AppExtensionsSDK, { Command } from "@pipedrive/app-extensions-sdk";
+import type AppExtensionsSDK from "@pipedrive/app-extensions-sdk";
+import { Command } from "@pipedrive/app-extensions-sdk";
 import { FormButton } from "@template/enum/button.enum";
-import pipeDriveParams, {
-  pipedriveParams,
-} from "@template/utils/pipedrive-params";
+import pipeDriveParams from "@template/utils/pipedrive-params";
 
 const CloudProvider = () => {
   const [isFetching, setIsFetching] = useState(false);
   const {
-    setGenerateCosell,
     mappingCrmList,
-    setData,
-    opportunityList,
     dropdownShow,
     optionValues,
     setOptionValues,
     setMappingCrmList,
   } = useCoSellContext();
   const [sellerCode, setSellerCode] = useState<optionField[]>([]);
-  const [isError, setIsError] = useState<any>(false);
+  const [isError, _setIsError] = useState<any>(false);
   const [loader, setLoader] = useState(true);
   const [formValue, setFormValue] = useState<Record<string, any>>({});
-  const [errorState, setErrorState] = useState("");
+  const [_errorState, setErrorState] = useState("");
   const [errorForm, setErrorForm] = useState<Record<string, boolean>>({});
-  const params = pipeDriveParams();
+  const _params = pipeDriveParams();
   const triggerAlert = ({ type, message, title }: AlertNotification) => {
     (ToastService as any)?.[type]?.(title, message);
   };
@@ -81,26 +76,28 @@ const CloudProvider = () => {
       setOptionValues,
       setMappingCrmList,
       setLoader,
-      triggerAlert
+      triggerAlert,
     );
   };
 
   useEffect(() => {
     init();
-  }, []);
+    // biome-ignore lint/correctness/useExhaustiveDependencies: Init should run on mount/updates
+  }, [init]);
 
   useEffect(() => {
     renderDefaultCosell();
-  }, [dropdownShow]);
+    // biome-ignore lint/correctness/useExhaustiveDependencies: Intentional dependency
+  }, [renderDefaultCosell]);
 
   useEffect(() => {
     const sellerAccountOpt = (
       optionValues?.[DropdownOptions.SELLER_CODE] ?? []
-    )?.filter((option) => option.ProviderName == formValue?.provider);
+    )?.filter((option) => option.ProviderName === formValue?.provider);
     setFormValue((prev) => ({
       ...prev,
       [labelMapper.sellerCode.name]:
-        sellerAccountOpt?.length == 1 ? sellerAccountOpt?.[0]?.value : "",
+        sellerAccountOpt?.length === 1 ? sellerAccountOpt?.[0]?.value : "",
     }));
     setSellerCode(sellerAccountOpt);
   }, [formValue?.provider, optionValues]);
@@ -176,14 +173,14 @@ const CloudProvider = () => {
             onChange={(value) =>
               onChangeValue(labelMapper.sellerCode.name, value)
             }
-            readOnly={sellerCode?.length == 1}
+            readOnly={sellerCode?.length === 1}
             options={sellerCode}
             placeholder={labelMapper.sellerCode.placeHolder}
             value={formValue[labelMapper.sellerCode.name]}
             error={errorForm[labelMapper.sellerCode.name]}
             validationMessage={displayErrorMessage(
               errorForm[labelMapper.sellerCode.name],
-              labelMapper.sellerCode.validationMessage
+              labelMapper.sellerCode.validationMessage,
             )}
           />
         )}
@@ -203,7 +200,7 @@ const CloudProvider = () => {
             disabled={loader || !sellerCode?.length}
             label={
               formValue[labelMapper.provider.name]?.includes(
-                requestPayload.cloud.gcp
+                requestPayload.cloud.gcp,
               )
                 ? FormButton.CREATE_OPPORTUNITY
                 : FormButton.CREATE_COSELL

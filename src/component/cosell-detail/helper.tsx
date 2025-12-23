@@ -4,9 +4,8 @@ import {
   PDButtonType,
 } from "@template/enum/pipedrive.enum";
 import PDButton from "../ui-components/pipedriveButton";
-import { RC3CosellResponse } from "@template/types/cosellResponse";
-import { Dispatch, SetStateAction } from "react";
-import { useTranslation } from "react-i18next";
+import type { Dispatch, SetStateAction } from "react";
+
 import { useCoSellContext } from "@template/context/Cosell.context";
 import ActionButtons from "../actions/Buttons";
 
@@ -20,16 +19,7 @@ export const CosellDetailHeader = ({
     }>
   >;
 }) => {
-  const { t } = useTranslation();
-  const {
-    data,
-    setData,
-    setIsSpecificLoading,
-    partnerType,
-    setOpportunityList,
-    opportunityList,
-    dropdownShow,
-  } = useCoSellContext();
+  const { data } = useCoSellContext();
   return (
     <div className="flex justify-between m-4">
       <div className="flex items-center justify-center">
@@ -41,7 +31,7 @@ export const CosellDetailHeader = ({
         ></PDButton>
         <h5>Opportunity Id: {data?.CloudProviderIdentifier || "N/A"}</h5>
       </div>
-      <ActionButtons actions={{}}/>
+      <ActionButtons actions={{}} />
       {/* <div className="flex items-center justify-center gap-1">
         <PDButton
           label={t("buttonLabel.edit")}

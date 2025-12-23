@@ -7,11 +7,6 @@ import React, {
 import type { OptionTypes } from "@template/types/dropdown.options";
 import type { RC3CosellResponse } from "@template/types/cosellResponse";
 import type { PaginationType } from "@template/types/paginator";
-import {
-  getDealType,
-  getStatus,
-  validateDealName,
-} from "@template/utils/globalHelper";
 import type { FilterDefaultDeal } from "@template/types/filter";
 // import type { Activitylog } from "@template/types/activity";
 import { requestPayload } from "@template/common/listCosell";
@@ -21,7 +16,7 @@ import { paginatorDefault } from "@template/common/constants/paginator";
 import type { MappingList } from "@template/types/mapping";
 import type { PartnerConnectionProps } from "@template/types/partner";
 import type { ReferenceDataProps } from "@template/types/reference";
-import { ModelType } from "@template/enum/pipedrive.enum";
+import type { ModelType } from "@template/enum/pipedrive.enum";
 
 interface CoSellContextProps {
   data: RC3CosellResponse;
@@ -60,11 +55,11 @@ interface CoSellContextProps {
   // setSelectedActivityLog: React.Dispatch<React.SetStateAction<Activitylog>>;
   optionValues: OptionTypes;
   setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>;
-  isSpecificLoading: Boolean;
+  isSpecificLoading: boolean;
   setIsSpecificLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  isListLoading: Boolean;
+  isListLoading: boolean;
   setIsListLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  emptyState: Boolean;
+  emptyState: boolean;
   setEmptyState: React.Dispatch<React.SetStateAction<boolean>>;
   partnerConnections: PartnerConnectionProps[];
   setPartnerConnects: React.Dispatch<
@@ -74,7 +69,8 @@ interface CoSellContextProps {
   setSelectedPartnerConnect: React.Dispatch<
     React.SetStateAction<PartnerConnectionProps>
   >;
-  loading:boolean, setLoading:React.Dispatch<boolean>;
+  loading: boolean;
+  setLoading: React.Dispatch<boolean>;
   referenceData: ReferenceDataProps[];
   setReferenceData: React.Dispatch<React.SetStateAction<ReferenceDataProps[]>>;
   // referenceDataGcp: ReferenceDataProps[];
@@ -102,13 +98,13 @@ export const CoSellProvider: React.FC<{ children: ReactNode }> = ({
   // const [cosellActiviy, setCosellActivity] = useState<Activitylog[]>([]);
   const [optionValues, setOptionValues] = useState<OptionTypes>({});
   const [opportunityList, setOpportunityList] = useState<RC3CosellResponse[]>(
-    []
+    [],
   );
   const [referenceData, setReferenceData] = useState<ReferenceDataProps[]>([]);
-  const [referenceDataGcp, setReferenceDataGcp] = useState<
+  const [_referenceDataGcp, _setReferenceDataGcp] = useState<
     ReferenceDataProps[]
   >([]);
-  const [referenceDataAmp, setReferenceDataAmp] = useState<
+  const [_referenceDataAmp, _setReferenceDataAmp] = useState<
     ReferenceDataProps[]
   >([]);
   const [currentPage, setCurrentPage] = useState<any>();

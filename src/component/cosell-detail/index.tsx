@@ -1,5 +1,5 @@
 import pipeDriveParams from "@template/utils/pipedrive-params";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { getSingleCosell } from "./apiHandler";
 import { useCoSellContext } from "@template/context/Cosell.context";
 import { OverViewCard } from "../AwsProviderCosell/Overviews";
@@ -13,23 +13,32 @@ import { MarketPlaceCard } from "../AwsProviderCosell/Marketplaces";
 import { CosellDetailHeader } from "./helper";
 
 const CosellDetailView = () => {
-  const params = pipeDriveParams();
+  const _params = pipeDriveParams();
   const { setData } = useCoSellContext();
-  const { currentPage, setCurrentPage, setIsSpecificLoading, isSpecificLoading } =
-    useCoSellContext();
-  const init = async () => {
-    await getSingleCosell({
-      sellerId: currentPage?.params?.sellerCode || "",
-      opportunityId: currentPage?.params?.referenceId || "",
-      setLoading:setIsSpecificLoading,
-      setData,
-    });
-  };
+  const {
+    currentPage,
+    setCurrentPage,
+    setIsSpecificLoading,
+    isSpecificLoading,
+  } = useCoSellContext();
   useEffect(() => {
     if (!currentPage?.params?.referenceId) return;
-    const sdk = initSdk(window.outerWidth, window.outerHeight);
+    const _sdk = initSdk(window.outerWidth, window.outerHeight);
+    const init = async () => {
+      await getSingleCosell({
+        sellerId: currentPage?.params?.sellerCode || "",
+        opportunityId: currentPage?.params?.referenceId || "",
+        setLoading: setIsSpecificLoading,
+        setData,
+      });
+    };
     init();
-  }, []);
+  }, [
+    currentPage?.params?.referenceId,
+    currentPage?.params?.sellerCode,
+    setData,
+    setIsSpecificLoading,
+  ]);
   if (isSpecificLoading) {
     return (
       <div className="h-screen flex flex-col items-center justify-center p-5">

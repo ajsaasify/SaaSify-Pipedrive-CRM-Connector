@@ -3,9 +3,9 @@ import { emailRegex } from "@template/utils/regex";
 import { labelMapper } from "./helper";
 
 export const fieldChecks = (
-  formValue:any,
+  formValue: any,
   readOnlyFields: string[],
-  isNationalSecurities: boolean
+  isNationalSecurities: boolean,
 ) => {
   const isReadOnly = (field: string): boolean => readOnlyFields.includes(field);
   const isInvalidField = (field: string): boolean => {
@@ -87,14 +87,14 @@ export const fieldChecks = (
       field: labelMapper.state.name,
       condition:
         !isNationalSecurities &&
-        formValue?.country == labelMapper.state.value &&
+        formValue?.country === labelMapper.state.value &&
         !formValue.state &&
         !isReadOnly(labelMapper.state.name),
     },
     {
       field: labelMapper.industryOther.name,
       condition:
-        formValue?.industryVertical == labelMapper?.industryVertical?.value &&
+        formValue?.industryVertical === labelMapper?.industryVertical?.value &&
         !formValue?.industryOther &&
         !isReadOnly(labelMapper.industryOther.name),
     },

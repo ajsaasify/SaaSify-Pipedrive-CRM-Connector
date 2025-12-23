@@ -6,15 +6,15 @@ import {
 } from "@template/utils/globalHelper";
 import { OpportunityTeam as Team } from "@template/enum/opportunityTeam.enum";
 import { CosellAction } from "@template/enum/action.enum";
-import { DataPropertyType } from "@template/types/cosell.forms";
+import type { DataPropertyType } from "@template/types/cosell.forms";
 import { StatusState } from "@template/enum/status.enum";
-import { RC3CosellResponse } from "@template/types/cosellResponse";
+import type { RC3CosellResponse } from "@template/types/cosellResponse";
 import { requestPayload } from "@template/common/listCosell";
 
 export function buildProject(
   formValue: any,
   existingProject: any,
-  revenuePayload: any
+  revenuePayload: any,
 ) {
   return {
     ...existingProject,
@@ -27,7 +27,7 @@ export function buildProject(
     ExpectedCustomerSpend: revenuePayload,
     OtherCompetitorNames: trimString(formValue?.otherCompetitors),
     RelatedOpportunityIdentifier: trimString(
-      formValue?.relatedOpportunityIndentifier
+      formValue?.relatedOpportunityIndentifier,
     ),
     SalesActivities: formValue?.salesActivities || [],
     Title: trimString(formValue?.partnerProjectTitle),
@@ -56,7 +56,7 @@ export function buildLifeCycle(formValue: any, existingLifeCycle: any) {
 export function buildCustomer(
   formValue: any,
   existingCustomer: any,
-  contactPayload: any
+  contactPayload: any,
 ) {
   return {
     ...existingCustomer,
@@ -100,7 +100,7 @@ export function buildCosellPayload({
   data: RC3CosellResponse;
   generateCosell: RC3CosellResponse;
 }) {
-  let payload = slug === CosellAction.EDIT ? data : generateCosell;
+  const payload = slug === CosellAction.EDIT ? data : generateCosell;
 
   const {
     Customer: { Contacts } = {},
@@ -117,7 +117,7 @@ export function buildCosellPayload({
           BusinessTitle: trimString(formValue?.contactTitle),
           Phone: trimString(formValue?.contactPhone),
         }
-      : team
+      : team,
   );
 
   const partnerManagerPayload = OpportunityTeam?.map((team: any) =>
@@ -129,18 +129,18 @@ export function buildCosellPayload({
           BusinessTitle: Team.PARTNER_MANAGER,
           Phone: trimString(formValue?.primaryContactPhone),
         }
-      : team
+      : team,
   );
 
   const revenuePayload = ExpectedCustomerSpend?.map(
     (spend: any, index: number) =>
       index === 0
         ? { ...spend, Amount: formValue?.estimatedAWSRecurringRevenue }
-        : spend
+        : spend,
   );
 
   const coSellEntity = payload.CoSellEntity || {};
-  console.log("formValue",formValue)
+  console.log("formValue", formValue);
   return {
     ...payload,
     Version: payload?.Version ?? requestPayload.version?.AWS,
@@ -151,14 +151,14 @@ export function buildCosellPayload({
       Customer: buildCustomer(
         formValue,
         coSellEntity?.Customer,
-        contactPayload
+        contactPayload,
       ),
       LifeCycle: buildLifeCycle(formValue, coSellEntity?.LifeCycle),
       Marketing: buildMarketing(formValue, coSellEntity?.Marketing),
       Project: buildProject(formValue, coSellEntity?.Project, revenuePayload),
       RelatedEntityIdentifiers: buildRelatedEntities(
         formValue,
-        coSellEntity?.RelatedEntityIdentifiers
+        coSellEntity?.RelatedEntityIdentifiers,
       ),
       PartnerOpportunityIdentifier: formValue?.crmUniqueIdentifier,
       PrimaryNeedsFromAws: formValue?.awsCosell || [],
@@ -243,7 +243,7 @@ export function buildDataProperty({
     useCase: Project?.CustomerUseCase,
     nationalSecurity: NationalSecurity ?? "No",
     deliveryModel: Project?.DeliveryModels,
-    estimatedAWSRecurringRevenue: isNaN(Number(customerSpend?.Amount))
+    estimatedAWSRecurringRevenue: Number.isNaN(Number(customerSpend?.Amount))
       ? 0
       : customerSpend?.Amount,
     apnProgram: Project?.ApnPrograms,

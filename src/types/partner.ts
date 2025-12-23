@@ -1,4 +1,4 @@
-import { OpportunityTeam } from "./cosellResponse";
+import type { OpportunityTeam } from "./cosellResponse";
 
 export interface PartnerConnectionProps {
   Catalog?: string;

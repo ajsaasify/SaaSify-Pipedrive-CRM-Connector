@@ -9,18 +9,12 @@ import { PrimeReactProvider } from "primereact/api";
 import { PipedriveProvider } from "@template/context/PipedriveContext";
 
 import i18n from "@template/lib/i18n";
-import { useRef } from "react";
-import { Toast } from "primereact/toast";
 import AppToast from "@template/component/ui-components/pipedrive-toast";
 
 // styles
-// @ts-ignore: module declaration for side-effect SCSS import
 import "@template/styles/globals.scss";
-// @ts-ignore: module declaration for side-effect SCSS import
 import "primereact/resources/primereact.min.css";
-// @ts-ignore: module declaration for side-effect SCSS import
 import "primeicons/primeicons.css";
-// @ts-ignore: module declaration for side-effect SCSS import
 import "primereact/resources/themes/saga-orange/theme.css";
 import { CoSellProvider } from "@template/context/Cosell.context";
 import { ToastService } from "@template/services/toast.service";

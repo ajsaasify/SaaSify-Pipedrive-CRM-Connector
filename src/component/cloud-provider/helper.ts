@@ -10,6 +10,8 @@ export const labelMapper = {
     label: t("awsCosell.inputLabelMapper.sellerCode.label"),
     placeHolder: t("awsCosell.inputLabelMapper.sellerCode.placeHolder"),
     name: "sellerCode",
-    validationMessage:t("awsCosell.inputLabelMapper.sellerCode.validationMessage"),
+    validationMessage: t(
+      "awsCosell.inputLabelMapper.sellerCode.validationMessage",
+    ),
   },
 };

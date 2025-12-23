@@ -1,6 +1,6 @@
 import { requestPayload } from "@template/common/listCosell";
 import {
-  AlertNotification,
+  type AlertNotification,
   getErrorAlert,
   getInfoAlert,
   getSuccessAlert,
@@ -10,19 +10,18 @@ import SaasifyService from "@template/services/saasify.service";
 import { CosellAction } from "@template/enum/action.enum";
 import { ModalId } from "@template/enum/modal.enum";
 import { ResponseStatus } from "@template/enum/response.enum";
-import { PipedriveContext } from "@template/types/pipedriveContext";
 import { formatOptions, getResponseError } from "@template/utils/globalHelper";
 // import {
 //   fetchListCosell,
 //   handleErrors,
 // } from "../../OpportunityList/apiHandler";
 import { pullCosell } from "@template/component/actions/Buttons/apiHandler";
-import { RC3CosellResponse } from "@template/types/cosellResponse";
-import { OptionTypes } from "@template/types/dropdown.options";
+import type { RC3CosellResponse } from "@template/types/cosellResponse";
+import type { OptionTypes } from "@template/types/dropdown.options";
 import { EntityService } from "@template/services/options.service";
-import { DropdownOptions, FetchOptions } from "@template/enum/options.enum";
+import { DropdownOptions } from "@template/enum/options.enum";
 import { referenceDataProps } from "@template/common/constants/referenceData";
-import { ReferenceDataProps } from "@template/types/reference";
+import type { ReferenceDataProps } from "@template/types/reference";
 import { fetchListCosell, handleErrors } from "../cosell-list/apiHandler";
 
 const saasifyService = new SaasifyService();
@@ -37,21 +36,21 @@ export async function saveEditCosells(
   setData: React.Dispatch<React.SetStateAction<RC3CosellResponse>>, //
   setOpportunityList: React.Dispatch<React.SetStateAction<RC3CosellResponse[]>>, //
   opportunityList: RC3CosellResponse[], //
-  setErrorStatus: React.Dispatch<React.SetStateAction<string>>
+  setErrorStatus: React.Dispatch<React.SetStateAction<string>>,
 ) {
   setErrorStatus("");
   triggerAlert(
     getInfoAlert(
-      slug == CosellAction.EDIT
+      slug === CosellAction.EDIT
         ? generateMessage.updateCosellInProgress
-        : generateMessage.createCosellInProgress
-    )
+        : generateMessage.createCosellInProgress,
+    ),
   );
   try {
     setIsFetching(true);
     const responseData = await saasifyService.postCosellById(
       payload?.SellerCode as string,
-      payload
+      payload,
     );
 
     if (responseData?.Status === ResponseStatus.ERROR) {
@@ -62,7 +61,7 @@ export async function saveEditCosells(
     }
 
     if (responseData?.Status === ResponseStatus.SUCCESS) {
-      if (slug != CosellAction.ADD) {
+      if (slug !== CosellAction.ADD) {
         await pullCosell(
           data,
           triggerAlert,
@@ -70,17 +69,17 @@ export async function saveEditCosells(
           setData,
           setOpportunityList,
           opportunityList,
-          false
+          false,
         );
       } else {
         await fetchListCosell(setData, setOpportunityList);
       }
       triggerAlert(
         getSuccessAlert(
-          slug == CosellAction.EDIT
+          slug === CosellAction.EDIT
             ? generateMessage.editCosell
-            : generateMessage.createCosell
-        )
+            : generateMessage.createCosell,
+        ),
       );
       actions.closeOverlay(ModalId.ACTION_COSELL);
     }
@@ -88,7 +87,7 @@ export async function saveEditCosells(
     // triggerAlert(getErrorAlert(error.message));
     if (error.message.includes(ResponseStatus.GATEWAY_ERROR)) {
       triggerAlert(getInfoAlert(generateMessage?.gatewayMessage));
-      slug == CosellAction.ADD &&
+      slug === CosellAction.ADD &&
         (await fetchListCosell(setData, setOpportunityList));
       actions.closeOverlay(ModalId.ACTION_COSELL);
     } else {
@@ -106,7 +105,7 @@ export async function fetchDropDowAllOptions(
   optionValues: OptionTypes,
   referencedata: ReferenceDataProps[],
   setReferenceData: React.Dispatch<React.SetStateAction<ReferenceDataProps[]>>,
-  sellerCode: string
+  sellerCode: string,
 ) {
   try {
     const firstSet = await Promise.all([
@@ -114,7 +113,7 @@ export async function fetchDropDowAllOptions(
         ? [
             entityService.fetchCountry(
               setOptionValues,
-              requestPayload.cloud.aws
+              requestPayload.cloud.aws,
             ),
           ]
         : []),
@@ -124,7 +123,7 @@ export async function fetchDropDowAllOptions(
               optionValues,
               setOptionValues,
               triggerAlert,
-              sellerCode
+              sellerCode,
             ),
           ]
         : []),
@@ -141,7 +140,7 @@ export async function fetchDropDowAllOptions(
       setReferenceData,
       setOptionValues,
       triggerAlert,
-      referencedata
+      referencedata,
     );
   } catch (error: any) {
     triggerAlert(getErrorAlert(error?.message));
@@ -152,13 +151,13 @@ export async function fetchSolutions(
   optionValues: OptionTypes,
   setOptionValues: React.Dispatch<React.SetStateAction<OptionTypes>>,
   triggerAlert: (alert: AlertNotification) => void,
-  sellerCode: string
+  sellerCode: string,
 ) {
   try {
     if (!optionValues[DropdownOptions.SOULTIONS]?.length) {
       const response = await entityService.fetchSolutions(
         setOptionValues,
-        sellerCode
+        sellerCode,
       );
       if (response?.result === ResponseStatus.ERROR) {
         throw new Error(getResponseError(response?.value));
@@ -175,7 +174,7 @@ export async function fetchReference(
   triggerAlert: (alert: AlertNotification) => void,
   referenceData: ReferenceDataProps[],
   referenceDataProp = referenceDataProps,
-  cloud = requestPayload.cloud.aws
+  cloud = requestPayload.cloud.aws,
 ) {
   try {
     const responseData = referenceData?.length
@@ -189,7 +188,7 @@ export async function fetchReference(
       referenceDataProp.forEach((item) => {
         const { fetch, value } = item;
         const filterData = referenceProps?.filter(
-          (data: any) => data?.EntityName == fetch
+          (data: any) => data?.EntityName === fetch,
         );
         setOptionValues((prev) => ({
           ...prev,
