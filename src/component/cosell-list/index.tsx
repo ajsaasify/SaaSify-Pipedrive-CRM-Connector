@@ -62,39 +62,37 @@ export const CosellList = () => {
 
   return (
     <div className="md:w-full lg:max-w-full p-4 overflow-auto">
-      {!["Pending", "Rejected", "Expired"]?.includes(currentCosell?.CloudProviderStatus ?? "") ? (
-        <Menu
-          model={[
-            {
-              label: "Edit",
-              command: () => {
-                setCurrentPage({
-                  page: ModelType.COSELL_CREATE,
-                  params: {
-                    referenceId: currentCosell?.ReferenceID || "",
-                    sellerCode: currentCosell?.SellerCode || "",
-                  },
-                });
-              },
+      <Menu
+        model={[
+          {
+            label: "Edit",
+            command: () => {
+              setCurrentPage({
+                page: ModelType.COSELL_CREATE,
+                params: {
+                  referenceId: currentCosell?.ReferenceID || "",
+                  sellerCode: currentCosell?.SellerCode || "",
+                },
+              });
             },
+          },
 
-            {
-              label: "View",
-              command: () => {
-                setCurrentPage({
-                  page: ModelType.COSELL_DETAIL,
-                  params: {
-                    referenceId: currentCosell?.ReferenceID || "",
-                    sellerCode: currentCosell?.SellerCode || "",
-                  },
-                });
-              },
+          {
+            label: "View",
+            command: () => {
+              setCurrentPage({
+                page: ModelType.COSELL_DETAIL,
+                params: {
+                  referenceId: currentCosell?.ReferenceID || "",
+                  sellerCode: currentCosell?.SellerCode || "",
+                },
+              });
             },
-          ]}
-          popup
-          ref={menuRef}
-        />
-      ) : null}
+          },
+        ]}
+        popup
+        ref={menuRef}
+      />
       <div className="custom_table">
         <PDAdvancedTable
           first={first}
