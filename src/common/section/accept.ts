@@ -1,11 +1,7 @@
 import type { OpportunityTeam } from "../../types/cosellResponse";
 import { StatusState } from "../../enum/status.enum";
-import {
-  currencyNotConvertedFormat,
-  displayDate,
-  displayDateInvitations,
-} from "../../utils/globalHelper";
-import { awsConstants } from "../constants/awsCosellFieldMappings";
+import { currencyNotConvertedFormat, displayDate, displayDateInvitations } from "../../utils/globalHelper";
+
 import { requestPayload } from "../listCosell";
 import { useTranslation } from "react-i18next";
 
@@ -13,21 +9,11 @@ export const fallBackKey = "--";
 
 export const acceptSegmentData = (cosell: any) => {
   const { Invitation } = cosell.CoSellEntity || {};
-  const {
-    Payload,
-    InvitationDate,
-    Status,
-    Receiver,
-    Message,
-    InvitationMessage,
-    RejectionReason,
-    SenderCompanyName,
-    SenderAwsAccountId,
-  } = Invitation || {};
+  const { Payload, InvitationDate, Status, Receiver, Message, InvitationMessage, RejectionReason, SenderCompanyName, SenderAwsAccountId } =
+    Invitation || {};
   const { t } = useTranslation();
   const opportunitySender =
-    SenderAwsAccountId?.toLowerCase() === "aws" ||
-    SenderCompanyName?.toLowerCase() === "aws"
+    SenderAwsAccountId?.toLowerCase() === "aws" || SenderCompanyName?.toLowerCase() === "aws"
       ? "AWS"
       : SenderCompanyName
       ? SenderAwsAccountId
@@ -108,17 +94,13 @@ export const acceptSegmentData = (cosell: any) => {
     },
     {
       title: t("awsCosell.accept.targetCloseDate"),
-      value: displayDate(
-        Payload?.OpportunityInvitation?.Project?.TargetCompletionDate
-      ),
+      value: displayDate(Payload?.OpportunityInvitation?.Project?.TargetCompletionDate),
     },
     {
       title: t("awsCosell.accept.estimatedAwsMonthlyRecurringRevenue"),
       value: currencyNotConvertedFormat(
-        Payload?.OpportunityInvitation?.Project?.ExpectedCustomerSpend?.[0]
-          ?.CurrencyCode,
-        Payload?.OpportunityInvitation?.Project?.ExpectedCustomerSpend?.[0]
-          ?.Amount
+        Payload?.OpportunityInvitation?.Project?.ExpectedCustomerSpend?.[0]?.CurrencyCode,
+        Payload?.OpportunityInvitation?.Project?.ExpectedCustomerSpend?.[0]?.Amount
       ),
     },
     {
@@ -138,36 +120,20 @@ export const acceptSegmentData = (cosell: any) => {
   ].filter(
     (field) =>
       !RejectField.includes(field.title) ||
-      (Status?.toLocaleLowerCase() ==
-        StatusState.REJECTED.toLocaleLowerCase() &&
-        RejectField.includes(field.title))
+      (Status?.toLocaleLowerCase() === StatusState.REJECTED.toLocaleLowerCase() && RejectField.includes(field.title))
   );
-  if (
-    cosell?.DealType?.toLocaleLowerCase()?.includes(
-      requestPayload?.dealType?.multiPartner
-    )
-  ) {
+  if (cosell?.DealType?.toLocaleLowerCase()?.includes(requestPayload?.dealType?.multiPartner)) {
     fields.splice(2, 0, ...multipartnerMessage);
   }
 
-  fields.splice(
-    4,
-    0,
-    ...(cosell?.DealType?.includes(requestPayload?.dealType?.inbound)
-      ? multiPartner
-      : forAws)
-  );
+  fields.splice(4, 0, ...(cosell?.DealType?.includes(requestPayload?.dealType?.inbound) ? multiPartner : forAws));
 
   return fields;
 };
 
-export const getValue = (field?: any, fallback: string = fallBackKey): string =>
-  field || fallback;
+export const getValue = (field?: any, fallback: string = fallBackKey): string => field || fallback;
 
-export const toTitleCase = (
-  field?: any,
-  fallback: string = fallBackKey
-): string => {
+export const toTitleCase = (field?: any, fallback: string = fallBackKey): string => {
   if (!field || typeof field !== "string") return fallback;
   return `${field[0].toLocaleUpperCase()}${field.slice(1).toLocaleLowerCase()}`;
 };

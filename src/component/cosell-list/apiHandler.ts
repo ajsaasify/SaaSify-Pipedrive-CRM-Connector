@@ -1,14 +1,11 @@
 import { requestPayload } from "@template/common/listCosell";
-import {
-  type AlertNotification,
-  getErrorAlert,
-} from "@template/common/messageAlert";
+import { type AlertNotification, getErrorAlert } from "@template/common/messageAlert";
 import { generateMessage } from "@template/common/messageAlert/generateMessage";
 import { ResponseStatus } from "@template/enum/response.enum";
 import SaasifyService from "@template/services/saasify.service";
 import type { Activitylog } from "@template/types/activity";
 import type { AmpCosellResponse } from "@template/types/ampCosell";
-import type { CoSellItem } from "@template/types/api/getListCosellAssociateCrm.t";
+
 import type { RC3CosellResponse } from "@template/types/cosellResponse";
 import type { PipedriveContext } from "@template/types/pipedriveContext";
 import { getResponseError } from "@template/utils/globalHelper";
@@ -20,7 +17,7 @@ export const getCosellsAPI = async (
   first: number,
   setLoading: Dispatch<SetStateAction<boolean>>,
   setCosells: Dispatch<SetStateAction<RC3CosellResponse[]>>,
-  setTotalRecords: Dispatch<SetStateAction<number>>,
+  setTotalRecords: Dispatch<SetStateAction<number>>
 ) => {
   const saasify = new SaasifyService();
   setLoading(true);
@@ -52,13 +49,11 @@ export async function fetchAllOptions(
   setOpportunityList: React.Dispatch<React.SetStateAction<RC3CosellResponse[]>>,
   initialError: React.MutableRefObject<boolean>,
   triggerAlert: (alert: AlertNotification) => void,
-  isDefaultView: boolean,
+  isDefaultView: boolean
 ) {
   try {
     !isDefaultView && setIsListLoading(true);
-    const firstSet = await Promise.all([
-      ...(isDefaultView ? [] : [fetchListCosell(setData, setOpportunityList)]),
-    ]);
+    const firstSet = await Promise.all([...(isDefaultView ? [] : [fetchListCosell(setData, setOpportunityList)])]);
 
     handleErrors(firstSet, initialError, triggerAlert);
   } catch (_error) {
@@ -71,7 +66,7 @@ export async function fetchAllOptions(
 export const getPartnerType = async (
   setPartnerType: React.Dispatch<React.SetStateAction<string[]>>,
   triggerAlert: (alert: AlertNotification) => void,
-  sellerCode: string,
+  sellerCode: string
 ) => {
   const saasifyService = new SaasifyService();
   try {
@@ -85,11 +80,7 @@ export const getPartnerType = async (
   }
 };
 
-export function handleErrors(
-  results: any[],
-  initialError: React.MutableRefObject<boolean>,
-  triggerAlert: (alert: AlertNotification) => void,
-) {
+export function handleErrors(results: any[], initialError: React.MutableRefObject<boolean>, triggerAlert: (alert: AlertNotification) => void) {
   const errorValue = results
     ?.filter((optionError: any) => optionError?.result === ResponseStatus.ERROR)
     ?.map((errors) => errors?.value)
@@ -105,57 +96,39 @@ export const fetchListCosell = async (
   setData: React.Dispatch<React.SetStateAction<RC3CosellResponse>>,
   setOpportunityList: React.Dispatch<React.SetStateAction<RC3CosellResponse[]>>,
   setLoader?: React.Dispatch<React.SetStateAction<boolean>>,
-  isResetData?: boolean,
+  isResetData?: boolean
 ) => {
   !isResetData && setData({} as RC3CosellResponse);
   setLoader?.(true);
   try {
     const executeWithRetry = async () => {
-      const responseData = await saasifyService.getListCosell(
-        requestPayload.sellerCode
-      );
+      const responseData = await saasifyService.getListCosell(requestPayload.sellerCode);
 
-      if (
-        responseData.Status === ResponseStatus.SUCCESS &&
-        Array.isArray(responseData.Data) &&
-        responseData.Data.length
-      ) {
-        const opportunities = responseData.Data.map(
-          (cosell: RC3CosellResponse) => {
-            const CoSellEntity = cosell?.CoSellEntity
-              ? JSON.parse(cosell.CoSellEntity as string)
-              : {};
+      if (responseData.Status === ResponseStatus.SUCCESS && Array.isArray(responseData.Data) && responseData.Data.length) {
+        const opportunities = responseData.Data.map((cosell: RC3CosellResponse) => {
+          const CoSellEntity = cosell?.CoSellEntity ? JSON.parse(cosell.CoSellEntity as string) : {};
 
-            return { ...cosell, CoSellEntity };
-          },
-        );
+          return { ...cosell, CoSellEntity };
+        });
 
-        const sortedList = opportunities.sort(
-          (a: RC3CosellResponse, b: RC3CosellResponse) => {
-            const dateStrA =
-              a.CoSellEntity?.CreatedDate ||
-              a.CoSellEntity?.createTime ||
-              (a as AmpCosellResponse).CoSellEntity?.CloudProviderDetails
-                ?.CreatedDate ||
-              "";
+        const sortedList = opportunities.sort((a: RC3CosellResponse, b: RC3CosellResponse) => {
+          const dateStrA =
+            a.CoSellEntity?.CreatedDate ||
+            a.CoSellEntity?.createTime ||
+            (a as AmpCosellResponse).CoSellEntity?.CloudProviderDetails?.CreatedDate ||
+            "";
 
-            const dateStrB =
-              b.CoSellEntity?.CreatedDate ||
-              b.CoSellEntity?.createTime ||
-              (b as AmpCosellResponse).CoSellEntity?.CloudProviderDetails
-                ?.CreatedDate ||
-              "";
+          const dateStrB =
+            b.CoSellEntity?.CreatedDate ||
+            b.CoSellEntity?.createTime ||
+            (b as AmpCosellResponse).CoSellEntity?.CloudProviderDetails?.CreatedDate ||
+            "";
 
-            const dateA = Number.isNaN(new Date(dateStrA).getTime())
-              ? 0
-              : new Date(dateStrA).getTime();
-            const dateB = Number.isNaN(new Date(dateStrB).getTime())
-              ? 0
-              : new Date(dateStrB).getTime();
+          const dateA = Number.isNaN(new Date(dateStrA).getTime()) ? 0 : new Date(dateStrA).getTime();
+          const dateB = Number.isNaN(new Date(dateStrB).getTime()) ? 0 : new Date(dateStrB).getTime();
 
-            return dateB - dateA;
-          },
-        );
+          return dateB - dateA;
+        });
         setOpportunityList(sortedList);
       } else {
         setOpportunityList([]);
@@ -192,7 +165,7 @@ export const fetchSpecificCoSell = async (
   setOpportunityList: React.Dispatch<React.SetStateAction<RC3CosellResponse[]>>,
   setAmp: React.Dispatch<React.SetStateAction<any>>,
   // setGcp: React.Dispatch<React.SetStateAction<any>>,
-  neededLoader?: boolean,
+  neededLoader?: boolean
 ) => {
   setData({});
   // setGcp({});
@@ -200,10 +173,7 @@ export const fetchSpecificCoSell = async (
   setIsSpecificLoading(true);
   try {
     const executeWithRetry = async () => {
-      const responseData = await saasifyService.getCosellById(
-        sellerId,
-        opportunityId,
-      );
+      const responseData = await saasifyService.getCosellById(sellerId, opportunityId);
       if (responseData?.Data) {
         const data = {
           ...responseData?.Data,
@@ -215,15 +185,10 @@ export const fetchSpecificCoSell = async (
             return {
               ...value,
               ErrorMessage: responseData?.Data?.ErrorMessage ?? [],
-              CloudProviderStatus:
-                !data?.DealType?.toLocaleLowerCase()?.includes(
-                  requestPayload.dealType.multiPartner,
-                )
-                  ? data?.CoSellEntity?.Invitation?.Status ||
-                    (data.CoSellEntity?.LifeCycle?.ReviewStatus
-                      ? data.CoSellEntity?.LifeCycle?.ReviewStatus
-                      : value?.CloudProviderStatus)
-                  : data?.CloudProviderStatus,
+              CloudProviderStatus: !data?.DealType?.toLocaleLowerCase()?.includes(requestPayload.dealType.multiPartner)
+                ? data?.CoSellEntity?.Invitation?.Status ||
+                  (data.CoSellEntity?.LifeCycle?.ReviewStatus ? data.CoSellEntity?.LifeCycle?.ReviewStatus : value?.CloudProviderStatus)
+                : data?.CloudProviderStatus,
               CloudProviderStage: data.CoSellEntity?.LifeCycle?.Stage,
             };
           } else {
@@ -256,7 +221,7 @@ export const fetchActivityLog = async (
   setActivity: React.Dispatch<React.SetStateAction<Activitylog[]>>,
   startInd: number = 1,
   endInd: number = 10,
-  pageCount: number = 0,
+  pageCount: number = 0
 ) => {
   setActivity([]);
   setIsSpecificLoading(true);
@@ -270,7 +235,7 @@ export const fetchActivityLog = async (
         0, // offset
         pageCount, // pageCount
         "Cosell", // EntityName
-        false, // IsFromWebApp
+        false // IsFromWebApp
       );
       if (responseData?.Data) {
         const data = responseData?.Data?.map((value: any) => ({
