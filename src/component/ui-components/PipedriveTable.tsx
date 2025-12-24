@@ -1,10 +1,7 @@
 import type React from "react";
 import { useState, useEffect } from "react";
 import { DataTable, type DataTablePageEvent, type DataTableFilterMeta } from "primereact/datatable";
-import {
-  Column,
-  type ColumnFilterElementTemplateOptions,
-} from "primereact/column";
+import { Column, type ColumnFilterElementTemplateOptions } from "primereact/column";
 import { FilterMatchMode, FilterOperator } from "primereact/api";
 
 import { InputNumber } from "primereact/inputnumber";
@@ -16,16 +13,8 @@ import Input from "./PipedriveInput";
 import { IconField } from "primereact/iconfield";
 import { InputIcon } from "primereact/inputicon";
 
-import {
-  FilterType,
-  type PDAdvancedTableProps,
-  type PDColumnConfig,
-} from "@template/types/pipedrive-table-interface";
-import {
-  PDButtonType,
-  PDButtonSize,
-  PDTextSize,
-} from "@template/enum/pipedrive.enum";
+import { FilterType, type PDAdvancedTableProps, type PDColumnConfig } from "@template/types/pipedrive-table-interface";
+import { PDButtonType, PDButtonSize, PDTextSize } from "@template/enum/pipedrive.enum";
 import PDSelectField from "./PipedriveDropdown";
 import PDDatePicker from "./PipedriveCalendar";
 import { MultiSelectField } from "./PipedriveMultiselect";
@@ -155,13 +144,7 @@ const PDAdvancedTable: React.FC<PDAdvancedTableProps> = ({
     return (options: ColumnFilterElementTemplateOptions) => {
       switch (col.filterType) {
         case FilterType.TEXT:
-          return (
-            <Input
-              value={options.value || ""}
-              onChange={(e) => options.filterCallback(e)}
-              placeholder={col.filterPlaceholder || "Search"}
-            />
-          );
+          return <Input value={options.value || ""} onChange={(e) => options.filterCallback(e)} placeholder={col.filterPlaceholder || "Search"} />;
 
         case FilterType.DROPDOWN:
           return (
@@ -206,41 +189,20 @@ const PDAdvancedTable: React.FC<PDAdvancedTableProps> = ({
             />
           );
         case FilterType.NUMBER:
-          return (
-            <InputNumber
-              value={options.value}
-              onChange={(e) => options.filterCallback(e.value)}
-              placeholder={col.filterPlaceholder}
-            />
-          );
+          return <InputNumber value={options.value} onChange={(e) => options.filterCallback(e.value)} placeholder={col.filterPlaceholder} />;
 
         case FilterType.NUMBER_RANGE:
           return (
             <>
-              <PDText
-                size={PDTextSize.XS}
-                className="flex mb-1 w-full justify-center"
-              >
+              <PDText size={PDTextSize.XS} className="flex mb-1 w-full justify-center">
                 {options.value?.[0]} - {options.value?.[1]}
               </PDText>
-              <Slider
-                value={options.value}
-                onChange={(e) => options.filterCallback(e.value)}
-                range
-                min={10000}
-                max={100000}
-                className="mt-5"
-              />
+              <Slider value={options.value} onChange={(e) => options.filterCallback(e.value)} range min={10000} max={100000} className="mt-5" />
             </>
           );
 
         case Boolean.name:
-          return (
-            <TriStateCheckbox
-              value={options.value}
-              onChange={(e) => options.filterCallback(e.value)}
-            />
-          );
+          return <TriStateCheckbox value={options.value} onChange={(e) => options.filterCallback(e.value)} />;
 
         case "custom":
           return col.filterElement?.(options);
@@ -256,20 +218,10 @@ const PDAdvancedTable: React.FC<PDAdvancedTableProps> = ({
   -------------------------------------*/
   const header = enableGlobalFilter ? (
     <div className="flex justify-between items-center">
-      <PDButton
-        className="h-8"
-        label="Clear"
-        size={PDButtonSize.TINY}
-        type={PDButtonType.GHOST}
-        onClick={() => onGlobalChange("")}
-      />
+      <PDButton className="h-8" label="Clear" size={PDButtonSize.TINY} type={PDButtonType.GHOST} onClick={() => onGlobalChange("")} />
 
       <IconField iconPosition="right">
-        <Input
-          value={globalValue}
-          onChange={(val) => onGlobalChange(val || "")}
-          placeholder="Keyword Search"
-        />
+        <Input value={globalValue} onChange={(val) => onGlobalChange(val || "")} placeholder="Keyword Search" />
         <InputIcon className="pi pi-search" />
       </IconField>
     </div>
@@ -343,9 +295,7 @@ const PDAdvancedTable: React.FC<PDAdvancedTableProps> = ({
               style={{ width: col.width ?? "200px" }}
               filter={Boolean(col.filterType)}
               filterField={col.filterField ?? col.field}
-              filterElement={
-                col.filterType ? getFilterTemplate(col) : undefined
-              }
+              filterElement={col.filterType ? getFilterTemplate(col) : undefined}
               showFilterMatchModes={false}
               frozen={isFrozen}
               alignFrozen={isFrozen ? alignFrozen : undefined}
@@ -358,7 +308,7 @@ const PDAdvancedTable: React.FC<PDAdvancedTableProps> = ({
           first={backendPagination ? first : localFirst}
           rows={backendPagination ? rows : localRows}
           totalRecords={totalRecords}
-          rowsPerPageOptions={[10, 20, 50, 100]}
+          rowsPerPageOptions={[50, 100, 200]}
           onPageChange={(e: DataTablePageEvent) => {
             if (backendPagination) {
               onPageChange?.(e); // backend pagination
