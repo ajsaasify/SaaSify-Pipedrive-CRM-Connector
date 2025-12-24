@@ -32,11 +32,7 @@ import { pullCosell } from "./apiHandler";
 // import LinkcrmModal from "../LinkCrm";
 import { requestPayload } from "@template/common/listCosell";
 import PDButton from "@template/component/ui-components/pipedriveButton";
-import {
-  ModelType,
-  PDButtonSize,
-  PDButtonType,
-} from "@template/enum/pipedrive.enum";
+import { PDButtonSize, PDButtonType } from "@template/enum/pipedrive.enum";
 import { useTranslation } from "react-i18next";
 import type { AlertNotification } from "@template/common/messageAlert";
 // import RejectCosell from "../RejectCosell";
@@ -53,24 +49,10 @@ const _ConditionalActionButton: React.FC<{
   overlay: React.ReactElement;
   disabled?: boolean;
 }> = ({ show, label, disabled = false }) => {
-  return show ? (
-    <PDButton
-      label={label}
-      type={PDButtonType.SECONDARY}
-      size={PDButtonSize.TINY}
-      disabled={disabled}
-    />
-  ) : null;
+  return show ? <PDButton label={label} type={PDButtonType.SECONDARY} size={PDButtonSize.TINY} disabled={disabled} /> : null;
 };
 const ActionButtons: React.FC<Props> = () => {
-  const {
-    data,
-    setData,
-    setIsSpecificLoading,
-    partnerType,
-    setOpportunityList,
-    opportunityList,
-  } = useCoSellContext();
+  const { data, setData, setIsSpecificLoading, partnerType, setOpportunityList, opportunityList } = useCoSellContext();
 
   const [isAccepting, _setIsAccepting] = useState(false);
 
@@ -80,7 +62,7 @@ const ActionButtons: React.FC<Props> = () => {
   const status = data?.CloudProviderStatus ?? ReviewStatus;
   const isPendingFromAoInBound = isPending(data);
   const { t } = useTranslation();
-  const { setCurrentPage } = useCoSellContext();
+
   const statusRequired = !!status;
 
   const showButtons = useMemo(
@@ -89,71 +71,23 @@ const ActionButtons: React.FC<Props> = () => {
       reject: isPendingFromAoInBound,
       displayOd: isDisplayOid(data),
       linkCrm: statusRequired && linkCrmDisable(data, DealType),
-      edit: editDisable(
-        status,
-        Stage,
-        data?.CloudProviderIdentifier,
-        DealType,
-        data,
-      ),
-      update:
-        statusRequired &&
-        updateDisable(
-          status,
-          Stage,
-          partnerType,
-          data?.CloudProviderIdentifier,
-          DealType,
-          data,
-        ),
-      changeStage:
-        statusRequired &&
-        changeStageDisable(
-          status,
-          Stage,
-          data?.CloudProviderIdentifier,
-          DealType,
-          data,
-        ),
-      transfer:
-        statusRequired &&
-        transferDisable(
-          status,
-          Stage,
-          data?.CloudProviderIdentifier,
-          DealType,
-          data,
-        ),
+      edit: editDisable(status, Stage, data?.CloudProviderIdentifier, DealType, data),
+      update: statusRequired && updateDisable(status, Stage, partnerType, data?.CloudProviderIdentifier, DealType, data),
+      changeStage: statusRequired && changeStageDisable(status, Stage, data?.CloudProviderIdentifier, DealType, data),
+      transfer: statusRequired && transferDisable(status, Stage, data?.CloudProviderIdentifier, DealType, data),
       associate:
         statusRequired &&
         associateDisable(
           status,
           Stage,
-          !!data?.CoSellEntity?.MarketplaceTransactions?.[0]?.MarketplaceOffer
-            ?.OfferID,
+          !!data?.CoSellEntity?.MarketplaceTransactions?.[0]?.MarketplaceOffer?.OfferID,
           data?.CloudProviderIdentifier,
           DealType,
-          data,
+          data
         ),
-      nextStep:
-        statusRequired &&
-        nextStepDisable(
-          status,
-          Stage,
-          data?.CloudProviderIdentifier,
-          DealType,
-          data,
-        ),
+      nextStep: statusRequired && nextStepDisable(status, Stage, data?.CloudProviderIdentifier, DealType, data),
     }),
-    [
-      data,
-      status,
-      Stage,
-      DealType,
-      partnerType,
-      isPendingFromAoInBound,
-      statusRequired,
-    ],
+    [data, status, Stage, DealType, partnerType, isPendingFromAoInBound, statusRequired]
   );
 
   const triggerAlert = ({ type, message, title }: AlertNotification) => {
@@ -162,7 +96,7 @@ const ActionButtons: React.FC<Props> = () => {
 
   return (
     <div className="flex items-center justify-center gap-1">
-      <PDButton
+      {/* <PDButton
         label={t("buttonLabel.edit")}
         type={PDButtonType.SECONDARY}
         size={PDButtonSize.SMALL}
@@ -171,23 +105,14 @@ const ActionButtons: React.FC<Props> = () => {
             page: ModelType.COSELL_CREATE,
           });
         }}
-      />
+      /> */}
       <PDButton
         className="pi pi-refresh"
         label={t("buttonLabel.reset")}
         type={PDButtonType.SECONDARY}
         size={PDButtonSize.SMALL}
         onClick={() => {
-          pullCosell(
-            data,
-            triggerAlert,
-            setIsSpecificLoading,
-            setData,
-            setOpportunityList,
-            opportunityList,
-            true,
-            isPendingFromAoInBound,
-          );
+          pullCosell(data, triggerAlert, setIsSpecificLoading, setData, setOpportunityList, opportunityList, true, isPendingFromAoInBound);
         }}
       />
 

@@ -21,7 +21,7 @@ export interface CoSellResponse {
   Status: string;
   RequestCorrelationID: string;
   ErrorDetail: string | null;
-  Data: CoSellItem[];
+  Data: any;
   StatusCode: number | null;
   ErrorMessage: string;
 }

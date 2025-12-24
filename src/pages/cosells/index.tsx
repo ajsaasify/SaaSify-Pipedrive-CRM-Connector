@@ -29,10 +29,13 @@ const CosellsPage = () => {
     if (params?.data?.page && currentPage !== params?.data?.page)
       setCurrentPage({ page: params?.data?.page });
   }, [params?.data?.page]);
-  return (
+  return currentPage?.page === ModelType.COSELL_DETAIL ? (
+    <div className="flex justify-start w-full">
+      <CosellDetailView />
+    </div>
+  ) : (
     <div className="flex justify-center w-full">
       {currentPage?.page === ModelType.COSELL_LIST && <CosellList />}
-      {currentPage?.page === ModelType.COSELL_DETAIL && <CosellDetailView />}
       {currentPage?.page === ModelType.COSELL_CREATE && <CreateCosell />}
       {currentPage?.page === ModelType.COSELL_CLOUD_PROVIDER && (
         <CloudProvider />
