@@ -19,13 +19,13 @@ export const getCosellsAPI = async (
   rows: number,
   first: number,
   setLoading: Dispatch<SetStateAction<boolean>>,
-  setCosells: Dispatch<SetStateAction<CoSellItem[]>>,
+  setCosells: Dispatch<SetStateAction<RC3CosellResponse[]>>,
   setTotalRecords: Dispatch<SetStateAction<number>>,
 ) => {
   const saasify = new SaasifyService();
   setLoading(true);
   saasify
-    .getListCosellAssociateCrm("BA03A6C2", {
+    .getListCosellAssociateCrm(requestPayload.sellerCode, {
       CloudProvider: "AWS",
       PageSize: rows,
       StartInd: first,

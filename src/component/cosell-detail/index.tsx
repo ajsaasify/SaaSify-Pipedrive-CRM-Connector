@@ -37,14 +37,14 @@ const CosellDetailView = () => {
   }, [currentPage?.params?.referenceId, currentPage?.params?.sellerCode, setData, setIsSpecificLoading]);
   if (isSpecificLoading) {
     return (
-      <div className="h-screen flex flex-col items-center justify-center p-5">
+      <div className="h-screen flex flex-col items-center justify-center p-5 w-full">
         <h2>Co-sell Details</h2>
         <p>Loading...</p>
       </div>
     );
   } else {
     return (
-      <div className="w-full">
+      <div className="w-[96%]">
         <CosellDetailHeader setCurrentPage={setCurrentPage} />
         {statusInvitation ? (
           <InviationCard />

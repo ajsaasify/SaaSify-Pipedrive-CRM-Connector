@@ -9,23 +9,6 @@ import { useCoSellContext } from "@template/context/Cosell.context";
 const CosellsPage = () => {
   const [_params, setParams] = useState<pipedriveParams>();
   const { setCurrentPage } = useCoSellContext();
-  const _viewCosells = async (model: ModelType) => {
-    const params = pipeDriveParams(setParams);
-    // console.log(params)
-    const dealId = params?.selectedIds;
-    try {
-      // console.log("SDK instance:", sdk);
-      const sdk = await new AppExtensionsSDK().initialize();
-      await sdk.execute(Command.OPEN_MODAL, {
-        type: Modal.CUSTOM_MODAL,
-        action_id: "f5458880-50b7-4d74-b4ce-ae8e571d7f54",
-        data: { dealId: dealId || "", page: model },
-      });
-      setCurrentPage({ page: model });
-    } catch (err) {
-      console.error("Failed to open modal:", err);
-    }
-  };
 
   const viewCosells2 = async (model: ModelType) => {
     const params = pipeDriveParams(setParams);

@@ -162,7 +162,7 @@ const ActionButtons: React.FC<Props> = () => {
 
   return (
     <div className="flex items-center justify-center gap-1">
-      <PDButton
+      {/* <PDButton
         label={t("buttonLabel.edit")}
         type={PDButtonType.SECONDARY}
         size={PDButtonSize.SMALL}
@@ -171,7 +171,7 @@ const ActionButtons: React.FC<Props> = () => {
             page: ModelType.COSELL_CREATE,
           });
         }}
-      />
+      /> */}
       <PDButton
         className="pi pi-refresh"
         label={t("buttonLabel.reset")}
